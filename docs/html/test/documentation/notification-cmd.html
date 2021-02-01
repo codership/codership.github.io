@@ -1,0 +1,363 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><meta content="Galera Cluster Notification Command" name="title" />
+<meta content="en-US" name="language" />
+<meta content="galera cluster, notification, notify command, trigger, script" name="keywords" />
+<meta content="Codership Oy, 2014 - 2020. All Rights Reserved." name="copyright" />
+
+    <title>Notification Command &#8212; Galera Cluster Documentation</title>
+    <link rel="stylesheet" href="../_static/reset-style.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Notification Script Example" href="notification-cmd-example.html" />
+    <link rel="prev" title="Upgrading Galera Manager (gmd)" href="gmd-upgrading.html" />
+
+
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<link rel="stylesheet" href="/library/_static/basic-style.css">
+<link rel="stylesheet" href="/library/_static/header.css">
+<link rel="stylesheet" href="/library/_static/footer.css">
+<link rel="stylesheet" href="/library/_static/codership.css">
+<link rel="stylesheet" media="screen and (max-width: 500px)" href="/library/_static/mobile.css"/>
+<link rel="stylesheet" media="screen and (min-width:501px) and (max-width:1024px)" href="/library/_static/tablet.css"/>
+<link rel="stylesheet" media="screen and (prefers-color-scheme: dark)" href="/library/_static/dark.css"/>
+
+
+<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Feed" href="https://galeracluster.com/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Comments Feed" href="https://galeracluster.com/comments/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Support Comments Feed" href="https://galeracluster.com/support/feed/" />
+
+<script type='text/javascript' src='https://galeracluster.com/wp-includes/js/comment-reply.min.js?ver=3.8.3'></script>
+
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://galeracluster.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://galeracluster.com/wp-includes/wlwmanifest.xml" />
+<link rel='prev' title='Downloads' href='https://galeracluster.com/downloads/' />
+<link rel='next' title='Community' href='https://galeracluster.com/community/' />
+<meta name="generator" content="WordPress 3.8.3" />
+
+<link rel='shortlink' href='https://galeracluster.com/?p=12' />
+
+<style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>
+<style type="text/css" id="twentythirteen-header-css">
+			.site-title,
+			.site-description {
+				position: absolute;
+				clip: rect(1px 1px 1px 1px); /* IE7 */
+				clip: rect(1px, 1px, 1px, 1px);
+			}
+				.site-header .home-link {
+				min-height: 0;
+			}
+</style>
+
+<script type="text/javascript">
+
+		  var _gaq = _gaq || [];
+		  _gaq.push(['_setAccount', 'UA-35163478-6']);
+		  _gaq.push(['_trackPageview']);
+
+		  (function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'https://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		  })();
+
+</script>
+
+  </head><body>
+	<div id="fb-root"></div>
+	<script>(function(d, s, id) {
+		  var js, fjs = d.getElementsByTagName(s)[0];
+		  if (d.getElementById(id)) return;
+		  js = d.createElement(s); js.id = id;
+		  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+		  fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));
+	</script>
+
+	<div id="page" class="hfeed site">
+
+	<header id="masthead" class="site-header" role="banner">
+
+	<div class="top">
+	<a class="home-link" href="https://galeracluster.com/" title="Galera Cluster for MySQL" rel="home">
+	<h1 class="site-title">Galera Cluster for MySQL</h1>
+	<h2 class="site-description">The world&#039;s most advanced open source database cluster</h2>
+	</a>
+	</div>
+
+
+	<div id="navbar" class="navbar">
+	<nav id="site-navigation" class="navigation main-navigation" role="navigation">
+	<div class="menu-main-menu-container">
+
+	<ul id="menu-main-menu" class="nav-menu">
+	<li id="menu-item-359" class="link-home menu-item menu-item-type-post_type menu-item-object-page menu-item-359"><a href="https://galeracluster.com/">Home</a></li>
+	<li id="menu-item-35" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-35"><a href="https://galeracluster.com/products/">Products</a></li>
+	<li id="menu-item-34" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="https://galeracluster.com/downloads/">Downloads</a></li>
+	<li id="menu-item-33" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-12 current_page_item current-menu-ancestor current-menu-parent current_page_parent current_page_ancestor menu-item-has-children menu-item-33"><a href="https://galeracluster.com/support/">Support</a></li>
+	<li id="menu-item-32" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="https://galeracluster.com/community/">Community</a></li>
+	<li id="menu-item-31" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-31"><a href="https://galeracluster.com/company/">Company</a></li>
+	<li id="menu-item-297" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-297"><a href="https://galeracluster.com/category/blog/">Blog</a></li>
+	<li id="menu-item-38" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-38"><a href="https://galeracluster.com/contact-us/">Contact us</a></li>
+	</ul>
+	</div>
+
+
+	</nav><!-- #site-navigation -->
+
+	</div><!-- #navbar -->
+	</header><!-- #masthead -->
+
+
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="left-margin docutils container">
+<div class="left-margin-top docutils container">
+<a class="reference internal" href="../index.html"><span class="doc">The Library</span></a></div>
+<div class="left-margin-content docutils container">
+<ul class="here simple">
+<li><a class="reference internal" href="index.html"><span class="doc">Documentation</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../kb/index.html"><span class="doc">Knowledge Base</span></a></li>
+<li><a class="reference internal" href="../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="sub-links simple">
+<li><a class="reference internal" href="../training/tutorials/index.html"><span class="doc">Tutorial Articles</span></a></li>
+<li><a class="reference internal" href="../training/videos/index.html"><span class="doc">Training Videos</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a></li>
+</ul>
+<p>Related Documents</p>
+<ul class="simple">
+<li><a class="reference internal" href="notification-cmd-example.html#example-notification-script"><span class="std std-ref">Notification Script</span></a></li>
+<li><a class="reference internal" href="mysql-wsrep-options.html#wsrep-node-incoming-address"><span class="std std-ref">wsrep_node_incoming_address</span></a></li>
+<li><a class="reference internal" href="mysql-wsrep-options.html#wsrep-node-name"><span class="std std-ref">wsrep_node_name</span></a></li>
+<li><a class="reference internal" href="mysql-wsrep-options.html#wsrep-notify-cmd"><span class="std std-ref">wsrep_notify_cmd</span></a></li>
+</ul>
+</div>
+</div>
+<div class="top-links docutils container">
+<ul class="simple">
+<li><a class="reference external" href="https://galeracluster.com">Home</a></li>
+</ul>
+<ul class="here simple">
+<li><a class="reference internal" href="index.html"><span class="doc">Docs</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../kb/index.html"><span class="doc">KB</span></a></li>
+</ul>
+<ul class="nav-wider simple">
+<li><a class="reference internal" href="../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a></li>
+</ul>
+</div>
+<div class="library-document section" id="notification-command">
+<span id="notification-cmd"></span><h1>Notification Command<a class="headerlink" href="#notification-command" title="Permalink to this headline">¶</a></h1>
+<p>You can use the database client (e.g., <code class="docutils literal notranslate"><span class="pre">mysql</span></code> client) to check the status of a cluster, individual nodes, and the health of replication. However, you may find it counterproductive to log in on each node to run such checks.</p>
+<p>As an alternative and better method, Galera Cluster provides a method to call a notification script. Such a script may be customized to automate the monitoring process of a cluster.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">For an example of such a custom script and related instructions, see <a class="reference internal" href="notification-cmd-example.html#example-notification-script"><span class="std std-ref">Notification Script Example</span></a>.</p>
+</div>
+<p class="section-heading rubric" id="notification-cmd-parameters">Notification Parameters</p>
+<p>When a node registers a change in itself or the cluster, it will trigger the notification script or command. In so doing, it will pass certain parameters to notification script.  Below is a list of them and their basic meaning:</p>
+<ul class="no-bull simple">
+<li><code class="docutils literal notranslate"><span class="pre">--status</span></code> The node passes a string indicating its current state.  For a list of the strings it uses, see <a class="reference internal" href="#node-status"><span class="std std-ref">Node Status Strings</span></a> below.</li>
+<li><code class="docutils literal notranslate"><span class="pre">--uuid</span></code> The node passes a string, <cite>yes</cite> or <cite>no</cite>, to indicate whether it considers itself part of the <a class="reference internal" href="glossary.html#term-primary-component"><span class="xref std std-term">Primary Component</span></a>.</li>
+<li><code class="docutils literal notranslate"><span class="pre">--members</span></code> The node passes a list of the current cluster members.  For more information on the format of these, see <a class="reference internal" href="#member-list-format"><span class="std std-ref">Member List Format</span></a> below.</li>
+<li><code class="docutils literal notranslate"><span class="pre">--index</span></code> The node passes a string that indicates its index value in the membership list.</li>
+</ul>
+<p>You will have to include code in the notificaiton script to capture the values of these parameters and then have the script act as you wish (e.g., notify you of certain values).</p>
+<p>Only nodes in the <code class="docutils literal notranslate"><span class="pre">Synced</span></code> state will accept connections from the cluster.  For more information on node states, see <a class="reference internal" href="node-states.html#node-state-changes"><span class="std std-ref">Node State Changes</span></a>.</p>
+<p class="sub-heading rubric" id="node-status">Node Status Strings</p>
+<p>The notification script may pass one of six values for the <code class="docutils literal notranslate"><span class="pre">--status</span></code> parameter to indicate the current state of the node:</p>
+<ul class="no-bull simple">
+<li><code class="docutils literal notranslate"><span class="pre">Undefined</span></code> indicates a starting node that is not part of the Primary Component.</li>
+<li><code class="docutils literal notranslate"><span class="pre">Joiner</span></code> indicates a node that is part of the Primary Component and is receiving a state snapshot transfer.</li>
+<li><code class="docutils literal notranslate"><span class="pre">Donor</span></code> indicates a node that is part of the Primary Component and is sending a state snapshot transfer.</li>
+<li><code class="docutils literal notranslate"><span class="pre">Joined</span></code> indicates a node that is part of the Primary Component and is in a complete state and is catching up with the cluster.</li>
+<li><code class="docutils literal notranslate"><span class="pre">Synced</span></code> indicates a node that is syncrhonized with the cluster.</li>
+<li><code class="docutils literal notranslate"><span class="pre">Error</span></code> indicates that an error has occurred.  This status string may provide an error code with more information on what occurred.</li>
+</ul>
+<p>Again, you will have to prepare your script to capture the value of the <code class="docutils literal notranslate"><span class="pre">--status</span></code> parameter and act accordingly.</p>
+<p class="sub-heading rubric" id="member-list-format">Members List Format</p>
+<p>The notification script will pass with the <code class="docutils literal notranslate"><span class="pre">--member</span></code> parameter, a list containing entries for each node connected to the cluster component.  For each entry in the list the node uses this format:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>&lt;node UUID&gt; / &lt;node name&gt; / &lt;incoming address&gt;
+</pre></div>
+</div>
+<ul class="no-bull simple">
+<li><strong>Node UUID</strong> refers to the unique identifier the node received from the wsrep Provider.</li>
+<li><strong>Node Name</strong> refers to the node name, as it’s defined with the <a class="reference internal" href="mysql-wsrep-options.html#wsrep-node-name"><span class="std std-ref">wsrep_node_name</span></a> parameter in the configuration file.</li>
+<li><strong>Incoming Address</strong> refers to the IP address for client connections, as set with the <a class="reference internal" href="mysql-wsrep-options.html#wsrep-node-incoming-address"><span class="std std-ref">wsrep_node_incoming_address</span></a> parameter in the configuration file. If this is not set, then the default value will be <code class="docutils literal notranslate"><span class="pre">AUTO</span></code>.</li>
+</ul>
+<p class="section-heading rubric" id="enable-notification-command">Enabling the Notification Script</p>
+<p>You can enable your notification script or command through the <a class="reference internal" href="mysql-wsrep-options.html#wsrep-notify-cmd"><span class="std std-ref">wsrep_notify_cmd</span></a> parameter in the configuration file.  Below is an excerpt from that file showing how it might look:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">wsrep_notify_cmd</span><span class="o">=</span><span class="s">/path/wsrep_notify.sh</span>
+</pre></div>
+</div>
+<p>The node will call the script for each change in cluster membership and node status.  You can use these status changes in configuring load balancers, raising alerts or scripting for any other situation in which you need your infrastructure to respond to changes to the cluster.</p>
+<p>Galera Cluster provides a default script, <code class="docutils literal notranslate"><span class="pre">wsrep_notify.sh</span></code>, for you to use in handling notifications or as a starting point in writing your own custom notification script.</p>
+<div class="bottom-links docutils container">
+<p>Related Documents</p>
+<ul class="simple">
+<li><a class="reference internal" href="notification-cmd-example.html#example-notification-script"><span class="std std-ref">Notification Script</span></a></li>
+<li><a class="reference internal" href="mysql-wsrep-options.html#wsrep-node-incoming-address"><span class="std std-ref">wsrep_node_incoming_address</span></a></li>
+<li><a class="reference internal" href="mysql-wsrep-options.html#wsrep-node-name"><span class="std std-ref">wsrep_node_name</span></a></li>
+<li><a class="reference internal" href="mysql-wsrep-options.html#wsrep-notify-cmd"><span class="std std-ref">wsrep_notify_cmd</span></a></li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/logo.png" alt="Logo"/>
+            </a></p>
+<h1 class="logo"><a href="../index.html">Galera Cluster</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">The Codership Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="overview.html">Overview of Galera Cluster</a></li>
+<li class="toctree-l2"><a class="reference internal" href="technical-description.html">Technical Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html">Installing Galera Cluster</a></li>
+<li class="toctree-l2"><a class="reference internal" href="administration.html">Galera Cluster Administration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deployment.html">Deployment</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="monitor.html">Cluster Monitoring</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="monitoring-cluster.html">Using Status Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="log.html">Database Server Logs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="galera-manager.html">The Galera Manager</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Notification Command</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notification-cmd-example.html">Notification Script Example</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="security.html">Security</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference.html">Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../kb/index.html">The Codership Knowledge Base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../training/index.html">Codership Training</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../whats-new.html">What’s New</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../editors/index.html">Codership Writers &amp; Editors</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">The Codership Documentation</a><ul>
+  <li><a href="monitor.html">Cluster Monitoring</a><ul>
+      <li>Previous: <a href="gmd-upgrading.html" title="previous chapter">Upgrading Galera Manager (<code class="docutils literal notranslate"><span class="pre">gmd</span></code>)</a></li>
+      <li>Next: <a href="notification-cmd-example.html" title="next chapter">Notification Script Example</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+	<div class="navbar">
+	<nav id="site-navigation" class="navigation main-navigation" role="navigation">
+	<div class="nav-bar-container">
+
+	<div id="menu-nav-bar" class="nav-menu">
+		<ul class="nav-link">
+			<li> </li>
+
+		</ul>
+
+	</div>
+	</nav>
+
+	<footer id="colophon" class="site-footer" role="contentinfo">
+	<div class="top">	<div class="powered-by"><p>Powered by Galera:</p>
+	<p><a href="https://mariadb.com/kb/en/galera/"><img class="alignleft size-full wp-image-237" alt="MariaDB" src="https://galeracluster.com/wp-content/uploads/2013/10/logo-mariadb.png" width="166" height="49" /></a></p>
+		</div></div>
+	<div class="footer-menu">
+	<div class="menu-main-menu-container">
+	<ul id="menu-main-menu-1" class="nav-menu">
+	<li class="link-home menu-item menu-item-type-post_type menu-item-object-page menu-item-359"><a href="https://galeracluster.com/">Home</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-35"><a href="https://galeracluster.com/products/">Products</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="https://galeracluster.com/downloads/">Downloads</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-12 current_page_item current-menu-ancestor current-menu-parent current_page_parent current_page_ancestor menu-item-has-children menu-item-33"><a href="https://galeracluster.com/support/">Support</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="https://galeracluster.com/community/">Community</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-31"><a href="https://galeracluster.com/company/">Company</a></li>
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-297"><a href="https://galeracluster.com/category/blog/">Blog</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-38"><a href="https://galeracluster.com/contact-us/">Contact us</a></li>
+	</ul></div>			</div><!-- .footer-menu -->
+
+
+	<div class="footer-bar">
+	<p class="copyright">2014 Codership Ltd.</p>
+	</div>
+	<div class="footnote">
+	<h2>Your data is invaluable. We're here to secure it. All of it.</h2>
+	</div>
+	</footer><!-- #colophon -->
+
+
+
+
+  </body>
+</html>

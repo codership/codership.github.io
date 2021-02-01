@@ -1,0 +1,399 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><meta content="Tutorials on Galera Cluster" name="title" />
+<meta content="en-US" name="language" />
+<meta content="Codership Oy, 2014 - 2020. All Rights Reserved." name="copyright" />
+
+    <title>Codership Tutorials on Galera Cluster &#8212; Galera Cluster Documentation</title>
+    <link rel="stylesheet" href="../../_static/reset-style.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Getting Started with Galera Cluster" href="getting-started.html" />
+    <link rel="prev" title="Codership Training Courses" href="../courses/index.html" />
+
+
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<link rel="stylesheet" href="/library/_static/basic-style.css">
+<link rel="stylesheet" href="/library/_static/header.css">
+<link rel="stylesheet" href="/library/_static/footer.css">
+<link rel="stylesheet" href="/library/_static/codership.css">
+<link rel="stylesheet" media="screen and (max-width: 500px)" href="/library/_static/mobile.css"/>
+<link rel="stylesheet" media="screen and (min-width:501px) and (max-width:1024px)" href="/library/_static/tablet.css"/>
+<link rel="stylesheet" media="screen and (prefers-color-scheme: dark)" href="/library/_static/dark.css"/>
+
+
+<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Feed" href="https://galeracluster.com/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Comments Feed" href="https://galeracluster.com/comments/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Support Comments Feed" href="https://galeracluster.com/support/feed/" />
+
+<script type='text/javascript' src='https://galeracluster.com/wp-includes/js/comment-reply.min.js?ver=3.8.3'></script>
+
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://galeracluster.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://galeracluster.com/wp-includes/wlwmanifest.xml" />
+<link rel='prev' title='Downloads' href='https://galeracluster.com/downloads/' />
+<link rel='next' title='Community' href='https://galeracluster.com/community/' />
+<meta name="generator" content="WordPress 3.8.3" />
+
+<link rel='shortlink' href='https://galeracluster.com/?p=12' />
+
+<style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>
+<style type="text/css" id="twentythirteen-header-css">
+			.site-title,
+			.site-description {
+				position: absolute;
+				clip: rect(1px 1px 1px 1px); /* IE7 */
+				clip: rect(1px, 1px, 1px, 1px);
+			}
+				.site-header .home-link {
+				min-height: 0;
+			}
+</style>
+
+<script type="text/javascript">
+
+		  var _gaq = _gaq || [];
+		  _gaq.push(['_setAccount', 'UA-35163478-6']);
+		  _gaq.push(['_trackPageview']);
+
+		  (function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'https://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		  })();
+
+</script>
+
+  </head><body>
+	<div id="fb-root"></div>
+	<script>(function(d, s, id) {
+		  var js, fjs = d.getElementsByTagName(s)[0];
+		  if (d.getElementById(id)) return;
+		  js = d.createElement(s); js.id = id;
+		  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+		  fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));
+	</script>
+
+	<div id="page" class="hfeed site">
+
+	<header id="masthead" class="site-header" role="banner">
+
+	<div class="top">
+	<a class="home-link" href="https://galeracluster.com/" title="Galera Cluster for MySQL" rel="home">
+	<h1 class="site-title">Galera Cluster for MySQL</h1>
+	<h2 class="site-description">The world&#039;s most advanced open source database cluster</h2>
+	</a>
+	</div>
+
+
+	<div id="navbar" class="navbar">
+	<nav id="site-navigation" class="navigation main-navigation" role="navigation">
+	<div class="menu-main-menu-container">
+
+	<ul id="menu-main-menu" class="nav-menu">
+	<li id="menu-item-359" class="link-home menu-item menu-item-type-post_type menu-item-object-page menu-item-359"><a href="https://galeracluster.com/">Home</a></li>
+	<li id="menu-item-35" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-35"><a href="https://galeracluster.com/products/">Products</a></li>
+	<li id="menu-item-34" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="https://galeracluster.com/downloads/">Downloads</a></li>
+	<li id="menu-item-33" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-12 current_page_item current-menu-ancestor current-menu-parent current_page_parent current_page_ancestor menu-item-has-children menu-item-33"><a href="https://galeracluster.com/support/">Support</a></li>
+	<li id="menu-item-32" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="https://galeracluster.com/community/">Community</a></li>
+	<li id="menu-item-31" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-31"><a href="https://galeracluster.com/company/">Company</a></li>
+	<li id="menu-item-297" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-297"><a href="https://galeracluster.com/category/blog/">Blog</a></li>
+	<li id="menu-item-38" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-38"><a href="https://galeracluster.com/contact-us/">Contact us</a></li>
+	</ul>
+	</div>
+
+
+	</nav><!-- #site-navigation -->
+
+	</div><!-- #navbar -->
+	</header><!-- #masthead -->
+
+
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="left-margin docutils container">
+<div class="left-margin-top docutils container">
+<a class="reference internal" href="../../index.html"><span class="doc">The Library</span></a></div>
+<div class="left-margin-content docutils container">
+<ul class="simple">
+<li><a class="reference internal" href="../../documentation/index.html"><span class="doc">Documentation</span></a></li>
+<li><a class="reference internal" href="../../kb/index.html"><span class="doc">Knowledge Base</span></a></li>
+<li><a class="reference internal" href="../index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="sub-links simple">
+<li><a class="reference internal" href="../courses/index.html"><span class="doc">Training Courses</span></a></li>
+<li><a class="reference internal" href="../videos/index.html"><span class="doc">Training Videos</span></a></li>
+</ul>
+<ul class="sub-links here simple">
+<li><a class="reference internal" href="#"><span class="doc">Tutorial Articles</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../../faq.html"><span class="doc">FAQ</span></a></li>
+</ul>
+</div>
+</div>
+<div class="top-links docutils container">
+<ul class="simple">
+<li><a class="reference external" href="https://galeracluster.com">Home</a></li>
+<li><a class="reference internal" href="../../documentation/index.html"><span class="doc">Docs</span></a></li>
+<li><a class="reference internal" href="../../kb/index.html"><span class="doc">KB</span></a></li>
+</ul>
+<ul class="here nav-wider simple">
+<li><a class="reference internal" href="../index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../../faq.html"><span class="doc">FAQ</span></a></li>
+</ul>
+</div>
+<div class="library-index section" id="codership-tutorials-on-galera-cluster">
+<span id="training-tutorials"></span><h1>Codership Tutorials on Galera Cluster<a class="headerlink" href="#codership-tutorials-on-galera-cluster" title="Permalink to this headline">¶</a></h1>
+<p class="list-stats">Article Counts: 20 Tutorials; Recent Changes: 2 Revised, 3 New Articles</p>
+<p class="page-abstract">These are tutorial articles of the training section of the Codership Library. Here you’ll find tutorial articles on how to get started with Galera and other basic tasks related to initially starting a Galera Cluster. There are also some intermediate articles on a few other aspects of Galera and related software.</p>
+<div class="banner docutils container" id="training-tutorials-entry-install">
+<p class="section-heading rubric">Introduction &amp; Installation</p>
+</div>
+<div class="list-col1 docutils container">
+<p class="sub-heading list-sub-header rubric"><a class="reference internal" href="getting-started.html"><span class="doc">Getting Started with Galera Cluster</span></a></p>
+<p class="list-stats">Length: 840 words; Writer: Staff; Pub: Oct 2014</p>
+<p class="list-abstract">This article explains Galera Cluster, how it works. It provides an overview for installing Galera and initializing nodes in a cluster. It’s a jumping off point to several other tutorials here.</p>
+<p class="sub-heading list-sub-header rubric"><a class="reference internal" href="galera-installation.html"><span class="doc">Installing Galera Cluster</span></a></p>
+<p class="list-stats">Length: 946 words; Writer: Staff; Pub: Oct 2014</p>
+<p class="list-abstract">This tutorial provides instructions to prepare your servers and instal Galera Cluster on each.  When you install Galera, you have to choose between three implementations available.</p>
+<p class="sub-heading list-sub-header rubric"><a class="reference internal" href="galera-on-aws.html"><span class="doc">Installing a Galera Cluster on AWS</span></a></p>
+<p class="list-stats">Length: 2494 words; Writer: Russell J.T. Dyer; Pub: Jun 2019</p>
+<p class="list-abstract">This tutorial explains how to use Amazon Web Services (AWS) to create virtual servers for a Galera Cluster: how to install and configure the database and Galera software on each node.</p>
+<p class="sub-heading list-sub-header rubric"><a class="reference internal" href="configuration.html"><span class="doc">System Configuration</span></a></p>
+<p class="list-stats">Length:  964 words; Writer: Staff; Pub: Oct 2014</p>
+<p class="list-abstract">After installing Galera, you’ll need to configure each node. This straightforward article provides a list of parameters to set in each node’s database configuration file.</p>
+<p class="sub-heading list-sub-header rubric"><a class="reference internal" href="wsrep-configuration.html"><span class="doc">Replication Configuration</span></a></p>
+<p class="list-stats">Length:  964 words; Writer: Staff; Pub: Oct 2014</p>
+<p class="list-abstract">This article provides a guide to configure the database server to connect and communicate with the cluster. It explains the syntax format used in cluster addresses.</p>
+</div>
+<div class="list-col2 docutils container">
+<p class="sub-heading list-sub-header rubric"><a class="reference internal" href="starting-cluster.html"><span class="doc">Starting the Cluster</span></a></p>
+<p class="list-stats">Length:  1,097 words; Writer: Staff; Pub: Oct 2014</p>
+<p class="list-abstract">A cluster requires at least two nodes, but you have to start the first one somehow. You’ll need to bootstrap the Primary Component. This article explains how to initialize the cluster.</p>
+<p class="sub-heading list-sub-header rubric"><a class="reference internal" href="getting-started-docker.html"><span class="doc">Getting Started Galera with Docker</span></a></p>
+<p class="list-stats">Length: 1416 words; Writer: Erkan Yanar; Pub: May 2015</p>
+<p class="list-abstract">This article explains how to build a basic Docker Image and deploy it on a test cluster. It also describes how to deploy Galera Cluster over multiple Docker hosts.</p>
+<p class="sub-heading list-sub-header rubric"><a class="reference internal" href="testing-cluster.html"><span class="doc">Testing a Cluster</span></a></p>
+<p class="list-stats">Length:  499 words; Writer: Staff; Pub: Oct 2014</p>
+<p class="list-abstract">Once you have a cluster running, test its features to ensure it’s working well, to decide on a deployment plan. This tutorial provides a guide to testing replication and cluster operations.</p>
+</div>
+<div class="banner docutils container" id="training-tutorials-admin">
+<p class="section-heading rubric">Administration</p>
+</div>
+<div class="list-col1 docutils container">
+<p class="sub-heading list-sub-header rubric"><a class="reference internal" href="galera-monitoring.html"><span class="doc">Monitoring a Galera Cluster</span></a></p>
+<p class="list-stats">Length: 2535 words; Writer: Russell J.T. Dyer; Pub: Jul 2019</p>
+<p class="list-abstract">This tutorial explains how to monitor a Galera Cluster, utilizing the Galera specific status variables, as well as employing scripts for logging status information.</p>
+<p class="sub-heading list-sub-header rubric"><a class="reference internal" href="galera-backup.html"><span class="doc">Making Back-Ups with Galera Cluster</span></a></p>
+<p class="list-stats">Length: 2693 words; Writer: Russell J.T. Dyer; Pub: Nov 2019</p>
+<p class="list-abstract">Using Galera, there are a few ways to make a back-up. This article looks at back-up basics, methods involving replication, and how to automate back-ups using the Galera functionality.</p>
+<p class="sub-heading list-sub-header rubric"><a class="reference internal" href="debug-problems-with-sst.html"><span class="doc">Debugging Problems with SST</span></a></p>
+<p class="list-stats">Length:  985 words; Writer: Philip Stoev; Pub: Jul 2015</p>
+<p class="list-abstract">The entire dataset is transfered (i.e., SST) to a new node and when a node rejoin after being down for a long time. This article offers insights and advice if there are problems with SST.</p>
+<p class="sub-heading list-sub-header rubric"><a class="reference internal" href="primary-component.html"><span class="doc">The Primary Component in Galera Cluster</span></a></p>
+<p class="list-stats">Length:  782 words; Writer: Philip Stoev; Pub: Aug 2015</p>
+<p class="list-abstract">This article describes the Primary Component. This is a central concept in how Galera ensures database consistency and no divergence between nodes in case of a network split.</p>
+</div>
+<div class="list-col2 docutils container">
+<p class="sub-heading list-sub-header rubric"><a class="reference internal" href="migrate.html"><span class="doc">Galera Cluster Migration Factors</span></a></p>
+<p class="list-stats">Length:  2087 words; Writer: Staff; Pub: Oct 2014</p>
+<p class="list-abstract">Migrating data with Galera Cluster should be done carefully. This tutorial article will help you to understand the concepts involved and take you through the steps to migrate a database.</p>
+<p class="sub-heading list-sub-header rubric"><a class="reference internal" href="supporting-transaction-isolation-levels.html"><span class="doc">Support for Transaction Isolation Levels</span></a></p>
+<p class="list-stats">Length:  1009 words; Writer: Seppo Jaakola; Pub: Sep 2015</p>
+<p class="list-abstract">Many DBAs and database developers don’t understand what MySQL transaction isolation levels Galera CLuster supports and how it does so. This articles tries to answer those uncertainties.</p>
+<p class="sub-heading list-sub-header rubric"><a class="reference internal" href="sst-or-not.html"><span class="doc">To SST or Not To SST?</span></a></p>
+<p class="list-stats">Length:  1001 words; Writer: Philip Stoev; Pub: Dec 2016</p>
+<p class="list-abstract">When a node rejoins a cluster, there are two methods of synchronizing it quickly. This article describes the process of doing this and confusing messages one might see in the logs.</p>
+</div>
+<div class="banner docutils container" id="training-tutorials-restart-recover">
+<p class="section-heading rubric">Restarting &amp; Recovery</p>
+</div>
+<div class="list-col1 docutils container">
+<p class="sub-heading list-sub-header rubric"><a class="reference internal" href="restarting-cluster.html"><span class="doc">Restarting the Cluster</span></a></p>
+<p class="list-stats">Length:  791 words; Writer: Staff; Pub: Oct 2014</p>
+<p class="list-abstract">Restarting a cluster so that data isn’t overwritten can be tricky. This article explains how to determine the most up-to-date node, so that it’s the first node of the new cluster.</p>
+</div>
+<div class="list-col2 docutils container">
+<p class="sub-heading list-sub-header rubric"><a class="reference internal" href="safe-to-bootstrap-feature.html"><span class="doc">The Safe-To-Bootstrap Feature</span></a></p>
+<p class="list-stats">Length:  745 words; Writer: Philip Stoev; Pub: Nov 2016</p>
+<p class="list-abstract">When it’s necessary to shut down a cluster, it’s important to do so safely and as quickly as possible to avoid extended downtime and data loss. This article gives advice in this area.</p>
+</div>
+<div class="banner docutils container" id="training-tutorials-performance-availability">
+<p class="section-heading rubric">Performance &amp; High Availability</p>
+</div>
+<div class="list-col1 docutils container">
+<p class="sub-heading list-sub-header rubric"><a class="reference internal" href="achieving-read-after-write-semantics.html"><span class="doc">Read-After-Write Semantics with Galera</span></a></p>
+<p class="list-stats">Length:  599 words; Writer: Philip Stoev; Pub: Jun 2015</p>
+<p class="list-abstract">Clients may try to read rows just inserted, excluding it from a transaction. Read/write splitting proxy, or a connection pool and a load balancer, can send queries to other nodes.</p>
+<p class="sub-heading list-sub-header rubric"><a class="reference internal" href="geo-distributed-clusters.html"><span class="doc">Geo-Distributed Database Clusters</span></a></p>
+<p class="list-stats">Length:  1043 words; Writer: Philip Stoev; Pub: Oct 2014</p>
+<p class="list-abstract">Nodes may be located in multiple physical locations. This article presents the benefits of a geo-distributed cluster, and Galera specific features to enable replication across a WAN.</p>
+</div>
+<div class="list-col2 docutils container">
+<p class="sub-heading list-sub-header rubric"><a class="reference internal" href="debugging-transaction-conflicts.html"><span class="doc">Debugging Transaction Conflicts</span></a></p>
+<p class="list-stats">Length:  1,086 words; Writer: Philip Stoev; Pub: Jun 2015</p>
+<p class="list-abstract">When using Galera in multi-master mode, transaction conflicts may occur if clients try to modify the same row at the same time. This discusses troubleshooting these deadlock errors.</p>
+</div>
+<div class="toctree-wrapper compound">
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../../index.html">
+              <img class="logo" src="../../_static/logo.png" alt="Logo"/>
+            </a></p>
+<h1 class="logo"><a href="../../index.html">Galera Cluster</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../documentation/index.html">The Codership Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../kb/index.html">The Codership Knowledge Base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Codership Training</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../courses/index.html">Codership Training Courses</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Codership Tutorials on Galera Cluster</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="getting-started.html">Getting Started with Galera Cluster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="galera-installation.html">Installing Galera Cluster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="configuration.html">System Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="wsrep-configuration.html">Replication Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="starting-cluster.html">Starting the Cluster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="testing-cluster.html">Testing a Cluster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="restarting-cluster.html">Restarting the Cluster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="galera-on-aws.html">Installing a Galera Cluster on AWS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="galera-monitoring.html">Monitoring a Galera Cluster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="migrate.html">Galera Cluster Migration Factors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="galera-backup.html">Making Back-Ups with Galera Cluster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="getting-started-docker.html">Getting Started Galera with Docker</a></li>
+<li class="toctree-l3"><a class="reference internal" href="achieving-read-after-write-semantics.html">Read-After-Write Semantics with Galera</a></li>
+<li class="toctree-l3"><a class="reference internal" href="debugging-transaction-conflicts.html">Debugging Transaction Conflicts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="debug-problems-with-sst.html">Debugging Problems with SST</a></li>
+<li class="toctree-l3"><a class="reference internal" href="geo-distributed-clusters.html">Geo-Distributed Database Clusters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="primary-component.html">The Primary Component in Galera Cluster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="supporting-transaction-isolation-levels.html">Support for Transaction Isolation Levels</a></li>
+<li class="toctree-l3"><a class="reference internal" href="safe-to-bootstrap-feature.html">The Safe-To-Bootstrap Feature</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sst-or-not.html">To SST or Not To SST?</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../videos/index.html">Codership Training Videos</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../whats-new.html">What’s New</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../editors/index.html">Codership Writers &amp; Editors</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Codership Training</a><ul>
+      <li>Previous: <a href="../courses/index.html" title="previous chapter">Codership Training Courses</a></li>
+      <li>Next: <a href="getting-started.html" title="next chapter">Getting Started with Galera Cluster</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+	<div class="navbar">
+	<nav id="site-navigation" class="navigation main-navigation" role="navigation">
+	<div class="nav-bar-container">
+
+	<div id="menu-nav-bar" class="nav-menu">
+		<ul class="nav-link">
+			<li> </li>
+
+		</ul>
+
+	</div>
+	</nav>
+
+	<footer id="colophon" class="site-footer" role="contentinfo">
+	<div class="top">	<div class="powered-by"><p>Powered by Galera:</p>
+	<p><a href="https://mariadb.com/kb/en/galera/"><img class="alignleft size-full wp-image-237" alt="MariaDB" src="https://galeracluster.com/wp-content/uploads/2013/10/logo-mariadb.png" width="166" height="49" /></a></p>
+		</div></div>
+	<div class="footer-menu">
+	<div class="menu-main-menu-container">
+	<ul id="menu-main-menu-1" class="nav-menu">
+	<li class="link-home menu-item menu-item-type-post_type menu-item-object-page menu-item-359"><a href="https://galeracluster.com/">Home</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-35"><a href="https://galeracluster.com/products/">Products</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="https://galeracluster.com/downloads/">Downloads</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-12 current_page_item current-menu-ancestor current-menu-parent current_page_parent current_page_ancestor menu-item-has-children menu-item-33"><a href="https://galeracluster.com/support/">Support</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="https://galeracluster.com/community/">Community</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-31"><a href="https://galeracluster.com/company/">Company</a></li>
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-297"><a href="https://galeracluster.com/category/blog/">Blog</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-38"><a href="https://galeracluster.com/contact-us/">Contact us</a></li>
+	</ul></div>			</div><!-- .footer-menu -->
+
+
+	<div class="footer-bar">
+	<p class="copyright">2014 Codership Ltd.</p>
+	</div>
+	<div class="footnote">
+	<h2>Your data is invaluable. We're here to secure it. All of it.</h2>
+	</div>
+	</footer><!-- #colophon -->
+
+
+
+
+  </body>
+</html>

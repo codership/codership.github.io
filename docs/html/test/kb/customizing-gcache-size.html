@@ -1,0 +1,368 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><meta content="Customizing the Write-Set Cache Size" name="title" />
+<meta content="en-US" name="language" />
+<meta content="Codership Oy, 2014 - 2020. All Rights Reserved." name="copyright" />
+
+    <title>Customizing the Write-Set Cache Size &#8212; Galera Cluster Documentation</title>
+    <link rel="stylesheet" href="../_static/reset-style.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Write-Set Caching during State Transfers" href="gcache-during-state-transfers.html" />
+    <link rel="prev" title="WAN Replication" href="wan-replication.html" />
+
+
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<link rel="stylesheet" href="/library/_static/basic-style.css">
+<link rel="stylesheet" href="/library/_static/header.css">
+<link rel="stylesheet" href="/library/_static/footer.css">
+<link rel="stylesheet" href="/library/_static/codership.css">
+<link rel="stylesheet" media="screen and (max-width: 500px)" href="/library/_static/mobile.css"/>
+<link rel="stylesheet" media="screen and (min-width:501px) and (max-width:1024px)" href="/library/_static/tablet.css"/>
+<link rel="stylesheet" media="screen and (prefers-color-scheme: dark)" href="/library/_static/dark.css"/>
+
+
+<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Feed" href="https://galeracluster.com/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Comments Feed" href="https://galeracluster.com/comments/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Support Comments Feed" href="https://galeracluster.com/support/feed/" />
+
+<script type='text/javascript' src='https://galeracluster.com/wp-includes/js/comment-reply.min.js?ver=3.8.3'></script>
+
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://galeracluster.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://galeracluster.com/wp-includes/wlwmanifest.xml" />
+<link rel='prev' title='Downloads' href='https://galeracluster.com/downloads/' />
+<link rel='next' title='Community' href='https://galeracluster.com/community/' />
+<meta name="generator" content="WordPress 3.8.3" />
+
+<link rel='shortlink' href='https://galeracluster.com/?p=12' />
+
+<style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>
+<style type="text/css" id="twentythirteen-header-css">
+			.site-title,
+			.site-description {
+				position: absolute;
+				clip: rect(1px 1px 1px 1px); /* IE7 */
+				clip: rect(1px, 1px, 1px, 1px);
+			}
+				.site-header .home-link {
+				min-height: 0;
+			}
+</style>
+
+<script type="text/javascript">
+
+		  var _gaq = _gaq || [];
+		  _gaq.push(['_setAccount', 'UA-35163478-6']);
+		  _gaq.push(['_trackPageview']);
+
+		  (function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'https://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		  })();
+
+</script>
+
+  </head><body>
+	<div id="fb-root"></div>
+	<script>(function(d, s, id) {
+		  var js, fjs = d.getElementsByTagName(s)[0];
+		  if (d.getElementById(id)) return;
+		  js = d.createElement(s); js.id = id;
+		  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+		  fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));
+	</script>
+
+	<div id="page" class="hfeed site">
+
+	<header id="masthead" class="site-header" role="banner">
+
+	<div class="top">
+	<a class="home-link" href="https://galeracluster.com/" title="Galera Cluster for MySQL" rel="home">
+	<h1 class="site-title">Galera Cluster for MySQL</h1>
+	<h2 class="site-description">The world&#039;s most advanced open source database cluster</h2>
+	</a>
+	</div>
+
+
+	<div id="navbar" class="navbar">
+	<nav id="site-navigation" class="navigation main-navigation" role="navigation">
+	<div class="menu-main-menu-container">
+
+	<ul id="menu-main-menu" class="nav-menu">
+	<li id="menu-item-359" class="link-home menu-item menu-item-type-post_type menu-item-object-page menu-item-359"><a href="https://galeracluster.com/">Home</a></li>
+	<li id="menu-item-35" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-35"><a href="https://galeracluster.com/products/">Products</a></li>
+	<li id="menu-item-34" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="https://galeracluster.com/downloads/">Downloads</a></li>
+	<li id="menu-item-33" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-12 current_page_item current-menu-ancestor current-menu-parent current_page_parent current_page_ancestor menu-item-has-children menu-item-33"><a href="https://galeracluster.com/support/">Support</a></li>
+	<li id="menu-item-32" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="https://galeracluster.com/community/">Community</a></li>
+	<li id="menu-item-31" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-31"><a href="https://galeracluster.com/company/">Company</a></li>
+	<li id="menu-item-297" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-297"><a href="https://galeracluster.com/category/blog/">Blog</a></li>
+	<li id="menu-item-38" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-38"><a href="https://galeracluster.com/contact-us/">Contact us</a></li>
+	</ul>
+	</div>
+
+
+	</nav><!-- #site-navigation -->
+
+	</div><!-- #navbar -->
+	</header><!-- #masthead -->
+
+
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="left-margin docutils container">
+<div class="left-margin-top docutils container">
+<a class="reference internal" href="../index.html"><span class="doc">The Library</span></a></div>
+<div class="left-margin-content docutils container">
+<ul class="simple">
+<li><a class="reference internal" href="../documentation/index.html"><span class="doc">Documentation</span></a></li>
+</ul>
+<ul class="here simple">
+<li><a class="reference internal" href="index.html"><span class="doc">Knowledge Base</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="sub-links simple">
+<li><a class="reference internal" href="../training/tutorials/index.html"><span class="doc">Tutorial Articles</span></a></li>
+<li><a class="reference internal" href="../training/videos/index.html"><span class="doc">Training Videos</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a></li>
+</ul>
+<p>Related Documents</p>
+<ul class="simple">
+<li><a class="reference internal" href="../documentation/galera-parameters.html#gcache-size"><span class="std std-ref">gcache.size</span></a></li>
+<li><a class="reference internal" href="../documentation/galera-status-variables.html#wsrep-received-bytes"><span class="std std-ref">wsrep_received_bytes</span></a></li>
+</ul>
+</div>
+</div>
+<div class="top-links docutils container">
+<ul class="simple">
+<li><a class="reference external" href="https://galeracluster.com">Home</a></li>
+<li><a class="reference internal" href="../documentation/index.html"><span class="doc">Docs</span></a></li>
+</ul>
+<ul class="here simple">
+<li><a class="reference internal" href="index.html"><span class="doc">KB</span></a></li>
+</ul>
+<ul class="nav-wider simple">
+<li><a class="reference internal" href="../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a></li>
+</ul>
+</div>
+<div class="library-article section" id="customizing-the-write-set-cache-size">
+<span id="kb-best-customizing-gcache-size"></span><h1>Customizing the Write-Set Cache Size<a class="headerlink" href="#customizing-the-write-set-cache-size" title="Permalink to this headline">¶</a></h1>
+<p class="article-stats">Length: 467 words; Published: June 24, 2015; Updated: October 22, 2019; Category: Performance; Type: Best Practices</p>
+<p>You can define the size of the write-set cache using the <a class="reference internal" href="../documentation/galera-parameters.html#gcache-size"><span class="std std-ref">gcache.size</span></a> parameter.  The set the size to one less than that of the data directory.</p>
+<p class="section-heading rubric">Scenario</p>
+<p>If you have storage issues, there are some guidelines to consider in adjusting this issue.  For example, your preferred state snapshot method.  <code class="docutils literal notranslate"><span class="pre">rsync</span></code> and <code class="docutils literal notranslate"><span class="pre">xtrabackup</span></code> copy the InnoDB log files, while <code class="docutils literal notranslate"><span class="pre">mysqldump</span></code> does not.  So, if you use <code class="docutils literal notranslate"><span class="pre">mysqldump</span></code> for state snapshot transfers, you can subtract the size of the log files from your calculation of the data directory size.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Incremental State Transfers (IST) copies the database five times faster over <code class="docutils literal notranslate"><span class="pre">mysqldump</span></code> and about 50% faster than <code class="docutils literal notranslate"><span class="pre">xtrabackup</span></code>.  Meaning that your cluster can handle relatively large write-set caches.  However, bear in mind that you cannot provision a server with Incremental State Transfers.</p>
+</div>
+<p class="section-heading rubric">Recommendations</p>
+<p>As a general rule, start with the data directory size, including any possible links, then subtract the size of the ring buffer storage file, which is called <code class="docutils literal notranslate"><span class="pre">galera.cache</span></code> by default.</p>
+<p>If storage remains an issue, you can further refine these calculations with the database write rate.  The write rate indicates the tail length that the cluster stores in the write-set cache.</p>
+<p>You can calculate this using the <a class="reference internal" href="../documentation/galera-status-variables.html#wsrep-received-bytes"><span class="std std-ref">wsrep_received_bytes</span></a> status variable.</p>
+<ol class="arabic">
+<li><p class="first">Determine the size of the write-sets the node has received from the cluster:</p>
+<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="k">SHOW</span> <span class="n">STATUS</span> <span class="k">LIKE</span> <span class="s1">&#39;wsrep_received_bytes&#39;</span><span class="p">;</span>
+
+<span class="o">+------------------------+-----------+</span>
+<span class="o">|</span> <span class="n">Variable</span> <span class="n">name</span>          <span class="o">|</span> <span class="n">Value</span>     <span class="o">|</span>
+<span class="o">+------------------------+-----------+</span>
+<span class="o">|</span> <span class="n">wsrep_received_bytes</span>   <span class="o">|</span> <span class="mi">6637093</span>   <span class="o">|</span>
+<span class="o">+------------------------+-----------+</span>
+</pre></div>
+</div>
+<p>Note the value and time, respective as <span class="math notranslate nohighlight">\(recv_1\)</span> and <span class="math notranslate nohighlight">\(time_1\)</span>.</p>
+</li>
+<li><p class="first">Run the same query again, noting the value and time, respectively, as <span class="math notranslate nohighlight">\(recv_2\)</span> and <span class="math notranslate nohighlight">\(time_2\)</span>.</p>
+</li>
+<li><p class="first">Apply these values to the following equation:</p>
+<div class="math notranslate nohighlight">
+\[write\_rate = \frac{ recv_2 - recv_1 }{ time_2 - time_1}\]</div>
+</li>
+</ol>
+<p>From the write rate you can determine the amount of time the cache remains valid.  When the cluster shows a node as absent for a period of time less than this interval, the node can rejoin the cluster through an incremental state transfer. Node that remains absent for longer than this interval will likely require a full state snapshot transfer to rejoin the cluster.</p>
+<p>You can determine the period of time the cache remains valid using this equation:</p>
+<div class="math notranslate nohighlight">
+\[period = \frac{ cachesize } { write\_rate }\]</div>
+<p>Conversely, if you already know the period in which you want the write-set cache to remain valid, you can use instead this equation:</p>
+<div class="math notranslate nohighlight">
+\[cachesize = write\_rate \times time\]</div>
+<p>This equation can show how the size of the write-set cache can improve performance.  For instance, say you find that cluster nodes frequently request state snapshot transfers.  Increasing the <a class="reference internal" href="../documentation/galera-parameters.html#gcache-size"><span class="std std-ref">gcache.size</span></a> parameter extends the period in which the write-set remains valid, allowing the nodes to update instead through incremental state transfers.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Consider these configuration tips as guidelines only. For example, in cases where you must avoid state snapshot transfers as much as possible, you may end up using a much larger write-set cache than suggested above.</p>
+</div>
+<div class="bottom-links docutils container">
+<p>Related Documents</p>
+<ul class="simple">
+<li><a class="reference internal" href="../documentation/galera-parameters.html#gcache-size"><span class="std std-ref">gcache.size</span></a></li>
+<li><a class="reference internal" href="../documentation/galera-status-variables.html#wsrep-received-bytes"><span class="std std-ref">wsrep_received_bytes</span></a></li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/logo.png" alt="Logo"/>
+            </a></p>
+<h1 class="logo"><a href="../index.html">Galera Cluster</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../documentation/index.html">The Codership Documentation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">The Codership Knowledge Base</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="index.html#troubleshooting-articles">Troubleshooting Articles</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#best-practices-articles">Best Practices Articles</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="node-crash-during-sst.html">Node Crashes during SST</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sst-fails-sql-syntax-error.html">SST Fails with SQL Syntax Errors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="requested-state-transfer-failed.html">Requested State Transfer Failed</a></li>
+<li class="toctree-l3"><a class="reference internal" href="stall-on-alter-table.html">Cluster Stalls on <code class="docutils literal notranslate"><span class="pre">ALTER</span> <span class="pre">TABLE</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="user-changes.html">User Changes not Replicating</a></li>
+<li class="toctree-l3"><a class="reference internal" href="auto-increment-multiples.html">AUTO_INCREMENT Increasing by Multiples</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deadlock-found.html">Deadlock Found during a Transaction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="resolve-commit-failure.html">Commit Failed for Reason 3</a></li>
+<li class="toctree-l3"><a class="reference internal" href="multi-master-conflicts.html">Multi-Master Conflicts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="error-unknown-command.html">Unknown Command Errors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="group-commit.html">Group Commit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="large-transactions.html">Handling Large Transactions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="parallel-slave-threads.html">Setting Parallel Slave Threads</a></li>
+<li class="toctree-l3"><a class="reference internal" href="detecting-slow-node.html">Detecting a Slow Node</a></li>
+<li class="toctree-l3"><a class="reference internal" href="wan-latency.html">WAN Latency</a></li>
+<li class="toctree-l3"><a class="reference internal" href="wan-replication.html">WAN Replication</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Customizing the Write-Set Cache Size</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gcache-during-state-transfers.html">Write-Set Caching during State Transfers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="single-master-setup.html">Single Master Setup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="multi-master-setup.html">Multi-Master Setup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="two-node-clusters.html">Two-Node Clusters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="setting-selinux-policy.html">Setting an SELinux Policy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sync-transaction-before-another.html">Synchronizing a Transaction Before Executing Another</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../training/index.html">Codership Training</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../whats-new.html">What’s New</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../editors/index.html">Codership Writers &amp; Editors</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">The Codership Knowledge Base</a><ul>
+      <li>Previous: <a href="wan-replication.html" title="previous chapter">WAN Replication</a></li>
+      <li>Next: <a href="gcache-during-state-transfers.html" title="next chapter">Write-Set Caching during State Transfers</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+	<div class="navbar">
+	<nav id="site-navigation" class="navigation main-navigation" role="navigation">
+	<div class="nav-bar-container">
+
+	<div id="menu-nav-bar" class="nav-menu">
+		<ul class="nav-link">
+			<li> </li>
+
+		</ul>
+
+	</div>
+	</nav>
+
+	<footer id="colophon" class="site-footer" role="contentinfo">
+	<div class="top">	<div class="powered-by"><p>Powered by Galera:</p>
+	<p><a href="https://mariadb.com/kb/en/galera/"><img class="alignleft size-full wp-image-237" alt="MariaDB" src="https://galeracluster.com/wp-content/uploads/2013/10/logo-mariadb.png" width="166" height="49" /></a></p>
+		</div></div>
+	<div class="footer-menu">
+	<div class="menu-main-menu-container">
+	<ul id="menu-main-menu-1" class="nav-menu">
+	<li class="link-home menu-item menu-item-type-post_type menu-item-object-page menu-item-359"><a href="https://galeracluster.com/">Home</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-35"><a href="https://galeracluster.com/products/">Products</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="https://galeracluster.com/downloads/">Downloads</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-12 current_page_item current-menu-ancestor current-menu-parent current_page_parent current_page_ancestor menu-item-has-children menu-item-33"><a href="https://galeracluster.com/support/">Support</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="https://galeracluster.com/community/">Community</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-31"><a href="https://galeracluster.com/company/">Company</a></li>
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-297"><a href="https://galeracluster.com/category/blog/">Blog</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-38"><a href="https://galeracluster.com/contact-us/">Contact us</a></li>
+	</ul></div>			</div><!-- .footer-menu -->
+
+
+	<div class="footer-bar">
+	<p class="copyright">2014 Codership Ltd.</p>
+	</div>
+	<div class="footnote">
+	<h2>Your data is invaluable. We're here to secure it. All of it.</h2>
+	</div>
+	</footer><!-- #colophon -->
+
+
+
+
+  </body>
+</html>

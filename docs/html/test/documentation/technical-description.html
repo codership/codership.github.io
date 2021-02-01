@@ -1,0 +1,369 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><meta content="Technical Description of Galera Cluster" name="title" />
+<meta content="en-US" name="language" />
+<meta content="galera cluster, overview, introduction, replication" name="keywords" />
+<meta content="Codership Oy, 2014 - 2020. All Rights Reserved." name="copyright" />
+
+    <title>Technical Description &#8212; Galera Cluster Documentation</title>
+    <link rel="stylesheet" href="../_static/reset-style.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Database Replication" href="tech-desc-introduction.html" />
+    <link rel="prev" title="Overview of Galera Cluster" href="overview.html" />
+
+
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<link rel="stylesheet" href="/library/_static/basic-style.css">
+<link rel="stylesheet" href="/library/_static/header.css">
+<link rel="stylesheet" href="/library/_static/footer.css">
+<link rel="stylesheet" href="/library/_static/codership.css">
+<link rel="stylesheet" media="screen and (max-width: 500px)" href="/library/_static/mobile.css"/>
+<link rel="stylesheet" media="screen and (min-width:501px) and (max-width:1024px)" href="/library/_static/tablet.css"/>
+<link rel="stylesheet" media="screen and (prefers-color-scheme: dark)" href="/library/_static/dark.css"/>
+
+
+<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Feed" href="https://galeracluster.com/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Comments Feed" href="https://galeracluster.com/comments/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Support Comments Feed" href="https://galeracluster.com/support/feed/" />
+
+<script type='text/javascript' src='https://galeracluster.com/wp-includes/js/comment-reply.min.js?ver=3.8.3'></script>
+
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://galeracluster.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://galeracluster.com/wp-includes/wlwmanifest.xml" />
+<link rel='prev' title='Downloads' href='https://galeracluster.com/downloads/' />
+<link rel='next' title='Community' href='https://galeracluster.com/community/' />
+<meta name="generator" content="WordPress 3.8.3" />
+
+<link rel='shortlink' href='https://galeracluster.com/?p=12' />
+
+<style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>
+<style type="text/css" id="twentythirteen-header-css">
+			.site-title,
+			.site-description {
+				position: absolute;
+				clip: rect(1px 1px 1px 1px); /* IE7 */
+				clip: rect(1px, 1px, 1px, 1px);
+			}
+				.site-header .home-link {
+				min-height: 0;
+			}
+</style>
+
+<script type="text/javascript">
+
+		  var _gaq = _gaq || [];
+		  _gaq.push(['_setAccount', 'UA-35163478-6']);
+		  _gaq.push(['_trackPageview']);
+
+		  (function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'https://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		  })();
+
+</script>
+
+  </head><body>
+	<div id="fb-root"></div>
+	<script>(function(d, s, id) {
+		  var js, fjs = d.getElementsByTagName(s)[0];
+		  if (d.getElementById(id)) return;
+		  js = d.createElement(s); js.id = id;
+		  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+		  fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));
+	</script>
+
+	<div id="page" class="hfeed site">
+
+	<header id="masthead" class="site-header" role="banner">
+
+	<div class="top">
+	<a class="home-link" href="https://galeracluster.com/" title="Galera Cluster for MySQL" rel="home">
+	<h1 class="site-title">Galera Cluster for MySQL</h1>
+	<h2 class="site-description">The world&#039;s most advanced open source database cluster</h2>
+	</a>
+	</div>
+
+
+	<div id="navbar" class="navbar">
+	<nav id="site-navigation" class="navigation main-navigation" role="navigation">
+	<div class="menu-main-menu-container">
+
+	<ul id="menu-main-menu" class="nav-menu">
+	<li id="menu-item-359" class="link-home menu-item menu-item-type-post_type menu-item-object-page menu-item-359"><a href="https://galeracluster.com/">Home</a></li>
+	<li id="menu-item-35" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-35"><a href="https://galeracluster.com/products/">Products</a></li>
+	<li id="menu-item-34" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="https://galeracluster.com/downloads/">Downloads</a></li>
+	<li id="menu-item-33" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-12 current_page_item current-menu-ancestor current-menu-parent current_page_parent current_page_ancestor menu-item-has-children menu-item-33"><a href="https://galeracluster.com/support/">Support</a></li>
+	<li id="menu-item-32" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="https://galeracluster.com/community/">Community</a></li>
+	<li id="menu-item-31" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-31"><a href="https://galeracluster.com/company/">Company</a></li>
+	<li id="menu-item-297" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-297"><a href="https://galeracluster.com/category/blog/">Blog</a></li>
+	<li id="menu-item-38" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-38"><a href="https://galeracluster.com/contact-us/">Contact us</a></li>
+	</ul>
+	</div>
+
+
+	</nav><!-- #site-navigation -->
+
+	</div><!-- #navbar -->
+	</header><!-- #masthead -->
+
+
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="left-margin docutils container">
+<div class="left-margin-top docutils container">
+<a class="reference internal" href="../index.html"><span class="doc">The Library</span></a></div>
+<div class="left-margin-content docutils container">
+<ul class="here simple">
+<li><a class="reference internal" href="index.html"><span class="doc">Documentation</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../kb/index.html"><span class="doc">Knowledge Base</span></a></li>
+<li><a class="reference internal" href="../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="sub-links simple">
+<li><a class="reference internal" href="../training/tutorials/index.html"><span class="doc">Tutorial Articles</span></a></li>
+<li><a class="reference internal" href="../training/videos/index.html"><span class="doc">Training Videos</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a></li>
+</ul>
+<p>Related Documents</p>
+<ul class="simple">
+<li><a class="reference internal" href="certification-based-replication.html"><span class="doc">Certification Replication</span></a></li>
+<li><a class="reference internal" href="tech-desc-introduction.html"><span class="doc">Database Replication</span></a></li>
+<li><a class="reference internal" href="node-states.html"><span class="doc">Flow Control</span></a></li>
+<li><a class="reference internal" href="isolation-levels.html"><span class="doc">Isolation Levels</span></a></li>
+<li><a class="reference internal" href="recovery.html"><span class="doc">Node Recovery</span></a></li>
+<li><a class="reference internal" href="weighted-quorum.html"><span class="doc">Quorum Components</span></a></li>
+<li><a class="reference internal" href="architecture.html"><span class="doc">Replication Architecture</span></a></li>
+<li><a class="reference internal" href="state-transfer.html"><span class="doc">State Transfers</span></a></li>
+<li><a class="reference internal" href="streaming-replication.html"><span class="doc">Streaming Replication</span></a></li>
+</ul>
+</div>
+</div>
+<div class="top-links docutils container">
+<ul class="simple">
+<li><a class="reference external" href="https://galeracluster.com">Home</a></li>
+</ul>
+<ul class="here simple">
+<li><a class="reference internal" href="index.html"><span class="doc">Docs</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../kb/index.html"><span class="doc">KB</span></a></li>
+</ul>
+<ul class="nav-wider simple">
+<li><a class="reference internal" href="../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a></li>
+</ul>
+</div>
+<div class="library-document section" id="technical-description">
+<span id="tech-description"></span><h1>Technical Description<a class="headerlink" href="#technical-description" title="Permalink to this headline">¶</a></h1>
+<p>Galera Cluster is a synchronous certification-based replication solution for MySQL, MariaDB and Percona XtraDB.  Cluster nodes are identical and fully representative of the cluster state. They allow for unconstrained transparent client access, acting as a single-distributed database server.  In order to better understand Galera Cluster, this section provides detailed information on how it works and how you can benefit from it.</p>
+<p class="section-heading rubric" id="understanding-repl">Understanding Replication</p>
+<p>Replication in the context of databases refers to the frequent copying of data from one database server to another.  These sections provide a high-level explanation of replication both in the general sense of how it works, as well as the particulars of how Galera Cluster implements these core concepts.</p>
+<ul>
+<li><p class="first"><a class="reference internal" href="tech-desc-introduction.html"><span class="doc">Database Replication</span></a></p>
+<p>This section explains how database replication works in general.  It provides an overview of the problems inherent in the various replication implementations, including master-slave, asynchronous and synchronous replication.</p>
+</li>
+<li><p class="first"><a class="reference internal" href="certification-based-replication.html"><span class="doc">Certification-Based Replication</span></a></p>
+<p>Using group communications and transaction ordering techniques, certification-based replication allows for synchronous replication.</p>
+</li>
+</ul>
+<p class="section-heading rubric" id="understanding-galera">Understanding Galera Cluster</p>
+<p>With a better grasp on how replication works, these pages provide a more detailed explanation of how Galera Cluster implements certification-based replication, including the specific architecture of the nodes, how they communicate with each other, as well as replicate data and manage the replication process.</p>
+<ul>
+<li><p class="first"><a class="reference internal" href="architecture.html"><span class="doc">Replication API</span></a></p>
+<p>While the above sections explain the abstract concepts surrounding certification-based replication, this section covers the specific architecture used by Galera Cluster in implementing write-set replication, including the wsrep API and the Galera Replication and Group Communication plug-ins.</p>
+</li>
+<li><p class="first"><a class="reference internal" href="isolation-levels.html"><span class="doc">Isolation Levels</span></a></p>
+<p>In a database system, the server will process concurrent transactions in isolation from each other. The level of isolation determines whether and how these transactions affect one another.  This section provides an overview of the isolation levels supported by Galera Cluster.</p>
+</li>
+<li><p class="first"><a class="reference internal" href="state-transfer.html"><span class="doc">State Transfers</span></a></p>
+<p>The actual process that nodes use to replicate data into each other is called provisioning.  Galera Cluster supports two provisioning methods: State Snapshot Transfers and Incremental State Transfers.  This section presents an overview of each.</p>
+</li>
+<li><p class="first"><a class="reference internal" href="node-states.html"><span class="doc">Flow Control</span></a></p>
+<p>Galera Cluster manages the replication process using a feedback mechanism called Flow Control.  This allows the node to pause and resume replication according to its performance needs and to prevent any node from lagging too far behind the others in applying transaction.  This section provides an overview of Flow Control and the different states nodes can hold.</p>
+</li>
+<li><p class="first"><a class="reference internal" href="recovery.html"><span class="doc">Node Failure &amp; Recovery</span></a></p>
+<p>Nodes fail to operate when they lose their connection with the cluster.  This can occur for various reasons, such as hardware failures, software crashes, or the loss of network connectivity.  This section provides an overview of how nodes and the cluster cope with failure and how they may recover.</p>
+</li>
+<li><p class="first"><a class="reference internal" href="weighted-quorum.html"><span class="doc">Quorum Components</span></a></p>
+<p>When nodes connect to each other, they form components.  The Primary Component is a component that has quorum: it carries the majority of nodes in the cluster.  By default, each node represents one vote in quorum calculations. However, you can modify this feature in order to ensure certain stable nodes with strong connections carry a greater value.  This section provides an overview of how Galera Cluster handles weighted values in quorum calculations.</p>
+</li>
+<li><p class="first"><a class="reference internal" href="streaming-replication.html"><span class="doc">Streaming Replication</span></a></p>
+<p>Normally, nodes transfer all replication and certification events on the transaction commit.  With Streaming Replication, the nodes break the transaction into fragments.  Then they certify, replicate and apply these replication fragments onto the slave nodes.  This section describes Streaming Replication, how it works and the limitations of its use.</p>
+</li>
+</ul>
+<div class="bottom-links docutils container">
+<p>Related Documents</p>
+<ul class="simple">
+<li><a class="reference internal" href="certification-based-replication.html"><span class="doc">Certification Replication</span></a></li>
+<li><a class="reference internal" href="tech-desc-introduction.html"><span class="doc">Database Replication</span></a></li>
+<li><a class="reference internal" href="node-states.html"><span class="doc">Flow Control</span></a></li>
+<li><a class="reference internal" href="isolation-levels.html"><span class="doc">Isolation Levels</span></a></li>
+<li><a class="reference internal" href="recovery.html"><span class="doc">Node Recovery</span></a></li>
+<li><a class="reference internal" href="weighted-quorum.html"><span class="doc">Quorum Components</span></a></li>
+<li><a class="reference internal" href="architecture.html"><span class="doc">Replication Architecture</span></a></li>
+<li><a class="reference internal" href="state-transfer.html"><span class="doc">State Transfers</span></a></li>
+<li><a class="reference internal" href="streaming-replication.html"><span class="doc">Streaming Replication</span></a></li>
+</ul>
+</div>
+<div class="toctree-wrapper compound">
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/logo.png" alt="Logo"/>
+            </a></p>
+<h1 class="logo"><a href="../index.html">Galera Cluster</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">The Codership Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="overview.html">Overview of Galera Cluster</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Technical Description</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="tech-desc-introduction.html">Database Replication</a></li>
+<li class="toctree-l3"><a class="reference internal" href="certification-based-replication.html">Certification-Based Replication</a></li>
+<li class="toctree-l3"><a class="reference internal" href="architecture.html">Replication API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="isolation-levels.html">Isolation Levels</a></li>
+<li class="toctree-l3"><a class="reference internal" href="state-transfer.html">State Transfers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="node-states.html">Flow Control</a></li>
+<li class="toctree-l3"><a class="reference internal" href="recovery.html">Node Failure &amp; Recovery</a></li>
+<li class="toctree-l3"><a class="reference internal" href="weighted-quorum.html">Quorum Components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="streaming-replication.html">Streaming Replication</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="install.html">Installing Galera Cluster</a></li>
+<li class="toctree-l2"><a class="reference internal" href="administration.html">Galera Cluster Administration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deployment.html">Deployment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="monitor.html">Cluster Monitoring</a></li>
+<li class="toctree-l2"><a class="reference internal" href="security.html">Security</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference.html">Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../kb/index.html">The Codership Knowledge Base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../training/index.html">Codership Training</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../whats-new.html">What’s New</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../editors/index.html">Codership Writers &amp; Editors</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">The Codership Documentation</a><ul>
+      <li>Previous: <a href="overview.html" title="previous chapter">Overview of Galera Cluster</a></li>
+      <li>Next: <a href="tech-desc-introduction.html" title="next chapter">Database Replication</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+	<div class="navbar">
+	<nav id="site-navigation" class="navigation main-navigation" role="navigation">
+	<div class="nav-bar-container">
+
+	<div id="menu-nav-bar" class="nav-menu">
+		<ul class="nav-link">
+			<li> </li>
+
+		</ul>
+
+	</div>
+	</nav>
+
+	<footer id="colophon" class="site-footer" role="contentinfo">
+	<div class="top">	<div class="powered-by"><p>Powered by Galera:</p>
+	<p><a href="https://mariadb.com/kb/en/galera/"><img class="alignleft size-full wp-image-237" alt="MariaDB" src="https://galeracluster.com/wp-content/uploads/2013/10/logo-mariadb.png" width="166" height="49" /></a></p>
+		</div></div>
+	<div class="footer-menu">
+	<div class="menu-main-menu-container">
+	<ul id="menu-main-menu-1" class="nav-menu">
+	<li class="link-home menu-item menu-item-type-post_type menu-item-object-page menu-item-359"><a href="https://galeracluster.com/">Home</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-35"><a href="https://galeracluster.com/products/">Products</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="https://galeracluster.com/downloads/">Downloads</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-12 current_page_item current-menu-ancestor current-menu-parent current_page_parent current_page_ancestor menu-item-has-children menu-item-33"><a href="https://galeracluster.com/support/">Support</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="https://galeracluster.com/community/">Community</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-31"><a href="https://galeracluster.com/company/">Company</a></li>
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-297"><a href="https://galeracluster.com/category/blog/">Blog</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-38"><a href="https://galeracluster.com/contact-us/">Contact us</a></li>
+	</ul></div>			</div><!-- .footer-menu -->
+
+
+	<div class="footer-bar">
+	<p class="copyright">2014 Codership Ltd.</p>
+	</div>
+	<div class="footnote">
+	<h2>Your data is invaluable. We're here to secure it. All of it.</h2>
+	</div>
+	</footer><!-- #colophon -->
+
+
+
+
+  </body>
+</html>

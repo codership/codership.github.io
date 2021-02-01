@@ -1,0 +1,375 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><meta content="Deciding with to use SST or Not in Galera Cluster" name="title" />
+<meta content="en-US" name="language" />
+<meta content="Codership Oy, 2014 - 2020. All Rights Reserved." name="copyright" />
+
+    <title>To SST or Not To SST? &#8212; Galera Cluster Documentation</title>
+    <link rel="stylesheet" href="../../_static/reset-style.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Codership Training Videos" href="../videos/index.html" />
+    <link rel="prev" title="The Safe-To-Bootstrap Feature" href="safe-to-bootstrap-feature.html" />
+
+
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<link rel="stylesheet" href="/library/_static/basic-style.css">
+<link rel="stylesheet" href="/library/_static/header.css">
+<link rel="stylesheet" href="/library/_static/footer.css">
+<link rel="stylesheet" href="/library/_static/codership.css">
+<link rel="stylesheet" media="screen and (max-width: 500px)" href="/library/_static/mobile.css"/>
+<link rel="stylesheet" media="screen and (min-width:501px) and (max-width:1024px)" href="/library/_static/tablet.css"/>
+<link rel="stylesheet" media="screen and (prefers-color-scheme: dark)" href="/library/_static/dark.css"/>
+
+
+<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Feed" href="https://galeracluster.com/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Comments Feed" href="https://galeracluster.com/comments/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Support Comments Feed" href="https://galeracluster.com/support/feed/" />
+
+<script type='text/javascript' src='https://galeracluster.com/wp-includes/js/comment-reply.min.js?ver=3.8.3'></script>
+
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://galeracluster.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://galeracluster.com/wp-includes/wlwmanifest.xml" />
+<link rel='prev' title='Downloads' href='https://galeracluster.com/downloads/' />
+<link rel='next' title='Community' href='https://galeracluster.com/community/' />
+<meta name="generator" content="WordPress 3.8.3" />
+
+<link rel='shortlink' href='https://galeracluster.com/?p=12' />
+
+<style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>
+<style type="text/css" id="twentythirteen-header-css">
+			.site-title,
+			.site-description {
+				position: absolute;
+				clip: rect(1px 1px 1px 1px); /* IE7 */
+				clip: rect(1px, 1px, 1px, 1px);
+			}
+				.site-header .home-link {
+				min-height: 0;
+			}
+</style>
+
+<script type="text/javascript">
+
+		  var _gaq = _gaq || [];
+		  _gaq.push(['_setAccount', 'UA-35163478-6']);
+		  _gaq.push(['_trackPageview']);
+
+		  (function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'https://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		  })();
+
+</script>
+
+  </head><body>
+	<div id="fb-root"></div>
+	<script>(function(d, s, id) {
+		  var js, fjs = d.getElementsByTagName(s)[0];
+		  if (d.getElementById(id)) return;
+		  js = d.createElement(s); js.id = id;
+		  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+		  fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));
+	</script>
+
+	<div id="page" class="hfeed site">
+
+	<header id="masthead" class="site-header" role="banner">
+
+	<div class="top">
+	<a class="home-link" href="https://galeracluster.com/" title="Galera Cluster for MySQL" rel="home">
+	<h1 class="site-title">Galera Cluster for MySQL</h1>
+	<h2 class="site-description">The world&#039;s most advanced open source database cluster</h2>
+	</a>
+	</div>
+
+
+	<div id="navbar" class="navbar">
+	<nav id="site-navigation" class="navigation main-navigation" role="navigation">
+	<div class="menu-main-menu-container">
+
+	<ul id="menu-main-menu" class="nav-menu">
+	<li id="menu-item-359" class="link-home menu-item menu-item-type-post_type menu-item-object-page menu-item-359"><a href="https://galeracluster.com/">Home</a></li>
+	<li id="menu-item-35" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-35"><a href="https://galeracluster.com/products/">Products</a></li>
+	<li id="menu-item-34" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="https://galeracluster.com/downloads/">Downloads</a></li>
+	<li id="menu-item-33" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-12 current_page_item current-menu-ancestor current-menu-parent current_page_parent current_page_ancestor menu-item-has-children menu-item-33"><a href="https://galeracluster.com/support/">Support</a></li>
+	<li id="menu-item-32" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="https://galeracluster.com/community/">Community</a></li>
+	<li id="menu-item-31" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-31"><a href="https://galeracluster.com/company/">Company</a></li>
+	<li id="menu-item-297" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-297"><a href="https://galeracluster.com/category/blog/">Blog</a></li>
+	<li id="menu-item-38" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-38"><a href="https://galeracluster.com/contact-us/">Contact us</a></li>
+	</ul>
+	</div>
+
+
+	</nav><!-- #site-navigation -->
+
+	</div><!-- #navbar -->
+	</header><!-- #masthead -->
+
+
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="left-margin docutils container">
+<div class="left-margin-top docutils container">
+<a class="reference internal" href="../../index.html"><span class="doc">The Library</span></a></div>
+<div class="left-margin-content docutils container">
+<ul class="simple">
+<li><a class="reference internal" href="../../documentation/index.html"><span class="doc">Documentation</span></a></li>
+<li><a class="reference internal" href="../../kb/index.html"><span class="doc">Knowledge Base</span></a></li>
+<li><a class="reference internal" href="../index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="sub-links simple">
+<li><a class="reference internal" href="../courses/index.html"><span class="doc">Training Courses</span></a></li>
+<li><a class="reference internal" href="../videos/index.html"><span class="doc">Training Videos</span></a></li>
+</ul>
+<ul class="sub-links here simple">
+<li><a class="reference internal" href="index.html"><span class="doc">Tutorial Articles</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../../faq.html"><span class="doc">FAQ</span></a></li>
+</ul>
+</div>
+</div>
+<div class="top-links docutils container">
+<ul class="simple">
+<li><a class="reference external" href="https://galeracluster.com">Home</a></li>
+<li><a class="reference internal" href="../../documentation/index.html"><span class="doc">Docs</span></a></li>
+<li><a class="reference internal" href="../../kb/index.html"><span class="doc">KB</span></a></li>
+</ul>
+<ul class="here nav-wider simple">
+<li><a class="reference internal" href="../index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../../faq.html"><span class="doc">FAQ</span></a></li>
+</ul>
+</div>
+<div class="library-article section" id="to-sst-or-not-to-sst">
+<span id="sst-or-not"></span><h1>To SST or Not To SST?<a class="headerlink" href="#to-sst-or-not-to-sst" title="Permalink to this headline">¶</a></h1>
+<p class="article-stats">Length:  1001 words; Writer: Philip Stoev; Published: December 6, 2016; Topic: General; Level: Intermediate</p>
+<p>If a node leaves the cluster and subsequently rejoins, Galera will internally make sure that the node is brought up to speed with the rest of the cluster. It is important for DBAs that this process completes quickly, so ideally SST is avoided altogether and IST is used. However, when looking at the log, SST is still mentioned even if IST is ultimately chosen, which may cause confusion.
+In this article, we will describe the entire process of getting a restarted node back to speed with the rest of the cluster and explain the logic behind the various log messages.</p>
+<p class="section-heading rubric">Basic Principles</p>
+<p>State transfers in Galera are governed by the following basic principles:
+The cluster will pick a donor node using an algorithm that favors IST and attempts to avoid any transfers over a wide-area network. A specific donor can be explicitly chosen using the wsrep_sst_donor variable.
+The joiner will declare if IST, SST or both are possible:</p>
+<p>If the <code class="docutils literal notranslate"><span class="pre">mysqld</span></code> process was shut down and is now being restarted, SST or IST are both possible;
+If a node is starting from an unknown state (such as empty database or a missing grastate.dat file), only SST can be performed;
+If the node was temporarily disconnected from the cluster while the mysqld process remains running, only IST can happen if the SST method is set to xtrabackup, xtrabackup-v2 or rsync. This is because the entire data directory can not be copied over to a running server.
+If both methods are possible, as is the case during a vanilla server restart, it is up to the donor node to decide if it can deliver IST. If needed, the donor has the ability to fall back to SST instead.</p>
+<p class="section-heading rubric">Step-by-Step Walkthrough</p>
+<p>This section describes the entire state transfer process during a normal server restart and shows the typical log messages that happen at each phase.
+First, the joining node establishes its current replication position and compares it to the position the rest of the cluster has moved to while the node was disconnected:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">WSREP: State transfer required:</span>
+<span class="go">     Group state: cdecf830-bad9-11e6-850b-d6cd097d8360:17</span>
+<span class="go">     Local state: cdecf830-bad9-11e6-850b-d6cd097d8360:3</span>
+<span class="go">...</span>
+<span class="go">WSREP: Gap in state sequence. Need state transfer.</span>
+</pre></div>
+</div>
+<p>Then, it prepares its own side for receiving a state transfer. Since the data can come as either IST and SST, the joiner prepares for both and runs the SST script just in case:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">WSREP: Running: &#39;wsrep_sst_rsync --role &#39;joiner&#39; --address &#39;127.0.0.2:13011&#39; --datadir &#39;/home/philips/git/mysql-wsrep-bugs-5.6/mysql-test/var/mysqld.3/data/&#39; --defaults-file &#39;/home/philips/git/mysql-wsrep-bugs-5.6/mysql-test/var/my.cnf&#39; --defaults-group-suffix &#39;.3&#39; --parent &#39;10676&#39;  &#39;&#39; &#39;</span>
+<span class="go">WSREP: Prepared SST request: rsync|127.0.0.2:13011/rsync_sst</span>
+<span class="go">...</span>
+<span class="go">IST receiver addr using tcp://127.0.0.1:13010</span>
+<span class="go">Prepared IST receiver, listening at: tcp://127.0.0.1:13010</span>
+</pre></div>
+</div>
+<p>Now, it is time to select the actual donor node. This decision is made by the cluster as a whole, so this message is printed on all nodes:</p>
+<p>Member 0.0 (fedora20) requested state transfer from ‘<em>any</em>’. Selected 2.0 (fedora20)(SYNCED) as donor.</p>
+<p>The donor node now joins the action. If it determines that it can serve IST after all, it calls the SST script on its side using the <code class="docutils literal notranslate"><span class="pre">--bypass</span></code> parameter. This instructs the script that no actual transfer of the entire database needs to happen, so the script exits quickly.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">WSREP: Running: &#39;wsrep_sst_rsync --role &#39;donor&#39; --address &#39;127.0.0.2:13011/rsync_sst&#39; --socket &#39;/home/philips/git/mysql-wsrep-bugs-5.6/mysql-test/var/tmp/mysqld.1.sock&#39; --datadir &#39;/home/philips/git/mysql-wsrep-bugs-5.6/mysql-test/var/mysqld.1/data/&#39; --defaults-file &#39;/home/philips/git/mysql-wsrep-bugs-5.6/mysql-test/var/my.cnf&#39; --defaults-group-suffix &#39;.1&#39;   &#39;&#39; --gtid &#39;cdecf830-bad9-11e6-850b-d6cd097d8360:0&#39; --bypass&#39;</span>
+<span class="go">WSREP_SST: [INFO] Bypassing state dump. (20161205 14:02:54.673)</span>
+</pre></div>
+</div>
+<p>on the joiner side, the empty SST is also wrapped up and the rsync process that was spawned and remained unused is cleaned up. The InnoDB storage engine can now be initialized:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">WSREP: 2.0 (fedora20): State transfer to 0.0 (fedora20) complete.</span>
+<span class="go">Joiner cleanup. rsync PID: 10706 (20161205 03:03:38.482)</span>
+<span class="go">Joiner cleanup done. (20161205 03:03:39.003)</span>
+<span class="go">...</span>
+<span class="go">InnoDB: 5.6.34 started; log sequence number 1636039</span>
+</pre></div>
+</div>
+<p>With InnoDB up and running, the actual IST can follow, as seen in the donor log:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">async IST sender starting to serve tcp://127.0.0.1:13010 sending 4-17</span>
+<span class="go">...</span>
+<span class="go">WSREP: async IST sender served</span>
+</pre></div>
+</div>
+<p>and in the joiner log:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">WSREP: Receiving IST: 14 writesets, seqnos 3-17</span>
+<span class="go">...</span>
+<span class="go">WSREP: IST received: cdecf830-bad9-11e6-850b-d6cd097d8360:17</span>
+<span class="go">WSREP: 0.0 (fedora20): State transfer from 2.0 (fedora20) complete.</span>
+</pre></div>
+</div>
+<p>The entire procedure ends when the replication events from the IST have been applied and the node has fully caught up with the cluster:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">WSREP: Shifting JOINED -&gt; SYNCED (TO: 17)</span>
+<span class="go">WSREP: Synchronized with group, ready for connections</span>
+</pre></div>
+</div>
+<p class="section-heading rubric">Catch-Up</p>
+<p>After the joiner has received a State Transfer, it must also catch up with any transactions that were issued on the rest of the cluster while the State Transfer was in progress. Those transactions are continuously received by the joiner and stored in the gcache. As soon as the state transfer completes, the donor needs to apply them all.</p>
+<p>An attentive reader may ask “What happens if the joining node is never able to catch up because there are too many new transactions? Will flow-control kick in?”. The answer is yes, however rather than applying flow control immediately and stopping the entire cluster in its tracks until the catch-up phase is complete, Galera uses a heuristics to determine when throttling is required.</p>
+<p>If the node is able to make progress towards catching up, as evidenced by a decreasing length of its receive queue, no flow control will kick in. However, if the node begins to fall further behind and the queue continues to grow, the cluster will be throttled so that the node is given some breathing room. This way the entire procedure for joining a new node is guaranteed to complete even in the presence of continuing load on the database.</p>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../../index.html">
+              <img class="logo" src="../../_static/logo.png" alt="Logo"/>
+            </a></p>
+<h1 class="logo"><a href="../../index.html">Galera Cluster</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../documentation/index.html">The Codership Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../kb/index.html">The Codership Knowledge Base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Codership Training</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../courses/index.html">Codership Training Courses</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Codership Tutorials on Galera Cluster</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="getting-started.html">Getting Started with Galera Cluster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="galera-installation.html">Installing Galera Cluster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="configuration.html">System Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="wsrep-configuration.html">Replication Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="starting-cluster.html">Starting the Cluster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="testing-cluster.html">Testing a Cluster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="restarting-cluster.html">Restarting the Cluster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="galera-on-aws.html">Installing a Galera Cluster on AWS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="galera-monitoring.html">Monitoring a Galera Cluster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="migrate.html">Galera Cluster Migration Factors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="galera-backup.html">Making Back-Ups with Galera Cluster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="getting-started-docker.html">Getting Started Galera with Docker</a></li>
+<li class="toctree-l3"><a class="reference internal" href="achieving-read-after-write-semantics.html">Read-After-Write Semantics with Galera</a></li>
+<li class="toctree-l3"><a class="reference internal" href="debugging-transaction-conflicts.html">Debugging Transaction Conflicts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="debug-problems-with-sst.html">Debugging Problems with SST</a></li>
+<li class="toctree-l3"><a class="reference internal" href="geo-distributed-clusters.html">Geo-Distributed Database Clusters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="primary-component.html">The Primary Component in Galera Cluster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="supporting-transaction-isolation-levels.html">Support for Transaction Isolation Levels</a></li>
+<li class="toctree-l3"><a class="reference internal" href="safe-to-bootstrap-feature.html">The Safe-To-Bootstrap Feature</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">To SST or Not To SST?</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../videos/index.html">Codership Training Videos</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../whats-new.html">What’s New</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../editors/index.html">Codership Writers &amp; Editors</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Codership Training</a><ul>
+  <li><a href="index.html">Codership Tutorials on Galera Cluster</a><ul>
+      <li>Previous: <a href="safe-to-bootstrap-feature.html" title="previous chapter">The Safe-To-Bootstrap Feature</a></li>
+      <li>Next: <a href="../videos/index.html" title="next chapter">Codership Training Videos</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+	<div class="navbar">
+	<nav id="site-navigation" class="navigation main-navigation" role="navigation">
+	<div class="nav-bar-container">
+
+	<div id="menu-nav-bar" class="nav-menu">
+		<ul class="nav-link">
+			<li> </li>
+
+		</ul>
+
+	</div>
+	</nav>
+
+	<footer id="colophon" class="site-footer" role="contentinfo">
+	<div class="top">	<div class="powered-by"><p>Powered by Galera:</p>
+	<p><a href="https://mariadb.com/kb/en/galera/"><img class="alignleft size-full wp-image-237" alt="MariaDB" src="https://galeracluster.com/wp-content/uploads/2013/10/logo-mariadb.png" width="166" height="49" /></a></p>
+		</div></div>
+	<div class="footer-menu">
+	<div class="menu-main-menu-container">
+	<ul id="menu-main-menu-1" class="nav-menu">
+	<li class="link-home menu-item menu-item-type-post_type menu-item-object-page menu-item-359"><a href="https://galeracluster.com/">Home</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-35"><a href="https://galeracluster.com/products/">Products</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="https://galeracluster.com/downloads/">Downloads</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-12 current_page_item current-menu-ancestor current-menu-parent current_page_parent current_page_ancestor menu-item-has-children menu-item-33"><a href="https://galeracluster.com/support/">Support</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="https://galeracluster.com/community/">Community</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-31"><a href="https://galeracluster.com/company/">Company</a></li>
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-297"><a href="https://galeracluster.com/category/blog/">Blog</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-38"><a href="https://galeracluster.com/contact-us/">Contact us</a></li>
+	</ul></div>			</div><!-- .footer-menu -->
+
+
+	<div class="footer-bar">
+	<p class="copyright">2014 Codership Ltd.</p>
+	</div>
+	<div class="footnote">
+	<h2>Your data is invaluable. We're here to secure it. All of it.</h2>
+	</div>
+	</footer><!-- #colophon -->
+
+
+
+
+  </body>
+</html>

@@ -1,0 +1,425 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><meta content="Galera Cluster Quorum Components" name="title" />
+<meta content="en-US" name="language" />
+<meta content="galera cluster, weighted quorum, quorum, split-brain" name="keywords" />
+<meta content="Codership Oy, 2014 - 2020. All Rights Reserved." name="copyright" />
+
+    <title>Quorum Components &#8212; Galera Cluster Documentation</title>
+    <link rel="stylesheet" href="../_static/reset-style.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Streaming Replication" href="streaming-replication.html" />
+    <link rel="prev" title="Node Failure &amp; Recovery" href="recovery.html" />
+
+
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<link rel="stylesheet" href="/library/_static/basic-style.css">
+<link rel="stylesheet" href="/library/_static/header.css">
+<link rel="stylesheet" href="/library/_static/footer.css">
+<link rel="stylesheet" href="/library/_static/codership.css">
+<link rel="stylesheet" media="screen and (max-width: 500px)" href="/library/_static/mobile.css"/>
+<link rel="stylesheet" media="screen and (min-width:501px) and (max-width:1024px)" href="/library/_static/tablet.css"/>
+<link rel="stylesheet" media="screen and (prefers-color-scheme: dark)" href="/library/_static/dark.css"/>
+
+
+<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Feed" href="https://galeracluster.com/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Comments Feed" href="https://galeracluster.com/comments/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Support Comments Feed" href="https://galeracluster.com/support/feed/" />
+
+<script type='text/javascript' src='https://galeracluster.com/wp-includes/js/comment-reply.min.js?ver=3.8.3'></script>
+
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://galeracluster.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://galeracluster.com/wp-includes/wlwmanifest.xml" />
+<link rel='prev' title='Downloads' href='https://galeracluster.com/downloads/' />
+<link rel='next' title='Community' href='https://galeracluster.com/community/' />
+<meta name="generator" content="WordPress 3.8.3" />
+
+<link rel='shortlink' href='https://galeracluster.com/?p=12' />
+
+<style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>
+<style type="text/css" id="twentythirteen-header-css">
+			.site-title,
+			.site-description {
+				position: absolute;
+				clip: rect(1px 1px 1px 1px); /* IE7 */
+				clip: rect(1px, 1px, 1px, 1px);
+			}
+				.site-header .home-link {
+				min-height: 0;
+			}
+</style>
+
+<script type="text/javascript">
+
+		  var _gaq = _gaq || [];
+		  _gaq.push(['_setAccount', 'UA-35163478-6']);
+		  _gaq.push(['_trackPageview']);
+
+		  (function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'https://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		  })();
+
+</script>
+
+  </head><body>
+	<div id="fb-root"></div>
+	<script>(function(d, s, id) {
+		  var js, fjs = d.getElementsByTagName(s)[0];
+		  if (d.getElementById(id)) return;
+		  js = d.createElement(s); js.id = id;
+		  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+		  fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));
+	</script>
+
+	<div id="page" class="hfeed site">
+
+	<header id="masthead" class="site-header" role="banner">
+
+	<div class="top">
+	<a class="home-link" href="https://galeracluster.com/" title="Galera Cluster for MySQL" rel="home">
+	<h1 class="site-title">Galera Cluster for MySQL</h1>
+	<h2 class="site-description">The world&#039;s most advanced open source database cluster</h2>
+	</a>
+	</div>
+
+
+	<div id="navbar" class="navbar">
+	<nav id="site-navigation" class="navigation main-navigation" role="navigation">
+	<div class="menu-main-menu-container">
+
+	<ul id="menu-main-menu" class="nav-menu">
+	<li id="menu-item-359" class="link-home menu-item menu-item-type-post_type menu-item-object-page menu-item-359"><a href="https://galeracluster.com/">Home</a></li>
+	<li id="menu-item-35" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-35"><a href="https://galeracluster.com/products/">Products</a></li>
+	<li id="menu-item-34" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="https://galeracluster.com/downloads/">Downloads</a></li>
+	<li id="menu-item-33" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-12 current_page_item current-menu-ancestor current-menu-parent current_page_parent current_page_ancestor menu-item-has-children menu-item-33"><a href="https://galeracluster.com/support/">Support</a></li>
+	<li id="menu-item-32" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="https://galeracluster.com/community/">Community</a></li>
+	<li id="menu-item-31" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-31"><a href="https://galeracluster.com/company/">Company</a></li>
+	<li id="menu-item-297" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-297"><a href="https://galeracluster.com/category/blog/">Blog</a></li>
+	<li id="menu-item-38" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-38"><a href="https://galeracluster.com/contact-us/">Contact us</a></li>
+	</ul>
+	</div>
+
+
+	</nav><!-- #site-navigation -->
+
+	</div><!-- #navbar -->
+	</header><!-- #masthead -->
+
+
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="left-margin docutils container">
+<div class="left-margin-top docutils container">
+<a class="reference internal" href="../index.html"><span class="doc">The Library</span></a></div>
+<div class="left-margin-content docutils container">
+<ul class="here simple">
+<li><a class="reference internal" href="index.html"><span class="doc">Documentation</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../kb/index.html"><span class="doc">Knowledge Base</span></a></li>
+<li><a class="reference internal" href="../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="sub-links simple">
+<li><a class="reference internal" href="../training/tutorials/index.html"><span class="doc">Tutorial Articles</span></a></li>
+<li><a class="reference internal" href="../training/videos/index.html"><span class="doc">Training Videos</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a></li>
+</ul>
+<p>Related Documents</p>
+<ul class="simple">
+<li><a class="reference internal" href="galera-parameters.html#evs-suspect-timeout"><span class="std std-ref">evs.suspect_timeout</span></a></li>
+<li><a class="reference internal" href="arbitrator.html"><span class="doc">Galera Arbitrator</span></a></li>
+<li><a class="reference internal" href="galera-parameters.html#pc-weight"><span class="std std-ref">pc.weight</span></a></li>
+<li><a class="reference internal" href="quorum-reset.html"><span class="doc">Reset Quorum</span></a></li>
+</ul>
+</div>
+</div>
+<div class="top-links docutils container">
+<ul class="simple">
+<li><a class="reference external" href="https://galeracluster.com">Home</a></li>
+</ul>
+<ul class="here simple">
+<li><a class="reference internal" href="index.html"><span class="doc">Docs</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../kb/index.html"><span class="doc">KB</span></a></li>
+</ul>
+<ul class="nav-wider simple">
+<li><a class="reference internal" href="../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a></li>
+</ul>
+</div>
+<div class="library-document section" id="quorum-components">
+<span id="id1"></span><h1>Quorum Components<a class="headerlink" href="#quorum-components" title="Permalink to this headline">¶</a></h1>
+<p>In addition to single node failures, the cluster may split into several components due to network failure.  A component is a set of nodes that are connected to each other, but not to the nodes that form other components.  In these situations, only one component can continue to modify the database state to avoid history divergence.  This component is called the <a class="reference internal" href="glossary.html#term-primary-component"><span class="xref std std-term">Primary Component</span></a>.</p>
+<p>Under normal operations, your Primary Component is the cluster.  When cluster partitioning occurs, Galera Cluster invokes a special quorum algorithm to select one component as the Primary Component.  This guarantees that there is never more than one Primary Component in the cluster.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">In addition to the individual node, quorum calculations also take into account a separate process called <code class="docutils literal notranslate"><span class="pre">garbd</span></code>.  For more information on its configuration and use, see <a class="reference internal" href="arbitrator.html"><span class="doc">Galera Arbitrator</span></a>.</p>
+</div>
+<p class="section-heading rubric" id="weighted-quorum">Weighted Quorum</p>
+<span class="target" id="index-0"></span><span class="target" id="index-1"></span><p id="index-2">The current number of nodes in the cluster defines the current cluster size.  There is no configuration setting that allows you to define the list of all possible cluster nodes.  Every time a node joins the cluster, the total cluster size increases.  When a node leaves the cluster, gracefully, the cluster size decreases.  Cluster size determines the number of votes required to achieve quorum.</p>
+<p>Galera Cluster takes a quorum vote whenever a node does not respond and is suspected of no longer being a part of the cluster.  You can fine tune this no response timeout using the <a class="reference internal" href="galera-parameters.html#evs-suspect-timeout"><span class="std std-ref">evs.suspect_timeout</span></a> parameter.  The default setting is 5 seconds.</p>
+<p>When the cluster takes a quorum vote, if the majority of the total nodes connected from before the disconnect remain, that partition stays up.  When network partitions occur, there are nodes active on both sides of the disconnect.  The component that has quorum alone continues to operate as the <a class="reference internal" href="glossary.html#term-primary-component"><span class="xref std std-term">Primary Component</span></a>, while those without quorum enter the non-primary state and begin attempt to connect with the Primary Component.</p>
+<div class="figure">
+<img alt="../_images/pc.png" src="../_images/pc.png" />
+</div>
+<p>Quorum requires a majority, meaning that you cannot have automatic failover in a two node cluster.  This is because the failure of one causes the remaining node automatically go into a non-primary state.</p>
+<p>Clusters that have an even number of nodes risk split-brain conditions.  If should you lose network connectivity somewhere between the partitions in a way that causes the number of nodes to split exactly in half, neither partition can retain quorum and both enter a non-primary state.</p>
+<div class="figure">
+<img alt="../_images/splitbrain.png" src="../_images/splitbrain.png" />
+</div>
+<p>In order to enable automatic failovers, you need to use at least three nodes.  Bear in mind that this scales out to other levels of infrastructure, for the same reasons.</p>
+<ul class="simple">
+<li>Single switch clusters should use a minimum of 3 nodes.</li>
+<li>Clusters spanning switches should use a minimum of 3 switches.</li>
+<li>Clusters spanning networks should use a minimum of 3 networks.</li>
+<li>Clusters spanning data centers should use a minimum of 3 data centers.</li>
+</ul>
+<p class="sub-heading rubric" id="split-brain-condition">Split-Brain Condition</p>
+<p>Cluster failures that result in database nodes operating autonomous of each other are called split-brain conditions.  When this occurs, data can become irreparably corrupted, such as would occur when two database nodes independently update the same row on the same table.  As is the case with any quorum-based system, Galera Cluster is subject to split-brain conditions when the quorum algorithm fails to select a <a class="reference internal" href="glossary.html#term-primary-component"><span class="xref std std-term">Primary Component</span></a>.</p>
+<p>For example, this can occur if you have a cluster without a backup switch in the event that the main switch fails.  Or, when a single node fails in a two node cluster.</p>
+<p>By design, Galera Cluster avoids split-brain condition.  In the event that a failure results in splitting the cluster into two partitions of equal size, (unless you explicitly configure it otherwise), neither partition becomes a Primary Component.</p>
+<p>To minimize the risk of this happening in clusters that do have an even number of nodes, partition the cluster in a way that one component always forms the Primary cluster section.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>4 node cluster -&gt; 3 (Primary) + 1 (Non-primary)
+6 node cluster -&gt; 4 (Primary) + 2 (Non-primary)
+6 node cluster -&gt; 5 (Primary) + 1 (Non-primary)
+</pre></div>
+</div>
+<p>In these partitioning examples, it is very difficult for any outage or failure to cause the nodes to split exactly in half.</p>
+<p>For more information on configuring and managing the quorum, see <a class="reference internal" href="quorum-reset.html"><span class="doc">Resetting the Quorum</span></a>.</p>
+<p class="section-heading rubric" id="quorum-calculation">Quorum Calculation</p>
+<p id="index-3">Galera Cluster supports a weighted quorum, where each node can be assigned a weight in the 0 to 255 range, with which it will participate in quorum calculations.</p>
+<p>The quorum calculation formula is</p>
+<div class="math notranslate nohighlight">
+\[\frac{ \sum_{p_i \times w_i} - \sum_{l_i \times w_i}}
+{ 2} &lt; \sum_{m_i \times w_i}\]</div>
+<p>Where:</p>
+<ul class="simple">
+<li><span class="math notranslate nohighlight">\(p_i\)</span> Members of the last seen primary component;</li>
+<li><span class="math notranslate nohighlight">\(l_i\)</span> Members that are known to have left gracefully;</li>
+<li><span class="math notranslate nohighlight">\(m_i\)</span> Current component members; and,</li>
+<li><span class="math notranslate nohighlight">\(w_i\)</span> Member weights.</li>
+</ul>
+<p>What this means is that the quorum is preserved if (and only if) the sum weight of the nodes in a new component strictly exceeds half that of the preceding <a class="reference internal" href="glossary.html#term-primary-component"><span class="xref std std-term">Primary Component</span></a>, minus the nodes which left gracefully.</p>
+<p>You can customize node weight using the <a class="reference internal" href="galera-parameters.html#pc-weight"><span class="std std-ref">pc.weight</span></a> parameter.  By default, node weight is <code class="docutils literal notranslate"><span class="pre">1</span></code>, which translates to the traditional node count behavior.</p>
+<p>You can change the node weight during runtime by setting the <a class="reference internal" href="galera-parameters.html#pc-weight"><span class="std std-ref">pc.weight</span></a> parameter.</p>
+<blockquote>
+<div><div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="kt">SET</span> <span class="n">GLOBAL</span> <span class="n">wsrep_provider_options</span><span class="o">=</span><span class="s2">&quot;pc.weight=3&quot;</span><span class="p">;</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Galera Cluster applies the new weight on the delivery of a message that carries a weight.  At the moment, there is no mechanism to notify the application of a new weight, but will eventually happen when the message is delivered.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">If a group partitions at the moment when the weight-change message is delivered, all partitioned components that deliver weight-change messages in the transitional view will become non-primary components.  Partitions that deliver messages in the regular view, will go through quorum computation with the applied weight when the subsequential transitional view is delivered. <br/> <br/> In other words, there is a corner case where the entire cluster can become non-primary component, if the weight changing message is sent at the moment when partitioning takes place.  Recovering from such a situation should be done either by waiting for a re-merge or by inspecting which partition is most advanced and by bootstrapping it as a new Primary Component.</p>
+</div>
+<p class="section-heading rubric" id="weighted-quorum-examples">Weighted Quorum Examples</p>
+<p>Now that you understand how quorum weights work, here are some examples of deployment patterns and how to use them.</p>
+<p class="sub-heading rubric" id="wq-three-nodes">Weighted Quorum for Three Nodes</p>
+<p>When configuring quorum weights for three nodes, use the following pattern:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>node1: pc.weight = 2
+node2: pc.weight = 1
+node3: pc.weight = 0
+</pre></div>
+</div>
+<p>Under this pattern, killing <code class="docutils literal notranslate"><span class="pre">node2</span></code> and <code class="docutils literal notranslate"><span class="pre">node3</span></code> simultaneously preserves the <a class="reference internal" href="glossary.html#term-primary-component"><span class="xref std std-term">Primary Component</span></a> on <code class="docutils literal notranslate"><span class="pre">node1</span></code>.  Killing <code class="docutils literal notranslate"><span class="pre">node1</span></code> causes <code class="docutils literal notranslate"><span class="pre">node2</span></code> and <code class="docutils literal notranslate"><span class="pre">node3</span></code> to become non-primary components.</p>
+<p class="sub-heading rubric" id="wq-simple-master-slave">Weighted Quorum for a Simple Master-Slave Scenario</p>
+<p>When configuring quorum weights for a simple master-slave scenario, use the following pattern:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>node1: pc.weight = 1
+node2: pc.weight = 0
+</pre></div>
+</div>
+<p>Under this pattern, if the master <code class="docutils literal notranslate"><span class="pre">node</span></code> dies, <code class="docutils literal notranslate"><span class="pre">node2</span></code> becomes a non-primary component.  However, in the event that <code class="docutils literal notranslate"><span class="pre">node2</span></code> dies, <code class="docutils literal notranslate"><span class="pre">node1</span></code> continues as the <a class="reference internal" href="glossary.html#term-primary-component"><span class="xref std std-term">Primary Component</span></a>.  If the network connection between the nodes fails, <code class="docutils literal notranslate"><span class="pre">node1</span></code> continues as the Primary Component while <code class="docutils literal notranslate"><span class="pre">node2</span></code> becomes a non-primary component.</p>
+<p class="sub-heading rubric" id="wq-master-multi-slave">Weighted Quorum for a Master and Multiple Slaves Scenario</p>
+<p>When configuring quorum weights for a master-slave scenario that features multiple slave nodes, use the following pattern:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>node1: pc.weight = 1
+node2: pc.weight = 0
+node3: pc.weight = 0
+...
+noden: pc.weight = 0
+</pre></div>
+</div>
+<p>Under this pattern, if <code class="docutils literal notranslate"><span class="pre">node1</span></code> dies, all remaining nodes end up as non-primary components.  If any other node dies, the <a class="reference internal" href="glossary.html#term-primary-component"><span class="xref std std-term">Primary Component</span></a> is preserved.  In the case of network partitioning, <code class="docutils literal notranslate"><span class="pre">node1</span></code> always remains as the Primary Component.</p>
+<p class="sub-heading rubric" id="wq-primary-secondary-site">Weighted Quorum for a Primary and Secondary Site Scenario</p>
+<p>When configuring quorum weights for primary and secondary sites, use the following pattern:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Primary Site:
+  node1: pc.weight = 2
+  node2: pc.weight = 2
+
+Secondary Site:
+  node3: pc.weight = 1
+  node4: pc.weight = 1
+</pre></div>
+</div>
+<p>Under this pattern, some nodes are located at the primary site while others are at the secondary site.  In the event that the secondary site goes down or if network connectivity is lost between the sites, the nodes at the primary site remain the <a class="reference internal" href="glossary.html#term-primary-component"><span class="xref std std-term">Primary Component</span></a>.  Additionally, either <code class="docutils literal notranslate"><span class="pre">node1</span></code> or <code class="docutils literal notranslate"><span class="pre">node2</span></code> can crash without the rest of the nodes becoming non-primary components.</p>
+<div class="bottom-links docutils container">
+<p>Related Documents</p>
+<ul class="simple">
+<li><a class="reference internal" href="galera-parameters.html#evs-suspect-timeout"><span class="std std-ref">evs.suspect_timeout</span></a></li>
+<li><a class="reference internal" href="arbitrator.html"><span class="doc">Galera Arbitrator</span></a></li>
+<li><a class="reference internal" href="galera-parameters.html#pc-weight"><span class="std std-ref">pc.weight</span></a></li>
+<li><a class="reference internal" href="quorum-reset.html"><span class="doc">Reset Quorum</span></a></li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/logo.png" alt="Logo"/>
+            </a></p>
+<h1 class="logo"><a href="../index.html">Galera Cluster</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">The Codership Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="overview.html">Overview of Galera Cluster</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="technical-description.html">Technical Description</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="tech-desc-introduction.html">Database Replication</a></li>
+<li class="toctree-l3"><a class="reference internal" href="certification-based-replication.html">Certification-Based Replication</a></li>
+<li class="toctree-l3"><a class="reference internal" href="architecture.html">Replication API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="isolation-levels.html">Isolation Levels</a></li>
+<li class="toctree-l3"><a class="reference internal" href="state-transfer.html">State Transfers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="node-states.html">Flow Control</a></li>
+<li class="toctree-l3"><a class="reference internal" href="recovery.html">Node Failure &amp; Recovery</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Quorum Components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="streaming-replication.html">Streaming Replication</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="install.html">Installing Galera Cluster</a></li>
+<li class="toctree-l2"><a class="reference internal" href="administration.html">Galera Cluster Administration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deployment.html">Deployment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="monitor.html">Cluster Monitoring</a></li>
+<li class="toctree-l2"><a class="reference internal" href="security.html">Security</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference.html">Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../kb/index.html">The Codership Knowledge Base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../training/index.html">Codership Training</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../whats-new.html">What’s New</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../editors/index.html">Codership Writers &amp; Editors</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">The Codership Documentation</a><ul>
+  <li><a href="technical-description.html">Technical Description</a><ul>
+      <li>Previous: <a href="recovery.html" title="previous chapter">Node Failure &amp; Recovery</a></li>
+      <li>Next: <a href="streaming-replication.html" title="next chapter">Streaming Replication</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+	<div class="navbar">
+	<nav id="site-navigation" class="navigation main-navigation" role="navigation">
+	<div class="nav-bar-container">
+
+	<div id="menu-nav-bar" class="nav-menu">
+		<ul class="nav-link">
+			<li> </li>
+
+		</ul>
+
+	</div>
+	</nav>
+
+	<footer id="colophon" class="site-footer" role="contentinfo">
+	<div class="top">	<div class="powered-by"><p>Powered by Galera:</p>
+	<p><a href="https://mariadb.com/kb/en/galera/"><img class="alignleft size-full wp-image-237" alt="MariaDB" src="https://galeracluster.com/wp-content/uploads/2013/10/logo-mariadb.png" width="166" height="49" /></a></p>
+		</div></div>
+	<div class="footer-menu">
+	<div class="menu-main-menu-container">
+	<ul id="menu-main-menu-1" class="nav-menu">
+	<li class="link-home menu-item menu-item-type-post_type menu-item-object-page menu-item-359"><a href="https://galeracluster.com/">Home</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-35"><a href="https://galeracluster.com/products/">Products</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="https://galeracluster.com/downloads/">Downloads</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-12 current_page_item current-menu-ancestor current-menu-parent current_page_parent current_page_ancestor menu-item-has-children menu-item-33"><a href="https://galeracluster.com/support/">Support</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="https://galeracluster.com/community/">Community</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-31"><a href="https://galeracluster.com/company/">Company</a></li>
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-297"><a href="https://galeracluster.com/category/blog/">Blog</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-38"><a href="https://galeracluster.com/contact-us/">Contact us</a></li>
+	</ul></div>			</div><!-- .footer-menu -->
+
+
+	<div class="footer-bar">
+	<p class="copyright">2014 Codership Ltd.</p>
+	</div>
+	<div class="footnote">
+	<h2>Your data is invaluable. We're here to secure it. All of it.</h2>
+	</div>
+	</footer><!-- #colophon -->
+
+
+
+
+  </body>
+</html>

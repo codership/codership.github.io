@@ -1,0 +1,432 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><meta content="Galera Load Balancer (glbd)" name="title" />
+<meta content="en-US" name="language" />
+<meta content="galera cluster, load balancing, galera load balancer, glbd" name="keywords" />
+<meta content="Codership Oy, 2014 - 2020. All Rights Reserved." name="copyright" />
+
+    <title>Galera Load Balancer &#8212; Galera Cluster Documentation</title>
+    <link rel="stylesheet" href="../_static/reset-style.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Container Deployments" href="containers.html" />
+    <link rel="prev" title="Pen Load Balancer" href="pen.html" />
+
+
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<link rel="stylesheet" href="/library/_static/basic-style.css">
+<link rel="stylesheet" href="/library/_static/header.css">
+<link rel="stylesheet" href="/library/_static/footer.css">
+<link rel="stylesheet" href="/library/_static/codership.css">
+<link rel="stylesheet" media="screen and (max-width: 500px)" href="/library/_static/mobile.css"/>
+<link rel="stylesheet" media="screen and (min-width:501px) and (max-width:1024px)" href="/library/_static/tablet.css"/>
+<link rel="stylesheet" media="screen and (prefers-color-scheme: dark)" href="/library/_static/dark.css"/>
+
+
+<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Feed" href="https://galeracluster.com/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Comments Feed" href="https://galeracluster.com/comments/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Support Comments Feed" href="https://galeracluster.com/support/feed/" />
+
+<script type='text/javascript' src='https://galeracluster.com/wp-includes/js/comment-reply.min.js?ver=3.8.3'></script>
+
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://galeracluster.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://galeracluster.com/wp-includes/wlwmanifest.xml" />
+<link rel='prev' title='Downloads' href='https://galeracluster.com/downloads/' />
+<link rel='next' title='Community' href='https://galeracluster.com/community/' />
+<meta name="generator" content="WordPress 3.8.3" />
+
+<link rel='shortlink' href='https://galeracluster.com/?p=12' />
+
+<style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>
+<style type="text/css" id="twentythirteen-header-css">
+			.site-title,
+			.site-description {
+				position: absolute;
+				clip: rect(1px 1px 1px 1px); /* IE7 */
+				clip: rect(1px, 1px, 1px, 1px);
+			}
+				.site-header .home-link {
+				min-height: 0;
+			}
+</style>
+
+<script type="text/javascript">
+
+		  var _gaq = _gaq || [];
+		  _gaq.push(['_setAccount', 'UA-35163478-6']);
+		  _gaq.push(['_trackPageview']);
+
+		  (function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'https://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		  })();
+
+</script>
+
+  </head><body>
+	<div id="fb-root"></div>
+	<script>(function(d, s, id) {
+		  var js, fjs = d.getElementsByTagName(s)[0];
+		  if (d.getElementById(id)) return;
+		  js = d.createElement(s); js.id = id;
+		  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+		  fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));
+	</script>
+
+	<div id="page" class="hfeed site">
+
+	<header id="masthead" class="site-header" role="banner">
+
+	<div class="top">
+	<a class="home-link" href="https://galeracluster.com/" title="Galera Cluster for MySQL" rel="home">
+	<h1 class="site-title">Galera Cluster for MySQL</h1>
+	<h2 class="site-description">The world&#039;s most advanced open source database cluster</h2>
+	</a>
+	</div>
+
+
+	<div id="navbar" class="navbar">
+	<nav id="site-navigation" class="navigation main-navigation" role="navigation">
+	<div class="menu-main-menu-container">
+
+	<ul id="menu-main-menu" class="nav-menu">
+	<li id="menu-item-359" class="link-home menu-item menu-item-type-post_type menu-item-object-page menu-item-359"><a href="https://galeracluster.com/">Home</a></li>
+	<li id="menu-item-35" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-35"><a href="https://galeracluster.com/products/">Products</a></li>
+	<li id="menu-item-34" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="https://galeracluster.com/downloads/">Downloads</a></li>
+	<li id="menu-item-33" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-12 current_page_item current-menu-ancestor current-menu-parent current_page_parent current_page_ancestor menu-item-has-children menu-item-33"><a href="https://galeracluster.com/support/">Support</a></li>
+	<li id="menu-item-32" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="https://galeracluster.com/community/">Community</a></li>
+	<li id="menu-item-31" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-31"><a href="https://galeracluster.com/company/">Company</a></li>
+	<li id="menu-item-297" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-297"><a href="https://galeracluster.com/category/blog/">Blog</a></li>
+	<li id="menu-item-38" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-38"><a href="https://galeracluster.com/contact-us/">Contact us</a></li>
+	</ul>
+	</div>
+
+
+	</nav><!-- #site-navigation -->
+
+	</div><!-- #navbar -->
+	</header><!-- #masthead -->
+
+
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="left-margin docutils container">
+<div class="left-margin-top docutils container">
+<a class="reference internal" href="../index.html"><span class="doc">The Library</span></a></div>
+<div class="left-margin-content docutils container">
+<ul class="here simple">
+<li><a class="reference internal" href="index.html"><span class="doc">Documentation</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../kb/index.html"><span class="doc">Knowledge Base</span></a></li>
+<li><a class="reference internal" href="../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="sub-links simple">
+<li><a class="reference internal" href="../training/tutorials/index.html"><span class="doc">Tutorial Articles</span></a></li>
+<li><a class="reference internal" href="../training/videos/index.html"><span class="doc">Training Videos</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a></li>
+</ul>
+<p>Related Documents</p>
+<ul class="simple">
+<li><a class="reference internal" href="#glb-use"><span class="std std-ref">Using Galera Load Balancer</span></a></li>
+<li><a class="reference internal" href="glb-parameters.html#glb-listen-addr"><span class="std std-ref">LISTEN_ADDR</span></a></li>
+<li><a class="reference internal" href="glb-parameters.html#glb-default-targets"><span class="std std-ref">DEFAULT_TARGETS</span></a></li>
+<li><a class="reference internal" href="glb-parameters.html#glb-other-options"><span class="std std-ref">OTHER_OPTIONS</span></a></li>
+<li><a class="reference internal" href="glb-parameters.html#glb-round"><span class="std std-ref">–round</span></a></li>
+<li><a class="reference internal" href="glb-parameters.html#glb-single"><span class="std std-ref">–single</span></a></li>
+<li><a class="reference internal" href="glb-parameters.html#glb-random"><span class="std std-ref">–random</span></a></li>
+<li><a class="reference internal" href="glb-parameters.html#glb-source"><span class="std std-ref">–source</span></a></li>
+<li><a class="reference internal" href="#glb-service"><span class="std std-ref">Service Installation</span></a></li>
+</ul>
+</div>
+</div>
+<div class="top-links docutils container">
+<ul class="simple">
+<li><a class="reference external" href="https://galeracluster.com">Home</a></li>
+</ul>
+<ul class="here simple">
+<li><a class="reference internal" href="index.html"><span class="doc">Docs</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../kb/index.html"><span class="doc">KB</span></a></li>
+</ul>
+<ul class="nav-wider simple">
+<li><a class="reference internal" href="../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a></li>
+</ul>
+</div>
+<div class="library-document section" id="galera-load-balancer">
+<span id="glb-doc"></span><h1>Galera Load Balancer<a class="headerlink" href="#galera-load-balancer" title="Permalink to this headline">¶</a></h1>
+<p>Galera Load Balancer provides simple TCP connection balancing. It was developed with scalability and performance in mind.  It draws on Pen for inspiration, but its functionality is limited to only balancing TCP connections.  It provides several features:</p>
+<ul class="simple">
+<li>Support for configuring back-end servers at runtime.</li>
+<li>Support for draining servers.</li>
+<li>Support for the epoll API for routing performance.</li>
+<li>Support for multithreaded operations.</li>
+<li>Optional watchdog module to monitor destinations and adjust the routing table.</li>
+</ul>
+<p class="section-heading rubric" id="glb-install">Installation</p>
+<p>Unlike Galera Cluster, there is no binary installation available for Galera Load Balancer.  Installing it on your system will require you to build it from the source files.  They’re available on GitHub at <a class="reference external" href="https://github.com/codership/glb">glb</a>.</p>
+<p>To build Galera Load Balancer, you will need to complete a few steps.  First, from a directory convenient for source builds (e.g., <code class="docutils literal notranslate"><span class="pre">/opt</span></code>), use the <code class="docutils literal notranslate"><span class="pre">git</span></code> utility to clone the GitHub repository for Galera Load Balancer. You would do this like so:</p>
+<blockquote>
+<div><div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> git clone https://github.com/codership/glb
+</pre></div>
+</div>
+</div></blockquote>
+<p>Next, from within <code class="docutils literal notranslate"><span class="pre">glb</span></code> directory created by <code class="docutils literal notranslate"><span class="pre">git</span></code>, run the bootstrap script–which will be found in that directory.</p>
+<blockquote>
+<div><div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> <span class="nb">cd</span> glb/
+<span class="gp">$</span> ./bootstrap.sh
+</pre></div>
+</div>
+</div></blockquote>
+<p>Now you will need to configure <code class="docutils literal notranslate"><span class="pre">make</span></code> to build on your system, then run <code class="docutils literal notranslate"><span class="pre">make</span></code> to build the application. After that, you’ll use <code class="docutils literal notranslate"><span class="pre">make</span></code> to install it. This may seem like a lot, but it’s simple. Just execute the following lines, one at a time, from the command-line:</p>
+<blockquote>
+<div><div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> ./configure
+
+<span class="gp">$</span> make
+
+<span class="gp">#</span> make install
+</pre></div>
+</div>
+</div></blockquote>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Galera Load Balancer installs in the <code class="docutils literal notranslate"><span class="pre">/usr/sbin</span></code> directory.  So you will need to run the last line above as root.</p>
+</div>
+<p>Once you’ve successfully execute everything above, Galera Load Balancer will be installed on your system.  You can launch it from the command-line, using the <code class="docutils literal notranslate"><span class="pre">glbd</span></code> command.</p>
+<p>In addition to the system daemon, you will also have installed <code class="docutils literal notranslate"><span class="pre">libglb</span></code>, a shared library for connection balancing with any Linux applications that use the <code class="docutils literal notranslate"><span class="pre">connect()</span></code> call from the C Standard Library.</p>
+<p class="section-heading rubric" id="glb-service">Service Installation</p>
+<p>The above installation procedure only installs Galera Load Balancer to be run manually from the command-line.  However, you may find it more useful to run this application as a system service. To do this, you’ll need to copy a couple of files to the appropriate directories.</p>
+<p>In the source directory you cloned from GitHub, navigate into the <code class="docutils literal notranslate"><span class="pre">files</span></code> directory.  Within that directory there is a configuration file and a service script that you need to copy to their relevant locations.</p>
+<p>First, copy <code class="docutils literal notranslate"><span class="pre">glbd.sh</span></code> into <code class="docutils literal notranslate"><span class="pre">/etc/init.d</span></code> directory under a service name. You would execute the following from the command-line to do this:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">#</span> cp glbd.sh /etc/init.d/glb
+</pre></div>
+</div>
+<p>Now, copy the default <code class="docutils literal notranslate"><span class="pre">glbd.cfg</span></code> file into the appropriate configuration directory.  For Red Hat and its derivatives, this is <code class="docutils literal notranslate"><span class="pre">/etc/sysconfig/glbd.cfg</span></code>.  For Debian and its derivatives, use <code class="docutils literal notranslate"><span class="pre">/etc/default/glbd.cfg</span></code>. For the former possibility, you would execute this from the command-line:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">#</span> cp glbd.cfg /etc/sysconfig/glbd.cfg
+</pre></div>
+</div>
+<p>When you finish this, you will be able to manage Galera Load Balancer through the <code class="docutils literal notranslate"><span class="pre">service</span></code> command.  For more information on available commands, see <a class="reference internal" href="#glb-use"><span class="std std-ref">Using Galera Load Balancer</span></a>.</p>
+<p class="section-heading rubric" id="glb-config">Configuration</p>
+<p>When you run Galera Load Balancer, you can configure its use through the command-line options. You can get a list of by exeduting <code class="docutils literal notranslate"><span class="pre">glb</span></code> with the <code class="docutils literal notranslate"><span class="pre">--help</span></code> option.  For servers running Galera Load Balancer as a service, you can manage it through the <code class="docutils literal notranslate"><span class="pre">glbd.cfg</span></code> configuration file.</p>
+<ul class="simple">
+<li><a class="reference internal" href="glb-parameters.html#glb-listen-addr"><span class="std std-ref">LISTEN_ADDR</span></a>: This is the address that Galera Load Balancer monitors for incoming client connections.</li>
+<li><a class="reference internal" href="glb-parameters.html#glb-default-targets"><span class="std std-ref">DEFAULT_TARGETS</span></a>: This specifies the default servers where Galera Load Balancer is to route incoming client connections. For this parameter, use the IP addresses for the nodes in your cluster.</li>
+<li><a class="reference internal" href="glb-parameters.html#glb-other-options"><span class="std std-ref">OTHER_OPTIONS</span></a>: This is used to define additional Galera Load Balancer options. For example, you might want to set the balancing policy.  Use the same format as you would from the command-line.</li>
+</ul>
+<p>Below is an example of a <cite>glbd.cfg`</cite> configuration file:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="c1"># Galera Load Balancer Configuration</span>
+<span class="na">LISTEN_ADDR</span><span class="o">=</span><span class="s">&quot;8010&quot;</span>
+<span class="na">DEFAULT_TARGETS</span><span class="o">=</span><span class="s">&quot;192.168.1.1 192.168.1.2 192.168.1.3&quot;</span>
+<span class="na">OTHER_OPTIONS</span><span class="o">=</span><span class="s">&quot;--random --top 3&quot;</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">glbd.cfg</span></code> configuration file would be the one you copied into <code class="docutils literal notranslate"><span class="pre">/etc</span></code> as mentioned in the previous section.</p>
+<p class="section-heading rubric" id="glb-dest-select">Destination Selection Policies</p>
+<p>Galera Load Balancer–both the system daemon and the shared library–supports five destination selection policies. When you run it from the command-line, you can define these using the command-line arguments. Otherwise, you’ll have to add the arguments to the <a class="reference internal" href="glb-parameters.html#glb-other-options"><span class="std std-ref">OTHER_OPTIONS</span></a> parameter in the <code class="docutils literal notranslate"><span class="pre">glbd.cfg</span></code> configuration file.</p>
+<ul class="simple">
+<li><strong>Least Connected</strong>: This directs new connections to the server using the smallest number of connections possible. It will be adjusted for the server weight.  This is the default policy.</li>
+<li><strong>Round Robin</strong>: This sets new connections to the next destination in the circular order list. You can enable it with the <a class="reference internal" href="glb-parameters.html#glb-round"><span class="std std-ref">–round</span></a> option.</li>
+<li><strong>Single</strong>: This directs all connections to the single server with the highest weight of those available.  Routing continues to that server until it fails, or until a server with a higher weight becomes available.  You can enable it with the <a class="reference internal" href="glb-parameters.html#glb-single"><span class="std std-ref">–single</span></a> option.</li>
+<li><strong>Random</strong>: This will direct connections randomly to available servers.  You can enable it using the <a class="reference internal" href="glb-parameters.html#glb-random"><span class="std std-ref">–random</span></a> option.</li>
+<li><strong>Source Tracking</strong>: This will direct connections originating from the same address to the same server.  You can enable it with the <a class="reference internal" href="glb-parameters.html#glb-source"><span class="std std-ref">–source</span></a> option.</li>
+</ul>
+<p class="section-heading rubric" id="glb-use">Using Galera Load Balancer</p>
+<p>The section on <a class="reference internal" href="#glb-service"><span class="std std-ref">Service Installation</span></a> explained how to configure a system to run Galera Load Balancer as a service.  If you do that, you can then manage common operations with the <code class="docutils literal notranslate"><span class="pre">service</span></code> command. The format for doing this is to enter <code class="docutils literal notranslate"><span class="pre">service</span></code>, followed by <code class="docutils literal notranslate"><span class="pre">glb</span></code>, and then an option.</p>
+<p>Below is an example of how you might use <code class="docutils literal notranslate"><span class="pre">service</span></code> to get information on the Galera Load Balancer:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">#</span> service glb getinfo
+
+<span class="go">Router:</span>
+<span class="go">-------------------------------------------</span>
+<span class="go">     Address       : weight   usage  cons</span>
+<span class="go">  192.168.1.1:4444 : 1.000    0.000    0</span>
+<span class="go">  192.168.1.2:4444 : 1.000    0.000    0</span>
+<span class="go">  192.168.1.3:4444 : 1.000    0.000    0</span>
+<span class="go">-------------------------------------------</span>
+<span class="go">Destinations: 3, total connections: 0</span>
+</pre></div>
+</div>
+<p>In the results shown here, you can see a list of servers available, their weight and usage, as well as the number of connections made to them.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">service</span></code> script supports several operations.  Below is a list of them and their uses:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">start</span></code> is used to start <code class="docutils literal notranslate"><span class="pre">glb</span></code>, the Galera Load Balancer.</li>
+<li><code class="docutils literal notranslate"><span class="pre">stop</span></code> will stop Galera Load Balancer.</li>
+<li><code class="docutils literal notranslate"><span class="pre">restart</span></code> tells <code class="docutils literal notranslate"><span class="pre">glb</span></code> to stop and restart the Galera Load Balancer.</li>
+<li><code class="docutils literal notranslate"><span class="pre">getinfo</span></code> is used as shown in the example above to retrieve the current routing information.</li>
+<li><code class="docutils literal notranslate"><span class="pre">getstats</span></code> will provide performance statistics related to the cluster.</li>
+<li><code class="docutils literal notranslate"><span class="pre">add</span> <span class="pre">&lt;IP</span> <span class="pre">Address&gt;</span></code> can be used to add an IP address from the routing table.</li>
+<li><code class="docutils literal notranslate"><span class="pre">remove</span> <span class="pre">&lt;IP</span> <span class="pre">Address&gt;</span></code> will remove the designated IP address from the routing table.</li>
+<li><code class="docutils literal notranslate"><span class="pre">drain</span> <span class="pre">&lt;IP</span> <span class="pre">Address&gt;</span></code> will sets the designated server to drain. When doing this, Galera Load Balancer won’t send new connections to the given server, but it also won’t kill existing connections. Instead, it waits for the connections to the specified server to end gracefully.</li>
+</ul>
+<p>When adding an IP address to Galera Load Balancer at runtime, keep in mind that it must follow the convention, <code class="docutils literal notranslate"><span class="pre">IP</span> <span class="pre">Address:port:weight</span></code>.  A hostname may be used instead of an IP address.</p>
+<div class="bottom-links docutils container">
+<p>Related Documents</p>
+<ul class="simple">
+<li><a class="reference internal" href="#glb-use"><span class="std std-ref">Using Galera Load Balancer</span></a></li>
+<li><a class="reference internal" href="glb-parameters.html#glb-listen-addr"><span class="std std-ref">LISTEN_ADDR</span></a></li>
+<li><a class="reference internal" href="glb-parameters.html#glb-default-targets"><span class="std std-ref">DEFAULT_TARGETS</span></a></li>
+<li><a class="reference internal" href="glb-parameters.html#glb-other-options"><span class="std std-ref">OTHER_OPTIONS</span></a></li>
+<li><a class="reference internal" href="glb-parameters.html#glb-round"><span class="std std-ref">–round</span></a></li>
+<li><a class="reference internal" href="glb-parameters.html#glb-single"><span class="std std-ref">–single</span></a></li>
+<li><a class="reference internal" href="glb-parameters.html#glb-random"><span class="std std-ref">–random</span></a></li>
+<li><a class="reference internal" href="glb-parameters.html#glb-source"><span class="std std-ref">–source</span></a></li>
+<li><a class="reference internal" href="#glb-service"><span class="std std-ref">Service Installation</span></a></li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/logo.png" alt="Logo"/>
+            </a></p>
+<h1 class="logo"><a href="../index.html">Galera Cluster</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">The Codership Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="overview.html">Overview of Galera Cluster</a></li>
+<li class="toctree-l2"><a class="reference internal" href="technical-description.html">Technical Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html">Installing Galera Cluster</a></li>
+<li class="toctree-l2"><a class="reference internal" href="administration.html">Galera Cluster Administration</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="deployment.html">Deployment</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="deployment-variants.html">Cluster Deployment Variants</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="load-balancing.html">Load Balancing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="containers.html">Container Deployments</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="monitor.html">Cluster Monitoring</a></li>
+<li class="toctree-l2"><a class="reference internal" href="security.html">Security</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference.html">Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../kb/index.html">The Codership Knowledge Base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../training/index.html">Codership Training</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../whats-new.html">What’s New</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../editors/index.html">Codership Writers &amp; Editors</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">The Codership Documentation</a><ul>
+  <li><a href="deployment.html">Deployment</a><ul>
+  <li><a href="load-balancing.html">Load Balancing</a><ul>
+      <li>Previous: <a href="pen.html" title="previous chapter">Pen Load Balancer</a></li>
+      <li>Next: <a href="containers.html" title="next chapter">Container Deployments</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+	<div class="navbar">
+	<nav id="site-navigation" class="navigation main-navigation" role="navigation">
+	<div class="nav-bar-container">
+
+	<div id="menu-nav-bar" class="nav-menu">
+		<ul class="nav-link">
+			<li> </li>
+
+		</ul>
+
+	</div>
+	</nav>
+
+	<footer id="colophon" class="site-footer" role="contentinfo">
+	<div class="top">	<div class="powered-by"><p>Powered by Galera:</p>
+	<p><a href="https://mariadb.com/kb/en/galera/"><img class="alignleft size-full wp-image-237" alt="MariaDB" src="https://galeracluster.com/wp-content/uploads/2013/10/logo-mariadb.png" width="166" height="49" /></a></p>
+		</div></div>
+	<div class="footer-menu">
+	<div class="menu-main-menu-container">
+	<ul id="menu-main-menu-1" class="nav-menu">
+	<li class="link-home menu-item menu-item-type-post_type menu-item-object-page menu-item-359"><a href="https://galeracluster.com/">Home</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-35"><a href="https://galeracluster.com/products/">Products</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="https://galeracluster.com/downloads/">Downloads</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-12 current_page_item current-menu-ancestor current-menu-parent current_page_parent current_page_ancestor menu-item-has-children menu-item-33"><a href="https://galeracluster.com/support/">Support</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="https://galeracluster.com/community/">Community</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-31"><a href="https://galeracluster.com/company/">Company</a></li>
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-297"><a href="https://galeracluster.com/category/blog/">Blog</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-38"><a href="https://galeracluster.com/contact-us/">Contact us</a></li>
+	</ul></div>			</div><!-- .footer-menu -->
+
+
+	<div class="footer-bar">
+	<p class="copyright">2014 Codership Ltd.</p>
+	</div>
+	<div class="footnote">
+	<h2>Your data is invaluable. We're here to secure it. All of it.</h2>
+	</div>
+	</footer><!-- #colophon -->
+
+
+
+
+  </body>
+</html>

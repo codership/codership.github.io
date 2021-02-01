@@ -1,0 +1,364 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><meta content="Galera Cluster - Cluster Deployment Variants" name="title" />
+<meta content="en-US" name="language" />
+<meta content="galera cluster, deployment, whole stack cluster, data tier cluster" name="keywords" />
+<meta content="Codership Oy, 2014 - 2020. All Rights Reserved." name="copyright" />
+
+    <title>Cluster Deployment Variants &#8212; Galera Cluster Documentation</title>
+    <link rel="stylesheet" href="../_static/reset-style.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Load Balancing" href="load-balancing.html" />
+    <link rel="prev" title="Deployment" href="deployment.html" />
+
+
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<link rel="stylesheet" href="/library/_static/basic-style.css">
+<link rel="stylesheet" href="/library/_static/header.css">
+<link rel="stylesheet" href="/library/_static/footer.css">
+<link rel="stylesheet" href="/library/_static/codership.css">
+<link rel="stylesheet" media="screen and (max-width: 500px)" href="/library/_static/mobile.css"/>
+<link rel="stylesheet" media="screen and (min-width:501px) and (max-width:1024px)" href="/library/_static/tablet.css"/>
+<link rel="stylesheet" media="screen and (prefers-color-scheme: dark)" href="/library/_static/dark.css"/>
+
+
+<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Feed" href="https://galeracluster.com/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Comments Feed" href="https://galeracluster.com/comments/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Support Comments Feed" href="https://galeracluster.com/support/feed/" />
+
+<script type='text/javascript' src='https://galeracluster.com/wp-includes/js/comment-reply.min.js?ver=3.8.3'></script>
+
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://galeracluster.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://galeracluster.com/wp-includes/wlwmanifest.xml" />
+<link rel='prev' title='Downloads' href='https://galeracluster.com/downloads/' />
+<link rel='next' title='Community' href='https://galeracluster.com/community/' />
+<meta name="generator" content="WordPress 3.8.3" />
+
+<link rel='shortlink' href='https://galeracluster.com/?p=12' />
+
+<style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>
+<style type="text/css" id="twentythirteen-header-css">
+			.site-title,
+			.site-description {
+				position: absolute;
+				clip: rect(1px 1px 1px 1px); /* IE7 */
+				clip: rect(1px, 1px, 1px, 1px);
+			}
+				.site-header .home-link {
+				min-height: 0;
+			}
+</style>
+
+<script type="text/javascript">
+
+		  var _gaq = _gaq || [];
+		  _gaq.push(['_setAccount', 'UA-35163478-6']);
+		  _gaq.push(['_trackPageview']);
+
+		  (function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'https://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		  })();
+
+</script>
+
+  </head><body>
+	<div id="fb-root"></div>
+	<script>(function(d, s, id) {
+		  var js, fjs = d.getElementsByTagName(s)[0];
+		  if (d.getElementById(id)) return;
+		  js = d.createElement(s); js.id = id;
+		  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+		  fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));
+	</script>
+
+	<div id="page" class="hfeed site">
+
+	<header id="masthead" class="site-header" role="banner">
+
+	<div class="top">
+	<a class="home-link" href="https://galeracluster.com/" title="Galera Cluster for MySQL" rel="home">
+	<h1 class="site-title">Galera Cluster for MySQL</h1>
+	<h2 class="site-description">The world&#039;s most advanced open source database cluster</h2>
+	</a>
+	</div>
+
+
+	<div id="navbar" class="navbar">
+	<nav id="site-navigation" class="navigation main-navigation" role="navigation">
+	<div class="menu-main-menu-container">
+
+	<ul id="menu-main-menu" class="nav-menu">
+	<li id="menu-item-359" class="link-home menu-item menu-item-type-post_type menu-item-object-page menu-item-359"><a href="https://galeracluster.com/">Home</a></li>
+	<li id="menu-item-35" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-35"><a href="https://galeracluster.com/products/">Products</a></li>
+	<li id="menu-item-34" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="https://galeracluster.com/downloads/">Downloads</a></li>
+	<li id="menu-item-33" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-12 current_page_item current-menu-ancestor current-menu-parent current_page_parent current_page_ancestor menu-item-has-children menu-item-33"><a href="https://galeracluster.com/support/">Support</a></li>
+	<li id="menu-item-32" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="https://galeracluster.com/community/">Community</a></li>
+	<li id="menu-item-31" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-31"><a href="https://galeracluster.com/company/">Company</a></li>
+	<li id="menu-item-297" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-297"><a href="https://galeracluster.com/category/blog/">Blog</a></li>
+	<li id="menu-item-38" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-38"><a href="https://galeracluster.com/contact-us/">Contact us</a></li>
+	</ul>
+	</div>
+
+
+	</nav><!-- #site-navigation -->
+
+	</div><!-- #navbar -->
+	</header><!-- #masthead -->
+
+
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="left-margin docutils container">
+<div class="left-margin-top docutils container">
+<a class="reference internal" href="../index.html"><span class="doc">The Library</span></a></div>
+<div class="left-margin-content docutils container">
+<ul class="here simple">
+<li><a class="reference internal" href="index.html"><span class="doc">Documentation</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../kb/index.html"><span class="doc">Knowledge Base</span></a></li>
+<li><a class="reference internal" href="../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="sub-links simple">
+<li><a class="reference internal" href="../training/tutorials/index.html"><span class="doc">Tutorial Articles</span></a></li>
+<li><a class="reference internal" href="../training/videos/index.html"><span class="doc">Training Videos</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a></li>
+</ul>
+</div>
+</div>
+<div class="top-links docutils container">
+<ul class="simple">
+<li><a class="reference external" href="https://galeracluster.com">Home</a></li>
+</ul>
+<ul class="here simple">
+<li><a class="reference internal" href="index.html"><span class="doc">Docs</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../kb/index.html"><span class="doc">KB</span></a></li>
+</ul>
+<ul class="nav-wider simple">
+<li><a class="reference internal" href="../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a></li>
+</ul>
+</div>
+<div class="library-document section" id="cluster-deployment-variants">
+<span id="deployment-variants"></span><h1>Cluster Deployment Variants<a class="headerlink" href="#cluster-deployment-variants" title="Permalink to this headline">¶</a></h1>
+<p>A Galera Cluster will consist of multiple nodes, preferably three or more.  Each node is an instance of MySQL, MariaDB or Percona XtraDB that you convert to Galera Cluster, allowing you to use that node as a cluster base.</p>
+<p>Galera Cluster provides synchronous multi-master replication. You can treat the cluster as a single database server that listens through many interfaces.  To appreciate this, consider a typical <em>n</em>-tier application and the various benefits that would come from deploying it with Galera Cluster.</p>
+<p class="section-heading rubric" id="no-clustering">No Clustering</p>
+<p>In the typical <em>n</em>-tier application cluster without database clustering, there’s no concern for database replication or synchronization.</p>
+<p>Internet traffic will be filtered down to your application servers, all of which read and write from the same <abbr title="Database Management System">DBMS</abbr> server.  Given that the upper tiers usually remain stateless, you can start as many instances as you need to meet the demand from the internet. Each instance stores its data in the data tier.</p>
+<div class="figure" id="id1">
+<img alt="../_images/galerausecases0.png" src="../_images/galerausecases0.png" />
+<p class="caption"><span class="caption-text"><em>No Clustering</em></span></p>
+</div>
+<p>This solution is simple and easy to manage, but has a particular weakness in the data tier’s lack of redundancy.</p>
+<p>For example, if for any reason the <abbr title="Database Management System">DBMS</abbr> server become unavailable, your application also becomes unavailable.  This is the same whether the server crashes or it has been shut down for maintenance.</p>
+<p>Similarly, this deployment also introduces performance concerns.  While you can start as many instances as you need to meet the demands on your web and application servers, they can only so much load on the <abbr title="Database Management System">DBMS</abbr> server can be handled before the load begins to slow end-user activities.</p>
+<p class="section-heading rubric" id="whole-stack-cluster">Whole Stack Clustering</p>
+<p>In the typical <em>n</em>-tier application cluster you can avoid the performance bottleneck by building a whole stack cluster.</p>
+<p>Internet traffic filters down to the application server, which stores data on its own dedicated <abbr title="Database Management System">DBMS</abbr> server.  Galera Cluster then replicates the data through to the cluster, ensuring it remains synchronous.</p>
+<div class="figure" id="id2">
+<img alt="../_images/galerausecases1.png" src="../_images/galerausecases1.png" />
+<p class="caption"><span class="caption-text"><em>Whole Stack Cluster</em></span></p>
+</div>
+<p>This solution is simple and easy to manage, especially if you can install the whole stack of each node on one physical machine.  The direct connection from the application tier to the data tier ensures low latency.</p>
+<p>There are, however, certain disadvantages to whole stack clustering that you should consider:</p>
+<ul class="simple">
+<li><strong>Lack of Redundancy</strong>: When the database server fails, the whole stack fails.  This is because the application server uses a dedicated database server. If the database server fails there’s no alternative for the application server, so the whole stack goes down.</li>
+<li><strong>Inefficient Resource Usage</strong>: A dedicated <abbr title="Database Management System">DBMS</abbr> server for each application server will be overused.  This is poor resource consolidation.  For instance, one server with a 7 GB buffer pool is much faster than two servers with 4 GB buffer pools.</li>
+<li><strong>Increased Unproductive Overhead</strong>:  Each server reproduces the work of the other servers in the cluster. This redundancy is a drain on the server’s resources.</li>
+<li><strong>Increased Rollback Rate</strong>: Given that each application server writes to a dedicated database server, cluster-wide conflicts are more likely. This can increase the likelihood of corrective rollbacks.</li>
+<li><strong>Inflexibility</strong>: There is no way for you to limit the number of master nodes or to perform intelligent load balancing.</li>
+</ul>
+<p>Despite the disadvantages, however, this setup can prove very usable for several applications, depending on your needs.</p>
+<p class="section-heading rubric" id="data-tier-cluster">Data Tier Clustering</p>
+<p>To compensate for the shortcomings in whole stack clusters, you can cluster the data tier separately from your web and application servers.</p>
+<p>With data tier clustering, the <abbr title="Database Management System">DBMS</abbr> servers form a cluster distinct from your <em>n</em>-tier application cluster.  The application servers treat the database cluster as a single virtual server, making calls through load balancers to the data tier.</p>
+<div class="figure" id="id3">
+<img alt="../_images/galerausecases2.png" src="../_images/galerausecases2.png" />
+<p class="caption"><span class="caption-text"><em>Data Tier Clustering</em></span></p>
+</div>
+<p>In a data tier cluster, the failure of one node doesn’t effect the rest of the cluster.  Furthermore, resources are consolidated better and the setup is flexible.  That is to say, you can assign nodes different roles using intelligent load balancing.</p>
+<p>There are, however, certain disadvantages to consider in data tier clustering:</p>
+<ul class="simple">
+<li><strong>Complex Structure</strong>: Since load balancers are involved, you must back them up in case of failure.  This typically means that you have two more servers than you would otherwise, as well as a failover solution between them.</li>
+<li><strong>Complex Management</strong>:  You need to configure and reconfigure the load balancers whenever a <abbr title="Database Management System">DBMS</abbr> server is added to the cluster or removed.</li>
+<li><strong>Indirect Connections</strong>: The load balancers between the application cluster and the data tier cluster increase the latency for each query.  As a result, this can easily become a performance bottleneck.  You will need powerful load balancing servers to avoid this.</li>
+<li><strong>Scalability</strong>: This setup doesn’t scale well over several datacenters.  Attempts to do so may reduce any benefits you gain from resource consolidation, given that each datacenter must include at least two <abbr title="Database Management System">DBMS</abbr> servers.</li>
+</ul>
+<p class="sub-heading rubric" id="data-tier-load-balancers">Data Tier Clustering with Distributed Load Balancing</p>
+<p>One solution to the limitations of data tier clustering is to deploy them with distributed load balancing.  This method roughly follows the standard data tier cluster method, but includes a dedicated load balancer installed on each application server.</p>
+<div class="figure" id="id4">
+<img alt="../_images/galerausecases3.png" src="../_images/galerausecases3.png" />
+<p class="caption"><span class="caption-text"><em>Data Tier Cluster with Distributed Load Balancing</em></span></p>
+</div>
+<p>In this deployment, the load balancer is no longer a single point of failure.  Furthermore, the load balancer scales with the application cluster and thus is unlikely to become a bottleneck.  Additionally, it minimizes the client-server communications latency.</p>
+<p>Data tier clustering with distributed load balancing has the following disadvantage:</p>
+<ul class="simple">
+<li><strong>Complex Management</strong>: Each application server deployed for an <em>n</em>-tier application cluster will require another load balancer that you need to set up, manage and reconfigure whenever you change or otherwise update the database cluster configuring.</li>
+</ul>
+<p class="section-heading rubric" id="aggregated-stack-cluster">Aggregated Stack Clustering</p>
+<p>Besides the deployment methods already mentioned, you could set up a hybrid method that integrates whole stack and data tier clustering by aggregating several application stacks around single <abbr title="Database Management System">DBMS</abbr> servers.</p>
+<div class="figure" id="id5">
+<img alt="../_images/galerausecases4.png" src="../_images/galerausecases4.png" />
+<p class="caption"><span class="caption-text"><em>Aggregated Stack Clustering</em></span></p>
+</div>
+<p>This layout improves on the resource utilization of the whole stack cluster, while maintaining its relative simplicity and direct <abbr title="Database Management System">DBMS</abbr> connection benefits.  It’s also how a data tier cluster with distributed load balancing will look if you were to use only one  <abbr title="Database Management System">DBMS</abbr> server per datacenter.</p>
+<p>The aggregated stack cluster is a good setup for sites that are not very large, but are hosted at more than one datacenter.</p>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/logo.png" alt="Logo"/>
+            </a></p>
+<h1 class="logo"><a href="../index.html">Galera Cluster</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">The Codership Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="overview.html">Overview of Galera Cluster</a></li>
+<li class="toctree-l2"><a class="reference internal" href="technical-description.html">Technical Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html">Installing Galera Cluster</a></li>
+<li class="toctree-l2"><a class="reference internal" href="administration.html">Galera Cluster Administration</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="deployment.html">Deployment</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Cluster Deployment Variants</a></li>
+<li class="toctree-l3"><a class="reference internal" href="load-balancing.html">Load Balancing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="containers.html">Container Deployments</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="monitor.html">Cluster Monitoring</a></li>
+<li class="toctree-l2"><a class="reference internal" href="security.html">Security</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference.html">Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../kb/index.html">The Codership Knowledge Base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../training/index.html">Codership Training</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../whats-new.html">What’s New</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../editors/index.html">Codership Writers &amp; Editors</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">The Codership Documentation</a><ul>
+  <li><a href="deployment.html">Deployment</a><ul>
+      <li>Previous: <a href="deployment.html" title="previous chapter">Deployment</a></li>
+      <li>Next: <a href="load-balancing.html" title="next chapter">Load Balancing</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+	<div class="navbar">
+	<nav id="site-navigation" class="navigation main-navigation" role="navigation">
+	<div class="nav-bar-container">
+
+	<div id="menu-nav-bar" class="nav-menu">
+		<ul class="nav-link">
+			<li> </li>
+
+		</ul>
+
+	</div>
+	</nav>
+
+	<footer id="colophon" class="site-footer" role="contentinfo">
+	<div class="top">	<div class="powered-by"><p>Powered by Galera:</p>
+	<p><a href="https://mariadb.com/kb/en/galera/"><img class="alignleft size-full wp-image-237" alt="MariaDB" src="https://galeracluster.com/wp-content/uploads/2013/10/logo-mariadb.png" width="166" height="49" /></a></p>
+		</div></div>
+	<div class="footer-menu">
+	<div class="menu-main-menu-container">
+	<ul id="menu-main-menu-1" class="nav-menu">
+	<li class="link-home menu-item menu-item-type-post_type menu-item-object-page menu-item-359"><a href="https://galeracluster.com/">Home</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-35"><a href="https://galeracluster.com/products/">Products</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="https://galeracluster.com/downloads/">Downloads</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-12 current_page_item current-menu-ancestor current-menu-parent current_page_parent current_page_ancestor menu-item-has-children menu-item-33"><a href="https://galeracluster.com/support/">Support</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="https://galeracluster.com/community/">Community</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-31"><a href="https://galeracluster.com/company/">Company</a></li>
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-297"><a href="https://galeracluster.com/category/blog/">Blog</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-38"><a href="https://galeracluster.com/contact-us/">Contact us</a></li>
+	</ul></div>			</div><!-- .footer-menu -->
+
+
+	<div class="footer-bar">
+	<p class="copyright">2014 Codership Ltd.</p>
+	</div>
+	<div class="footnote">
+	<h2>Your data is invaluable. We're here to secure it. All of it.</h2>
+	</div>
+	</footer><!-- #colophon -->
+
+
+
+
+  </body>
+</html>

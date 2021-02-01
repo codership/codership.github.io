@@ -1,0 +1,568 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><meta content="Monitoring a Galera Cluster" name="title" />
+<meta content="en-US" name="language" />
+<meta content="Codership Oy, 2014 - 2020. All Rights Reserved." name="copyright" />
+
+    <title>Monitoring a Galera Cluster &#8212; Galera Cluster Documentation</title>
+    <link rel="stylesheet" href="../../_static/reset-style.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Galera Cluster Migration Factors" href="migrate.html" />
+    <link rel="prev" title="Installing a Galera Cluster on AWS" href="galera-on-aws.html" />
+
+
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<link rel="stylesheet" href="/library/_static/basic-style.css">
+<link rel="stylesheet" href="/library/_static/header.css">
+<link rel="stylesheet" href="/library/_static/footer.css">
+<link rel="stylesheet" href="/library/_static/codership.css">
+<link rel="stylesheet" media="screen and (max-width: 500px)" href="/library/_static/mobile.css"/>
+<link rel="stylesheet" media="screen and (min-width:501px) and (max-width:1024px)" href="/library/_static/tablet.css"/>
+<link rel="stylesheet" media="screen and (prefers-color-scheme: dark)" href="/library/_static/dark.css"/>
+
+
+<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Feed" href="https://galeracluster.com/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Comments Feed" href="https://galeracluster.com/comments/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Support Comments Feed" href="https://galeracluster.com/support/feed/" />
+
+<script type='text/javascript' src='https://galeracluster.com/wp-includes/js/comment-reply.min.js?ver=3.8.3'></script>
+
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://galeracluster.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://galeracluster.com/wp-includes/wlwmanifest.xml" />
+<link rel='prev' title='Downloads' href='https://galeracluster.com/downloads/' />
+<link rel='next' title='Community' href='https://galeracluster.com/community/' />
+<meta name="generator" content="WordPress 3.8.3" />
+
+<link rel='shortlink' href='https://galeracluster.com/?p=12' />
+
+<style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>
+<style type="text/css" id="twentythirteen-header-css">
+			.site-title,
+			.site-description {
+				position: absolute;
+				clip: rect(1px 1px 1px 1px); /* IE7 */
+				clip: rect(1px, 1px, 1px, 1px);
+			}
+				.site-header .home-link {
+				min-height: 0;
+			}
+</style>
+
+<script type="text/javascript">
+
+		  var _gaq = _gaq || [];
+		  _gaq.push(['_setAccount', 'UA-35163478-6']);
+		  _gaq.push(['_trackPageview']);
+
+		  (function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'https://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		  })();
+
+</script>
+
+  </head><body>
+	<div id="fb-root"></div>
+	<script>(function(d, s, id) {
+		  var js, fjs = d.getElementsByTagName(s)[0];
+		  if (d.getElementById(id)) return;
+		  js = d.createElement(s); js.id = id;
+		  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+		  fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));
+	</script>
+
+	<div id="page" class="hfeed site">
+
+	<header id="masthead" class="site-header" role="banner">
+
+	<div class="top">
+	<a class="home-link" href="https://galeracluster.com/" title="Galera Cluster for MySQL" rel="home">
+	<h1 class="site-title">Galera Cluster for MySQL</h1>
+	<h2 class="site-description">The world&#039;s most advanced open source database cluster</h2>
+	</a>
+	</div>
+
+
+	<div id="navbar" class="navbar">
+	<nav id="site-navigation" class="navigation main-navigation" role="navigation">
+	<div class="menu-main-menu-container">
+
+	<ul id="menu-main-menu" class="nav-menu">
+	<li id="menu-item-359" class="link-home menu-item menu-item-type-post_type menu-item-object-page menu-item-359"><a href="https://galeracluster.com/">Home</a></li>
+	<li id="menu-item-35" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-35"><a href="https://galeracluster.com/products/">Products</a></li>
+	<li id="menu-item-34" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="https://galeracluster.com/downloads/">Downloads</a></li>
+	<li id="menu-item-33" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-12 current_page_item current-menu-ancestor current-menu-parent current_page_parent current_page_ancestor menu-item-has-children menu-item-33"><a href="https://galeracluster.com/support/">Support</a></li>
+	<li id="menu-item-32" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="https://galeracluster.com/community/">Community</a></li>
+	<li id="menu-item-31" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-31"><a href="https://galeracluster.com/company/">Company</a></li>
+	<li id="menu-item-297" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-297"><a href="https://galeracluster.com/category/blog/">Blog</a></li>
+	<li id="menu-item-38" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-38"><a href="https://galeracluster.com/contact-us/">Contact us</a></li>
+	</ul>
+	</div>
+
+
+	</nav><!-- #site-navigation -->
+
+	</div><!-- #navbar -->
+	</header><!-- #masthead -->
+
+
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="left-margin docutils container">
+<div class="left-margin-top docutils container">
+<a class="reference internal" href="../../index.html"><span class="doc">The Library</span></a></div>
+<div class="left-margin-content docutils container">
+<ul class="simple">
+<li><a class="reference internal" href="../../documentation/index.html"><span class="doc">Documentation</span></a></li>
+<li><a class="reference internal" href="../../kb/index.html"><span class="doc">Knowledge Base</span></a></li>
+<li><a class="reference internal" href="../index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="sub-links simple">
+<li><a class="reference internal" href="../courses/index.html"><span class="doc">Training Courses</span></a></li>
+<li><a class="reference internal" href="../videos/index.html"><span class="doc">Training Videos</span></a></li>
+</ul>
+<ul class="sub-links here simple">
+<li><a class="reference internal" href="index.html"><span class="doc">Tutorial Articles</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../../faq.html"><span class="doc">FAQ</span></a></li>
+</ul>
+<p>Related Documents</p>
+<ul class="simple">
+<li><a class="reference internal" href="../../documentation/install-mysql.html"><span class="doc">Install MySQL Galera</span></a></li>
+</ul>
+<p>Related Articles</p>
+<ul class="simple">
+<li><a class="reference internal" href="../videos/galera-monitoring.html"><span class="doc">Galera Monitoring (video)</span></a></li>
+</ul>
+</div>
+</div>
+<div class="top-links docutils container">
+<ul class="simple">
+<li><a class="reference external" href="https://galeracluster.com">Home</a></li>
+<li><a class="reference internal" href="../../documentation/index.html"><span class="doc">Docs</span></a></li>
+<li><a class="reference internal" href="../../kb/index.html"><span class="doc">KB</span></a></li>
+</ul>
+<ul class="here nav-wider simple">
+<li><a class="reference internal" href="../index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../../faq.html"><span class="doc">FAQ</span></a></li>
+</ul>
+</div>
+<div class="library-article section" id="monitoring-a-galera-cluster">
+<span id="galera-monitoring"></span><h1>Monitoring a Galera Cluster<a class="headerlink" href="#monitoring-a-galera-cluster" title="Permalink to this headline">¶</a></h1>
+<p class="article-stats">Length: 3100 words; Writer: Russell J.T Dyer: July 17, 2019; Topic: Administration; Level: Intermediate</p>
+<p>Galera Cluster is a reliable, stable database replication clustering system. Both MySQL and MariaDB, with the InnoDB storage, utilize Galera for communications between nodes running Linux. Every aspect of such an arrangement is equally dependable for maintenance and availability of data.  It’s truly a high-end professional package.</p>
+<p>Nevertheless, you should monitor your cluster as an added level of assurance, to maintain a high availability standard – to resolve problems quickly and without loss of data.  You should occasionally manually, and continuously by automated means, check the status of your cluster. Additionally, you should check and monitor the state of each node to ensure against problems (i.e., replication lag, network connectivity, etc.).</p>
+<p>There are three methods available to monitor cluster activity and replication health: you can regularly query MySQL’s status variables; use customized scripts, which would basically react to changes in status variables; or use a third-party monitoring application, which would also relies on status variables. In essence, you can either check the status variables yourself, or you can automate and record the process by employing a script or some sort of monitoring software to check the status variables and alert you when there’s a problem.</p>
+<p>In this article, we’ll look closely at the essential status variables for you to consider and ways to log cluster and node status.</p>
+<p class="section-heading rubric">Using Status Variables</p>
+<p>In addition to the standard status variables in MySQL you may already monitor, Galera Cluster also provides a set of status variables. They will allow you to check node and cluster states, as well as replication health.</p>
+<p>Galera Cluster variables are related to write-set replication and thereby prefixed with <code class="docutils literal notranslate"><span class="pre">wsrep_</span></code>. To retrieve a list of all of these status variables, you would enter the following SQL statement on each node, using a simple database client, such as <code class="docutils literal notranslate"><span class="pre">mysql</span></code>:</p>
+<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="k">SHOW</span> <span class="n">GLOBAL</span> <span class="n">STATUS</span> <span class="k">LIKE</span> <span class="s1">&#39;wsrep_%&#39;</span><span class="p">;</span>
+
+<span class="o">+------------------------+--------------------------------------+</span>
+<span class="o">|</span> <span class="n">Variable_name</span>          <span class="o">|</span> <span class="n">Value</span>                                <span class="o">|</span>
+<span class="o">+------------------------+--------------------------------------+</span>
+<span class="o">|</span> <span class="n">wsrep_local_state_uuid</span> <span class="o">|</span> <span class="n">bd5fe1c3</span><span class="o">-</span><span class="mi">7</span><span class="n">d80</span><span class="o">-</span><span class="mi">11</span><span class="n">e9</span><span class="o">-</span><span class="mi">8913</span><span class="o">-</span><span class="mi">4</span><span class="n">f209d688a15</span> <span class="o">|</span>
+<span class="o">|</span> <span class="n">wsrep_protocol_version</span> <span class="o">|</span> <span class="mi">10</span>                                   <span class="o">|</span>
+<span class="o">|</span> <span class="p">...</span>                    <span class="o">|</span> <span class="p">...</span>                                  <span class="o">|</span>
+<span class="o">|</span> <span class="n">wsrep_thread_count</span>     <span class="o">|</span> <span class="mi">6</span>                                    <span class="o">|</span>
+<span class="o">+------------------------+--------------------------------------+</span>
+</pre></div>
+</div>
+<p>If you’d execute this SQL statement on one of your nodes, you’d see that there are over sixty status variables. Some of them may be of no interest to you – perhaps most – but there are some you should check regularly.  You could group these into three basic categories:  cluster integrity; node status; and replication health.</p>
+<p class="sub-heading rubric">A Cluster’s Integrity</p>
+<p>A cluster is said to have integrity when each node – all of the nodes in the cluster – receive and replicate write-sets from all of the other nodes. The cluster begins to lose integrity when this situation falters. This can be caused by the cluster going down, becoming partitioned, or if there is a split-brain situation.</p>
+<p>The status variables that will reveal whether there is a loss of cluster integrity are the <code class="docutils literal notranslate"><span class="pre">wsrep_cluster_state_uuid</span></code>, <code class="docutils literal notranslate"><span class="pre">wsrep_cluster_conf_id</span></code>, <code class="docutils literal notranslate"><span class="pre">wsrep_cluster_size</span></code>, and the <code class="docutils literal notranslate"><span class="pre">wsrep_cluster_status</span></code>.  Let’s consider each and how it may indicate a problem.</p>
+<p class="lower-heading rubric">Compare UUIDs</p>
+<p>When all nodes are synchronized with each other, they will have executed all of the same transactions.  Each transaction includes a UUID to identify it.  Therefore, the last UUID on each node should be the same.</p>
+<p>To confirm this, execute the following SQL statement on each node to see if the results are the same:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">SHOW GLOBAL STATUS LIKE &#39;wsrep_cluster_state_uuid&#39; \G</span>
+
+<span class="go">*************************** 1. row ***************************</span>
+<span class="go">Variable_name: wsrep_cluster_state_uuid</span>
+<span class="go">        Value: bd5fe1c3-7d80-11e9-8913-4f209d688a15</span>
+</pre></div>
+</div>
+<p>If the last node has a different result from the others, it may be that a transaction came through while you were in the process of executing the SQL statement. So, check again, maybe in a different order. But if one or more nodes clearly have different UUIDs than the others, the cluster has no integrity. This means more than one cluster has been formed, and the nodes are not all communicating with each other.</p>
+<p class="lower-heading rubric">Take Attendance</p>
+<p>If there may be a problem with network connectivity or if you think the cluster may have split into separate clusters, check the <code class="docutils literal notranslate"><span class="pre">wsrep_cluster_size</span></code> on each to see that they agree.  If you have five nodes and some of the nodes say the cluster size contains three, while others say two, you have a problem. Any value that doesn’t match the number of nodes you have running suggests there’s a network connectivity problem, or maybe MySQL is down on one node.</p>
+<p>However, if only one node is out of sync, you might solve the problem by taking it down, fixing whatever network problem it’s having, and then starting it again. When it properly joins the cluster, it will undergo a  State Snapshot Transfer (SST), a full replacement of the databases.</p>
+<p class="lower-heading rubric">Take a Tally</p>
+<p>Another approach to checking cluster integrity is to compare the values of the <code class="docutils literal notranslate"><span class="pre">wsrep_cluster_conf_id</span></code> status variable on all nodes. This will show the total number of changes that have occurred in the cluster—changes that the node on which it’s executed is aware. Basically, comparing this variable will determine whether a node is a part of the Primary Component.</p>
+<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="k">SHOW</span> <span class="n">GLOBAL</span> <span class="n">STATUS</span> <span class="k">LIKE</span> <span class="s1">&#39;wsrep_cluster_conf_id&#39;</span><span class="p">;</span>
+
+<span class="o">+-----------------------+--------+</span>
+<span class="o">|</span> <span class="n">Variable_name</span>         <span class="o">|</span> <span class="n">Value</span>  <span class="o">|</span>
+<span class="o">+-----------------------+--------+</span>
+<span class="o">|</span> <span class="n">wsrep_cluster_conf_id</span> <span class="o">|</span> <span class="mi">82</span>     <span class="o">|</span>
+<span class="o">+-----------------------+--------+</span>
+</pre></div>
+</div>
+<p>Each node in the cluster should provide the same value. Otherwise, it indicates that the cluster is partitioned. This is not good. If this value is some outrageously high number (e.g., in excess of a trillion), it may indicate that the nodes are dropping and restarting themselves over and over.</p>
+<p class="sub-heading rubric">Each Node’s Status</p>
+<p>In addition to checking cluster integrity, you should also monitor the status of individual nodes—as in, not necessarily in relation to the cluster as a whole.</p>
+<p>Basically, you would look to see whether a node received and processed updates from the cluster write-sets. There are a few status variables that will give such insights:  <code class="docutils literal notranslate"><span class="pre">wsrep_ready</span></code>; <code class="docutils literal notranslate"><span class="pre">wsrep_connected</span></code>; and <code class="docutils literal notranslate"><span class="pre">wsrep_local_state_comment</span></code>.</p>
+<p class="lower-heading rubric">Ready &amp; Connected</p>
+<p>The first two status variables are pretty straightforward: they’re either <code class="docutils literal notranslate"><span class="pre">ON</span></code> or <code class="docutils literal notranslate"><span class="pre">OFF</span></code>.  If <code class="docutils literal notranslate"><span class="pre">wsrep_ready</span></code> returns <code class="docutils literal notranslate"><span class="pre">OFF</span></code>, it’s not ready and almost all queries will fail.  You’ll receive error messages like this one:</p>
+<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="n">ERROR</span> <span class="mi">1047</span> <span class="p">(</span><span class="mi">08501</span><span class="p">)</span> <span class="n">Unknown</span> <span class="n">Command</span>
+</pre></div>
+</div>
+<p>When <code class="docutils literal notranslate"><span class="pre">wsrep_connected</span></code> returns a value <code class="docutils literal notranslate"><span class="pre">OFF</span></code>, the node doesn’t have a connection to any other nodes or cluster components. The reason for lost connection could be more physical (i.e., the network is down, a cable is disconnected, etc.).  Or it could be that the node’s configuration file is incorrect or inconsistent with the other nodes.</p>
+<p>For instance, the values of the <code class="docutils literal notranslate"><span class="pre">wsrep_cluster_address</span></code> and <code class="docutils literal notranslate"><span class="pre">wsrep_cluster_name</span></code> parameters may be entered incorrectly in the MySQL configuration file. The error log should provide details to help troubleshoot the problem.  This is usually, <code class="docutils literal notranslate"><span class="pre">/var/log/mysqld.log</span></code>—or whatever the value is for <code class="docutils literal notranslate"><span class="pre">log_error</span></code> variable.</p>
+<p class="lower-heading rubric">Easily Understood</p>
+<p>To make the node status much clearer, you can check the value of the <code class="docutils literal notranslate"><span class="pre">wsrep_local_state_comment</span></code> status variable. Its value will be easy to understand.</p>
+<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="k">SHOW</span> <span class="n">GLOBAL</span> <span class="n">STATUS</span> <span class="k">LIKE</span> <span class="s1">&#39;wsrep_local_state_comment&#39;</span><span class="p">;</span>
+
+<span class="o">+---------------------------+--------+</span>
+<span class="o">|</span> <span class="n">Variable_name</span>             <span class="o">|</span> <span class="n">Value</span>  <span class="o">|</span>
+<span class="o">+---------------------------+--------+</span>
+<span class="o">|</span> <span class="n">wsrep_local_state_comment</span> <span class="o">|</span> <span class="n">Synced</span> <span class="o">|</span>
+<span class="o">+---------------------------+--------+</span>
+</pre></div>
+</div>
+<p>That’s pretty clear—Synced—and reassuring.</p>
+<p>When a node is part of the Primary Component, it will return <code class="docutils literal notranslate"><span class="pre">Joining</span></code>, <code class="docutils literal notranslate"><span class="pre">Waiting</span> <span class="pre">on</span> <span class="pre">SST</span></code>, <code class="docutils literal notranslate"><span class="pre">Joined</span></code>, <code class="docutils literal notranslate"><span class="pre">Synced</span></code> or <code class="docutils literal notranslate"><span class="pre">Donor</span></code>. If you don’t like the results you get, try again. It changes quickly and generally won’t take long to get to <code class="docutils literal notranslate"><span class="pre">Synced</span></code>. If a node is part of a non-operational component, though, it will return <code class="docutils literal notranslate"><span class="pre">Initialized</span></code>. If it stays that way, it might be a problem.</p>
+<p class="sub-heading rubric">Replication Health</p>
+<p>Monitoring cluster integrity and node status can show issues that may prevent or otherwise block replication. These status variables will help in identifying performance issues and identifying problem areas so that you can get the most from your cluster.</p>
+<p>So that things don’t get too hectic for a node, Galera will trigger a feedback mechanism called, <em>Flow Control</em> to manage the replication process. When there are too many write-sets in the queue, the node engages Flow Control to pause replication until it can get caught up.</p>
+<p>The status variables you’d check for this are <code class="docutils literal notranslate"><span class="pre">wsrep_local_recv_queue_avg</span></code>, <code class="docutils literal notranslate"><span class="pre">wsrep_flow_control_paused</span></code>, and <code class="docutils literal notranslate"><span class="pre">wsrep_cert_deps_distance</span></code>. Unlike the previously mentioned status variables, these are variables reset when the servers are restarted or the <code class="docutils literal notranslate"><span class="pre">FLUSH</span> <span class="pre">STATUS</span></code> statement is executed.</p>
+<p class="lower-heading rubric">Bunching of Writes</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">wsrep_local_recv_queue_avg</span></code> variable shows the average size of the local received queue since the last status query. When this is greater than 0, it indicates that the node can’t apply write-sets as fast as it’s receiving them.  If you’re detecting a problem here, you might also check <code class="docutils literal notranslate"><span class="pre">wsrep_local_recv_queue_min</span></code> and <code class="docutils literal notranslate"><span class="pre">wsrep_local_recv_queue_max</span></code> to get a range of values, rather than just the average.</p>
+<p>In addition to checking the node’s status related to incoming write-sets, it could check how outgoing connectivity is looking.  Mainly, you would check the <code class="docutils literal notranslate"><span class="pre">wsrep_local_send_queue_avg</span></code> variable to get an average of the send queue length since the last time the status variables were flushed.  However, sending is rarely a bottleneck.</p>
+<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="k">SHOW</span> <span class="n">STATUS</span> <span class="k">LIKE</span> <span class="s1">&#39;wsrep_local_send_queue_avg&#39;</span><span class="p">;</span>
+
+<span class="o">+----------------------------+----------+</span>
+<span class="o">|</span> <span class="n">Variable_name</span>              <span class="o">|</span> <span class="n">Value</span>    <span class="o">|</span>
+<span class="o">+----------------------------+----------+</span>
+<span class="o">|</span> <span class="n">wsrep_local_send_queue_avg</span> <span class="o">|</span> <span class="mi">0</span><span class="p">.</span><span class="mi">145000</span> <span class="o">|</span>
+<span class="o">+----------------------------+----------+</span>
+</pre></div>
+</div>
+<p>A value greater than 0 indicates replication throttling or network throughput issues. It could be the physical network cards and cables, or the operating system’s configuration. Similar to the received queue above, you can check the <code class="docutils literal notranslate"><span class="pre">wsrep_local_send_queue_min</span></code> and <code class="docutils literal notranslate"><span class="pre">wsrep_local_send_queue_max</span></code> status parameters to see the range, and not just the average.</p>
+<p class="lower-heading rubric">Flow Control Paused</p>
+<p>If you sense a node is getting overwhelmed, you might execute <code class="docutils literal notranslate"><span class="pre">FLUSH</span> <span class="pre">STATUS</span></code> on it and then check the value of the <code class="docutils literal notranslate"><span class="pre">wsrep_flow_control_paused</span></code> variable—after waiting a bit for a better sample.  It will return the percentage of time the node was paused because of Flow Control since you just flushed the status.</p>
+<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="k">SHOW</span> <span class="n">STATUS</span> <span class="k">LIKE</span> <span class="s1">&#39;wsrep_flow_control_paused&#39;</span><span class="p">;</span>
+
+<span class="o">+---------------------------+----------+</span>
+<span class="o">|</span> <span class="n">Variable_name</span>             <span class="o">|</span> <span class="n">Value</span>    <span class="o">|</span>
+<span class="o">+---------------------------+----------+</span>
+<span class="o">|</span> <span class="n">wsrep_flow_control_paused</span> <span class="o">|</span> <span class="mi">0</span><span class="p">.</span><span class="mi">184353</span> <span class="o">|</span>
+<span class="o">+---------------------------+----------+</span>
+</pre></div>
+</div>
+<p>In the results here, it shows that for a little more than 18 percent of the time elapsed, the replication was paused.  A value of 1 would indicate that the node was paused 100% of the time. Anything greater than 0 indicates the node’s replication health may be weak. You should closely monitor it—flushing occasionally—until you start seeing 0 values.  If it doesn’t resolve itself, you might increase the number of slave threads (i.e., <code class="docutils literal notranslate"><span class="pre">wsrep_slave_threads</span></code>).</p>
+<p class="lower-heading rubric">Sequentially in Parallel</p>
+<p>Last, you might monitor <code class="docutils literal notranslate"><span class="pre">wsrep_cert_deps_distance</span></code>. It will tell you the average distance between the lowest and highest sequence number, values a node can potentially apply in parallel.</p>
+<p>Basically, this is the optimal value to set <code class="docutils literal notranslate"><span class="pre">wsrep_slave_threads</span></code>, since it’s pointless to assign more slave threads than the number of transactions that can be applied in parallel.</p>
+<p class="section-heading rubric">Utilizing Server Logs to Troubleshoot</p>
+<p>As you can see, the status variables provide you with plenty of information for detecting problems.  However, they don’t generally indicate a pattern—they’re mostly the current state when you happen to look.  Historical information, though, can make it easier to see a problem developing. Additionally, the status variables do little to help you to determine the cause of problems, or provide you with recommendations on how to solve them.</p>
+<p>For seeing a pattern, you’ll have to record the results from querying the status variables at regular intervals, recording them in a database or a log for later review. For consistency of intervals, it should be automated. You could either write your own scripts to do this, or you could use one of the many database monitoring programs (e.g., Monyog).</p>
+<p class="lower-heading rubric">Enabling the Error Log &amp; Special Logging</p>
+<p>For determining the cause of a problem, the server logs are generally the most helpful. Use <code class="docutils literal notranslate"><span class="pre">SHOW</span> <span class="pre">VARIABLES</span></code> to check the value of the <code class="docutils literal notranslate"><span class="pre">log_error</span></code> variable—and determine the path and name of the log file. If it returns nothing, you’ll need to enable it by adding <code class="docutils literal notranslate"><span class="pre">log-error</span></code> to the MySQL configuration file. It will set the path and file name on its own.</p>
+<p>In addition to the information recorded in the error log, there are parameters and options you can use to enable error logging on events specific to replication: <code class="docutils literal notranslate"><span class="pre">wsrep_log_conflicts</span></code>, <code class="docutils literal notranslate"><span class="pre">cert.log_conflicts</span></code>, and <code class="docutils literal notranslate"><span class="pre">wsrep_debug</span></code>. Setting these will cause MySQL to record information about conflicts in the replication process.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">wsrep_log_conflicts</span></code> parameter enables conflict logging for error logs. For instance, it will record when two nodes attempt to write to the same row in the same table at the same time. It will do this even if this conflict is resolved before it can be committed. Without logging this information, you would be unaware that there was temporarily a conflict.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">cert.log_conflicts</span></code> is a wsrep Provider option that enables logging of certification failures during replication.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">wsrep_debug</span></code> parameter enables debugging information, providing much more verbose entries in the log files. However, this parameter can also cause the database server to record passwords and similar authentication data to the error logs. Don’t enable it in production environments since it’s a security vulnerability.</p>
+<p>Below is how these entries would look in the MySQL configuration file:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">wsrep_log_conflicts</span><span class="o">=</span><span class="s">ON</span>
+<span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;cert.log_conflicts=ON&quot;</span>
+<span class="na">wsrep_debug</span><span class="o">=</span><span class="s">ON</span>
+</pre></div>
+</div>
+<p>There is one more type of log you should check. When a node is unable to complete a transaction or some other event, the database server will create a special binary log file with details of that failure. This file is placed in the data directory and is named something like, <code class="docutils literal notranslate"><span class="pre">GRA_*.log</span></code>. You should periodically see if these log files are generated.  When they are, review them right away.</p>
+<p class="section-heading rubric">Notification Command</p>
+<p>Although checking status variables and logs will provide you information you’ll need, retrieving and reviewing such information is a manual process. Plus, you may have to examine status variables and logs on each determine and resolve a problem. This is one of the appealing aspects of third-party monitoring software.</p>
+<p>To assist you in monitoring a cluster and its nodes, Galera includes a mechanism for alerting you of a problem.  To make use of it, you’ll need to create a script—or copy someone else’s script—that will process values passed to it from Galera.  Then you have to set the <code class="docutils literal notranslate"><span class="pre">wsrep_notify_cmd</span></code> parameter with the path and name of the script—put this in the MySQL configuration file.</p>
+<p>Galera will call the script and pass a set of values to it whenever a node joins or leaves the cluster, and whenever the cluster or node’s status changes.  Your script can then send you an alert, log the data it receives in a table or a log file—this is a way to accumulate data for determining a pattern we just mentioned—or adjusting traffic flow through a load balancer.</p>
+<p class="lower-heading rubric">Notification Script Example</p>
+<p>When a change occurs in a node or the cluster and triggers the notification script or command, it will pass certain parameters to the script. Of particular interest are the <code class="docutils literal notranslate"><span class="pre">--status</span></code> and <code class="docutils literal notranslate"><span class="pre">--members</span></code> parameters. The status will be that of the node on which the script is running. It will indicate, among other things, if the node is synchronized or not. See the [Documentation on Notification Status](<a class="reference external" href="https://galeracluster.com/library/documentation/notification-cmd.html#node-status">https://galeracluster.com/library/documentation/notification-cmd.html#node-status</a>) for a list of all values.</p>
+<p>Below is a very simple bash script that will serve as a notification command. It collects only some of the information available and records it to a log file, with labels.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+
+<span class="nv">log_file</span><span class="o">=</span><span class="s1">&#39;/var/log/galera-node-monitor.log&#39;</span>
+
+<span class="k">while</span> <span class="o">[</span> <span class="nv">$#</span> -gt <span class="m">0</span> <span class="o">]</span>
+   <span class="k">do</span>
+   <span class="k">case</span> <span class="nv">$1</span> in
+      --status<span class="o">)</span>
+         <span class="nv">node_status</span><span class="o">=</span><span class="nv">$2</span>
+         <span class="nb">shift</span>
+         <span class="p">;;</span>
+      --members<span class="o">)</span>
+         <span class="nv">members</span><span class="o">=</span><span class="nv">$2</span>
+         <span class="nb">shift</span>
+         <span class="p">;;</span>
+         <span class="k">esac</span>
+         <span class="nb">shift</span>
+   <span class="k">done</span>
+
+<span class="nb">declare</span> <span class="nv">idx</span><span class="o">=</span><span class="m">0</span>
+<span class="nb">declare</span> -a node_names
+
+<span class="k">for</span> node in <span class="k">$(</span><span class="nb">echo</span> <span class="nv">$members</span> <span class="p">|</span> sed s/,/<span class="se">\ </span>/g<span class="k">)</span>
+  <span class="k">do</span>
+    <span class="nv">node_name</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span> <span class="s2">&quot;&#39;</span><span class="nv">$node</span><span class="s2">&#39;&quot;</span> <span class="p">|</span> sed  s/<span class="se">\\</span>//,/g<span class="p">|</span> cut -d<span class="s1">&#39;,&#39;</span> -f <span class="m">2</span><span class="k">)</span>
+    <span class="nv">node_names</span><span class="o">+=(</span><span class="nv">$node_name</span><span class="o">)</span>
+
+    <span class="nv">idx</span><span class="o">=</span><span class="k">$((</span> <span class="nv">$idx</span> <span class="o">+</span> <span class="m">1</span> <span class="k">))</span>
+  <span class="k">done</span>
+
+<span class="k">if</span> <span class="o">[</span> -z <span class="s2">&quot;</span><span class="si">${</span><span class="nv">idx</span><span class="si">}</span><span class="s2">&quot;</span> <span class="o">]</span><span class="p">;</span>
+  <span class="k">then</span>
+     <span class="nv">idx</span><span class="o">=</span><span class="m">0</span>
+<span class="k">fi</span>
+
+<span class="nv">node_names</span><span class="o">=(</span> <span class="k">$(</span><span class="nb">printf</span> <span class="s2">&quot;%s\n&quot;</span> <span class="si">${</span><span class="nv">node_names</span><span class="p">[@]</span><span class="si">}</span> <span class="p">|</span> sort <span class="k">)</span> <span class="o">)</span>
+<span class="nv">node_name</span><span class="o">=(</span><span class="sb">`</span>grep wsrep_node_name /etc/my.cnf<span class="sb">`</span><span class="o">)</span>
+<span class="nv">node_name</span><span class="o">=</span><span class="si">${</span><span class="nv">node_name</span><span class="p">:</span><span class="nv">17</span><span class="p">:</span><span class="nv">7</span><span class="si">}</span>
+
+<span class="nb">echo</span> <span class="s2">&quot;Cluster Size: </span><span class="nv">$idx</span><span class="s2"> nodes&quot;</span> &gt;&gt; <span class="nv">$log_file</span>
+<span class="nb">echo</span> <span class="s2">&quot;Cluster Members:&quot;</span> <span class="si">${</span><span class="nv">node_names</span><span class="p">[@]</span><span class="si">}</span> <span class="p">|</span> sort -g &gt;&gt; <span class="nv">$log_file</span>
+<span class="nb">echo</span> <span class="s2">&quot;Node Name: </span><span class="nv">$node_name</span><span class="s2">&quot;</span> &gt;&gt; <span class="nv">$log_file</span>
+<span class="nb">echo</span> <span class="s2">&quot;Node Status: </span><span class="nv">$node_status</span><span class="s2">&quot;</span> &gt;&gt; <span class="nv">$log_file</span>
+<span class="nb">echo</span> <span class="s2">&quot;----------------------&quot;</span> &gt;&gt; <span class="nv">$log_file</span>
+
+<span class="nb">exit</span>
+</pre></div>
+</div>
+<p>To keep this script simple, it parses only two of the parameters that are passed to it. It manipulates that data a little bit, and then writes it to a log file in the data directory. To initiate this script, you’ll have to use touch to start that log file and then change the ownership to <code class="docutils literal notranslate"><span class="pre">mysql</span></code>.</p>
+<p>A more useful version of this script would include code which sends you an email message if the node’s status is disconnected. Again, we wanted to keep this script simple as an example. The result of it would look like this excerpt below from the log file it appends as events happen:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>----------------------
+Cluster Size: 3 nodes
+Cluster Members: galera1 galera2 galera3
+Node Name: galera1
+Node Status: synced
+----------------------
+</pre></div>
+</div>
+<p>This entry shows three nodes are running and lists their names—there are in fact only three nodes in this cluster.  It also shows that the notification script was run on the <code class="docutils literal notranslate"><span class="pre">galera1</span></code> node and that node is synchronized.</p>
+<p>The next two entries show that <code class="docutils literal notranslate"><span class="pre">mysqld</span></code> was shut down on this node.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>----------------------
+Cluster Size: 1 nodes
+Cluster Members: galera1
+Node Name: galera1
+Node Status: disconnecting
+----------------------
+Cluster Size: 0 nodes
+Cluster Members:
+Node Name: galera1
+Node Status: disconnected
+----------------------
+</pre></div>
+</div>
+<p>Notice that the number of nodes is now at 1, although the other two nodes are operating fine and maintaining the cluster. This is because it’s no longer in communication with the cluster.</p>
+<p>The next set of entries below reflect <code class="docutils literal notranslate"><span class="pre">mysqld</span></code> starting again. Notice here that after being connected, it becomes a joiner, as well as other steps to become synchronized.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>----------------------
+Cluster Size: 0 nodes
+Cluster Members:
+Node Name: galera1
+Node Status: connected
+----------------------
+Cluster Size: 0 nodes
+Cluster Members:
+Node Name: galera1
+Node Status: joiner
+----------------------
+Cluster Size: 0 nodes
+Cluster Members:
+Node Name: galera1
+Node Status: initializing
+----------------------
+Cluster Size: 0 nodes
+Cluster Members:
+Node Name: galera1
+Node Status: initialized
+----------------------
+Cluster Size: 0 nodes
+Cluster Members:
+Node Name: galera1
+Node Status: joined
+----------------------
+Cluster Size: 3 nodes
+Cluster Members: galera1 galera2 galera3
+Node Name: galera1
+Node Status: synced
+----------------------
+</pre></div>
+</div>
+<p>You would have to copy this script to each node and set it to run with the <code class="docutils literal notranslate"><span class="pre">wsrep_notify_cmd</span></code> parameter on each.  The problem with this approach is that the data will be in separate logs.</p>
+<p>A better solution would be to have the script connect with the database and insert these log entries into a table.  Remember, entries made on one table are made on all and thereby joined together as part of the replication process. However, Galera seems to trip over itself when the notification command tries to replicate its own writes. It results in the nodes becoming non-operational and out-of-sync. An alternative would be to create a table on each node that doesn’t use the InnoDB storage engine (e.g., use a MyISAM table). These tables would be unique to each node and not replicated, but they wouldn’t choke Galera.  You could write another script—activated instead by <code class="docutils literal notranslate"><span class="pre">cron</span></code>—that would query the table on each node to produce reports and alerts. You could be alerted by email or some other method. It’s a little cumbersome, but it works.</p>
+<p class="section-heading rubric">Conclusion</p>
+<p>With busy and large databases, keeping them running smoothly and consistently can be a little intimidating.  However, Galera provides plenty of information for you to be able to monitor the status of each node and the cluster. You need only develop a habit of checking, or a system to check automatically and with regularity.  Plus, it provides a method of reacting to changes in node and cluster status.</p>
+<p>Yes, you’ll need to know how to read the warning signs and know what to do to resolve problems before they affect the entire cluster, but the sooner you are made aware of a situation developing, the better and less stressful it will be for you.</p>
+<div class="bottom-links docutils container">
+<p>Related Documents</p>
+<ul class="simple">
+<li><a class="reference internal" href="../../documentation/install-mysql.html"><span class="doc">Install MySQL Galera</span></a></li>
+</ul>
+<p>Related Articles</p>
+<ul class="simple">
+<li><a class="reference internal" href="../videos/galera-monitoring.html"><span class="doc">Galera Monitoring (video)</span></a></li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../../index.html">
+              <img class="logo" src="../../_static/logo.png" alt="Logo"/>
+            </a></p>
+<h1 class="logo"><a href="../../index.html">Galera Cluster</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../documentation/index.html">The Codership Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../kb/index.html">The Codership Knowledge Base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Codership Training</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../courses/index.html">Codership Training Courses</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Codership Tutorials on Galera Cluster</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="getting-started.html">Getting Started with Galera Cluster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="galera-installation.html">Installing Galera Cluster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="configuration.html">System Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="wsrep-configuration.html">Replication Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="starting-cluster.html">Starting the Cluster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="testing-cluster.html">Testing a Cluster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="restarting-cluster.html">Restarting the Cluster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="galera-on-aws.html">Installing a Galera Cluster on AWS</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Monitoring a Galera Cluster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="migrate.html">Galera Cluster Migration Factors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="galera-backup.html">Making Back-Ups with Galera Cluster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="getting-started-docker.html">Getting Started Galera with Docker</a></li>
+<li class="toctree-l3"><a class="reference internal" href="achieving-read-after-write-semantics.html">Read-After-Write Semantics with Galera</a></li>
+<li class="toctree-l3"><a class="reference internal" href="debugging-transaction-conflicts.html">Debugging Transaction Conflicts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="debug-problems-with-sst.html">Debugging Problems with SST</a></li>
+<li class="toctree-l3"><a class="reference internal" href="geo-distributed-clusters.html">Geo-Distributed Database Clusters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="primary-component.html">The Primary Component in Galera Cluster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="supporting-transaction-isolation-levels.html">Support for Transaction Isolation Levels</a></li>
+<li class="toctree-l3"><a class="reference internal" href="safe-to-bootstrap-feature.html">The Safe-To-Bootstrap Feature</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sst-or-not.html">To SST or Not To SST?</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../videos/index.html">Codership Training Videos</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../whats-new.html">What’s New</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../editors/index.html">Codership Writers &amp; Editors</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Codership Training</a><ul>
+  <li><a href="index.html">Codership Tutorials on Galera Cluster</a><ul>
+      <li>Previous: <a href="galera-on-aws.html" title="previous chapter">Installing a Galera Cluster on AWS</a></li>
+      <li>Next: <a href="migrate.html" title="next chapter">Galera Cluster Migration Factors</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+	<div class="navbar">
+	<nav id="site-navigation" class="navigation main-navigation" role="navigation">
+	<div class="nav-bar-container">
+
+	<div id="menu-nav-bar" class="nav-menu">
+		<ul class="nav-link">
+			<li> </li>
+
+		</ul>
+
+	</div>
+	</nav>
+
+	<footer id="colophon" class="site-footer" role="contentinfo">
+	<div class="top">	<div class="powered-by"><p>Powered by Galera:</p>
+	<p><a href="https://mariadb.com/kb/en/galera/"><img class="alignleft size-full wp-image-237" alt="MariaDB" src="https://galeracluster.com/wp-content/uploads/2013/10/logo-mariadb.png" width="166" height="49" /></a></p>
+		</div></div>
+	<div class="footer-menu">
+	<div class="menu-main-menu-container">
+	<ul id="menu-main-menu-1" class="nav-menu">
+	<li class="link-home menu-item menu-item-type-post_type menu-item-object-page menu-item-359"><a href="https://galeracluster.com/">Home</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-35"><a href="https://galeracluster.com/products/">Products</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="https://galeracluster.com/downloads/">Downloads</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-12 current_page_item current-menu-ancestor current-menu-parent current_page_parent current_page_ancestor menu-item-has-children menu-item-33"><a href="https://galeracluster.com/support/">Support</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="https://galeracluster.com/community/">Community</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-31"><a href="https://galeracluster.com/company/">Company</a></li>
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-297"><a href="https://galeracluster.com/category/blog/">Blog</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-38"><a href="https://galeracluster.com/contact-us/">Contact us</a></li>
+	</ul></div>			</div><!-- .footer-menu -->
+
+
+	<div class="footer-bar">
+	<p class="copyright">2014 Codership Ltd.</p>
+	</div>
+	<div class="footnote">
+	<h2>Your data is invaluable. We're here to secure it. All of it.</h2>
+	</div>
+	</footer><!-- #colophon -->
+
+
+
+
+  </body>
+</html>

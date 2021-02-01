@@ -1,0 +1,450 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><meta content="Installing Galera Cluster" name="title" />
+<meta content="en-US" name="language" />
+<meta content="Codership Oy, 2014 - 2020. All Rights Reserved." name="copyright" />
+
+    <title>Installing Galera Cluster &#8212; Galera Cluster Documentation</title>
+    <link rel="stylesheet" href="../../_static/reset-style.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="System Configuration" href="configuration.html" />
+    <link rel="prev" title="Getting Started with Galera Cluster" href="getting-started.html" />
+
+
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<link rel="stylesheet" href="/library/_static/basic-style.css">
+<link rel="stylesheet" href="/library/_static/header.css">
+<link rel="stylesheet" href="/library/_static/footer.css">
+<link rel="stylesheet" href="/library/_static/codership.css">
+<link rel="stylesheet" media="screen and (max-width: 500px)" href="/library/_static/mobile.css"/>
+<link rel="stylesheet" media="screen and (min-width:501px) and (max-width:1024px)" href="/library/_static/tablet.css"/>
+<link rel="stylesheet" media="screen and (prefers-color-scheme: dark)" href="/library/_static/dark.css"/>
+
+
+<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Feed" href="https://galeracluster.com/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Comments Feed" href="https://galeracluster.com/comments/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Support Comments Feed" href="https://galeracluster.com/support/feed/" />
+
+<script type='text/javascript' src='https://galeracluster.com/wp-includes/js/comment-reply.min.js?ver=3.8.3'></script>
+
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://galeracluster.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://galeracluster.com/wp-includes/wlwmanifest.xml" />
+<link rel='prev' title='Downloads' href='https://galeracluster.com/downloads/' />
+<link rel='next' title='Community' href='https://galeracluster.com/community/' />
+<meta name="generator" content="WordPress 3.8.3" />
+
+<link rel='shortlink' href='https://galeracluster.com/?p=12' />
+
+<style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>
+<style type="text/css" id="twentythirteen-header-css">
+			.site-title,
+			.site-description {
+				position: absolute;
+				clip: rect(1px 1px 1px 1px); /* IE7 */
+				clip: rect(1px, 1px, 1px, 1px);
+			}
+				.site-header .home-link {
+				min-height: 0;
+			}
+</style>
+
+<script type="text/javascript">
+
+		  var _gaq = _gaq || [];
+		  _gaq.push(['_setAccount', 'UA-35163478-6']);
+		  _gaq.push(['_trackPageview']);
+
+		  (function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'https://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		  })();
+
+</script>
+
+  </head><body>
+	<div id="fb-root"></div>
+	<script>(function(d, s, id) {
+		  var js, fjs = d.getElementsByTagName(s)[0];
+		  if (d.getElementById(id)) return;
+		  js = d.createElement(s); js.id = id;
+		  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+		  fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));
+	</script>
+
+	<div id="page" class="hfeed site">
+
+	<header id="masthead" class="site-header" role="banner">
+
+	<div class="top">
+	<a class="home-link" href="https://galeracluster.com/" title="Galera Cluster for MySQL" rel="home">
+	<h1 class="site-title">Galera Cluster for MySQL</h1>
+	<h2 class="site-description">The world&#039;s most advanced open source database cluster</h2>
+	</a>
+	</div>
+
+
+	<div id="navbar" class="navbar">
+	<nav id="site-navigation" class="navigation main-navigation" role="navigation">
+	<div class="menu-main-menu-container">
+
+	<ul id="menu-main-menu" class="nav-menu">
+	<li id="menu-item-359" class="link-home menu-item menu-item-type-post_type menu-item-object-page menu-item-359"><a href="https://galeracluster.com/">Home</a></li>
+	<li id="menu-item-35" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-35"><a href="https://galeracluster.com/products/">Products</a></li>
+	<li id="menu-item-34" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="https://galeracluster.com/downloads/">Downloads</a></li>
+	<li id="menu-item-33" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-12 current_page_item current-menu-ancestor current-menu-parent current_page_parent current_page_ancestor menu-item-has-children menu-item-33"><a href="https://galeracluster.com/support/">Support</a></li>
+	<li id="menu-item-32" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="https://galeracluster.com/community/">Community</a></li>
+	<li id="menu-item-31" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-31"><a href="https://galeracluster.com/company/">Company</a></li>
+	<li id="menu-item-297" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-297"><a href="https://galeracluster.com/category/blog/">Blog</a></li>
+	<li id="menu-item-38" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-38"><a href="https://galeracluster.com/contact-us/">Contact us</a></li>
+	</ul>
+	</div>
+
+
+	</nav><!-- #site-navigation -->
+
+	</div><!-- #navbar -->
+	</header><!-- #masthead -->
+
+
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="left-margin docutils container">
+<div class="left-margin-top docutils container">
+<a class="reference internal" href="../../index.html"><span class="doc">The Library</span></a></div>
+<div class="left-margin-content docutils container">
+<ul class="simple">
+<li><a class="reference internal" href="../../documentation/index.html"><span class="doc">Documentation</span></a></li>
+<li><a class="reference internal" href="../../kb/index.html"><span class="doc">Knowledge Base</span></a></li>
+<li><a class="reference internal" href="../index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="sub-links simple">
+<li><a class="reference internal" href="../courses/index.html"><span class="doc">Training Courses</span></a></li>
+<li><a class="reference internal" href="../videos/index.html"><span class="doc">Training Videos</span></a></li>
+</ul>
+<ul class="sub-links here simple">
+<li><a class="reference internal" href="index.html"><span class="doc">Tutorial Articles</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../../faq.html"><span class="doc">FAQ</span></a></li>
+</ul>
+<p>Related Documents</p>
+<ul class="simple">
+<li><a class="reference internal" href="../../documentation/selinux.html"><span class="doc">SELinux</span></a></li>
+<li><a class="reference internal" href="../../documentation/firewall-settings.html"><span class="doc">Firewall Settings</span></a></li>
+<li><a class="reference internal" href="migration.html"><span class="doc">Migration</span></a></li>
+<li><a class="reference internal" href="configuration.html#swap-config"><span class="std std-ref">Configuring Swap Space</span></a></li>
+</ul>
+</div>
+</div>
+<div class="top-links docutils container">
+<ul class="simple">
+<li><a class="reference external" href="https://galeracluster.com">Home</a></li>
+<li><a class="reference internal" href="../../documentation/index.html"><span class="doc">Docs</span></a></li>
+<li><a class="reference internal" href="../../kb/index.html"><span class="doc">KB</span></a></li>
+</ul>
+<ul class="here nav-wider simple">
+<li><a class="reference internal" href="../index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../../faq.html"><span class="doc">FAQ</span></a></li>
+</ul>
+</div>
+<div class="library-article section" id="installing-galera-cluster">
+<span id="galera-installation"></span><h1>Installing Galera Cluster<a class="headerlink" href="#installing-galera-cluster" title="Permalink to this headline">¶</a></h1>
+<p class="article-stats">Length: 946 words; Published: October 20, 2014; Topic: General; Level: Beginner</p>
+<p>Galera Cluster requires server hardware for a minimum of three nodes.</p>
+<p>If your cluster runs on a single switch, use three nodes.  If your cluster spans switches, use three switches.  If your cluster spans networks, use three networks.  If your cluster spans data centers, use three data centers.  This ensures that the cluster can maintain a Primary Component in the event of network outages.</p>
+<p><strong>Hardware Requirements</strong></p>
+<p>For server hardware, each node requires at a minimum the following components:</p>
+<ul class="simple">
+<li>1 GHz single core CPU;</li>
+<li>512 MB RAM; and</li>
+<li>100 Mbps network connectivity</li>
+</ul>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Galera Cluster may occasionally crash when run on limited hardware due to insufficient memory.  To prevent this, make sure that you have allocated a sufficient amount of swap space.  For more information on how to create swap space, see <a class="reference internal" href="configuration.html#swap-config"><span class="std std-ref">Configuring Swap Space</span></a>.</p>
+</div>
+<p><strong>Software Requirements</strong></p>
+<p>For software, each node in the cluster requires at a minimum the following:</p>
+<ul class="simple">
+<li>Linux or FreeBSD operating system installed;</li>
+<li>MySQL or MariaDB server with the wsrep API patch; and</li>
+<li>Galera Replication Plugin installed.</li>
+</ul>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Binary installation packages for Galera Cluster include the database server with the wsrep API patch.  When building from source, though, you must apply this patch manually.</p>
+</div>
+<p class="section-heading rubric" id="system-requirements">Preparing the Server</p>
+<p>Before you begin the installation process, there are a few tasks that you need to do to prepare the servers for Galera Cluster.  You must perform the following steps on each node in your cluster.</p>
+<div class="section" id="disabling-selinux-for-mysqld">
+<h2>Disabling SELinux for mysqld<a class="headerlink" href="#disabling-selinux-for-mysqld" title="Permalink to this headline">¶</a></h2>
+<p id="disable-selinux">If SELinux (Security-Enhanced Linux) is enabled on the servers, it may block <code class="docutils literal notranslate"><span class="pre">mysqld</span></code> from performing required operations.  You must either disable SELinux for <code class="docutils literal notranslate"><span class="pre">mysqld</span></code> or configure it to allow <code class="docutils literal notranslate"><span class="pre">mysqld</span></code> to run external programs and open listen sockets on unprivileged ports—that is, operations that an unprivileged user may do.</p>
+<p>To disable SELinux for <code class="docutils literal notranslate"><span class="pre">mysqld</span></code>, execute the following from the command-line:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">#</span> semanage permissive -a mysqld_t
+</pre></div>
+</div>
+<p>This command switches SELinux into permissive mode when it registers activity from the database server.  While this is fine during the installation and configuration process, it is not in general a good policy to disable security applications.</p>
+<p>Rather than disable SELinux, so that your may use it along with Galera Cluster, you will need to create an access policy. This will allow SELinux to understand and allow normal operations from the database server.  For information on how to create such an access policy, see <a class="reference internal" href="../../documentation/selinux.html"><span class="doc">SELinux</span></a>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">For more information on writing SELinux policies, see <a class="reference external" href="https://blogs.oracle.com/jsmyth/entry/selinux_and_mysql">SELinux and MySQL</a>.</p>
+</div>
+</div>
+<div class="section" id="firewall-configuration">
+<h2>Firewall Configuration<a class="headerlink" href="#firewall-configuration" title="Permalink to this headline">¶</a></h2>
+<p id="firewall-config">Next, you will need to update the firewall settings on each node so that they may communicate with the cluster.  How you do this varies depending upon your distribution and the particular firewall software that you use.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If there is a <abbr title="Network Address Translation">NAT</abbr> firewall between the nodes, you must configure it to allow for direct connections between the nodes, such as through port forwarding.</p>
+</div>
+<p>As an example, to open ports between trusted hosts using <code class="docutils literal notranslate"><span class="pre">iptables</span></code>, you would execute something like the following on each node:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">#</span> iptables --append INPUT --protocol tcp <span class="se">\</span>
+      --source <span class="m">64</span>.57.102.34 --jump ACCEPT
+<span class="gp">#</span> iptables --apend INPUT --protocol tcp <span class="se">\</span>
+      --source <span class="m">193</span>.166.33.20 --jump ACCEPT
+<span class="gp">#</span> iptables --append INPUT --protocol tcp <span class="se">\</span>
+      --source <span class="m">193</span>.125.4.10 --jump ACCEPT
+</pre></div>
+</div>
+<p>This causes packet filtering on the kernel to accept <abbr title="Transmission Control Protocol">TCP</abbr> connections between the given IP addresses.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">The IP addresses in the example are for demonstration purposes only.  Use the real values from your nodes and netmask in the <code class="docutils literal notranslate"><span class="pre">iptables</span></code> configuration for your cluster.</p>
+</div>
+<p>The updated packet filtering rules take effect immediately, but are not persistent.  When the server reboots, it reverts to default packet filtering rules, which do not include your updates.  To use these rules after rebooting, you need to save them as defaults.</p>
+<p>For systems that use <code class="docutils literal notranslate"><span class="pre">init</span></code>, run the following command:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">#</span> service save iptables
+</pre></div>
+</div>
+<p>For systems that use <code class="docutils literal notranslate"><span class="pre">systemd</span></code>, you need to save the current packet filtering rules to the path that the <code class="docutils literal notranslate"><span class="pre">iptables</span></code> unit reads when it starts.  This path can vary by distribution, but you can normally find it in the <code class="docutils literal notranslate"><span class="pre">/etc</span></code> directory.</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">/etc/sysconfig/iptables</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">/etc/iptables/iptables.rules</span></code></li>
+</ul>
+<p>When you find the relevant file, you can save the rules using the <code class="docutils literal notranslate"><span class="pre">iptables-save</span></code> command, then redirecting the output to overwrite this file.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">#</span> iptables-save &gt; /etc/sysconfig/iptables
+</pre></div>
+</div>
+<p>When <code class="docutils literal notranslate"><span class="pre">iptables</span></code> starts it now reads the new defaults, with your updates to the firewall.</p>
+<p>For more information on setting up the firewall for Galera Cluster and other programs for configuring packet filtering in Linux and FreeBSD, see <a class="reference internal" href="../../documentation/firewall-settings.html"><span class="doc">Firewall Settings</span></a>.</p>
+</div>
+<div class="section" id="disabling-apparmor">
+<h2>Disabling AppArmor<a class="headerlink" href="#disabling-apparmor" title="Permalink to this headline">¶</a></h2>
+<p id="disable-apparmor">By default, some servers—for instance, Ubuntu—include AppArmor, which may prevent <code class="docutils literal notranslate"><span class="pre">mysqld</span></code> from opening additional ports or running scripts.  You must disable AppArmor or configure it to allow <code class="docutils literal notranslate"><span class="pre">mysqld</span></code> to run external programs and open listen sockets on unprivileged ports.</p>
+<p>To disable AppArmor, run the following commands:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> sudo ln -s /etc/apparmor.d/usr.sbin.mysqld /etc/apparmor.d/disable/usr.sbin.mysqld
+</pre></div>
+</div>
+<p>You will then need to tell AppArmor to reload profile:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> sudo apparmor_parser -R /etc/apparmor.d/usr.sbin.mysqld
+</pre></div>
+</div>
+<p>In some cases you may also need to restart AppArmor. If your system uses init scripts, run the following command:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> sudo service apparmor restart
+</pre></div>
+</div>
+<p>If instead, your system uses <code class="docutils literal notranslate"><span class="pre">systemd</span></code>, run the following command instead:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> sudo systemctl restart apparmor
+</pre></div>
+</div>
+<p class="section-heading rubric" id="galera-install">Installing Galera Cluster</p>
+<p>There are two versions of Galera Cluster for MySQL: the original Codership reference implementation and MariaDB Galera Cluster.  For each database server, binary packages are available for Debian- and RPM-based Linux distributions, or you can build them from source.</p>
+</div>
+<div class="section" id="galera-cluster-for-mysql">
+<h2>Galera Cluster for MySQL<a class="headerlink" href="#galera-cluster-for-mysql" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../documentation/install-mysql.html">Galera Cluster for MySQL—Binary Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../documentation/install-mysql-src.html">Galera Cluster for MySQL - Source Installation</a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="mariadb-galera-cluster">
+<h2>MariaDB Galera Cluster<a class="headerlink" href="#mariadb-galera-cluster" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../documentation/install-mariadb.html">MariaDB Galera Cluster - Binary Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../documentation/install-mariadb-src.html">MariaDB Galera Cluster - Source Installation</a></li>
+</ul>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">In the event that you build or install Galera Cluster over an existing standalone instance of MySQL or MariaDB, there are some additional steps that you need to take in order to update your system to the new database server.  For more information, see <a class="reference internal" href="migration.html"><span class="doc">Migration</span></a>.</p>
+</div>
+<div class="bottom-links docutils container">
+<p>Related Documents</p>
+<ul class="simple">
+<li><a class="reference internal" href="../../documentation/selinux.html"><span class="doc">SELinux</span></a></li>
+<li><a class="reference internal" href="../../documentation/firewall-settings.html"><span class="doc">Firewall Settings</span></a></li>
+<li><a class="reference internal" href="migration.html"><span class="doc">Migration</span></a></li>
+<li><a class="reference internal" href="configuration.html#swap-config"><span class="std std-ref">Configuring Swap Space</span></a></li>
+</ul>
+</div>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../../index.html">
+              <img class="logo" src="../../_static/logo.png" alt="Logo"/>
+            </a></p>
+<h1 class="logo"><a href="../../index.html">Galera Cluster</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../documentation/index.html">The Codership Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../kb/index.html">The Codership Knowledge Base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Codership Training</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../courses/index.html">Codership Training Courses</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Codership Tutorials on Galera Cluster</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="getting-started.html">Getting Started with Galera Cluster</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Installing Galera Cluster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="configuration.html">System Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="wsrep-configuration.html">Replication Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="starting-cluster.html">Starting the Cluster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="testing-cluster.html">Testing a Cluster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="restarting-cluster.html">Restarting the Cluster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="galera-on-aws.html">Installing a Galera Cluster on AWS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="galera-monitoring.html">Monitoring a Galera Cluster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="migrate.html">Galera Cluster Migration Factors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="galera-backup.html">Making Back-Ups with Galera Cluster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="getting-started-docker.html">Getting Started Galera with Docker</a></li>
+<li class="toctree-l3"><a class="reference internal" href="achieving-read-after-write-semantics.html">Read-After-Write Semantics with Galera</a></li>
+<li class="toctree-l3"><a class="reference internal" href="debugging-transaction-conflicts.html">Debugging Transaction Conflicts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="debug-problems-with-sst.html">Debugging Problems with SST</a></li>
+<li class="toctree-l3"><a class="reference internal" href="geo-distributed-clusters.html">Geo-Distributed Database Clusters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="primary-component.html">The Primary Component in Galera Cluster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="supporting-transaction-isolation-levels.html">Support for Transaction Isolation Levels</a></li>
+<li class="toctree-l3"><a class="reference internal" href="safe-to-bootstrap-feature.html">The Safe-To-Bootstrap Feature</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sst-or-not.html">To SST or Not To SST?</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../videos/index.html">Codership Training Videos</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../whats-new.html">What’s New</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../editors/index.html">Codership Writers &amp; Editors</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Codership Training</a><ul>
+  <li><a href="index.html">Codership Tutorials on Galera Cluster</a><ul>
+  <li><a href="getting-started.html">Getting Started with Galera Cluster</a><ul>
+      <li>Previous: <a href="getting-started.html" title="previous chapter">Getting Started with Galera Cluster</a></li>
+      <li>Next: <a href="configuration.html" title="next chapter">System Configuration</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+	<div class="navbar">
+	<nav id="site-navigation" class="navigation main-navigation" role="navigation">
+	<div class="nav-bar-container">
+
+	<div id="menu-nav-bar" class="nav-menu">
+		<ul class="nav-link">
+			<li> </li>
+
+		</ul>
+
+	</div>
+	</nav>
+
+	<footer id="colophon" class="site-footer" role="contentinfo">
+	<div class="top">	<div class="powered-by"><p>Powered by Galera:</p>
+	<p><a href="https://mariadb.com/kb/en/galera/"><img class="alignleft size-full wp-image-237" alt="MariaDB" src="https://galeracluster.com/wp-content/uploads/2013/10/logo-mariadb.png" width="166" height="49" /></a></p>
+		</div></div>
+	<div class="footer-menu">
+	<div class="menu-main-menu-container">
+	<ul id="menu-main-menu-1" class="nav-menu">
+	<li class="link-home menu-item menu-item-type-post_type menu-item-object-page menu-item-359"><a href="https://galeracluster.com/">Home</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-35"><a href="https://galeracluster.com/products/">Products</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="https://galeracluster.com/downloads/">Downloads</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-12 current_page_item current-menu-ancestor current-menu-parent current_page_parent current_page_ancestor menu-item-has-children menu-item-33"><a href="https://galeracluster.com/support/">Support</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="https://galeracluster.com/community/">Community</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-31"><a href="https://galeracluster.com/company/">Company</a></li>
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-297"><a href="https://galeracluster.com/category/blog/">Blog</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-38"><a href="https://galeracluster.com/contact-us/">Contact us</a></li>
+	</ul></div>			</div><!-- .footer-menu -->
+
+
+	<div class="footer-bar">
+	<p class="copyright">2014 Codership Ltd.</p>
+	</div>
+	<div class="footnote">
+	<h2>Your data is invaluable. We're here to secure it. All of it.</h2>
+	</div>
+	</footer><!-- #colophon -->
+
+
+
+
+  </body>
+</html>

@@ -1,0 +1,394 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><meta content="Adding Nodes with Galera Manager" name="title" />
+<meta content="en-US" name="language" />
+<meta content="galera cluster, gmd, galera manager, gui" name="keywords" />
+<meta content="Codership Oy, 2014 - 2020. All Rights Reserved." name="copyright" />
+
+    <title>Adding Nodes with Galera Manager &#8212; Galera Cluster Documentation</title>
+    <link rel="stylesheet" href="../_static/reset-style.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Adding Users to Galera Manager" href="galera-manager-adding-users.html" />
+    <link rel="prev" title="Deploying a Cluster in Galera Manager" href="galera-manager-adding-clusters.html" />
+
+
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<link rel="stylesheet" href="/library/_static/basic-style.css">
+<link rel="stylesheet" href="/library/_static/header.css">
+<link rel="stylesheet" href="/library/_static/footer.css">
+<link rel="stylesheet" href="/library/_static/codership.css">
+<link rel="stylesheet" media="screen and (max-width: 500px)" href="/library/_static/mobile.css"/>
+<link rel="stylesheet" media="screen and (min-width:501px) and (max-width:1024px)" href="/library/_static/tablet.css"/>
+<link rel="stylesheet" media="screen and (prefers-color-scheme: dark)" href="/library/_static/dark.css"/>
+
+
+<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Feed" href="https://galeracluster.com/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Comments Feed" href="https://galeracluster.com/comments/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Support Comments Feed" href="https://galeracluster.com/support/feed/" />
+
+<script type='text/javascript' src='https://galeracluster.com/wp-includes/js/comment-reply.min.js?ver=3.8.3'></script>
+
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://galeracluster.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://galeracluster.com/wp-includes/wlwmanifest.xml" />
+<link rel='prev' title='Downloads' href='https://galeracluster.com/downloads/' />
+<link rel='next' title='Community' href='https://galeracluster.com/community/' />
+<meta name="generator" content="WordPress 3.8.3" />
+
+<link rel='shortlink' href='https://galeracluster.com/?p=12' />
+
+<style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>
+<style type="text/css" id="twentythirteen-header-css">
+			.site-title,
+			.site-description {
+				position: absolute;
+				clip: rect(1px 1px 1px 1px); /* IE7 */
+				clip: rect(1px, 1px, 1px, 1px);
+			}
+				.site-header .home-link {
+				min-height: 0;
+			}
+</style>
+
+<script type="text/javascript">
+
+		  var _gaq = _gaq || [];
+		  _gaq.push(['_setAccount', 'UA-35163478-6']);
+		  _gaq.push(['_trackPageview']);
+
+		  (function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'https://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		  })();
+
+</script>
+
+  </head><body>
+	<div id="fb-root"></div>
+	<script>(function(d, s, id) {
+		  var js, fjs = d.getElementsByTagName(s)[0];
+		  if (d.getElementById(id)) return;
+		  js = d.createElement(s); js.id = id;
+		  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+		  fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));
+	</script>
+
+	<div id="page" class="hfeed site">
+
+	<header id="masthead" class="site-header" role="banner">
+
+	<div class="top">
+	<a class="home-link" href="https://galeracluster.com/" title="Galera Cluster for MySQL" rel="home">
+	<h1 class="site-title">Galera Cluster for MySQL</h1>
+	<h2 class="site-description">The world&#039;s most advanced open source database cluster</h2>
+	</a>
+	</div>
+
+
+	<div id="navbar" class="navbar">
+	<nav id="site-navigation" class="navigation main-navigation" role="navigation">
+	<div class="menu-main-menu-container">
+
+	<ul id="menu-main-menu" class="nav-menu">
+	<li id="menu-item-359" class="link-home menu-item menu-item-type-post_type menu-item-object-page menu-item-359"><a href="https://galeracluster.com/">Home</a></li>
+	<li id="menu-item-35" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-35"><a href="https://galeracluster.com/products/">Products</a></li>
+	<li id="menu-item-34" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="https://galeracluster.com/downloads/">Downloads</a></li>
+	<li id="menu-item-33" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-12 current_page_item current-menu-ancestor current-menu-parent current_page_parent current_page_ancestor menu-item-has-children menu-item-33"><a href="https://galeracluster.com/support/">Support</a></li>
+	<li id="menu-item-32" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="https://galeracluster.com/community/">Community</a></li>
+	<li id="menu-item-31" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-31"><a href="https://galeracluster.com/company/">Company</a></li>
+	<li id="menu-item-297" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-297"><a href="https://galeracluster.com/category/blog/">Blog</a></li>
+	<li id="menu-item-38" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-38"><a href="https://galeracluster.com/contact-us/">Contact us</a></li>
+	</ul>
+	</div>
+
+
+	</nav><!-- #site-navigation -->
+
+	</div><!-- #navbar -->
+	</header><!-- #masthead -->
+
+
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="left-margin docutils container">
+<div class="left-margin-top docutils container">
+<a class="reference internal" href="../index.html"><span class="doc">The Library</span></a></div>
+<div class="left-margin-content docutils container">
+<ul class="here simple">
+<li><a class="reference internal" href="index.html"><span class="doc">Documentation</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../kb/index.html"><span class="doc">Knowledge Base</span></a></li>
+<li><a class="reference internal" href="../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="sub-links simple">
+<li><a class="reference internal" href="../training/tutorials/index.html"><span class="doc">Tutorial Articles</span></a></li>
+<li><a class="reference internal" href="../training/videos/index.html"><span class="doc">Training Videos</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a></li>
+</ul>
+<p>Galera Manager Documents</p>
+<ul class="simple">
+<li><a class="reference internal" href="galera-manager.html"><span class="doc">Getting Started</span></a></li>
+<li><a class="reference internal" href="gmd-install.html"><span class="doc">Installing</span></a></li>
+<li><a class="reference internal" href="galera-manager-ports.html"><span class="doc">AWS Ports</span></a></li>
+<li><a class="reference internal" href="gmd.html"><span class="doc">gmd Daemon</span></a></li>
+<li><a class="reference internal" href="galera-manager-adding-clusters.html"><span class="doc">Deploying Clusters</span></a></li>
+</ul>
+<ul class="here simple">
+<li><a class="reference internal" href="#"><span class="doc">Adding Nodes</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="galera-manager-adding-users.html"><span class="doc">Adding Users</span></a></li>
+<li><a class="reference internal" href="galera-manager-initializing-data.html"><span class="doc">Loading Data</span></a></li>
+<li><a class="reference internal" href="galera-manager-monitoring-clusters.html"><span class="doc">Monitoring a Cluster</span></a></li>
+<li><a class="reference internal" href="gmd-upgrading.html"><span class="doc">Upgrading</span></a></li>
+</ul>
+</div>
+</div>
+<div class="top-links docutils container">
+<ul class="simple">
+<li><a class="reference external" href="https://galeracluster.com">Home</a></li>
+</ul>
+<ul class="here simple">
+<li><a class="reference internal" href="index.html"><span class="doc">Docs</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../kb/index.html"><span class="doc">KB</span></a></li>
+</ul>
+<ul class="nav-wider simple">
+<li><a class="reference internal" href="../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a></li>
+</ul>
+</div>
+<div class="library-document section" id="adding-nodes-with-galera-manager">
+<span id="galera-manager-adding-nodes"></span><h1>Adding Nodes with Galera Manager<a class="headerlink" href="#adding-nodes-with-galera-manager" title="Permalink to this headline">¶</a></h1>
+<p>After you’ve created a cluster, set the defaults for nodes within Galera Manager, you’ll need to add nodes to that cluster. When  you add nodes to a cluster, Galera Manager will add hosts on AWS (Amazon Web Services) and install all of the software needed, including either MySQL or MariaDB. It will then configure <code class="docutils literal notranslate"><span class="pre">mysqld</span></code> to be a node in the cluster.</p>
+<p>If you haven’t yet created a cluster, read the <a class="reference internal" href="galera-manager-adding-clusters.html"><span class="doc">Deploying a Cluster in Galera Manager</span></a> page—installing Galera Manager is covered in the <a class="reference internal" href="gmd-install.html"><span class="doc">Installing Galera Manager</span></a> page.</p>
+<p class="section-heading rubric" id="galera-manager-node-deployment">Node &amp; Host Deployment</p>
+<p>To add nodes to a cluster, after logging into Galera Manager from a web browser, click on the cluster in the left margin.  In the main panel, click then on the vertical ellipsis in the top right margin.  When you do, a small box (see Figure 1 below) will offer you two choices:  to add a node or to delete the cluster.  Click on <em>Add Node</em>.</p>
+<div class="figure" id="id1">
+<a class="document-screenshot reference internal image-reference" href="../_images/galera-manager-pulldown-add-node.png"><img alt="Add a Node" class="document-screenshot" src="../_images/galera-manager-pulldown-add-node.png" style="width: 300px;" /></a>
+<p class="caption"><span class="caption-text">Close-Up of Menu to Change a Cluster (Figure 1)</span></p>
+</div>
+<p>You may add nodes one at a time, or several at the same time.  Typically, a cluster has at least three nodes.  You may start with three nodes and easily add more later.  Or you could start with more than three and later delete unneeded nodes. This is one of the advantages of Galera Manager:  the ability to expand and contract a cluster, easily.  Keep in mind when you add nodes, though, you’re creating <em>AWS Instances</em> and Amazon may be charging you based on the number of nodes and other usage factors.</p>
+<p>After you click <em>Add Node</em>, a large box like the one shown in the screenshot below in Figure 2 will appear.  Here you will provide your preferences for the node or nodes, and the hosts you want to add.</p>
+<div class="figure" id="id2">
+<a class="document-screenshot reference internal image-reference" href="../_images/galera-manager-node-deploy-wizard.png"><img alt="Node Deployment Wizard in Galera Manager" class="document-screenshot" src="../_images/galera-manager-node-deploy-wizard.png" style="width: 800px;" /></a>
+<p class="caption"><span class="caption-text">Node Deployment for a Cluster (Figure 2)</span></p>
+</div>
+<p>As mentioned above, the first field at the top left of the <em>Node Deployment Wizard</em> is to enter the number of nodes you want to add.  In the example here, 3 has been entered.  By default, the nodes will be started automatically after the hosts have been generated and configured.</p>
+<p class="sub-heading rubric" id="galera-manager-node-deployment-choices">Node Deployment Choices</p>
+<p>Next, you’ll enter specific information on this node or set of nodes.  To make discussing easier, below is the screenshot from Figure 2, but cropped around the default node configuration section:</p>
+<div class="figure" id="id3">
+<a class="document-screenshot reference internal image-reference" href="../_images/galera-manager-node-deploy-node-config.png"><img alt="Node Deployment - Node Configuration" class="document-screenshot" src="../_images/galera-manager-node-deploy-node-config.png" style="width: 800px;" /></a>
+<p class="caption"><span class="caption-text">Node Configuration (Figure 3)</span></p>
+</div>
+<p>At a minimum, you would enter the prefix for naming nodes.  If you’re creating only one node, what you enter here will be used. If you’re creating multiple nodes, this text will be used as a prefix to each node’s name. The suffix of the node name will be randomly generated.  If it’s important to you to name each node, you’ll need to add them one at a time to the cluster.</p>
+<p>The database system and version is already set from when you created the cluster.  You have to use the same database system for each node. However, although the custom database settings you might have added at that time will be passed to the nodes—if you’re creating nodes one at a time—you may give one node extra settings.  You probably wouldn’t do this with the initial set of nodes, but later when you’re adding temporarily another node because of a surge in traffic, you might want the extra node to handle more traffic. Therefore, you may want to set its buffers and other settings to higher values.  You can add those settings then for the one node.</p>
+<p class="sub-heading rubric" id="galera-manager-host-deployment-choices">Host Deployment Choices</p>
+<p>The next part of the <em>Node Deployment Wizard</em>, shown in the cropped screenshot below, relates to configuring the hosts.  Remember, hosts are the virtual servers or instances generated by AWS.  You can set all of the values as you did when you created the cluster, although they are by default set to the choices you made then.  These choices are explained in the <a class="reference internal" href="galera-manager-adding-clusters.html#galera-manager-default-host-configuration"><span class="std std-ref">Default Host Configuration</span></a> section of the <a class="reference internal" href="galera-manager-adding-clusters.html"><span class="doc">Deploying a Cluster in Galera Manager</span></a> documentation page.</p>
+<div class="figure" id="id4">
+<a class="document-screenshot reference internal image-reference" href="../_images/galera-manager-node-deploy-host-config.png"><img alt="Node Deployment - Host Configuration" class="document-screenshot" src="../_images/galera-manager-node-deploy-host-config.png" style="width: 800px;" /></a>
+<p class="caption"><span class="caption-text">Host Configuration (Figure 4)</span></p>
+</div>
+<p>Being able to make different choices for the host when adding nodes is particularly useful when adding nodes to an existing and running cluster.  As just mentioned, if you’re adding temporarily a node because of an increase in traffic, you might want to use a larger server.  To do this, you would select a different <em>EC2 Instance Type</em>, one with more memory and processing power.  If you want to migrate to a new release of Linux, you can add new nodes with that choices. After they’ve synchronized, you could then delete the old nodes.</p>
+<p class="section-heading rubric" id="galera-manager-node-host-deployment-finishing">Finishing Deployment</p>
+<p>After you finish entering the number of nodes in the <em>Node Deployment Wizard</em>, and the node and host names, as well as any changes you want to make to the default settings, you would then click on <em>Deploy</em> in the right-hand corner. A small box, like the one below, will appear in which you can observe the progress of the hosts and nodes being deployed.</p>
+<div class="figure" id="id5">
+<a class="document-screenshot reference internal image-reference" href="../_images/galera-manager-node-deploying.png"><img alt="Progress of Adding Nodes in Galera Manager" class="document-screenshot" src="../_images/galera-manager-node-deploying.png" style="width: 400px;" /></a>
+<p class="caption"><span class="caption-text">Progress of Adding Nodes (Figure 5)</span></p>
+</div>
+<p>This box will be visible for a few minutes at most. If the node deployment fails, you’ll see in the small red text at which point it failed.  You can also check the <em>Logs</em> and <em>Jobs</em> tabs for the cluster and node for more information. When the node deployment succeeds, all of the circled-dot and right-arrow play buttons on the right (see Figure 5) will change to check marks and the <em>Finish</em> link will become active.  Click on that link to close the box when it’s done.</p>
+<p class="sub-heading rubric" id="galera-manager-node-host-deployment-finished">Finished Results</p>
+<p>When the <em>Node Deployment Wizard</em> has finished running and you’ve closed the related box, you’ll see the nodes that were added listed in the left margin, under the name of the cluster.  The results should look similar to the screenshot below in Figure 6 below:</p>
+<div class="figure" id="id6">
+<a class="document-screenshot reference internal image-reference" href="../_images/galera-manager-new-cluster.png"><img alt="New Cluster in Galera Manager" class="document-screenshot" src="../_images/galera-manager-new-cluster.png" style="width: 250px;" /></a>
+<p class="caption"><span class="caption-text">Left Margin with Results of Adding Three Nodes (Figure 6)</span></p>
+</div>
+<p>Notice that although a node name of <code class="docutils literal notranslate"><span class="pre">noder</span></code> was entered, some extra text was added to make each node name unique (e.g., <code class="docutils literal notranslate"><span class="pre">noder-jfebk</span></code>).  As mentioned earlier, if you add one node at a time, you can name each and no suffix will be appended.</p>
+<p>If you chose to have the nodes started automatically, they should all have a status of <em>Synced</em>. If one wasn’t started automatically, click on the node in the left margin, and then click on the vertical ellipsis at the top right of the main panel. From the choices you’re offered there, click <em>Start</em> to start the node.</p>
+<p>As mentioned previously, when you add nodes, a host or <em>Instance</em> will be generated for each node in AWS.  If you look in your EC2 console showing your <em>Instances</em>, you’ll see something like the screenshot below:</p>
+<div class="figure" id="id7">
+<a class="document-screenshot reference internal image-reference" href="../_images/galera-manager-aws-nodes.png"><img alt="Nodes on AWS" class="document-screenshot" src="../_images/galera-manager-aws-nodes.png" style="width: 800px;" /></a>
+<p class="caption"><span class="caption-text">AWS Instances: Galera Manager and Three Hosts (Figure 7)</span></p>
+</div>
+<p>In this example, there’s one <em>Instance</em>, the main server on which Galera Manager is installed.  There’s an <em>Instance</em> for each node of the three in the cluster (e.g., <code class="docutils literal notranslate"><span class="pre">hoster-jfebk</span></code>, etc.). You see the host names because that’s the physical or virtual server on which the node and its software is running.</p>
+<p>When you click on a node in the left margin of Galera Manager, you’ll see charts for monitoring the node’s activities.  To start, it will be fairly empty like the screenshot below:</p>
+<div class="figure" id="id8">
+<a class="document-screenshot reference internal image-reference" href="../_images/galera-manager-new-node.png"><img alt="New Node in Galera Manager" class="document-screenshot" src="../_images/galera-manager-new-node.png" style="width: 600px;" /></a>
+<p class="caption"><span class="caption-text">New Node in Galera Manager (Figure 8)</span></p>
+</div>
+<p>At this point, the charts are meaningless.  However, as you start to add data, which is covered in <a class="reference internal" href="galera-manager-initializing-data.html"><span class="doc">Loading Initial Data</span></a> page of the documentation, you’ll start to see some activity. You can learn more about how to use these charts, as well as how to add other charts to track other metrics than these initial few, by reading the <a class="reference internal" href="galera-manager-monitoring-clusters.html"><span class="doc">Monitoring a Cluster with Galera Manager</span></a> page. You may also want to add other users to Galera Manager who can monitor and add clusters and nodes. This is covered on the <a class="reference internal" href="galera-manager-adding-users.html"><span class="doc">Adding Users to Galera Manager</span></a> page.</p>
+<div class="bottom-links docutils container">
+<p>Galera Manager Documents</p>
+<ul class="simple">
+<li><a class="reference internal" href="galera-manager.html"><span class="doc">Getting Started</span></a></li>
+<li><a class="reference internal" href="gmd-install.html"><span class="doc">Installing</span></a></li>
+<li><a class="reference internal" href="galera-manager-ports.html"><span class="doc">AWS Ports</span></a></li>
+<li><a class="reference internal" href="gmd.html"><span class="doc">gmd Daemon</span></a></li>
+<li><a class="reference internal" href="galera-manager-adding-clusters.html"><span class="doc">Deploying Clusters</span></a></li>
+<li><a class="reference internal" href="#"><span class="doc">Adding Nodes</span></a></li>
+<li><a class="reference internal" href="galera-manager-adding-users.html"><span class="doc">Adding Users</span></a></li>
+<li><a class="reference internal" href="galera-manager-initializing-data.html"><span class="doc">Loading Data</span></a></li>
+<li><a class="reference internal" href="galera-manager-monitoring-clusters.html"><span class="doc">Monitoring a Cluster</span></a></li>
+<li><a class="reference internal" href="gmd-upgrading.html"><span class="doc">Upgrading</span></a></li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/logo.png" alt="Logo"/>
+            </a></p>
+<h1 class="logo"><a href="../index.html">Galera Cluster</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">The Codership Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="overview.html">Overview of Galera Cluster</a></li>
+<li class="toctree-l2"><a class="reference internal" href="technical-description.html">Technical Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html">Installing Galera Cluster</a></li>
+<li class="toctree-l2"><a class="reference internal" href="administration.html">Galera Cluster Administration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deployment.html">Deployment</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="monitor.html">Cluster Monitoring</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="monitoring-cluster.html">Using Status Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="log.html">Database Server Logs</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="galera-manager.html">The Galera Manager</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notification-cmd.html">Notification Command</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notification-cmd-example.html">Notification Script Example</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="security.html">Security</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference.html">Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../kb/index.html">The Codership Knowledge Base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../training/index.html">Codership Training</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../whats-new.html">What’s New</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../editors/index.html">Codership Writers &amp; Editors</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">The Codership Documentation</a><ul>
+  <li><a href="monitor.html">Cluster Monitoring</a><ul>
+  <li><a href="galera-manager.html">The Galera Manager</a><ul>
+      <li>Previous: <a href="galera-manager-adding-clusters.html" title="previous chapter">Deploying a Cluster in Galera Manager</a></li>
+      <li>Next: <a href="galera-manager-adding-users.html" title="next chapter">Adding Users to Galera Manager</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+	<div class="navbar">
+	<nav id="site-navigation" class="navigation main-navigation" role="navigation">
+	<div class="nav-bar-container">
+
+	<div id="menu-nav-bar" class="nav-menu">
+		<ul class="nav-link">
+			<li> </li>
+
+		</ul>
+
+	</div>
+	</nav>
+
+	<footer id="colophon" class="site-footer" role="contentinfo">
+	<div class="top">	<div class="powered-by"><p>Powered by Galera:</p>
+	<p><a href="https://mariadb.com/kb/en/galera/"><img class="alignleft size-full wp-image-237" alt="MariaDB" src="https://galeracluster.com/wp-content/uploads/2013/10/logo-mariadb.png" width="166" height="49" /></a></p>
+		</div></div>
+	<div class="footer-menu">
+	<div class="menu-main-menu-container">
+	<ul id="menu-main-menu-1" class="nav-menu">
+	<li class="link-home menu-item menu-item-type-post_type menu-item-object-page menu-item-359"><a href="https://galeracluster.com/">Home</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-35"><a href="https://galeracluster.com/products/">Products</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="https://galeracluster.com/downloads/">Downloads</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-12 current_page_item current-menu-ancestor current-menu-parent current_page_parent current_page_ancestor menu-item-has-children menu-item-33"><a href="https://galeracluster.com/support/">Support</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="https://galeracluster.com/community/">Community</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-31"><a href="https://galeracluster.com/company/">Company</a></li>
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-297"><a href="https://galeracluster.com/category/blog/">Blog</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-38"><a href="https://galeracluster.com/contact-us/">Contact us</a></li>
+	</ul></div>			</div><!-- .footer-menu -->
+
+
+	<div class="footer-bar">
+	<p class="copyright">2014 Codership Ltd.</p>
+	</div>
+	<div class="footnote">
+	<h2>Your data is invaluable. We're here to secure it. All of it.</h2>
+	</div>
+	</footer><!-- #colophon -->
+
+
+
+
+  </body>
+</html>

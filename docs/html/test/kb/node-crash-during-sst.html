@@ -1,0 +1,360 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><meta content="Resolving Node Crashes during SST" name="title" />
+<meta content="&quot;Discusses how to resolve a problem with rsync or other tool stalling during SST.&quot;" name="description" />
+<meta content="en-US" name="language" />
+<meta content="galera cluster, sst, rsync, stalled, hangs" name="keywords" />
+<meta content="Codership Oy, 2014 - 2020. All Rights Reserved." name="copyright" />
+
+    <title>Node Crashes during SST &#8212; Galera Cluster Documentation</title>
+    <link rel="stylesheet" href="../_static/reset-style.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="SST Fails with SQL Syntax Errors" href="sst-fails-sql-syntax-error.html" />
+    <link rel="prev" title="The Codership Knowledge Base" href="index.html" />
+
+
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<link rel="stylesheet" href="/library/_static/basic-style.css">
+<link rel="stylesheet" href="/library/_static/header.css">
+<link rel="stylesheet" href="/library/_static/footer.css">
+<link rel="stylesheet" href="/library/_static/codership.css">
+<link rel="stylesheet" media="screen and (max-width: 500px)" href="/library/_static/mobile.css"/>
+<link rel="stylesheet" media="screen and (min-width:501px) and (max-width:1024px)" href="/library/_static/tablet.css"/>
+<link rel="stylesheet" media="screen and (prefers-color-scheme: dark)" href="/library/_static/dark.css"/>
+
+
+<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Feed" href="https://galeracluster.com/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Comments Feed" href="https://galeracluster.com/comments/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Support Comments Feed" href="https://galeracluster.com/support/feed/" />
+
+<script type='text/javascript' src='https://galeracluster.com/wp-includes/js/comment-reply.min.js?ver=3.8.3'></script>
+
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://galeracluster.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://galeracluster.com/wp-includes/wlwmanifest.xml" />
+<link rel='prev' title='Downloads' href='https://galeracluster.com/downloads/' />
+<link rel='next' title='Community' href='https://galeracluster.com/community/' />
+<meta name="generator" content="WordPress 3.8.3" />
+
+<link rel='shortlink' href='https://galeracluster.com/?p=12' />
+
+<style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>
+<style type="text/css" id="twentythirteen-header-css">
+			.site-title,
+			.site-description {
+				position: absolute;
+				clip: rect(1px 1px 1px 1px); /* IE7 */
+				clip: rect(1px, 1px, 1px, 1px);
+			}
+				.site-header .home-link {
+				min-height: 0;
+			}
+</style>
+
+<script type="text/javascript">
+
+		  var _gaq = _gaq || [];
+		  _gaq.push(['_setAccount', 'UA-35163478-6']);
+		  _gaq.push(['_trackPageview']);
+
+		  (function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'https://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		  })();
+
+</script>
+
+  </head><body>
+	<div id="fb-root"></div>
+	<script>(function(d, s, id) {
+		  var js, fjs = d.getElementsByTagName(s)[0];
+		  if (d.getElementById(id)) return;
+		  js = d.createElement(s); js.id = id;
+		  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+		  fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));
+	</script>
+
+	<div id="page" class="hfeed site">
+
+	<header id="masthead" class="site-header" role="banner">
+
+	<div class="top">
+	<a class="home-link" href="https://galeracluster.com/" title="Galera Cluster for MySQL" rel="home">
+	<h1 class="site-title">Galera Cluster for MySQL</h1>
+	<h2 class="site-description">The world&#039;s most advanced open source database cluster</h2>
+	</a>
+	</div>
+
+
+	<div id="navbar" class="navbar">
+	<nav id="site-navigation" class="navigation main-navigation" role="navigation">
+	<div class="menu-main-menu-container">
+
+	<ul id="menu-main-menu" class="nav-menu">
+	<li id="menu-item-359" class="link-home menu-item menu-item-type-post_type menu-item-object-page menu-item-359"><a href="https://galeracluster.com/">Home</a></li>
+	<li id="menu-item-35" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-35"><a href="https://galeracluster.com/products/">Products</a></li>
+	<li id="menu-item-34" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="https://galeracluster.com/downloads/">Downloads</a></li>
+	<li id="menu-item-33" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-12 current_page_item current-menu-ancestor current-menu-parent current_page_parent current_page_ancestor menu-item-has-children menu-item-33"><a href="https://galeracluster.com/support/">Support</a></li>
+	<li id="menu-item-32" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="https://galeracluster.com/community/">Community</a></li>
+	<li id="menu-item-31" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-31"><a href="https://galeracluster.com/company/">Company</a></li>
+	<li id="menu-item-297" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-297"><a href="https://galeracluster.com/category/blog/">Blog</a></li>
+	<li id="menu-item-38" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-38"><a href="https://galeracluster.com/contact-us/">Contact us</a></li>
+	</ul>
+	</div>
+
+
+	</nav><!-- #site-navigation -->
+
+	</div><!-- #navbar -->
+	</header><!-- #masthead -->
+
+
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="left-margin docutils container">
+<div class="left-margin-top docutils container">
+<a class="reference internal" href="../index.html"><span class="doc">The Library</span></a></div>
+<div class="left-margin-content docutils container">
+<ul class="simple">
+<li><a class="reference internal" href="../documentation/index.html"><span class="doc">Documentation</span></a></li>
+</ul>
+<ul class="here simple">
+<li><a class="reference internal" href="index.html"><span class="doc">Knowledge Base</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="sub-links simple">
+<li><a class="reference internal" href="../training/tutorials/index.html"><span class="doc">Tutorial Articles</span></a></li>
+<li><a class="reference internal" href="../training/videos/index.html"><span class="doc">Training Videos</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a></li>
+</ul>
+<p>Related Documents</p>
+<ul class="simple">
+<li><a class="reference internal" href="../documentation/sst.html"><span class="doc">SST</span></a></li>
+<li><a class="reference internal" href="../documentation/mysql-wsrep-options.html#wsrep-sst-donor"><span class="std std-ref">wsrep_sst_donor</span></a></li>
+<li><a class="reference internal" href="../documentation/mysql-wsrep-options.html#wsrep-sst-method"><span class="std std-ref">wsrep_sst_method</span></a></li>
+</ul>
+</div>
+</div>
+<div class="top-links docutils container">
+<ul class="simple">
+<li><a class="reference external" href="https://galeracluster.com">Home</a></li>
+<li><a class="reference internal" href="../documentation/index.html"><span class="doc">Docs</span></a></li>
+</ul>
+<ul class="here simple">
+<li><a class="reference internal" href="index.html"><span class="doc">KB</span></a></li>
+</ul>
+<ul class="nav-wider simple">
+<li><a class="reference internal" href="../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a></li>
+</ul>
+</div>
+<div class="library-article section" id="node-crashes-during-sst">
+<span id="kb-trouble-node-crash-during-sst"></span><h1>Node Crashes during SST<a class="headerlink" href="#node-crashes-during-sst" title="Permalink to this headline">¶</a></h1>
+<p class="article-stats">Length: 463 words; Published: April 1, 2014; Updated: November 4, 2019; Category: State Transfers; Type: Troubleshooting</p>
+<p>When a new node joins a cluster, it will request data from the cluster.  One node, known as a <em>donor</em>, will use a <a class="reference internal" href="../documentation/glossary.html#term-state-snapshot-transfer"><span class="xref std std-term">State Snapshot Transfer</span></a> (SST) method to provide a full copy of the data to the new node, known as the <em>joiner</em>.  Depending on how the nodes are configured, they will typically use the utilities, <code class="docutils literal notranslate"><span class="pre">mysqldump</span></code> or <code class="docutils literal notranslate"><span class="pre">rsync</span></code> to transfer the data.  All of this usually works well, but it doesn’t always. This KB article will consider a common scenario in which problems may occur.</p>
+<p class="section-heading rubric">Scenario</p>
+<p>You can set the <a class="reference internal" href="../documentation/mysql-wsrep-options.html#wsrep-sst-method"><span class="std std-ref">wsrep_sst_method</span></a> option to whatever tool you want to use to make state transfers. DBAs typically set this to <code class="docutils literal notranslate"><span class="pre">mysqldump</span></code> or <code class="docutils literal notranslate"><span class="pre">rsync</span></code>.  When a new node joins, <a class="reference internal" href="../documentation/glossary.html#term-state-snapshot-transfer"><span class="xref std std-term">State Snapshot Transfer</span></a> begins, and file system processes are started for the tool used (e.g., <code class="docutils literal notranslate"><span class="pre">rsync</span></code>). Below is show the results of running <code class="docutils literal notranslate"><span class="pre">ps</span></code> on the joining node during a state transfer:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">ps -e | grep rsync</span>
+
+<span class="go">14718 ? 00:00:00 wsrep_sst_rsync</span>
+<span class="go">14766 ? 00:00:00 rsync</span>
+<span class="go">14799 ? 00:00:00 rsync</span>
+<span class="go">14800 ? 00:00:00 rsync</span>
+</pre></div>
+</div>
+<p>If the node crashes before the state transfer is complete, it may cause the process or processing running <code class="docutils literal notranslate"><span class="pre">rsync</span></code>, or whatever tool you’re using, to stall, occupying the port and not allowing you to restart the node. When this happens, the error logs for the database server (i.e., <code class="docutils literal notranslate"><span class="pre">/var/log/mysqld.log</span></code>) will show that the port is in use, although it isn’t.  You’ll have to fix this problem.</p>
+<p class="section-heading rubric">Solution</p>
+<p>There are a few ways you can resolve this situation.  The simplest way is to kill the stalled processes.  To do this, you’ll need to know the process identification number. However, first you may want to stop <code class="docutils literal notranslate"><span class="pre">mysqld</span></code> on the joining node, to start fresh. You could enter something like the following on the stalled node, from the command-line:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">systemctl stop mysqld</span>
+
+<span class="go">ps -e | grep rsync</span>
+
+<span class="go">14800 ? 00:06:05 rsync</span>
+</pre></div>
+</div>
+<p>In the example here, the results show that the process identification number is <code class="docutils literal notranslate"><span class="pre">14800</span></code>.  Using this information, you might enter the following from the command-line:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">kill -9 14800</span>
+</pre></div>
+</div>
+<p>If there are multiple processes running, which can be the case with <code class="docutils literal notranslate"><span class="pre">rsync</span></code>, you’ll have to kill all of them.  Sometimes the killall command will suffice:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">killall rsync</span>
+</pre></div>
+</div>
+<p>However, this usually doesn’t work.  Instead, you’ll have to use the <code class="docutils literal notranslate"><span class="pre">kill</span></code> command for each process.  It’s tedious, but necessary. Once you have killed the orphaned process, it will free the relevant ports and allow you to start <code class="docutils literal notranslate"><span class="pre">mysqld</span></code> on the new node.</p>
+<p>After restarting the node, if the processes handling the state transfer stalls again, it wasn’t a fluke. There’s a persistent problem with the network or security or something else.  Check the server logs and the database logs on the server to determine the cause.</p>
+<div class="bottom-links docutils container">
+<p>Related Documents</p>
+<ul class="simple">
+<li><a class="reference internal" href="../documentation/sst.html"><span class="doc">SST</span></a></li>
+<li><a class="reference internal" href="../documentation/mysql-wsrep-options.html#wsrep-sst-donor"><span class="std std-ref">wsrep_sst_donor</span></a></li>
+<li><a class="reference internal" href="../documentation/mysql-wsrep-options.html#wsrep-sst-method"><span class="std std-ref">wsrep_sst_method</span></a></li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/logo.png" alt="Logo"/>
+            </a></p>
+<h1 class="logo"><a href="../index.html">Galera Cluster</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../documentation/index.html">The Codership Documentation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">The Codership Knowledge Base</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="index.html#troubleshooting-articles">Troubleshooting Articles</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#best-practices-articles">Best Practices Articles</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Node Crashes during SST</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sst-fails-sql-syntax-error.html">SST Fails with SQL Syntax Errors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="requested-state-transfer-failed.html">Requested State Transfer Failed</a></li>
+<li class="toctree-l3"><a class="reference internal" href="stall-on-alter-table.html">Cluster Stalls on <code class="docutils literal notranslate"><span class="pre">ALTER</span> <span class="pre">TABLE</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="user-changes.html">User Changes not Replicating</a></li>
+<li class="toctree-l3"><a class="reference internal" href="auto-increment-multiples.html">AUTO_INCREMENT Increasing by Multiples</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deadlock-found.html">Deadlock Found during a Transaction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="resolve-commit-failure.html">Commit Failed for Reason 3</a></li>
+<li class="toctree-l3"><a class="reference internal" href="multi-master-conflicts.html">Multi-Master Conflicts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="error-unknown-command.html">Unknown Command Errors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="group-commit.html">Group Commit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="large-transactions.html">Handling Large Transactions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="parallel-slave-threads.html">Setting Parallel Slave Threads</a></li>
+<li class="toctree-l3"><a class="reference internal" href="detecting-slow-node.html">Detecting a Slow Node</a></li>
+<li class="toctree-l3"><a class="reference internal" href="wan-latency.html">WAN Latency</a></li>
+<li class="toctree-l3"><a class="reference internal" href="wan-replication.html">WAN Replication</a></li>
+<li class="toctree-l3"><a class="reference internal" href="customizing-gcache-size.html">Customizing the Write-Set Cache Size</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gcache-during-state-transfers.html">Write-Set Caching during State Transfers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="single-master-setup.html">Single Master Setup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="multi-master-setup.html">Multi-Master Setup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="two-node-clusters.html">Two-Node Clusters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="setting-selinux-policy.html">Setting an SELinux Policy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sync-transaction-before-another.html">Synchronizing a Transaction Before Executing Another</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../training/index.html">Codership Training</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../whats-new.html">What’s New</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../editors/index.html">Codership Writers &amp; Editors</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">The Codership Knowledge Base</a><ul>
+      <li>Previous: <a href="index.html" title="previous chapter">The Codership Knowledge Base</a></li>
+      <li>Next: <a href="sst-fails-sql-syntax-error.html" title="next chapter">SST Fails with SQL Syntax Errors</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+	<div class="navbar">
+	<nav id="site-navigation" class="navigation main-navigation" role="navigation">
+	<div class="nav-bar-container">
+
+	<div id="menu-nav-bar" class="nav-menu">
+		<ul class="nav-link">
+			<li> </li>
+
+		</ul>
+
+	</div>
+	</nav>
+
+	<footer id="colophon" class="site-footer" role="contentinfo">
+	<div class="top">	<div class="powered-by"><p>Powered by Galera:</p>
+	<p><a href="https://mariadb.com/kb/en/galera/"><img class="alignleft size-full wp-image-237" alt="MariaDB" src="https://galeracluster.com/wp-content/uploads/2013/10/logo-mariadb.png" width="166" height="49" /></a></p>
+		</div></div>
+	<div class="footer-menu">
+	<div class="menu-main-menu-container">
+	<ul id="menu-main-menu-1" class="nav-menu">
+	<li class="link-home menu-item menu-item-type-post_type menu-item-object-page menu-item-359"><a href="https://galeracluster.com/">Home</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-35"><a href="https://galeracluster.com/products/">Products</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="https://galeracluster.com/downloads/">Downloads</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-12 current_page_item current-menu-ancestor current-menu-parent current_page_parent current_page_ancestor menu-item-has-children menu-item-33"><a href="https://galeracluster.com/support/">Support</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="https://galeracluster.com/community/">Community</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-31"><a href="https://galeracluster.com/company/">Company</a></li>
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-297"><a href="https://galeracluster.com/category/blog/">Blog</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-38"><a href="https://galeracluster.com/contact-us/">Contact us</a></li>
+	</ul></div>			</div><!-- .footer-menu -->
+
+
+	<div class="footer-bar">
+	<p class="copyright">2014 Codership Ltd.</p>
+	</div>
+	<div class="footnote">
+	<h2>Your data is invaluable. We're here to secure it. All of it.</h2>
+	</div>
+	</footer><!-- #colophon -->
+
+
+
+
+  </body>
+</html>

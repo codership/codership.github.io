@@ -1,0 +1,391 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><meta content="The Galera Manager - AWS Ports" name="title" />
+<meta content="en-US" name="language" />
+<meta content="galera cluster, gmd, galera manager, gui" name="keywords" />
+<meta content="Codership Oy, 2014 - 2020. All Rights Reserved." name="copyright" />
+
+    <title>AWS Ports with Galera Manager &#8212; Galera Cluster Documentation</title>
+    <link rel="stylesheet" href="../_static/reset-style.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Galera Manager End-User License Agreement (EULA)" href="gmd-eula.html" />
+    <link rel="prev" title="Installing Galera Manager" href="gmd-install.html" />
+
+
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<link rel="stylesheet" href="/library/_static/basic-style.css">
+<link rel="stylesheet" href="/library/_static/header.css">
+<link rel="stylesheet" href="/library/_static/footer.css">
+<link rel="stylesheet" href="/library/_static/codership.css">
+<link rel="stylesheet" media="screen and (max-width: 500px)" href="/library/_static/mobile.css"/>
+<link rel="stylesheet" media="screen and (min-width:501px) and (max-width:1024px)" href="/library/_static/tablet.css"/>
+<link rel="stylesheet" media="screen and (prefers-color-scheme: dark)" href="/library/_static/dark.css"/>
+
+
+<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Feed" href="https://galeracluster.com/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Comments Feed" href="https://galeracluster.com/comments/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Support Comments Feed" href="https://galeracluster.com/support/feed/" />
+
+<script type='text/javascript' src='https://galeracluster.com/wp-includes/js/comment-reply.min.js?ver=3.8.3'></script>
+
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://galeracluster.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://galeracluster.com/wp-includes/wlwmanifest.xml" />
+<link rel='prev' title='Downloads' href='https://galeracluster.com/downloads/' />
+<link rel='next' title='Community' href='https://galeracluster.com/community/' />
+<meta name="generator" content="WordPress 3.8.3" />
+
+<link rel='shortlink' href='https://galeracluster.com/?p=12' />
+
+<style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>
+<style type="text/css" id="twentythirteen-header-css">
+			.site-title,
+			.site-description {
+				position: absolute;
+				clip: rect(1px 1px 1px 1px); /* IE7 */
+				clip: rect(1px, 1px, 1px, 1px);
+			}
+				.site-header .home-link {
+				min-height: 0;
+			}
+</style>
+
+<script type="text/javascript">
+
+		  var _gaq = _gaq || [];
+		  _gaq.push(['_setAccount', 'UA-35163478-6']);
+		  _gaq.push(['_trackPageview']);
+
+		  (function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'https://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		  })();
+
+</script>
+
+  </head><body>
+	<div id="fb-root"></div>
+	<script>(function(d, s, id) {
+		  var js, fjs = d.getElementsByTagName(s)[0];
+		  if (d.getElementById(id)) return;
+		  js = d.createElement(s); js.id = id;
+		  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+		  fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));
+	</script>
+
+	<div id="page" class="hfeed site">
+
+	<header id="masthead" class="site-header" role="banner">
+
+	<div class="top">
+	<a class="home-link" href="https://galeracluster.com/" title="Galera Cluster for MySQL" rel="home">
+	<h1 class="site-title">Galera Cluster for MySQL</h1>
+	<h2 class="site-description">The world&#039;s most advanced open source database cluster</h2>
+	</a>
+	</div>
+
+
+	<div id="navbar" class="navbar">
+	<nav id="site-navigation" class="navigation main-navigation" role="navigation">
+	<div class="menu-main-menu-container">
+
+	<ul id="menu-main-menu" class="nav-menu">
+	<li id="menu-item-359" class="link-home menu-item menu-item-type-post_type menu-item-object-page menu-item-359"><a href="https://galeracluster.com/">Home</a></li>
+	<li id="menu-item-35" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-35"><a href="https://galeracluster.com/products/">Products</a></li>
+	<li id="menu-item-34" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="https://galeracluster.com/downloads/">Downloads</a></li>
+	<li id="menu-item-33" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-12 current_page_item current-menu-ancestor current-menu-parent current_page_parent current_page_ancestor menu-item-has-children menu-item-33"><a href="https://galeracluster.com/support/">Support</a></li>
+	<li id="menu-item-32" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="https://galeracluster.com/community/">Community</a></li>
+	<li id="menu-item-31" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-31"><a href="https://galeracluster.com/company/">Company</a></li>
+	<li id="menu-item-297" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-297"><a href="https://galeracluster.com/category/blog/">Blog</a></li>
+	<li id="menu-item-38" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-38"><a href="https://galeracluster.com/contact-us/">Contact us</a></li>
+	</ul>
+	</div>
+
+
+	</nav><!-- #site-navigation -->
+
+	</div><!-- #navbar -->
+	</header><!-- #masthead -->
+
+
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="left-margin docutils container">
+<div class="left-margin-top docutils container">
+<a class="reference internal" href="../index.html"><span class="doc">The Library</span></a></div>
+<div class="left-margin-content docutils container">
+<ul class="here simple">
+<li><a class="reference internal" href="index.html"><span class="doc">Documentation</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../kb/index.html"><span class="doc">Knowledge Base</span></a></li>
+<li><a class="reference internal" href="../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="sub-links simple">
+<li><a class="reference internal" href="../training/tutorials/index.html"><span class="doc">Tutorial Articles</span></a></li>
+<li><a class="reference internal" href="../training/videos/index.html"><span class="doc">Training Videos</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a></li>
+</ul>
+<p>Galera Manager Documents</p>
+<ul class="simple">
+<li><a class="reference internal" href="galera-manager.html"><span class="doc">Getting Started</span></a></li>
+<li><a class="reference internal" href="gmd-install.html"><span class="doc">Installing</span></a></li>
+</ul>
+<ul class="here simple">
+<li><a class="reference internal" href="#"><span class="doc">AWS Ports</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="gmd.html"><span class="doc">gmd Daemon</span></a></li>
+<li><a class="reference internal" href="galera-manager-adding-clusters.html"><span class="doc">Deploying Clusters</span></a></li>
+<li><a class="reference internal" href="galera-manager-adding-nodes.html"><span class="doc">Adding Nodes</span></a></li>
+<li><a class="reference internal" href="galera-manager-adding-users.html"><span class="doc">Adding Users</span></a></li>
+<li><a class="reference internal" href="galera-manager-initializing-data.html"><span class="doc">Loading Data</span></a></li>
+<li><a class="reference internal" href="galera-manager-monitoring-clusters.html"><span class="doc">Monitoring a Cluster</span></a></li>
+<li><a class="reference internal" href="gmd-upgrading.html"><span class="doc">Upgrading</span></a></li>
+</ul>
+</div>
+</div>
+<div class="top-links docutils container">
+<ul class="simple">
+<li><a class="reference external" href="https://galeracluster.com">Home</a></li>
+</ul>
+<ul class="here simple">
+<li><a class="reference internal" href="index.html"><span class="doc">Docs</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../kb/index.html"><span class="doc">KB</span></a></li>
+</ul>
+<ul class="nav-wider simple">
+<li><a class="reference internal" href="../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a></li>
+</ul>
+</div>
+<div class="library-document section" id="aws-ports-with-galera-manager">
+<span id="galera-manager-aws-ports"></span><h1>AWS Ports with Galera Manager<a class="headerlink" href="#aws-ports-with-galera-manager" title="Permalink to this headline">¶</a></h1>
+<p>There are several ports that Galera Manager uses to communication with the hosts in a cluster, as well as the ports that the nodes in a Galera Cluster use to communicate among themselves—and clients use to communicate with MySQL or MariaDB.  There are also ports administrators need to access Galera Manager and the hosts.</p>
+<p>You’ll have to modify the <em>Security Group</em> on AWS (Amazon Web Services) for the <em>Instance</em> on which you installed Galera Manager.  In that <em>Security Group</em>, you’ll have to add <em>Inbound Rules</em> for each of the ports that Galera Manager needs.  A <em>Security Group</em> will be generated automatically by Galera Manager for each host added to a cluster, but you may want to edit each one, or you may want consolidate those <em>Security Groups</em> by creating one for all hosts in the cluster.</p>
+<p>Below is information on ports used by Galera Manager, followed by information on the ports used by the hosts. See the <a class="reference internal" href="gmd-install.html"><span class="doc">Installing Galera Manager</span></a> for more information on installing Galera Manager.</p>
+<p class="section-heading rubric" id="galera-manager-ports">Galera Manager Ports</p>
+<p>When you successfully completed the installation of Galera Manager using the <em>Installer</em>, the final message displayed mentions the TCP ports used by Galera Manager. Below are exceprts from that message, showing the lead-in and the message about ports:</p>
+<div class="literal-block-wrapper docutils container" id="id1">
+<div class="code-block-caption"><span class="caption-text">Closing Messages from Galera Manager Installer (Example 1)</span><a class="headerlink" href="#id1" title="Permalink to this code">¶</a></div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">INFO[0213] Galera Manager installation complete.</span>
+<span class="hll"><span class="go">Direct your browser to https://34.217.114.37 to use it.</span>
+</span><span class="go">Since there was no publicly resolvable domain name provided,</span>
+<span class="go">we&#39;ll be using self-signed SSL certificate.</span>
+<span class="go">You will be responsible to re-generate it after it expires.</span>
+<span class="go">Also, if the browser warns about security risk when connecting</span>
+<span class="go">to service for the first time, you should choose to &quot;continue&quot;.</span>
+<span class="go">...</span>
+
+<span class="hll"><span class="go">Please make sure you have TCP ports 80, 443, 8091, 8092 open in the server firewall.</span>
+</span></pre></div>
+</div>
+</div>
+<p>As the highlighted line at the bottom here says, you will need to make sure the TCP ports 80, 443, 8091, 8092 are open. This could be on a local computer or on an <em>AWS Instance</em> on which you’ve installed Galera Manager.</p>
+<p>Ports 80 and 443 are used to access Galera Manager through a web browser.  Port 8091 is used by <code class="docutils literal notranslate"><span class="pre">gmd</span></code> to access InfluxDB for logging, and port 8092 is used by <code class="docutils literal notranslate"><span class="pre">gmd</span></code> to access Prometheus for cluster and node metrics, both of which are installed by the <em>Installer</em>.</p>
+<p>To open these ports on AWS, go to the EC2 console, and click on <em>Security Groups</em> in the left margin.  Then look for the <em>Security Group</em> for the <em>Instance</em> on which you installed Galera Manager. Edit the <em>Inbound Rules</em> for that group to open those ports. When you’re finished, the <em>Inbound Rules</em> will look something like the screenshot below:</p>
+<div class="figure" id="id2">
+<a class="document-screenshot reference internal image-reference" href="../_images/galera-manager-aws-inbound-rules-gmd.png"><img alt="AWS Inbound Rules for Galera Manager" class="document-screenshot" src="../_images/galera-manager-aws-inbound-rules-gmd.png" style="width: 800px;" /></a>
+<p class="caption"><span class="caption-text">AWS Inbound Rules for Galera Manager (Figure 1)</span></p>
+</div>
+<p>In the example in this screenshot, these ports can be accessed from anywhere. The user will still need the user name and password to access the particular service.  Having these ports accessible like this will allow you, and others you designate, to monitor your cluster from wherever you or they might be. If you don’t need this flexibility, you could limit all of these ports to the specific IP addresses from where they would be accessed—just as you might normally limit <code class="docutils literal notranslate"><span class="pre">ssh</span></code> access for port 22 to the IP address of the administrator who has authority to log into the server.</p>
+<p>Incidentally, the <em>Installer</em> message shown above is the result of having chosen to enable <code class="docutils literal notranslate"><span class="pre">https</span></code>.  If you had chosen not to enable it, though, the list of ports to open in AWS will be different:</p>
+<div class="literal-block-wrapper docutils container" id="id3">
+<div class="code-block-caption"><span class="caption-text">Excerpt from Installer listing Ports to Open (Example 2)</span><a class="headerlink" href="#id3" title="Permalink to this code">¶</a></div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">...</span>
+<span class="hll"><span class="go">Please make sure you have TCP ports 80, 8081, 8082 open in the server firewall.</span>
+</span></pre></div>
+</div>
+</div>
+<p>Only port 80 is used to access Galera Manager from a web broswer.  Port 8081 is used by <code class="docutils literal notranslate"><span class="pre">gmd</span></code> to access InfluxDB; port 8082 is used for Prometheus.  Since you didn’t enable <code class="docutils literal notranslate"><span class="pre">https</span></code>, you’ll have to open these three ports in the <em>Security Group</em> for the <em>Instance</em> on which you’ve installed Galera Manager. But in this case, you don’t need also to enable ports 443, 8091, and 8092.</p>
+<p>You may have noticed when looking at the lists of ports above and in Figure 1 that they don’t include port 3306 and other ports used by MySQL, MariaDB and Galera Cluster. Galera Manager doesn’t need them to create and monitor a cluster and nodes. Those ports are needed on the hosts of the nodes. So separate <em>Security Groups</em> will be needed for them.</p>
+<p class="section-heading rubric" id="galera-manager-node-ports">Host &amp; Node Ports</p>
+<p>After you create a cluster within Galera Manager, and then add nodes to that cluster, Galera Manager will create <em>Instances</em> or hosts for each node, and a <em>Security Group</em> in AWS with <em>Inbound Rules</em> for each host. These rules will open the ports needed for <code class="docutils literal notranslate"><span class="pre">gmd</span></code> on the Galera Manager server to communicate with the nodes, as well as the normal ports required by the nodes within a Galera Cluster to communicate with each other, in addition to ports for users and other clients need to communicate with MySQL or MariaDB.</p>
+<p>The screenshot in Figure 2 below shows an example of a <em>Security Group</em> for a host created with Galera Manager for a node in a cluster:</p>
+<div class="figure" id="id4">
+<a class="document-screenshot reference internal image-reference" href="../_images/galera-manager-aws-inbound-rules.png"><img alt="AWS Inbound Rules" class="document-screenshot" src="../_images/galera-manager-aws-inbound-rules.png" style="width: 800px;" /></a>
+<p class="caption"><span class="caption-text">AWS Inbound Rules for a Host (Figure 2)</span></p>
+</div>
+<p>Notice this <em>Security Group</em> includes ports 8091 and 8092, which are necessary for Galera Manager to communicate with the host related to host metrics and llogs.  Port 3036 is used by users and clients to communicate with MySQL or MariaDB to access the databases. The other three ports are used by Galera Cluster and the nodes to communicate with each other and synchronize lagging or new nodes that join the cluster.</p>
+<p>You might be tempted to tighten security more, to create one <em>Security Group</em> to be used by all hosts and in it to specify the IP addresses of each node for ports 4444, 4567, and 4568—perhaps because of the default description, <em>No Restructions</em> for each of those rules. Along these lines, you might also change ports 9100 - 9104 to the IP address of wherever Galera Manager or <code class="docutils literal notranslate"><span class="pre">gmd</span></code> is running. You would have to leave port 3306 accessible from anywhere, though, so that MySQL users and clients can access the databases.</p>
+<p>If you were to do all of that, make all of those changes to the <em>Source</em> IP addresses, it would like something like what you see in the screenshot in Figure 3 below:</p>
+<div class="figure" id="id5">
+<a class="document-screenshot reference internal image-reference" href="../_images/galera-manager-aws-inbound-rules-all-nodes.png"><img alt="AWS Security Group for All Nodes" class="document-screenshot" src="../_images/galera-manager-aws-inbound-rules-all-nodes.png" style="width: 800px;" /></a>
+<p class="caption"><span class="caption-text"><em>AWS Security Group</em> for All Hosts (Figure 3)</span></p>
+</div>
+<p>That looks professional and is in a sense more secure.  However, it takes away from the flexibility of using Galera Manager for adding and removing nodes, if you have to add and delete rules manually for each host, and set the new hosts to this <em>Security Group</em>.  Given that the traffic between Galera Manager and the hosts is already very secure already, limiting the IP addresses might be overkill.  Should you decide that you want this extra security and that it’s worth the effort, you probably won’t have to do it in future releases of Galera Manager since it’s on the list of features to add.</p>
+<p>For more on the nuances and configuring some of the background settings of Galera Manager, see the <a class="reference internal" href="gmd.html"><span class="doc">Galera Manager Daemon (gmd)</span></a> page of this documentation.</p>
+<div class="bottom-links docutils container">
+<p>Galera Manager Documents</p>
+<ul class="simple">
+<li><a class="reference internal" href="galera-manager.html"><span class="doc">Getting Started</span></a></li>
+<li><a class="reference internal" href="gmd-install.html"><span class="doc">Installing</span></a></li>
+<li><a class="reference internal" href="#"><span class="doc">AWS Ports</span></a></li>
+<li><a class="reference internal" href="gmd.html"><span class="doc">gmd Daemon</span></a></li>
+<li><a class="reference internal" href="galera-manager-adding-clusters.html"><span class="doc">Deploying Clusters</span></a></li>
+<li><a class="reference internal" href="galera-manager-adding-nodes.html"><span class="doc">Adding Nodes</span></a></li>
+<li><a class="reference internal" href="galera-manager-adding-users.html"><span class="doc">Adding Users</span></a></li>
+<li><a class="reference internal" href="galera-manager-initializing-data.html"><span class="doc">Loading Data</span></a></li>
+<li><a class="reference internal" href="galera-manager-monitoring-clusters.html"><span class="doc">Monitoring a Cluster</span></a></li>
+<li><a class="reference internal" href="gmd-upgrading.html"><span class="doc">Upgrading</span></a></li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/logo.png" alt="Logo"/>
+            </a></p>
+<h1 class="logo"><a href="../index.html">Galera Cluster</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">The Codership Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="overview.html">Overview of Galera Cluster</a></li>
+<li class="toctree-l2"><a class="reference internal" href="technical-description.html">Technical Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html">Installing Galera Cluster</a></li>
+<li class="toctree-l2"><a class="reference internal" href="administration.html">Galera Cluster Administration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deployment.html">Deployment</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="monitor.html">Cluster Monitoring</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="monitoring-cluster.html">Using Status Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="log.html">Database Server Logs</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="galera-manager.html">The Galera Manager</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notification-cmd.html">Notification Command</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notification-cmd-example.html">Notification Script Example</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="security.html">Security</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference.html">Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../kb/index.html">The Codership Knowledge Base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../training/index.html">Codership Training</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../whats-new.html">What’s New</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../editors/index.html">Codership Writers &amp; Editors</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">The Codership Documentation</a><ul>
+  <li><a href="monitor.html">Cluster Monitoring</a><ul>
+  <li><a href="galera-manager.html">The Galera Manager</a><ul>
+      <li>Previous: <a href="gmd-install.html" title="previous chapter">Installing Galera Manager</a></li>
+      <li>Next: <a href="gmd-eula.html" title="next chapter">Galera Manager End-User License Agreement (EULA)</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+	<div class="navbar">
+	<nav id="site-navigation" class="navigation main-navigation" role="navigation">
+	<div class="nav-bar-container">
+
+	<div id="menu-nav-bar" class="nav-menu">
+		<ul class="nav-link">
+			<li> </li>
+
+		</ul>
+
+	</div>
+	</nav>
+
+	<footer id="colophon" class="site-footer" role="contentinfo">
+	<div class="top">	<div class="powered-by"><p>Powered by Galera:</p>
+	<p><a href="https://mariadb.com/kb/en/galera/"><img class="alignleft size-full wp-image-237" alt="MariaDB" src="https://galeracluster.com/wp-content/uploads/2013/10/logo-mariadb.png" width="166" height="49" /></a></p>
+		</div></div>
+	<div class="footer-menu">
+	<div class="menu-main-menu-container">
+	<ul id="menu-main-menu-1" class="nav-menu">
+	<li class="link-home menu-item menu-item-type-post_type menu-item-object-page menu-item-359"><a href="https://galeracluster.com/">Home</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-35"><a href="https://galeracluster.com/products/">Products</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="https://galeracluster.com/downloads/">Downloads</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-12 current_page_item current-menu-ancestor current-menu-parent current_page_parent current_page_ancestor menu-item-has-children menu-item-33"><a href="https://galeracluster.com/support/">Support</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="https://galeracluster.com/community/">Community</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-31"><a href="https://galeracluster.com/company/">Company</a></li>
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-297"><a href="https://galeracluster.com/category/blog/">Blog</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-38"><a href="https://galeracluster.com/contact-us/">Contact us</a></li>
+	</ul></div>			</div><!-- .footer-menu -->
+
+
+	<div class="footer-bar">
+	<p class="copyright">2014 Codership Ltd.</p>
+	</div>
+	<div class="footnote">
+	<h2>Your data is invaluable. We're here to secure it. All of it.</h2>
+	</div>
+	</footer><!-- #colophon -->
+
+
+
+
+  </body>
+</html>

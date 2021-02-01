@@ -1,0 +1,453 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><meta content="Upgrading Galera Cluster Software" name="title" />
+<meta content="en-US" name="language" />
+<meta content="galera cluster, upgrading galera, rolling upgrade" name="keywords" />
+<meta content="Codership Oy, 2014 - 2020. All Rights Reserved." name="copyright" />
+
+    <title>Upgrading Galera Cluster &#8212; Galera Cluster Documentation</title>
+    <link rel="stylesheet" href="../_static/reset-style.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Recovering Primary Component" href="pc-recovery.html" />
+    <link rel="prev" title="Schema Upgrades" href="schema-upgrades.html" />
+
+
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<link rel="stylesheet" href="/library/_static/basic-style.css">
+<link rel="stylesheet" href="/library/_static/header.css">
+<link rel="stylesheet" href="/library/_static/footer.css">
+<link rel="stylesheet" href="/library/_static/codership.css">
+<link rel="stylesheet" media="screen and (max-width: 500px)" href="/library/_static/mobile.css"/>
+<link rel="stylesheet" media="screen and (min-width:501px) and (max-width:1024px)" href="/library/_static/tablet.css"/>
+<link rel="stylesheet" media="screen and (prefers-color-scheme: dark)" href="/library/_static/dark.css"/>
+
+
+<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Feed" href="https://galeracluster.com/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Comments Feed" href="https://galeracluster.com/comments/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Support Comments Feed" href="https://galeracluster.com/support/feed/" />
+
+<script type='text/javascript' src='https://galeracluster.com/wp-includes/js/comment-reply.min.js?ver=3.8.3'></script>
+
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://galeracluster.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://galeracluster.com/wp-includes/wlwmanifest.xml" />
+<link rel='prev' title='Downloads' href='https://galeracluster.com/downloads/' />
+<link rel='next' title='Community' href='https://galeracluster.com/community/' />
+<meta name="generator" content="WordPress 3.8.3" />
+
+<link rel='shortlink' href='https://galeracluster.com/?p=12' />
+
+<style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>
+<style type="text/css" id="twentythirteen-header-css">
+			.site-title,
+			.site-description {
+				position: absolute;
+				clip: rect(1px 1px 1px 1px); /* IE7 */
+				clip: rect(1px, 1px, 1px, 1px);
+			}
+				.site-header .home-link {
+				min-height: 0;
+			}
+</style>
+
+<script type="text/javascript">
+
+		  var _gaq = _gaq || [];
+		  _gaq.push(['_setAccount', 'UA-35163478-6']);
+		  _gaq.push(['_trackPageview']);
+
+		  (function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'https://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		  })();
+
+</script>
+
+  </head><body>
+	<div id="fb-root"></div>
+	<script>(function(d, s, id) {
+		  var js, fjs = d.getElementsByTagName(s)[0];
+		  if (d.getElementById(id)) return;
+		  js = d.createElement(s); js.id = id;
+		  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+		  fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));
+	</script>
+
+	<div id="page" class="hfeed site">
+
+	<header id="masthead" class="site-header" role="banner">
+
+	<div class="top">
+	<a class="home-link" href="https://galeracluster.com/" title="Galera Cluster for MySQL" rel="home">
+	<h1 class="site-title">Galera Cluster for MySQL</h1>
+	<h2 class="site-description">The world&#039;s most advanced open source database cluster</h2>
+	</a>
+	</div>
+
+
+	<div id="navbar" class="navbar">
+	<nav id="site-navigation" class="navigation main-navigation" role="navigation">
+	<div class="menu-main-menu-container">
+
+	<ul id="menu-main-menu" class="nav-menu">
+	<li id="menu-item-359" class="link-home menu-item menu-item-type-post_type menu-item-object-page menu-item-359"><a href="https://galeracluster.com/">Home</a></li>
+	<li id="menu-item-35" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-35"><a href="https://galeracluster.com/products/">Products</a></li>
+	<li id="menu-item-34" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="https://galeracluster.com/downloads/">Downloads</a></li>
+	<li id="menu-item-33" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-12 current_page_item current-menu-ancestor current-menu-parent current_page_parent current_page_ancestor menu-item-has-children menu-item-33"><a href="https://galeracluster.com/support/">Support</a></li>
+	<li id="menu-item-32" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="https://galeracluster.com/community/">Community</a></li>
+	<li id="menu-item-31" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-31"><a href="https://galeracluster.com/company/">Company</a></li>
+	<li id="menu-item-297" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-297"><a href="https://galeracluster.com/category/blog/">Blog</a></li>
+	<li id="menu-item-38" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-38"><a href="https://galeracluster.com/contact-us/">Contact us</a></li>
+	</ul>
+	</div>
+
+
+	</nav><!-- #site-navigation -->
+
+	</div><!-- #navbar -->
+	</header><!-- #masthead -->
+
+
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="left-margin docutils container">
+<div class="left-margin-top docutils container">
+<a class="reference internal" href="../index.html"><span class="doc">The Library</span></a></div>
+<div class="left-margin-content docutils container">
+<ul class="here simple">
+<li><a class="reference internal" href="index.html"><span class="doc">Documentation</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../kb/index.html"><span class="doc">Knowledge Base</span></a></li>
+<li><a class="reference internal" href="../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="sub-links simple">
+<li><a class="reference internal" href="../training/tutorials/index.html"><span class="doc">Tutorial Articles</span></a></li>
+<li><a class="reference internal" href="../training/videos/index.html"><span class="doc">Training Videos</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a></li>
+</ul>
+<p>Related Documents</p>
+<ul class="simple">
+<li><a class="reference internal" href="#rolling-upgrade"><span class="std std-ref">Rolling Upgrade</span></a></li>
+<li><a class="reference internal" href="#bulk-upgrade"><span class="std std-ref">Bulk Upgrade</span></a></li>
+<li><a class="reference internal" href="#provider-upgrade"><span class="std std-ref">Provider Upgrade</span></a></li>
+<li><a class="reference internal" href="galera-parameters.html#gcache-size"><span class="std std-ref">gcache.size</span></a></li>
+</ul>
+</div>
+</div>
+<div class="top-links docutils container">
+<ul class="simple">
+<li><a class="reference external" href="https://galeracluster.com">Home</a></li>
+</ul>
+<ul class="here simple">
+<li><a class="reference internal" href="index.html"><span class="doc">Docs</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../kb/index.html"><span class="doc">KB</span></a></li>
+</ul>
+<ul class="nav-wider simple">
+<li><a class="reference internal" href="../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a></li>
+</ul>
+</div>
+<div class="library-document section" id="upgrading-galera-cluster">
+<span id="upgrading"></span><h1>Upgrading Galera Cluster<a class="headerlink" href="#upgrading-galera-cluster" title="Permalink to this headline">¶</a></h1>
+<p>Since high-availability is a priority for many Galera Cluster administrators, how to go about upgrading the nodes is important. Doing so with the least amount of downtime is tricky.  There are three methods for upgrading Galera Cluster, the Galera software on the individual nodes:</p>
+<blockquote>
+<div><ul class="simple">
+<li><a class="reference internal" href="#rolling-upgrade"><span class="std std-ref">Rolling Upgrade</span></a> permits you to upgrade one node  at a time, without taking down the cluster—and newly upgraded nodes can join the cluster without problems.</li>
+<li><a class="reference internal" href="#bulk-upgrade"><span class="std std-ref">Bulk Upgrade</span></a> is the method by which you take down the cluster and upgrade all of the nodes together.</li>
+<li><a class="reference internal" href="#provider-upgrade"><span class="std std-ref">Provider Upgrade</span></a> is a method in which you only upgrade the Galera Replication Plugin on each node.</li>
+</ul>
+</div></blockquote>
+<p>There are advantages and disadvantages to each of these methods.  For instance, while a rolling upgrade may prove time consuming, the cluster continues to run during the upgrades.  Similarly, while a bulk upgrade is faster, depending on on your situation, problems can result from taking down the cluster for a longer period of time.  You will have to choose the best method for your situation, needs and concerns.</p>
+<p class="section-heading rubric" id="rolling-upgrade">Rolling Upgrade</p>
+<p>When you need the cluster to remain live and do not mind the time it takes to upgrade each node, use rolling upgrades.</p>
+<p>In rolling upgrades, you take each node down individually, upgrade its software and then restart the node.  When the node reconnects, it brings itself back into sync with the cluster, as it would in the event of any other outage.  Once the individual finishes syncing with the cluster, you can move to the next in the cluster.</p>
+<p>The main advantage of a rolling upgrade is that in the even that something goes wrong with the upgrade, the other nodes remain operational, giving you time to troubleshoot the problem.</p>
+<p>Some of the disadvantages to consider in rolling upgrades are:</p>
+<p class="verbose-list"><strong>Time Consumption</strong> Performing a rolling upgrade can take some time, longer depending on the size of the databases and the number of nodes in the cluster, during which the cluster operates at a diminished capacity.</p>
+<p class="verbose-list">Unless you use <a class="reference internal" href="glossary.html#term-incremental-state-transfer"><span class="xref std std-term">Incremental State Transfer</span></a>, as you bring each node back online after an upgrade, it initiates a full <a class="reference internal" href="glossary.html#term-state-snapshot-transfer"><span class="xref std std-term">State Snapshot Transfer</span></a>, which can take a long time to process on larger databases and slower state transfer methods.</p>
+<p class="verbose-list">During the State Snapshot Transfer, the node continues to accumulate catch-up in the replication event queue, which it will then have to replay to synchronize with the cluster.  At the same time, the cluster is operational and continues to add further replication events to the queue.</p>
+<p class="verbose-list"><strong>Blocking Nodes</strong> When the node comes back online, if you use <code class="docutils literal notranslate"><span class="pre">mysqldump</span></code> for State Snapshot Transfers, the donor node remains blocked for the duration of the transfer.  In practice, this means that the cluster is short two nodes for the duration of the state transfer, one for the donor node and one for the node in catch-up.</p>
+<p class="verbose-list">Using <code class="docutils literal notranslate"><span class="pre">xtrabackup</span></code> or <code class="docutils literal notranslate"><span class="pre">rsync</span></code> with the LVM state transfer methods, you can avoid blocking the donor, but doing so may slow the donor node down.</p>
+<p class="verbose-list">Depending on the load balancing mechanism, you may have to configure the load balancer not to direct requests at joining and donating nodes.</p>
+<p class="verbose-list"><strong>Cluster Availability</strong> Taking down nodes for a rolling upgrade can greatly diminish cluster performance or availability, such as if there are too few nodes in the cluster to begin with or where the cluster is operating at its maximum capacity.</p>
+<p class="verbose-list">In such cases, losing access to two nodes during a rolling upgrade can create situations where the cluster can no longer serve all requests made of it or where the execution times of each request increase to the point where services become less available.</p>
+<p class="verbose-list"><strong>Cluster Performance</strong> Each node you bring up after an upgrade, diminishes cluster performance until the node buffer pool warms back up.  Parallel applying can help with this.</p>
+<p class="rubric-3 rubric" id="rolling-upgrade-steps">Rolling Upgrade Procedure</p>
+<p>Assuming you’ve read and considered the above, below are the steps for upgrading each node in a cluster—one at a time. This procedure, though, is for minor upgrades, not major upgrades.  For those, see the next section.</p>
+<blockquote>
+<div><ul class="simple">
+<li>First, transfer all client connections from the node you’re about to upgrade to the other nodes.</li>
+<li>When there are no more client connections trying to access the node, shut down the database software (i.e., <code class="docutils literal notranslate"><span class="pre">mysqld</span></code>). This will remove the node from the cluster.</li>
+<li>Now use the method you prefer to upgrade the software.  A package management utility such as <code class="docutils literal notranslate"><span class="pre">yum</span></code>, or whatever is appropriate for the your operating system distribution.</li>
+<li>When you’ve finished updating the database and Galera software, start the node. Check that it has successfully joined the cluster and finished synchronizing before beginning the process to upgrade another node in the cluster.</li>
+</ul>
+</div></blockquote>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">If you upgrade a node that will be part of a weighted quorum, set the initial node weight to zero.  This guarantees that if the joining node should fail before it finishes synchronizing, it won’t affect any quorum computations that follow.</p>
+</div>
+<p class="sub-heading rubric" id="rolling-upgrade-major-versions">Rolling Upgrades of Major Versions of Galera Cluster</p>
+<p>Performing a rolling upgrade between major versions of Galera Cluster (e.g., from 5.6 to 5.7) has certain additional limitations.  Below is a list of them; you should consider these factors.</p>
+<p class="verbose-list">SST is not supported between nodes of different major versions. Therefore, nodes of different major versions should not coexist in the same cluster for longer than necessary to perform the upgrade;</p>
+<p class="verbose-list">Prior to performing the upgrade, ensure that the <a class="reference internal" href="galera-parameters.html#gcache-size"><span class="std std-ref">gcache.size</span></a> provider option on all nodes is sized so that it can provide IST for the expected duration of the upgrade;</p>
+<p class="verbose-list">While the cluster contains nodes of multiple versions, avoid running any statements that are only supported in a particular version or statements that have different effect in different versions. For example, do not run DDL statements that are only available in the newer version.</p>
+<p class="rubric-3 rubric" id="rolling-major-upgrade-steps">Rolling Major Upgrade Procedure</p>
+<p>Below are the steps of the following procedure for performing rolling upgrades between major versions of Galera Cluster.</p>
+<blockquote>
+<div><ul class="simple">
+<li>Choose one node to upgrade and make sure that all client connections are directed elsewhere.  Once it’s free of its cluster obligations, shut down the database daemon (e.g., <code class="docutils literal notranslate"><span class="pre">mysqld</span></code>).</li>
+<li>Edit the database configuration file (i.e., <code class="docutils literal notranslate"><span class="pre">my.cnf</span></code>) and temporarily comment out the <code class="docutils literal notranslate"><span class="pre">wsrep_provider</span></code> line. This will prevent the node from attempting to rejoin the cluster during the package upgrade process.</li>
+<li>Uninstall all existing <code class="docutils literal notranslate"><span class="pre">mysql-wsrep</span></code> packages and install the new packages using a package manager (e.g., <code class="docutils literal notranslate"><span class="pre">yum</span></code>)</li>
+<li>Start the <code class="docutils literal notranslate"><span class="pre">mysqld</span></code> daemon—without connecting to the cluster—and then run the <code class="docutils literal notranslate"><span class="pre">mysql_upgrade</span></code> script, if it wasn’t run automatically as part of package installation.</li>
+<li>Last, restore the <code class="docutils literal notranslate"><span class="pre">wsrep_provider</span></code> line in the database configuration and restart the <code class="docutils literal notranslate"><span class="pre">mysqld</span></code> daemon.</li>
+</ul>
+</div></blockquote>
+<p class="section-heading rubric" id="bulk-upgrade">Bulk Upgrade</p>
+<p>When you want to avoid time-consuming state transfers and the slow process of upgrading each node, one at a time, use a bulk upgrade.</p>
+<p>In bulk upgrades, you take all of the nodes down in an idle cluster, perform the upgrades, then bring the cluster back online.  This allows you to upgrade your cluster quickly, but does mean a complete service outage for your cluster.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Always use bulk upgrades when using a two-node cluster, as the rolling upgrade would result in a much longer service outage.</p>
+</div>
+<p>The main advantage of bulk upgrade is that when you are working with huge databases, it is much faster and results in better availability than rolling upgrades.</p>
+<p>The main disadvantage is that it relies on the upgrade and restart being quick.  Shutting down InnoDB may take a few minutes as it flushes dirty pages.  If something goes wrong during the upgrade, there is little time to troubleshoot and fix the problem.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">To minimize any issues that might arise from an upgrade, do not upgrade all of the nodes at once.  Rather, run the upgrade on a single node first.  If it runs without issue, upgrade the rest of the cluster.</p>
+</div>
+<p>To perform a bulk upgrade on Galera Cluster, complete the following steps:</p>
+<ol class="arabic simple">
+<li>Stop all load on the cluster</li>
+<li>Shut down all the nodes</li>
+<li>Upgrade software</li>
+<li>Restart the nodes. The nodes will merge to the cluster without state transfers, in a matter of seconds.</li>
+<li>Resume the load on the cluster</li>
+</ol>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">You can carry out steps 2-3-4 on all nodes in parallel, therefore reducing the service outage time to virtually the time needed for a single server restart.</p>
+</div>
+<p class="section-heading rubric" id="provider-upgrade">Provider-Only Upgrade</p>
+<p id="index-0">When you only need to upgrade the Galera provider, you can further optimize the bulk upgrade to only take a few seconds.</p>
+<div class="admonition important">
+<p class="first admonition-title">Important</p>
+<p class="last">In provider-only upgrade, the warmed up InnoDB buffer pool is fully preserved and the cluster continues to operate at full speed as soon as you resume the load.</p>
+</div>
+<p class="sub-heading rubric" id="upgrade-plugin">Upgrading Galera Replication Plugin</p>
+<p>If you installed Galera Cluster for MySQL using the binary package from the Codership repository, you can upgrade the Galera Replication Plugin through your package manager..</p>
+<p>To upgrade the Galera Replicator Plugin on an RPM-based Linux distribution, run the following command for each node in the cluster:</p>
+<blockquote>
+<div><div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> yum update galera
+</pre></div>
+</div>
+</div></blockquote>
+<p>To upgrade the Galera Replicator Plugin on a Debian-based Linux distribution, run the following commands for each node in the cluster:</p>
+<blockquote>
+<div><div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> apt-get update
+<span class="gp">$</span> apt-get upgrade galera
+</pre></div>
+</div>
+</div></blockquote>
+<p>When <code class="docutils literal notranslate"><span class="pre">apt-get</span></code> or <code class="docutils literal notranslate"><span class="pre">yum</span></code> finish, you will have the latest version of the Galera Replicator Plugin available on the node.  Once this process is complete, you can move on to updating the cluster to use the newer version of the plugin.</p>
+<p class="sub-heading rubric" id="updating-galera-cluster">Updating Galera Cluster</p>
+<p>After you upgrade the Galera Replicator Plugin package on each node in the cluster, you need to run a bulk upgrade to switch the cluster over to the newer version of the plugin.</p>
+<ol class="arabic">
+<li><p class="first">Stop all load on the cluster.</p>
+</li>
+<li><p class="first">For each node in the cluster, issue the following queries:</p>
+<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="kt">SET</span> <span class="n">GLOBAL</span> <span class="n">wsrep_provider</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">;</span>
+<span class="kt">SET</span> <span class="n">GLOBAL</span> <span class="n">wsrep_provider</span><span class="o">=</span><span class="s1">&#39;/usr/lib64/galera/libgalera_smm.so&#39;</span><span class="p">;</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">One any one node in the cluster, issue the following query:</p>
+<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="kt">SET</span> <span class="n">GLOBAL</span> <span class="n">wsrep_cluster_address</span><span class="o">=</span><span class="s1">&#39;gcomm://&#39;</span><span class="p">;</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">For every other node in the cluster, issue the following query:</p>
+<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="kt">SET</span> <span class="n">GLOBAL</span> <span class="n">wsrep_cluster_address</span><span class="o">=</span><span class="s1">&#39;gcomm://node1addr&#39;</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>For <code class="docutils literal notranslate"><span class="pre">node1addr</span></code>, use the address of the node in step 3.</p>
+</li>
+<li><p class="first">Resume the load on the cluster.</p>
+</li>
+</ol>
+<p>Reloading the provider and connecting it to the cluster typically takes less than ten seconds, so there is virtually no service outage.</p>
+<div class="bottom-links docutils container">
+<p>Related Documents</p>
+<ul class="simple">
+<li><a class="reference internal" href="#rolling-upgrade"><span class="std std-ref">Rolling Upgrade</span></a></li>
+<li><a class="reference internal" href="#bulk-upgrade"><span class="std std-ref">Bulk Upgrade</span></a></li>
+<li><a class="reference internal" href="#provider-upgrade"><span class="std std-ref">Provider Upgrade</span></a></li>
+<li><a class="reference internal" href="galera-parameters.html#gcache-size"><span class="std std-ref">gcache.size</span></a></li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/logo.png" alt="Logo"/>
+            </a></p>
+<h1 class="logo"><a href="../index.html">Galera Cluster</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">The Codership Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="overview.html">Overview of Galera Cluster</a></li>
+<li class="toctree-l2"><a class="reference internal" href="technical-description.html">Technical Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html">Installing Galera Cluster</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="administration.html">Galera Cluster Administration</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="node-provisioning.html">Node Provisioning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sst.html">State Snapshot Transfers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="scriptable-sst.html">Scriptable State Snapshot Transfers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="system-tables.html">Galera System Tables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="schema-upgrades.html">Schema Upgrades</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Upgrading Galera Cluster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pc-recovery.html">Recovering Primary Component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="quorum-reset.html">Resetting the Quorum</a></li>
+<li class="toctree-l3"><a class="reference internal" href="managing-fc.html">Managing Flow Control</a></li>
+<li class="toctree-l3"><a class="reference internal" href="auto-eviction.html">Auto-Eviction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="using-sr.html">Using Streaming Replication</a></li>
+<li class="toctree-l3"><a class="reference internal" href="arbitrator.html">Galera Arbitrator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="backup-cluster.html">Backing Up Cluster Data</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="deployment.html">Deployment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="monitor.html">Cluster Monitoring</a></li>
+<li class="toctree-l2"><a class="reference internal" href="security.html">Security</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference.html">Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../kb/index.html">The Codership Knowledge Base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../training/index.html">Codership Training</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../whats-new.html">What’s New</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../editors/index.html">Codership Writers &amp; Editors</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">The Codership Documentation</a><ul>
+  <li><a href="administration.html">Galera Cluster Administration</a><ul>
+      <li>Previous: <a href="schema-upgrades.html" title="previous chapter">Schema Upgrades</a></li>
+      <li>Next: <a href="pc-recovery.html" title="next chapter">Recovering Primary Component</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+	<div class="navbar">
+	<nav id="site-navigation" class="navigation main-navigation" role="navigation">
+	<div class="nav-bar-container">
+
+	<div id="menu-nav-bar" class="nav-menu">
+		<ul class="nav-link">
+			<li> </li>
+
+		</ul>
+
+	</div>
+	</nav>
+
+	<footer id="colophon" class="site-footer" role="contentinfo">
+	<div class="top">	<div class="powered-by"><p>Powered by Galera:</p>
+	<p><a href="https://mariadb.com/kb/en/galera/"><img class="alignleft size-full wp-image-237" alt="MariaDB" src="https://galeracluster.com/wp-content/uploads/2013/10/logo-mariadb.png" width="166" height="49" /></a></p>
+		</div></div>
+	<div class="footer-menu">
+	<div class="menu-main-menu-container">
+	<ul id="menu-main-menu-1" class="nav-menu">
+	<li class="link-home menu-item menu-item-type-post_type menu-item-object-page menu-item-359"><a href="https://galeracluster.com/">Home</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-35"><a href="https://galeracluster.com/products/">Products</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="https://galeracluster.com/downloads/">Downloads</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-12 current_page_item current-menu-ancestor current-menu-parent current_page_parent current_page_ancestor menu-item-has-children menu-item-33"><a href="https://galeracluster.com/support/">Support</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="https://galeracluster.com/community/">Community</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-31"><a href="https://galeracluster.com/company/">Company</a></li>
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-297"><a href="https://galeracluster.com/category/blog/">Blog</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-38"><a href="https://galeracluster.com/contact-us/">Contact us</a></li>
+	</ul></div>			</div><!-- .footer-menu -->
+
+
+	<div class="footer-bar">
+	<p class="copyright">2014 Codership Ltd.</p>
+	</div>
+	<div class="footnote">
+	<h2>Your data is invaluable. We're here to secure it. All of it.</h2>
+	</div>
+	</footer><!-- #colophon -->
+
+
+
+
+  </body>
+</html>

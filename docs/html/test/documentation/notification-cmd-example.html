@@ -1,0 +1,436 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><meta content="Example of a Galera Notification Script" name="title" />
+<meta content="en-US" name="language" />
+<meta content="galera cluster, notification, notify command, trigger, script" name="keywords" />
+<meta content="Codership Oy, 2014 - 2020. All Rights Reserved." name="copyright" />
+
+    <title>Notification Script Example &#8212; Galera Cluster Documentation</title>
+    <link rel="stylesheet" href="../_static/reset-style.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Security" href="security.html" />
+    <link rel="prev" title="Notification Command" href="notification-cmd.html" />
+
+
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<link rel="stylesheet" href="/library/_static/basic-style.css">
+<link rel="stylesheet" href="/library/_static/header.css">
+<link rel="stylesheet" href="/library/_static/footer.css">
+<link rel="stylesheet" href="/library/_static/codership.css">
+<link rel="stylesheet" media="screen and (max-width: 500px)" href="/library/_static/mobile.css"/>
+<link rel="stylesheet" media="screen and (min-width:501px) and (max-width:1024px)" href="/library/_static/tablet.css"/>
+<link rel="stylesheet" media="screen and (prefers-color-scheme: dark)" href="/library/_static/dark.css"/>
+
+
+<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Feed" href="https://galeracluster.com/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Comments Feed" href="https://galeracluster.com/comments/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Support Comments Feed" href="https://galeracluster.com/support/feed/" />
+
+<script type='text/javascript' src='https://galeracluster.com/wp-includes/js/comment-reply.min.js?ver=3.8.3'></script>
+
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://galeracluster.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://galeracluster.com/wp-includes/wlwmanifest.xml" />
+<link rel='prev' title='Downloads' href='https://galeracluster.com/downloads/' />
+<link rel='next' title='Community' href='https://galeracluster.com/community/' />
+<meta name="generator" content="WordPress 3.8.3" />
+
+<link rel='shortlink' href='https://galeracluster.com/?p=12' />
+
+<style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>
+<style type="text/css" id="twentythirteen-header-css">
+			.site-title,
+			.site-description {
+				position: absolute;
+				clip: rect(1px 1px 1px 1px); /* IE7 */
+				clip: rect(1px, 1px, 1px, 1px);
+			}
+				.site-header .home-link {
+				min-height: 0;
+			}
+</style>
+
+<script type="text/javascript">
+
+		  var _gaq = _gaq || [];
+		  _gaq.push(['_setAccount', 'UA-35163478-6']);
+		  _gaq.push(['_trackPageview']);
+
+		  (function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'https://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		  })();
+
+</script>
+
+  </head><body>
+	<div id="fb-root"></div>
+	<script>(function(d, s, id) {
+		  var js, fjs = d.getElementsByTagName(s)[0];
+		  if (d.getElementById(id)) return;
+		  js = d.createElement(s); js.id = id;
+		  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+		  fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));
+	</script>
+
+	<div id="page" class="hfeed site">
+
+	<header id="masthead" class="site-header" role="banner">
+
+	<div class="top">
+	<a class="home-link" href="https://galeracluster.com/" title="Galera Cluster for MySQL" rel="home">
+	<h1 class="site-title">Galera Cluster for MySQL</h1>
+	<h2 class="site-description">The world&#039;s most advanced open source database cluster</h2>
+	</a>
+	</div>
+
+
+	<div id="navbar" class="navbar">
+	<nav id="site-navigation" class="navigation main-navigation" role="navigation">
+	<div class="menu-main-menu-container">
+
+	<ul id="menu-main-menu" class="nav-menu">
+	<li id="menu-item-359" class="link-home menu-item menu-item-type-post_type menu-item-object-page menu-item-359"><a href="https://galeracluster.com/">Home</a></li>
+	<li id="menu-item-35" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-35"><a href="https://galeracluster.com/products/">Products</a></li>
+	<li id="menu-item-34" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="https://galeracluster.com/downloads/">Downloads</a></li>
+	<li id="menu-item-33" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-12 current_page_item current-menu-ancestor current-menu-parent current_page_parent current_page_ancestor menu-item-has-children menu-item-33"><a href="https://galeracluster.com/support/">Support</a></li>
+	<li id="menu-item-32" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="https://galeracluster.com/community/">Community</a></li>
+	<li id="menu-item-31" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-31"><a href="https://galeracluster.com/company/">Company</a></li>
+	<li id="menu-item-297" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-297"><a href="https://galeracluster.com/category/blog/">Blog</a></li>
+	<li id="menu-item-38" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-38"><a href="https://galeracluster.com/contact-us/">Contact us</a></li>
+	</ul>
+	</div>
+
+
+	</nav><!-- #site-navigation -->
+
+	</div><!-- #navbar -->
+	</header><!-- #masthead -->
+
+
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="left-margin docutils container">
+<div class="left-margin-top docutils container">
+<a class="reference internal" href="../index.html"><span class="doc">The Library</span></a></div>
+<div class="left-margin-content docutils container">
+<ul class="here simple">
+<li><a class="reference internal" href="index.html"><span class="doc">Documentation</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../kb/index.html"><span class="doc">Knowledge Base</span></a></li>
+<li><a class="reference internal" href="../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="sub-links simple">
+<li><a class="reference internal" href="../training/tutorials/index.html"><span class="doc">Tutorial Articles</span></a></li>
+<li><a class="reference internal" href="../training/videos/index.html"><span class="doc">Training Videos</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a></li>
+</ul>
+<p>Related Documents</p>
+<ul class="simple">
+<li><a class="reference internal" href="mysql-wsrep-options.html#wsrep-notify-cmd"><span class="std std-ref">wsrep_notify_cmd</span></a></li>
+</ul>
+</div>
+</div>
+<div class="top-links docutils container">
+<ul class="simple">
+<li><a class="reference external" href="https://galeracluster.com">Home</a></li>
+</ul>
+<ul class="here simple">
+<li><a class="reference internal" href="index.html"><span class="doc">Docs</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../kb/index.html"><span class="doc">KB</span></a></li>
+</ul>
+<ul class="nav-wider simple">
+<li><a class="reference internal" href="../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a></li>
+</ul>
+</div>
+<div class="library-document section" id="notification-script-example">
+<span id="example-notification-script"></span><h1>Notification Script Example<a class="headerlink" href="#notification-script-example" title="Permalink to this headline">¶</a></h1>
+<p>Nodes can call a notification script when changes happen in the membership of the cluster, that is when nodes join or leave the cluster.  You can specify the name of the script the node calls using the <a class="reference internal" href="mysql-wsrep-options.html#wsrep-notify-cmd"><span class="std std-ref">wsrep_notify_cmd</span></a>.  While you can use whatever script meets the particular needs of a deployment, you may find it helpful to consider the example below as a starting point.</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/sh -eu</span>
+
+<span class="c1"># This is a simple example of wsrep notification script (wsrep_notify_cmd).</span>
+<span class="c1"># It will create &#39;wsrep&#39; schema and two tables in it: &#39;membership&#39; and &#39;status&#39;</span>
+<span class="c1"># and insert data into them on every membership or node status change.</span>
+<span class="c1">#</span>
+<span class="c1"># Edit parameters below to specify the address and login to server.</span>
+
+<span class="nv">USER</span><span class="o">=</span>root
+<span class="nv">PSWD</span><span class="o">=</span>rootpass
+<span class="nv">HOST</span><span class="o">=</span>&lt;host_IP_address&gt;
+<span class="nv">PORT</span><span class="o">=</span><span class="m">3306</span>
+
+<span class="nv">SCHEMA</span><span class="o">=</span><span class="s2">&quot;wsrep&quot;</span>
+<span class="nv">MEMB_TABLE</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$SCHEMA</span><span class="s2">.membership&quot;</span>
+<span class="nv">STATUS_TABLE</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$SCHEMA</span><span class="s2">.status&quot;</span>
+
+<span class="nv">BEGIN</span><span class="o">=</span><span class="s2">&quot;</span>
+<span class="s2">   SET wsrep_on=0;</span>
+<span class="s2">   DROP SCHEMA IF EXISTS </span><span class="nv">$SCHEMA</span><span class="s2">; CREATE SCHEMA </span><span class="nv">$SCHEMA</span><span class="s2">;</span>
+<span class="s2">   CREATE TABLE </span><span class="nv">$MEMB_TABLE</span><span class="s2"> (</span>
+<span class="s2">      idx  INT UNIQUE PRIMARY KEY,</span>
+<span class="s2">      uuid CHAR(40) UNIQUE, /* node UUID */</span>
+<span class="s2">      name VARCHAR(32),     /* node name */</span>
+<span class="s2">      addr VARCHAR(256)     /* node address */</span>
+<span class="s2">   ) ENGINE=MEMORY;</span>
+<span class="s2">   CREATE TABLE </span><span class="nv">$STATUS_TABLE</span><span class="s2"> (</span>
+<span class="s2">      size   INT,      /* component size   */</span>
+<span class="s2">      idx    INT,      /* this node index  */</span>
+<span class="s2">      status CHAR(16), /* this node status */</span>
+<span class="s2">      uuid   CHAR(40), /* cluster UUID */</span>
+<span class="s2">      prim   BOOLEAN   /* if component is primary */</span>
+<span class="s2">   ) ENGINE=MEMORY;</span>
+<span class="s2">   BEGIN;</span>
+<span class="s2">   DELETE FROM </span><span class="nv">$MEMB_TABLE</span><span class="s2">;</span>
+<span class="s2">   DELETE FROM </span><span class="nv">$STATUS_TABLE</span><span class="s2">;</span>
+<span class="s2">&quot;</span>
+<span class="nv">END</span><span class="o">=</span><span class="s2">&quot;COMMIT;&quot;</span>
+
+configuration_change<span class="o">()</span>
+<span class="o">{</span>
+   <span class="nb">echo</span> <span class="s2">&quot;</span><span class="nv">$BEGIN</span><span class="s2">;&quot;</span>
+
+   <span class="nb">local</span> <span class="nv">idx</span><span class="o">=</span><span class="m">0</span>
+
+   <span class="k">for</span> NODE in <span class="k">$(</span><span class="nb">echo</span> <span class="nv">$MEMBERS</span> <span class="p">|</span> sed s/,/<span class="se">\ </span>/g<span class="k">)</span>
+   <span class="k">do</span>
+      <span class="nb">echo</span> <span class="s2">&quot;INSERT INTO </span><span class="nv">$MEMB_TABLE</span><span class="s2"> VALUES ( </span><span class="nv">$idx</span><span class="s2">, &quot;</span>
+      <span class="c1"># Don&#39;t forget to properly quote string values</span>
+      <span class="nb">echo</span> <span class="s2">&quot;&#39;</span><span class="nv">$NODE</span><span class="s2">&#39;&quot;</span> <span class="p">|</span> sed  s/<span class="se">\\</span>//<span class="se">\&#39;</span>,<span class="se">\&#39;</span>/g
+      <span class="nb">echo</span> <span class="s2">&quot;);&quot;</span>
+      <span class="nv">idx</span><span class="o">=</span><span class="k">$((</span> <span class="nv">$idx</span> <span class="o">+</span> <span class="m">1</span> <span class="k">))</span>
+   <span class="k">done</span>
+
+   <span class="nb">echo</span> <span class="s2">&quot;</span>
+<span class="s2">      INSERT INTO </span><span class="nv">$STATUS_TABLE</span><span class="s2"></span>
+<span class="s2">      VALUES(</span><span class="nv">$idx</span><span class="s2">, </span><span class="nv">$INDEX</span><span class="s2">,&#39;</span><span class="nv">$STATUS</span><span class="s2">&#39;, &#39;</span><span class="nv">$CLUSTER_UUID</span><span class="s2">&#39;, </span><span class="nv">$PRIMARY</span><span class="s2">);</span>
+<span class="s2">   &quot;</span>
+
+   <span class="nb">echo</span> <span class="s2">&quot;</span><span class="nv">$END</span><span class="s2">&quot;</span>
+<span class="o">}</span>
+
+status_update<span class="o">()</span>
+<span class="o">{</span>
+   <span class="nb">echo</span> <span class="s2">&quot;</span>
+<span class="s2">      SET wsrep_on=0;</span>
+<span class="s2">      BEGIN;</span>
+<span class="s2">      UPDATE </span><span class="nv">$STATUS_TABLE</span><span class="s2"> SET status=&#39;</span><span class="nv">$STATUS</span><span class="s2">&#39;;</span>
+<span class="s2">      COMMIT;</span>
+<span class="s2">   &quot;</span>
+<span class="o">}</span>
+
+<span class="nv">COM</span><span class="o">=</span>status_update <span class="c1"># not a configuration change by default</span>
+
+<span class="k">while</span> <span class="o">[</span> <span class="nv">$#</span> -gt <span class="m">0</span> <span class="o">]</span>
+<span class="k">do</span>
+   <span class="k">case</span> <span class="nv">$1</span> in
+      --status<span class="o">)</span>
+         <span class="nv">STATUS</span><span class="o">=</span><span class="nv">$2</span>
+         <span class="nb">shift</span>
+         <span class="p">;;</span>
+      --uuid<span class="o">)</span>
+         <span class="nv">CLUSTER_UUID</span><span class="o">=</span><span class="nv">$2</span>
+         <span class="nb">shift</span>
+         <span class="p">;;</span>
+      --primary<span class="o">)</span>
+         <span class="o">[</span> <span class="s2">&quot;</span><span class="nv">$2</span><span class="s2">&quot;</span> <span class="o">=</span> <span class="s2">&quot;yes&quot;</span> <span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="nv">PRIMARY</span><span class="o">=</span><span class="s2">&quot;1&quot;</span> <span class="o">||</span> <span class="nv">PRIMARY</span><span class="o">=</span><span class="s2">&quot;0&quot;</span>
+         <span class="nv">COM</span><span class="o">=</span>configuration_change
+         <span class="nb">shift</span>
+         <span class="p">;;</span>
+      --index<span class="o">)</span>
+         <span class="nv">INDEX</span><span class="o">=</span><span class="nv">$2</span>
+         <span class="nb">shift</span>
+         <span class="p">;;</span>
+      --members<span class="o">)</span>
+         <span class="nv">MEMBERS</span><span class="o">=</span><span class="nv">$2</span>
+         <span class="nb">shift</span>
+         <span class="p">;;</span>
+         <span class="k">esac</span>
+         <span class="nb">shift</span>
+   <span class="k">done</span>
+
+<span class="c1"># Undefined means node is shutting down</span>
+<span class="k">if</span> <span class="o">[</span> <span class="s2">&quot;</span><span class="nv">$STATUS</span><span class="s2">&quot;</span> !<span class="o">=</span> <span class="s2">&quot;Undefined&quot;</span> <span class="o">]</span>
+<span class="k">then</span>
+   <span class="nv">$COM</span> <span class="p">|</span> mysql -B -u<span class="nv">$USER</span> -p<span class="nv">$PSWD</span> -h<span class="nv">$HOST</span> -P<span class="nv">$PORT</span>
+<span class="k">fi</span>
+
+<span class="nb">exit</span> <span class="m">0</span>
+</pre></div>
+</div>
+<p class="section-heading rubric" id="notification-cmd-path-permissions">Path and Permissions</p>
+<p>After you modify this script to fit your requirements, you need to move it into a directory in the <code class="docutils literal notranslate"><span class="pre">$PATH</span></code> or the binaries directory for your system.  On Linux, the binaries directory is typically at <code class="docutils literal notranslate"><span class="pre">/usr/bin</span></code>, while on FreeBSD it is at <code class="docutils literal notranslate"><span class="pre">/usr/local/bin</span></code>.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">#</span> mv my-wsrep-notify.sh /usr/bin
+</pre></div>
+</div>
+<p>In addition to this, given that the notification command contains your root password, change the ownership to the <code class="docutils literal notranslate"><span class="pre">mysql</span></code> user and make sure the script is executable only by that user.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">#</span> chown mysql:mysql /usr/bin/my-wsrep-notify.sh
+<span class="gp">#</span> chmod <span class="m">700</span> /usr/bin/my-wsrep-notify.sh.
+</pre></div>
+</div>
+<p>This ensures that only the <code class="docutils literal notranslate"><span class="pre">mysql</span></code> user can execute and read the notification script, preventing all other users from seeing the root password.</p>
+<div class="bottom-links docutils container">
+<p>Related Documents</p>
+<ul class="simple">
+<li><a class="reference internal" href="mysql-wsrep-options.html#wsrep-notify-cmd"><span class="std std-ref">wsrep_notify_cmd</span></a></li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/logo.png" alt="Logo"/>
+            </a></p>
+<h1 class="logo"><a href="../index.html">Galera Cluster</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">The Codership Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="overview.html">Overview of Galera Cluster</a></li>
+<li class="toctree-l2"><a class="reference internal" href="technical-description.html">Technical Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html">Installing Galera Cluster</a></li>
+<li class="toctree-l2"><a class="reference internal" href="administration.html">Galera Cluster Administration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deployment.html">Deployment</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="monitor.html">Cluster Monitoring</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="monitoring-cluster.html">Using Status Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="log.html">Database Server Logs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="galera-manager.html">The Galera Manager</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notification-cmd.html">Notification Command</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Notification Script Example</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="security.html">Security</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference.html">Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../kb/index.html">The Codership Knowledge Base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../training/index.html">Codership Training</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../whats-new.html">What’s New</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../editors/index.html">Codership Writers &amp; Editors</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">The Codership Documentation</a><ul>
+  <li><a href="monitor.html">Cluster Monitoring</a><ul>
+      <li>Previous: <a href="notification-cmd.html" title="previous chapter">Notification Command</a></li>
+      <li>Next: <a href="security.html" title="next chapter">Security</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+	<div class="navbar">
+	<nav id="site-navigation" class="navigation main-navigation" role="navigation">
+	<div class="nav-bar-container">
+
+	<div id="menu-nav-bar" class="nav-menu">
+		<ul class="nav-link">
+			<li> </li>
+
+		</ul>
+
+	</div>
+	</nav>
+
+	<footer id="colophon" class="site-footer" role="contentinfo">
+	<div class="top">	<div class="powered-by"><p>Powered by Galera:</p>
+	<p><a href="https://mariadb.com/kb/en/galera/"><img class="alignleft size-full wp-image-237" alt="MariaDB" src="https://galeracluster.com/wp-content/uploads/2013/10/logo-mariadb.png" width="166" height="49" /></a></p>
+		</div></div>
+	<div class="footer-menu">
+	<div class="menu-main-menu-container">
+	<ul id="menu-main-menu-1" class="nav-menu">
+	<li class="link-home menu-item menu-item-type-post_type menu-item-object-page menu-item-359"><a href="https://galeracluster.com/">Home</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-35"><a href="https://galeracluster.com/products/">Products</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="https://galeracluster.com/downloads/">Downloads</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-12 current_page_item current-menu-ancestor current-menu-parent current_page_parent current_page_ancestor menu-item-has-children menu-item-33"><a href="https://galeracluster.com/support/">Support</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="https://galeracluster.com/community/">Community</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-31"><a href="https://galeracluster.com/company/">Company</a></li>
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-297"><a href="https://galeracluster.com/category/blog/">Blog</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-38"><a href="https://galeracluster.com/contact-us/">Contact us</a></li>
+	</ul></div>			</div><!-- .footer-menu -->
+
+
+	<div class="footer-bar">
+	<p class="copyright">2014 Codership Ltd.</p>
+	</div>
+	<div class="footnote">
+	<h2>Your data is invaluable. We're here to secure it. All of it.</h2>
+	</div>
+	</footer><!-- #colophon -->
+
+
+
+
+  </body>
+</html>

@@ -1,0 +1,360 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><meta content="Maintaining a Two-Node Galera Cluster" name="title" />
+<meta content="en-US" name="language" />
+<meta content="Codership Oy, 2014 - 2020. All Rights Reserved." name="copyright" />
+
+    <title>Two-Node Clusters &#8212; Galera Cluster Documentation</title>
+    <link rel="stylesheet" href="../_static/reset-style.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Setting an SELinux Policy" href="setting-selinux-policy.html" />
+    <link rel="prev" title="Multi-Master Setup" href="multi-master-setup.html" />
+
+
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<link rel="stylesheet" href="/library/_static/basic-style.css">
+<link rel="stylesheet" href="/library/_static/header.css">
+<link rel="stylesheet" href="/library/_static/footer.css">
+<link rel="stylesheet" href="/library/_static/codership.css">
+<link rel="stylesheet" media="screen and (max-width: 500px)" href="/library/_static/mobile.css"/>
+<link rel="stylesheet" media="screen and (min-width:501px) and (max-width:1024px)" href="/library/_static/tablet.css"/>
+<link rel="stylesheet" media="screen and (prefers-color-scheme: dark)" href="/library/_static/dark.css"/>
+
+
+<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Feed" href="https://galeracluster.com/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Comments Feed" href="https://galeracluster.com/comments/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Support Comments Feed" href="https://galeracluster.com/support/feed/" />
+
+<script type='text/javascript' src='https://galeracluster.com/wp-includes/js/comment-reply.min.js?ver=3.8.3'></script>
+
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://galeracluster.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://galeracluster.com/wp-includes/wlwmanifest.xml" />
+<link rel='prev' title='Downloads' href='https://galeracluster.com/downloads/' />
+<link rel='next' title='Community' href='https://galeracluster.com/community/' />
+<meta name="generator" content="WordPress 3.8.3" />
+
+<link rel='shortlink' href='https://galeracluster.com/?p=12' />
+
+<style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>
+<style type="text/css" id="twentythirteen-header-css">
+			.site-title,
+			.site-description {
+				position: absolute;
+				clip: rect(1px 1px 1px 1px); /* IE7 */
+				clip: rect(1px, 1px, 1px, 1px);
+			}
+				.site-header .home-link {
+				min-height: 0;
+			}
+</style>
+
+<script type="text/javascript">
+
+		  var _gaq = _gaq || [];
+		  _gaq.push(['_setAccount', 'UA-35163478-6']);
+		  _gaq.push(['_trackPageview']);
+
+		  (function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'https://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		  })();
+
+</script>
+
+  </head><body>
+	<div id="fb-root"></div>
+	<script>(function(d, s, id) {
+		  var js, fjs = d.getElementsByTagName(s)[0];
+		  if (d.getElementById(id)) return;
+		  js = d.createElement(s); js.id = id;
+		  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+		  fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));
+	</script>
+
+	<div id="page" class="hfeed site">
+
+	<header id="masthead" class="site-header" role="banner">
+
+	<div class="top">
+	<a class="home-link" href="https://galeracluster.com/" title="Galera Cluster for MySQL" rel="home">
+	<h1 class="site-title">Galera Cluster for MySQL</h1>
+	<h2 class="site-description">The world&#039;s most advanced open source database cluster</h2>
+	</a>
+	</div>
+
+
+	<div id="navbar" class="navbar">
+	<nav id="site-navigation" class="navigation main-navigation" role="navigation">
+	<div class="menu-main-menu-container">
+
+	<ul id="menu-main-menu" class="nav-menu">
+	<li id="menu-item-359" class="link-home menu-item menu-item-type-post_type menu-item-object-page menu-item-359"><a href="https://galeracluster.com/">Home</a></li>
+	<li id="menu-item-35" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-35"><a href="https://galeracluster.com/products/">Products</a></li>
+	<li id="menu-item-34" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="https://galeracluster.com/downloads/">Downloads</a></li>
+	<li id="menu-item-33" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-12 current_page_item current-menu-ancestor current-menu-parent current_page_parent current_page_ancestor menu-item-has-children menu-item-33"><a href="https://galeracluster.com/support/">Support</a></li>
+	<li id="menu-item-32" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="https://galeracluster.com/community/">Community</a></li>
+	<li id="menu-item-31" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-31"><a href="https://galeracluster.com/company/">Company</a></li>
+	<li id="menu-item-297" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-297"><a href="https://galeracluster.com/category/blog/">Blog</a></li>
+	<li id="menu-item-38" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-38"><a href="https://galeracluster.com/contact-us/">Contact us</a></li>
+	</ul>
+	</div>
+
+
+	</nav><!-- #site-navigation -->
+
+	</div><!-- #navbar -->
+	</header><!-- #masthead -->
+
+
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="left-margin docutils container">
+<div class="left-margin-top docutils container">
+<a class="reference internal" href="../index.html"><span class="doc">The Library</span></a></div>
+<div class="left-margin-content docutils container">
+<ul class="simple">
+<li><a class="reference internal" href="../documentation/index.html"><span class="doc">Documentation</span></a></li>
+</ul>
+<ul class="here simple">
+<li><a class="reference internal" href="index.html"><span class="doc">Knowledge Base</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="sub-links simple">
+<li><a class="reference internal" href="../training/tutorials/index.html"><span class="doc">Tutorial Articles</span></a></li>
+<li><a class="reference internal" href="../training/videos/index.html"><span class="doc">Training Videos</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a></li>
+</ul>
+<p>Related Documents</p>
+<ul class="simple">
+<li><a class="reference internal" href="../documentation/galera-parameters.html#pc-bootstrap"><span class="std std-ref">pc.boostrap</span></a></li>
+<li><a class="reference internal" href="../documentation/galera-parameters.html#pc-ignore-sb"><span class="std std-ref">pc.ignore_sb</span></a></li>
+<li><a class="reference internal" href="../documentation/arbitrator.html#arbitrator"><span class="std std-ref">Arbitrator</span></a></li>
+</ul>
+</div>
+</div>
+<div class="top-links docutils container">
+<ul class="simple">
+<li><a class="reference external" href="https://galeracluster.com">Home</a></li>
+<li><a class="reference internal" href="../documentation/index.html"><span class="doc">Docs</span></a></li>
+</ul>
+<ul class="here simple">
+<li><a class="reference internal" href="index.html"><span class="doc">KB</span></a></li>
+</ul>
+<ul class="nav-wider simple">
+<li><a class="reference internal" href="../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a></li>
+</ul>
+</div>
+<div class="library-article section" id="two-node-clusters">
+<span id="kb-best-two-node-clusters"></span><h1>Two-Node Clusters<a class="headerlink" href="#two-node-clusters" title="Permalink to this headline">¶</a></h1>
+<p class="article-stats">Length: 880 words; Published: June 24, 2015; Updated: October 22, 2019; Category: Topology; Type: Best Practices</p>
+<p>When using Galera Cluster, it’s recommended that the cluster have at least three nodes.  However, some DBAs would prefer to use only two nodes.  This could be because their budget doesn’t allow for the cost of a third production node.  Or it could be that they are putting together a cluster for testing updates and want to minimize the effort and expense of testing.</p>
+<p>Whatever the reason for having only two nodes, there are some factors to consider, some preventive measures to take.  In a two-node cluster, when there is a conflicting pair of transactions, it could lead to a split-brain situation. Also, when one node fails, the remaining node will become non-operational. This KB article will explain how to address these possibilities.</p>
+<p class="section-heading rubric">Two Scenarios</p>
+<p>For this KB article, we’ll consider two scenarios.  The first scenario involves dealing with conflicting transactions in a two-node cluster.  Suppose each node executes a transaction which changes the same row in the same table at the same time.  Each node will vote for its transaction as being the superior one.  Normally, a third node would be called upon to cast the deciding vote. Without that tie-breaking vote, each node will commit their respective conflicting transaction. This is known as a split-brain. As more transactions occur, the data could continue to deviate, more conflicts can occur.</p>
+<p>For the second scenario, suppose that one of the nodes in a two-node cluster, leaves the cluster, ungracefully.  For instance, it crashes or loses network connectivity.  When this happens, the other node becomes non-operational.  It will remain so until additional information is provided by a third entity, such as another node joining or an administrator intervening.</p>
+<p>There’s a reason for nodes becoming non-operational. If a node is separated from the cluster due to losing network connection, both nodes will think itself as being the <a class="reference internal" href="../documentation/glossary.html#term-primary-component"><span class="xref std std-term">Primary Component</span></a>.  Each will be unaware that the other is still running. This could cause problems once network connectivity is restored. To prevent this, the nodes become non-operational.</p>
+<p class="section-heading rubric">Recommendation—Scenario One</p>
+<p>Let’s look at how to resolve the potential problem with the first scenario above, one in which there are conflicting transactions and no tie-breaking vote.  The simplest solution is to use Galera Arbitrator.  It will be a member of the cluster and thereby participate in voting, but not in the actual replication.  It has its own daemon, <code class="docutils literal notranslate"><span class="pre">garbd</span></code>, separate from the <code class="docutils literal notranslate"><span class="pre">mysqld</span></code> daemon.</p>
+<p>To use Galera Arbitrator, you can either start it at the command-line with a set of options, or use the easier method of a configuration file. You can name this configuration file whatever you want and locate it wherever you want.  One possibility is to name it <code class="docutils literal notranslate"><span class="pre">garbd.cnf</span></code> and put it in the <code class="docutils literal notranslate"><span class="pre">/etc</span></code> directory, where the database configuration file is located. Below is an example of how the Arbitrator configuration file might look:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>group=&quot;galera-testing&quot;
+address=&quot;gcomm://172.31.30.39,172.31.18.53,172.31.26.106&quot;
+
+options=&quot;gmcast.listen_addr=tcp://0.0.0.0:4444&quot;
+log=&quot;/var/log/garbd.log&quot;
+</pre></div>
+</div>
+<p>You would set the <code class="docutils literal notranslate"><span class="pre">name</span></code> option to match the value given in the <code class="docutils literal notranslate"><span class="pre">wsrep_cluster_name</span></code> option in the database configuration file.  The <code class="docutils literal notranslate"><span class="pre">address</span></code> option would match the value given in the <code class="docutils literal notranslate"><span class="pre">wsrep_cluster_address</span></code> option.  The <code class="docutils literal notranslate"><span class="pre">log</span></code> option is to set the path and name of the log file.</p>
+<p>You’ll have to create an identical configuration file on each node, since you won’t know which node is the one that will fail. Using the configuration file, to start the Galera Arbitrator daemon, you would execute something like the following at the command-line:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>garbd --cfg /etc/garbd.cnf
+</pre></div>
+</div>
+<p>This will start the <code class="docutils literal notranslate"><span class="pre">garbd</span></code> daemon,  using the options in the configuration file given.  You can add more options to the command-line here.  You’ll have to execute this on each node. The <code class="docutils literal notranslate"><span class="pre">garbd</span></code> daemons will work together as one across the network.  If a node in a two-node cluster fails, the surviving node with the <code class="docutils literal notranslate"><span class="pre">garbd</span></code> daemon will remain operational since the node has the Arbitrator.</p>
+<p class="section-heading rubric">Recommendation—Scenario Two</p>
+<p>To resolve the potential problem in the second scenario above, instead of using Galera Arbitrator, you can bootstrap the surviving node to form a new <a class="reference internal" href="../documentation/glossary.html#term-primary-component"><span class="xref std std-term">Primary Component</span></a>. You would do this by using the <a class="reference internal" href="../documentation/galera-parameters.html#pc-bootstrap"><span class="std std-ref">pc.boostrap</span></a> wsrep Provider option.  To do so, log into the node using the <code class="docutils literal notranslate"><span class="pre">mysql</span></code> client and excute the following SQL statement:</p>
+<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="kt">SET</span> <span class="n">GLOBAL</span> <span class="n">wsrep_provider_options</span><span class="o">=</span><span class="s1">&#39;pc.bootstrap=YES&#39;</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>This will bootstrap the surviving node as a new Primary Component.  When the other node comes back online or regains network connectivity with this node, it will recognize that it’s behind and initiate a state transfer to be synchronized.</p>
+<p>Another solution, but a bad choice, is to configure the <code class="docutils literal notranslate"><span class="pre">wsrep_provider_options</span></code> parameter.  You would set it to use  <a class="reference internal" href="../documentation/galera-parameters.html#pc-ignore-sb"><span class="std std-ref">pc.ignore_sb</span></a>.  This would allow it to continue to operate independently. To do so, you would log into the node with the <code class="docutils literal notranslate"><span class="pre">mysql</span></code> client and execute the following SQL statement:</p>
+<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="kt">SET</span> <span class="n">GLOBAL</span> <span class="n">wsrep_provider_options</span><span class="o">=</span><span class="s1">&#39;pc.ignore_sb=TRUE&#39;</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>The node will resume processing updates, even if it suspects a split-brain situation. Enabling <a class="reference internal" href="../documentation/galera-parameters.html#pc-ignore-sb"><span class="std std-ref">pc.ignore_sb</span></a> is dangerous, though, in a multi-master setup due to the risk for split-brain situations.  However, it does simplify things in master-slave clusters—especially in situations with only two nodes.</p>
+<div class="bottom-links docutils container">
+<p>Related Documents</p>
+<ul class="simple">
+<li><a class="reference internal" href="../documentation/galera-parameters.html#pc-bootstrap"><span class="std std-ref">pc.boostrap</span></a></li>
+<li><a class="reference internal" href="../documentation/galera-parameters.html#pc-ignore-sb"><span class="std std-ref">pc.ignore_sb</span></a></li>
+<li><a class="reference internal" href="../documentation/arbitrator.html#arbitrator"><span class="std std-ref">Arbitrator</span></a></li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/logo.png" alt="Logo"/>
+            </a></p>
+<h1 class="logo"><a href="../index.html">Galera Cluster</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../documentation/index.html">The Codership Documentation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">The Codership Knowledge Base</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="index.html#troubleshooting-articles">Troubleshooting Articles</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#best-practices-articles">Best Practices Articles</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="node-crash-during-sst.html">Node Crashes during SST</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sst-fails-sql-syntax-error.html">SST Fails with SQL Syntax Errors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="requested-state-transfer-failed.html">Requested State Transfer Failed</a></li>
+<li class="toctree-l3"><a class="reference internal" href="stall-on-alter-table.html">Cluster Stalls on <code class="docutils literal notranslate"><span class="pre">ALTER</span> <span class="pre">TABLE</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="user-changes.html">User Changes not Replicating</a></li>
+<li class="toctree-l3"><a class="reference internal" href="auto-increment-multiples.html">AUTO_INCREMENT Increasing by Multiples</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deadlock-found.html">Deadlock Found during a Transaction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="resolve-commit-failure.html">Commit Failed for Reason 3</a></li>
+<li class="toctree-l3"><a class="reference internal" href="multi-master-conflicts.html">Multi-Master Conflicts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="error-unknown-command.html">Unknown Command Errors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="group-commit.html">Group Commit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="large-transactions.html">Handling Large Transactions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="parallel-slave-threads.html">Setting Parallel Slave Threads</a></li>
+<li class="toctree-l3"><a class="reference internal" href="detecting-slow-node.html">Detecting a Slow Node</a></li>
+<li class="toctree-l3"><a class="reference internal" href="wan-latency.html">WAN Latency</a></li>
+<li class="toctree-l3"><a class="reference internal" href="wan-replication.html">WAN Replication</a></li>
+<li class="toctree-l3"><a class="reference internal" href="customizing-gcache-size.html">Customizing the Write-Set Cache Size</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gcache-during-state-transfers.html">Write-Set Caching during State Transfers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="single-master-setup.html">Single Master Setup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="multi-master-setup.html">Multi-Master Setup</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Two-Node Clusters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="setting-selinux-policy.html">Setting an SELinux Policy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sync-transaction-before-another.html">Synchronizing a Transaction Before Executing Another</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../training/index.html">Codership Training</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../whats-new.html">What’s New</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../editors/index.html">Codership Writers &amp; Editors</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">The Codership Knowledge Base</a><ul>
+      <li>Previous: <a href="multi-master-setup.html" title="previous chapter">Multi-Master Setup</a></li>
+      <li>Next: <a href="setting-selinux-policy.html" title="next chapter">Setting an SELinux Policy</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+	<div class="navbar">
+	<nav id="site-navigation" class="navigation main-navigation" role="navigation">
+	<div class="nav-bar-container">
+
+	<div id="menu-nav-bar" class="nav-menu">
+		<ul class="nav-link">
+			<li> </li>
+
+		</ul>
+
+	</div>
+	</nav>
+
+	<footer id="colophon" class="site-footer" role="contentinfo">
+	<div class="top">	<div class="powered-by"><p>Powered by Galera:</p>
+	<p><a href="https://mariadb.com/kb/en/galera/"><img class="alignleft size-full wp-image-237" alt="MariaDB" src="https://galeracluster.com/wp-content/uploads/2013/10/logo-mariadb.png" width="166" height="49" /></a></p>
+		</div></div>
+	<div class="footer-menu">
+	<div class="menu-main-menu-container">
+	<ul id="menu-main-menu-1" class="nav-menu">
+	<li class="link-home menu-item menu-item-type-post_type menu-item-object-page menu-item-359"><a href="https://galeracluster.com/">Home</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-35"><a href="https://galeracluster.com/products/">Products</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="https://galeracluster.com/downloads/">Downloads</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-12 current_page_item current-menu-ancestor current-menu-parent current_page_parent current_page_ancestor menu-item-has-children menu-item-33"><a href="https://galeracluster.com/support/">Support</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="https://galeracluster.com/community/">Community</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-31"><a href="https://galeracluster.com/company/">Company</a></li>
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-297"><a href="https://galeracluster.com/category/blog/">Blog</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-38"><a href="https://galeracluster.com/contact-us/">Contact us</a></li>
+	</ul></div>			</div><!-- .footer-menu -->
+
+
+	<div class="footer-bar">
+	<p class="copyright">2014 Codership Ltd.</p>
+	</div>
+	<div class="footnote">
+	<h2>Your data is invaluable. We're here to secure it. All of it.</h2>
+	</div>
+	</footer><!-- #colophon -->
+
+
+
+
+  </body>
+</html>

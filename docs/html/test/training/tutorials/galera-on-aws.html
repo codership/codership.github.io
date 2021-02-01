@@ -1,0 +1,452 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><meta content="Installing a Galera Cluster on AWS" name="title" />
+<meta content="en-US" name="language" />
+<meta content="galera cluster, amazon, aws, installation, setup guide" name="keywords" />
+<meta content="Codership Oy, 2014 - 2020. All Rights Reserved." name="copyright" />
+
+    <title>Installing a Galera Cluster on AWS &#8212; Galera Cluster Documentation</title>
+    <link rel="stylesheet" href="../../_static/reset-style.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Monitoring a Galera Cluster" href="galera-monitoring.html" />
+    <link rel="prev" title="Restarting the Cluster" href="restarting-cluster.html" />
+
+
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<link rel="stylesheet" href="/library/_static/basic-style.css">
+<link rel="stylesheet" href="/library/_static/header.css">
+<link rel="stylesheet" href="/library/_static/footer.css">
+<link rel="stylesheet" href="/library/_static/codership.css">
+<link rel="stylesheet" media="screen and (max-width: 500px)" href="/library/_static/mobile.css"/>
+<link rel="stylesheet" media="screen and (min-width:501px) and (max-width:1024px)" href="/library/_static/tablet.css"/>
+<link rel="stylesheet" media="screen and (prefers-color-scheme: dark)" href="/library/_static/dark.css"/>
+
+
+<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Feed" href="https://galeracluster.com/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Comments Feed" href="https://galeracluster.com/comments/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Support Comments Feed" href="https://galeracluster.com/support/feed/" />
+
+<script type='text/javascript' src='https://galeracluster.com/wp-includes/js/comment-reply.min.js?ver=3.8.3'></script>
+
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://galeracluster.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://galeracluster.com/wp-includes/wlwmanifest.xml" />
+<link rel='prev' title='Downloads' href='https://galeracluster.com/downloads/' />
+<link rel='next' title='Community' href='https://galeracluster.com/community/' />
+<meta name="generator" content="WordPress 3.8.3" />
+
+<link rel='shortlink' href='https://galeracluster.com/?p=12' />
+
+<style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>
+<style type="text/css" id="twentythirteen-header-css">
+			.site-title,
+			.site-description {
+				position: absolute;
+				clip: rect(1px 1px 1px 1px); /* IE7 */
+				clip: rect(1px, 1px, 1px, 1px);
+			}
+				.site-header .home-link {
+				min-height: 0;
+			}
+</style>
+
+<script type="text/javascript">
+
+		  var _gaq = _gaq || [];
+		  _gaq.push(['_setAccount', 'UA-35163478-6']);
+		  _gaq.push(['_trackPageview']);
+
+		  (function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'https://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		  })();
+
+</script>
+
+  </head><body>
+	<div id="fb-root"></div>
+	<script>(function(d, s, id) {
+		  var js, fjs = d.getElementsByTagName(s)[0];
+		  if (d.getElementById(id)) return;
+		  js = d.createElement(s); js.id = id;
+		  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+		  fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));
+	</script>
+
+	<div id="page" class="hfeed site">
+
+	<header id="masthead" class="site-header" role="banner">
+
+	<div class="top">
+	<a class="home-link" href="https://galeracluster.com/" title="Galera Cluster for MySQL" rel="home">
+	<h1 class="site-title">Galera Cluster for MySQL</h1>
+	<h2 class="site-description">The world&#039;s most advanced open source database cluster</h2>
+	</a>
+	</div>
+
+
+	<div id="navbar" class="navbar">
+	<nav id="site-navigation" class="navigation main-navigation" role="navigation">
+	<div class="menu-main-menu-container">
+
+	<ul id="menu-main-menu" class="nav-menu">
+	<li id="menu-item-359" class="link-home menu-item menu-item-type-post_type menu-item-object-page menu-item-359"><a href="https://galeracluster.com/">Home</a></li>
+	<li id="menu-item-35" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-35"><a href="https://galeracluster.com/products/">Products</a></li>
+	<li id="menu-item-34" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="https://galeracluster.com/downloads/">Downloads</a></li>
+	<li id="menu-item-33" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-12 current_page_item current-menu-ancestor current-menu-parent current_page_parent current_page_ancestor menu-item-has-children menu-item-33"><a href="https://galeracluster.com/support/">Support</a></li>
+	<li id="menu-item-32" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="https://galeracluster.com/community/">Community</a></li>
+	<li id="menu-item-31" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-31"><a href="https://galeracluster.com/company/">Company</a></li>
+	<li id="menu-item-297" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-297"><a href="https://galeracluster.com/category/blog/">Blog</a></li>
+	<li id="menu-item-38" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-38"><a href="https://galeracluster.com/contact-us/">Contact us</a></li>
+	</ul>
+	</div>
+
+
+	</nav><!-- #site-navigation -->
+
+	</div><!-- #navbar -->
+	</header><!-- #masthead -->
+
+
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="left-margin docutils container">
+<div class="left-margin-top docutils container">
+<a class="reference internal" href="../../index.html"><span class="doc">The Library</span></a></div>
+<div class="left-margin-content docutils container">
+<ul class="simple">
+<li><a class="reference internal" href="../../documentation/index.html"><span class="doc">Documentation</span></a></li>
+<li><a class="reference internal" href="../../kb/index.html"><span class="doc">Knowledge Base</span></a></li>
+<li><a class="reference internal" href="../index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="sub-links simple">
+<li><a class="reference internal" href="../courses/index.html"><span class="doc">Training Courses</span></a></li>
+<li><a class="reference internal" href="../videos/index.html"><span class="doc">Training Videos</span></a></li>
+</ul>
+<ul class="sub-links here simple">
+<li><a class="reference internal" href="index.html"><span class="doc">Tutorial Articles</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../../faq.html"><span class="doc">FAQ</span></a></li>
+</ul>
+<p>Related Documents</p>
+<ul class="simple">
+<li><a class="reference internal" href="../../documentation/install-mysql.html"><span class="doc">Install MySQL Galera</span></a></li>
+</ul>
+<p>Related Articles</p>
+<ul class="simple">
+<li><a class="reference internal" href="../videos/galera-aws-installing.html"><span class="doc">Galera on AWS (video)</span></a></li>
+</ul>
+</div>
+</div>
+<div class="top-links docutils container">
+<ul class="simple">
+<li><a class="reference external" href="https://galeracluster.com">Home</a></li>
+<li><a class="reference internal" href="../../documentation/index.html"><span class="doc">Docs</span></a></li>
+<li><a class="reference internal" href="../../kb/index.html"><span class="doc">KB</span></a></li>
+</ul>
+<ul class="here nav-wider simple">
+<li><a class="reference internal" href="../index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../../faq.html"><span class="doc">FAQ</span></a></li>
+</ul>
+</div>
+<div class="library-article section" id="installing-a-galera-cluster-on-aws">
+<span id="galera-on-aws"></span><h1>Installing a Galera Cluster on AWS<a class="headerlink" href="#installing-a-galera-cluster-on-aws" title="Permalink to this headline">¶</a></h1>
+<p class="article-stats">Length: 2494 words; Writer: Russell J.T Dyer; Published: June 15, 2019; Topic: Installation</p>
+<p class="first-paragraph">Amazon Web Services (AWS) is one of the largest providers of virtual servers and other web services. Through an account with AWS, using their EC2 (Elastic Compute Cloud) platform, you can create virtual servers, known as <em>instances</em>, and choose the operating system distribution. From there you can log remotely into the instance like you would a physical server, and install MySQL or MariaDB and Galera software. This means that you can create multiple instances to form a Galera Cluster.</p>
+<p>This tutorial will explain the steps to creating instances on AWS, and how to install and configure the database and Galera software on each node. It’ll end by showing you how to start the cluster.</p>
+<p>We’re assuming you already have an account with AWS and know the basics of how to use the EC2 platform to create an instance and related aspects. We’ll focus instead on aspects relevant to forming a Galera Cluster.</p>
+<p class="section-heading list-sub-header rubric">Encryption Key</p>
+<p>For this article, we’ll create three nodes to be used in the cluster. To access these nodes, you’ll need an encryption key. You can use an existing key, but we recommend creating a new one specifically for the Galera. There are many tools to do so, such as <code class="docutils literal notranslate"><span class="pre">ssh-keygen</span></code>. See <a class="reference external" href="https://help.github.com/en/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent">Generating an SSH Key</a> for instructions on how to do this.</p>
+<p>Once you have your encryption key, log into AWS and navigate to the EC2 console. Under <em>Security</em> in the left margin, click on the <em>Key Pairs</em> link. Click on the white <em>Import Key Pair</em> button.  You can click on <em>Choose File</em> to load a <code class="docutils literal notranslate"><span class="pre">.pem</span></code> file from your computer, or you can copy and paste the raw text from your key into the large box labeled, <em>Public Key Contents</em>. Give the key a name like, <em>galera-cluster</em>.  When finished, click <em>Import</em>.</p>
+<p class="section-heading list-sub-header rubric">Creating AWS Instances</p>
+<p>With an encryption key in place, you’re ready to create three instances on AWS. You could create more, but we’ll do three, which is the minimum recommended for a healthy cluster. In the EC2 console, click on <em>Instances</em> in the left margin. That will show your existing instances in the main pane. Now click on the large blue button at the top labeled, <em>Launch Instances</em>.</p>
+<p>The first choice you’ll have to make when creating a new instance is the operating system distribution. For the examples in this article, we chose <em>CentOS 7 (x86_64) - with Updates HVM</em>. This is a 64-bit operating system.</p>
+<p>The second step is to choose an instance type. Because we’re using this cluster as a training tool, we chose <code class="docutils literal notranslate"><span class="pre">t2.micro</span></code> since it’s <em>Free Tier Eligible</em>.  This allows us to use it for a year without having to pay anything.</p>
+<p>Next, you’ll be asked configure the details of the instance. The first box asks how many instances you want to launch: enter 3. You can leave all of the other settings at their default values.</p>
+<p>Adding storage is next. If you chose the free tier as did we, you’ll have to accept the default of 8 gigabytes of storage. You may need more if you’re creating a cluster for production use. For our training purposes, this is plenty. The next screen is about adding tags, you can click past that.</p>
+<p>Then you’ll be asked to configure a security group. This is basically AWS’s firewall. Even if you already have one for your existing instances, create a new one just for Galera. Name it something easy like, <em>galera-servers</em>. You’ll be able to give several inbound traffic rules related to the three nodes we’ll create and the ports they will need. Until we create the three instances, though, we won’t know their IP addresses. So, for now, just add a rule that allows you to log into the nodes. To do this, select SSH type. For the source, click on the pull-down menu and choose <em>My IP</em>—or choose <em>Custom</em> and type in the IP address from which you’ll log in (e.g., <code class="docutils literal notranslate"><span class="pre">12.127.17.72/32</span></code>).</p>
+<p>With that all done, click on the blue button at the bottom right to review and launch the instance. It will show you the choices you made. If everything is fine, click <em>Launch</em>.</p>
+<a class="tutorial-screenshot reference internal image-reference" href="../../_images/aws-galera-instances.png"><img alt="AWS Instances" class="tutorial-screenshot" src="../../_images/aws-galera-instances.png" style="width: 600px;" /></a>
+<p>A dialog box will then appear asking you to provide an encryption key. Click <em>Choose an Existing Key Pair</em> and select the one you created for Galera. Then read and click the check-box for the warning and then click <em>Launch Instance</em>. That’ll begin the process of starting the instance.</p>
+<p>Now, click on the <em>Instances</em> link in the margin again to see state of the instances. It’ll take a little while before the new instances are running. You may want to label each instance something like, <em>galera - node 1</em>.</p>
+<p class="section-heading list-sub-header rubric">Installing Software on Nodes</p>
+<p>When all three nodes are running, you’re ready to install and configure the database and Galera software. Check the details of each instance to get the external IP address. Then use <code class="docutils literal notranslate"><span class="pre">ssh</span></code> to log into each node, using your the encryption key.</p>
+<p>It’s best to keep all three nodes the same. So update the software that’s already installed on each node with a command-line package-management utility. Since we installed CentOS on our nodes, we used <code class="docutils literal notranslate"><span class="pre">yum</span></code> on each like so:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">sudo yum -y update</span>
+</pre></div>
+</div>
+<p>We also installed <code class="docutils literal notranslate"><span class="pre">rsync</span></code>, which Galera will use to synchronize nodes when they first join the cluster, or recovering nodes that have been offline for a while. We also installed <code class="docutils literal notranslate"><span class="pre">firewalld</span></code>, which provides a firewall.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">sudo yum -y install rync firewalld</span>
+</pre></div>
+</div>
+<p>When you’ve finished updating and installing basic software on all three nodes, you can then proceed to installing the database and Galera software. For our purposes, we chose to install MariaDB. If you’d prefer to use MySQL, see the article on <a class="reference internal" href="../../documentation/install-mysql.html"><span class="doc">Installing MySQL and Galera Cluster</span></a>.</p>
+<p>To install MariaDB, we first used the MariaDB repository (<a class="reference external" href="https://downloads.mariadb.org/mariadb/repositories/">MariaDB Repository Generator</a>).  We chose the CentOS distribution, the CentOS 7 (x86_64) release to match what we’ve installed on our nodes. We then chose the MariaDB version 10.4. The repository tool gave us the lines we needed to copy into a new repo file, <code class="docutils literal notranslate"><span class="pre">/etc/yum.repos.d/mariadb.repo</span></code>.</p>
+<a class="tutorial-screenshot reference internal image-reference" href="../../_images/mariadb-repository-tool-choices.png"><img alt="MariaDB Repository Tool" class="tutorial-screenshot" src="../../_images/mariadb-repository-tool-choices.png" style="width: 500px;" /></a>
+<p>Using <code class="docutils literal notranslate"><span class="pre">yum</span></code> again, we executed the following from the command-line on each node:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">sudo yum install MariaDB-server MariaDB-client</span>
+</pre></div>
+</div>
+<p>That will install everything we need, including the Galera software since it’s shipped with MariaDB as of version 10.4. When you’re finished doing this one each node, you’ll be ready to configure the MariaDB and Galera.</p>
+<p class="section-heading list-sub-header rubric">Configuring Software on Nodes</p>
+<p>Before starting MariaDB on each node, you need to configure it. To do this, edit the <code class="docutils literal notranslate"><span class="pre">my.cnf</span></code> file—or <code class="docutils literal notranslate"><span class="pre">/etc/my.cnf.d/server.cnf</span></code> as we did. Add the following lines under the <code class="docutils literal notranslate"><span class="pre">[mysqld]</span></code> heading:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="k">[mysqld]</span>
+<span class="na">datadir</span><span class="o">=</span><span class="s">/var/lib/mysql</span>
+<span class="na">socket</span><span class="o">=</span><span class="s">/var/lib/mysql/mysql.sock</span>
+<span class="na">bind-address</span><span class="o">=</span><span class="s">0.0.0.0</span>
+<span class="na">user</span><span class="o">=</span><span class="s">mysql</span>
+
+<span class="na">default_storage_engine</span><span class="o">=</span><span class="s">InnoDB</span>
+<span class="na">innodb_autoinc_lock_mode</span><span class="o">=</span><span class="s">2</span>
+<span class="na">innodb_flush_log_at_trx_commit</span><span class="o">=</span><span class="s">0</span>
+<span class="na">innodb_buffer_pool_size</span><span class="o">=</span><span class="s">128M</span>
+
+<span class="na">binlog_format</span><span class="o">=</span><span class="s">ROW</span>
+<span class="na">log-error</span><span class="o">=</span><span class="s">/var/log/mysqld.log</span>
+</pre></div>
+</div>
+<p>There are some basic parameters related to MariaDB and using the InnoDB storage engine—which is the only one that Galera uses. For parameters particular to Galera, add a <code class="docutils literal notranslate"><span class="pre">[galera]</span></code> section to the same configuration file:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="k">[galera]</span>
+<span class="na">wsrep_on</span><span class="o">=</span><span class="s">ON</span>
+<span class="na">wsrep_provider</span><span class="o">=</span><span class="s">/usr/lib64/galera-4/libgalera_smm.so</span>
+
+<span class="na">wsrep_node_name</span><span class="o">=</span><span class="s">&#39;galera1&#39;</span>
+<span class="na">wsrep_node_address</span><span class="o">=</span><span class="s">&quot;172.31.19.208&quot;</span>
+<span class="na">wsrep_cluster_name</span><span class="o">=</span><span class="s">&#39;galera-training&#39;</span>
+<span class="na">wsrep_cluster_address</span><span class="o">=</span><span class="s">&quot;gcomm://172.31.19.208,172.31.26.197,172.31.15.54&quot;</span>
+
+<span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;gcache.size=300M; gcache.page_size=300M&quot;</span>
+<span class="na">wsrep_slave_threads</span><span class="o">=</span><span class="s">4</span>
+<span class="na">wsrep_sst_method</span><span class="o">=</span><span class="s">rsync</span>
+</pre></div>
+</div>
+<p>There are several parameters here, but we’ll talk about just a few of them. First, <code class="docutils literal notranslate"><span class="pre">wsrep_on</span></code> enables Galera. The file path for the value of <code class="docutils literal notranslate"><span class="pre">wsrep_provider</span></code> may have to be adjusted to your server.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">wsrep_node_name</span></code> needs to be unique for each node (e.g., <code class="docutils literal notranslate"><span class="pre">galera1</span></code>, <code class="docutils literal notranslate"><span class="pre">galera2</span></code>, and <code class="docutils literal notranslate"><span class="pre">galera3</span></code>). The <code class="docutils literal notranslate"><span class="pre">wsrep_node_address</span></code> is the IP address for the node. For AWS, use the internal IP addresses, not the external ones. You’ll have to adjust this for each node. Make sure the <code class="docutils literal notranslate"><span class="pre">wsrep_node_name</span></code> and the <code class="docutils literal notranslate"><span class="pre">wsrep_node_address</span></code> correspond to the names you gave for each node in AWS. It will make it easier later to shut down a node for maintenance.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">wsrep_cluster_name</span></code> is a name you’ll assign for the cluster. It has to be the same on all three nodes. The <code class="docutils literal notranslate"><span class="pre">wsrep_cluster_address</span></code> contains the IP addresses of all of the nodes in the cluster, including the node on which it’s entered.</p>
+<p>That’s all that we need to do to configure MariaDB and Galera. However, don’t start MariaDB, yet. You first need to configure security on each node and on AWS.</p>
+<p class="section-heading list-sub-header rubric">Security Settings on Nodes</p>
+<p>Security is important, but it can be the biggest obstacle for creating a new Galera Cluster. You have to open the lines of communications between the nodes. The two main factors will be SELinux and the firewall. You could disable both, but we recommend using them and enabling what you need.</p>
+<p>Galera Cluster uses a few TCP ports: 3306 (MariaDB’s default), 4444, 4567, and 4568—and 4567 for UDP.  For SELinux, you will need to open these ports by executing the following from the command-line on each node:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">semanage port -a -t mysqld_port_t -p tcp 3306</span>
+<span class="go">semanage port -a -t mysqld_port_t -p tcp 4444</span>
+<span class="go">semanage port -a -t mysqld_port_t -p tcp 4567</span>
+<span class="go">semanage port -a -t mysqld_port_t -p udp 4567</span>
+<span class="go">semanage port -a -t mysqld_port_t -p tcp 4568</span>
+<span class="go">semanage permissive -a mysqld_t</span>
+</pre></div>
+</div>
+<p>As for the firewall, you’ll have to first enable and start it by entering the first two lines below. The six lines that follow those two will open the needed ports. The last line reloads the <code class="docutils literal notranslate"><span class="pre">firewalld</span></code> daemon.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">systemctl enable firewalld</span>
+<span class="go">systemctl start firewalld</span>
+
+<span class="go">firewall-cmd --zone=public --add-service=mysql --permanent</span>
+<span class="go">firewall-cmd --zone=public --add-port=3306/tcp --permanent</span>
+<span class="go">firewall-cmd --zone=public --add-port=4444/tcp --permanent</span>
+<span class="go">firewall-cmd --zone=public --add-port=4567/tcp --permanent</span>
+<span class="go">firewall-cmd --zone=public --add-port=4567/udp --permanent</span>
+<span class="go">firewall-cmd --zone=public --add-port=4568/tcp --permanent</span>
+<span class="go">firewall-cmd --reload</span>
+</pre></div>
+</div>
+<p>After these lines have been executed on each node, they’re now ready to interact with each other. You just need to go back to AWS and add some entries to the security group you created earlier so that AWS would interfere.</p>
+<p class="section-heading list-sub-header rubric">Security Settings on AWS</p>
+<p>From the AWS EC2 console, under <em>Security</em> in the left margin, click on <em>Security Groups</em> and then select the one you created for your Galera cluster. Under the <em>Actions</em> pull-down menu, select <em>Edit Inbound Rules</em>. This will open a large dialog box like the one in the screenshot below.</p>
+<a class="tutorial-screenshot reference internal image-reference" href="../../_images/aws-galera-security-inbound-rules.png"><img alt="AWS Inbound Rules" class="tutorial-screenshot" src="../../_images/aws-galera-security-inbound-rules.png" style="width: 600px;" /></a>
+<p>For your first entry, click <em>Add Rule</em> and select the type, <em>MySQL/Aurora</em> and then enter the internal IP address for the first node (e.g., <code class="docutils literal notranslate"><span class="pre">172.31.19.208/32</span></code>). Add a description to keep your sanity (e.g., <em>Galera - Node 1</em>). Next, add another rule, but this time select the type, <em>Custom TCP Rule</em>. Enter in the port field, <code class="docutils literal notranslate"><span class="pre">4444</span></code>. Then enter the internal IP address and a description of the first node. Now add another custom TCP entry the same way, but for the port, enter <code class="docutils literal notranslate"><span class="pre">4567</span> <span class="pre">-</span> <span class="pre">4568</span></code>. Last, add a custom UDP entry for port <code class="docutils literal notranslate"><span class="pre">4567</span></code>.</p>
+<p>Repeat these four entries for each node, adjusting the IP addresses and descriptions for each.  When you’re finished, click on <em>Save</em>.</p>
+<p>Now that you’ve authorized each Galera node to communicate with the others on the required ports, you’re ready to start Galera</p>
+<p class="section-heading list-sub-header rubric">Starting Galera</p>
+<p>When first starting a new Galera cluster, you’ll have to start one node first. The problem is that if there are no other nodes in the cluster, it will fail—unless you start MariaDB on the first node telling it that it’s the first. To do this, you would use the <code class="docutils literal notranslate"><span class="pre">--wsrep-new-cluster</span></code> option.</p>
+<p>To make it easy, though, in version 4 of Galera, you can use the <code class="docutils literal notranslate"><span class="pre">galera_new_cluster</span></code> script. Just execute it from the command-line on the first node, only. Incidentally, if you ever shut-down all nodes in the cluster and want to use <code class="docutils literal notranslate"><span class="pre">galera_new_cluster</span></code> again, you may have to edit <code class="docutils literal notranslate"><span class="pre">/var/lib/mysql/grastate.dat</span></code> and change the <code class="docutils literal notranslate"><span class="pre">safe_to_bootstrap</span></code> variable in that file from 0 to 1.</p>
+<p>Running <code class="docutils literal notranslate"><span class="pre">galera_new_cluster</span></code> on the first node will start MariaDB and Galera, but only on that one node. On the other nodes, execute the following from the command-line:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">systemctl start mariadb</span>
+</pre></div>
+</div>
+<p>Wait until the second node has started before starting the third. It doesn’t matter, but it’s better to keep the clutter to a minimum when learning. Once MariaDB has started on each node, enter the first line below from the command-line on one of the nodes. Incidentally, there’s no password at this point, so just hit enter when asked.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">mysql -p -u root -e &quot;SHOW STATUS LIKE &#39;wsrep_cluster_size&#39;&quot;</span>
+
+<span class="go">Enter password:</span>
+
+<span class="go">+--------------------+-------+</span>
+<span class="go">| Variable_name      | Value |</span>
+<span class="go">+--------------------+-------+</span>
+<span class="go">| wsrep_cluster_size | 3     |</span>
+<span class="go">+--------------------+-------+</span>
+</pre></div>
+</div>
+<p>You can see from the results here that there are three nodes in the cluster. That’s what we want. You’ve successfully installed a Galera cluster using AWS instances. You can start entering data and using the cluster.</p>
+<p>If you first want to play with the cluster a bit, log into all three nodes with the <code class="docutils literal notranslate"><span class="pre">mysql</span></code> client. Create a database on one node and check the other two nodes to see that it’s there. Then create a table on another node and insert a row of data into that table on the third node. Then execute a <code class="docutils literal notranslate"><span class="pre">SELECT</span></code> statement on each node to see that it’s replicating the data across the cluster.</p>
+<div class="bottom-links docutils container">
+<p>Related Documents</p>
+<ul class="simple">
+<li><a class="reference internal" href="../../documentation/install-mysql.html"><span class="doc">Install MySQL Galera</span></a></li>
+</ul>
+<p>Related Articles</p>
+<ul class="simple">
+<li><a class="reference internal" href="../videos/galera-aws-installing.html"><span class="doc">Galera on AWS (video)</span></a></li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../../index.html">
+              <img class="logo" src="../../_static/logo.png" alt="Logo"/>
+            </a></p>
+<h1 class="logo"><a href="../../index.html">Galera Cluster</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../documentation/index.html">The Codership Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../kb/index.html">The Codership Knowledge Base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Codership Training</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../courses/index.html">Codership Training Courses</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Codership Tutorials on Galera Cluster</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="getting-started.html">Getting Started with Galera Cluster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="galera-installation.html">Installing Galera Cluster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="configuration.html">System Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="wsrep-configuration.html">Replication Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="starting-cluster.html">Starting the Cluster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="testing-cluster.html">Testing a Cluster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="restarting-cluster.html">Restarting the Cluster</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Installing a Galera Cluster on AWS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="galera-monitoring.html">Monitoring a Galera Cluster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="migrate.html">Galera Cluster Migration Factors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="galera-backup.html">Making Back-Ups with Galera Cluster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="getting-started-docker.html">Getting Started Galera with Docker</a></li>
+<li class="toctree-l3"><a class="reference internal" href="achieving-read-after-write-semantics.html">Read-After-Write Semantics with Galera</a></li>
+<li class="toctree-l3"><a class="reference internal" href="debugging-transaction-conflicts.html">Debugging Transaction Conflicts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="debug-problems-with-sst.html">Debugging Problems with SST</a></li>
+<li class="toctree-l3"><a class="reference internal" href="geo-distributed-clusters.html">Geo-Distributed Database Clusters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="primary-component.html">The Primary Component in Galera Cluster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="supporting-transaction-isolation-levels.html">Support for Transaction Isolation Levels</a></li>
+<li class="toctree-l3"><a class="reference internal" href="safe-to-bootstrap-feature.html">The Safe-To-Bootstrap Feature</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sst-or-not.html">To SST or Not To SST?</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../videos/index.html">Codership Training Videos</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../whats-new.html">What’s New</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../editors/index.html">Codership Writers &amp; Editors</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Codership Training</a><ul>
+  <li><a href="index.html">Codership Tutorials on Galera Cluster</a><ul>
+      <li>Previous: <a href="restarting-cluster.html" title="previous chapter">Restarting the Cluster</a></li>
+      <li>Next: <a href="galera-monitoring.html" title="next chapter">Monitoring a Galera Cluster</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+	<div class="navbar">
+	<nav id="site-navigation" class="navigation main-navigation" role="navigation">
+	<div class="nav-bar-container">
+
+	<div id="menu-nav-bar" class="nav-menu">
+		<ul class="nav-link">
+			<li> </li>
+
+		</ul>
+
+	</div>
+	</nav>
+
+	<footer id="colophon" class="site-footer" role="contentinfo">
+	<div class="top">	<div class="powered-by"><p>Powered by Galera:</p>
+	<p><a href="https://mariadb.com/kb/en/galera/"><img class="alignleft size-full wp-image-237" alt="MariaDB" src="https://galeracluster.com/wp-content/uploads/2013/10/logo-mariadb.png" width="166" height="49" /></a></p>
+		</div></div>
+	<div class="footer-menu">
+	<div class="menu-main-menu-container">
+	<ul id="menu-main-menu-1" class="nav-menu">
+	<li class="link-home menu-item menu-item-type-post_type menu-item-object-page menu-item-359"><a href="https://galeracluster.com/">Home</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-35"><a href="https://galeracluster.com/products/">Products</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="https://galeracluster.com/downloads/">Downloads</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-12 current_page_item current-menu-ancestor current-menu-parent current_page_parent current_page_ancestor menu-item-has-children menu-item-33"><a href="https://galeracluster.com/support/">Support</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="https://galeracluster.com/community/">Community</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-31"><a href="https://galeracluster.com/company/">Company</a></li>
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-297"><a href="https://galeracluster.com/category/blog/">Blog</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-38"><a href="https://galeracluster.com/contact-us/">Contact us</a></li>
+	</ul></div>			</div><!-- .footer-menu -->
+
+
+	<div class="footer-bar">
+	<p class="copyright">2014 Codership Ltd.</p>
+	</div>
+	<div class="footnote">
+	<h2>Your data is invaluable. We're here to secure it. All of it.</h2>
+	</div>
+	</footer><!-- #colophon -->
+
+
+
+
+  </body>
+</html>

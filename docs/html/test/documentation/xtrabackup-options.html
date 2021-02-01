@@ -1,0 +1,1005 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><meta content="XtraBackup Parameters" name="title" />
+<meta content="en-US" name="language" />
+<meta content="galera cluster, xtradb, xtrabackup, parameters" name="keywords" />
+<meta content="Codership Oy, 2014 - 2020. All Rights Reserved." name="copyright" />
+
+    <title>XtraBackup Parameters &#8212; Galera Cluster Documentation</title>
+    <link rel="stylesheet" href="../_static/reset-style.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Galera Load Balancer Parameters" href="glb-parameters.html" />
+    <link rel="prev" title="Galera Status Variables" href="galera-status-variables.html" />
+
+
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<link rel="stylesheet" href="/library/_static/basic-style.css">
+<link rel="stylesheet" href="/library/_static/header.css">
+<link rel="stylesheet" href="/library/_static/footer.css">
+<link rel="stylesheet" href="/library/_static/codership.css">
+<link rel="stylesheet" media="screen and (max-width: 500px)" href="/library/_static/mobile.css"/>
+<link rel="stylesheet" media="screen and (min-width:501px) and (max-width:1024px)" href="/library/_static/tablet.css"/>
+<link rel="stylesheet" media="screen and (prefers-color-scheme: dark)" href="/library/_static/dark.css"/>
+
+
+<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Feed" href="https://galeracluster.com/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Comments Feed" href="https://galeracluster.com/comments/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Support Comments Feed" href="https://galeracluster.com/support/feed/" />
+
+<script type='text/javascript' src='https://galeracluster.com/wp-includes/js/comment-reply.min.js?ver=3.8.3'></script>
+
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://galeracluster.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://galeracluster.com/wp-includes/wlwmanifest.xml" />
+<link rel='prev' title='Downloads' href='https://galeracluster.com/downloads/' />
+<link rel='next' title='Community' href='https://galeracluster.com/community/' />
+<meta name="generator" content="WordPress 3.8.3" />
+
+<link rel='shortlink' href='https://galeracluster.com/?p=12' />
+
+<style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>
+<style type="text/css" id="twentythirteen-header-css">
+			.site-title,
+			.site-description {
+				position: absolute;
+				clip: rect(1px 1px 1px 1px); /* IE7 */
+				clip: rect(1px, 1px, 1px, 1px);
+			}
+				.site-header .home-link {
+				min-height: 0;
+			}
+</style>
+
+<script type="text/javascript">
+
+		  var _gaq = _gaq || [];
+		  _gaq.push(['_setAccount', 'UA-35163478-6']);
+		  _gaq.push(['_trackPageview']);
+
+		  (function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'https://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		  })();
+
+</script>
+
+  </head><body>
+	<div id="fb-root"></div>
+	<script>(function(d, s, id) {
+		  var js, fjs = d.getElementsByTagName(s)[0];
+		  if (d.getElementById(id)) return;
+		  js = d.createElement(s); js.id = id;
+		  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+		  fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));
+	</script>
+
+	<div id="page" class="hfeed site">
+
+	<header id="masthead" class="site-header" role="banner">
+
+	<div class="top">
+	<a class="home-link" href="https://galeracluster.com/" title="Galera Cluster for MySQL" rel="home">
+	<h1 class="site-title">Galera Cluster for MySQL</h1>
+	<h2 class="site-description">The world&#039;s most advanced open source database cluster</h2>
+	</a>
+	</div>
+
+
+	<div id="navbar" class="navbar">
+	<nav id="site-navigation" class="navigation main-navigation" role="navigation">
+	<div class="menu-main-menu-container">
+
+	<ul id="menu-main-menu" class="nav-menu">
+	<li id="menu-item-359" class="link-home menu-item menu-item-type-post_type menu-item-object-page menu-item-359"><a href="https://galeracluster.com/">Home</a></li>
+	<li id="menu-item-35" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-35"><a href="https://galeracluster.com/products/">Products</a></li>
+	<li id="menu-item-34" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="https://galeracluster.com/downloads/">Downloads</a></li>
+	<li id="menu-item-33" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-12 current_page_item current-menu-ancestor current-menu-parent current_page_parent current_page_ancestor menu-item-has-children menu-item-33"><a href="https://galeracluster.com/support/">Support</a></li>
+	<li id="menu-item-32" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="https://galeracluster.com/community/">Community</a></li>
+	<li id="menu-item-31" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-31"><a href="https://galeracluster.com/company/">Company</a></li>
+	<li id="menu-item-297" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-297"><a href="https://galeracluster.com/category/blog/">Blog</a></li>
+	<li id="menu-item-38" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-38"><a href="https://galeracluster.com/contact-us/">Contact us</a></li>
+	</ul>
+	</div>
+
+
+	</nav><!-- #site-navigation -->
+
+	</div><!-- #navbar -->
+	</header><!-- #masthead -->
+
+
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="left-margin docutils container">
+<div class="left-margin-top docutils container">
+<a class="reference internal" href="../index.html"><span class="doc">The Library</span></a></div>
+<div class="left-margin-content docutils container">
+<ul class="here simple">
+<li><a class="reference internal" href="index.html"><span class="doc">Documentation</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../kb/index.html"><span class="doc">Knowledge Base</span></a></li>
+<li><a class="reference internal" href="../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="sub-links simple">
+<li><a class="reference internal" href="../training/tutorials/index.html"><span class="doc">Tutorial Articles</span></a></li>
+<li><a class="reference internal" href="../training/videos/index.html"><span class="doc">Training Videos</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a></li>
+</ul>
+</div>
+</div>
+<div class="top-links docutils container">
+<ul class="simple">
+<li><a class="reference external" href="https://galeracluster.com">Home</a></li>
+</ul>
+<ul class="here simple">
+<li><a class="reference internal" href="index.html"><span class="doc">Docs</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../kb/index.html"><span class="doc">KB</span></a></li>
+</ul>
+<ul class="nav-wider simple">
+<li><a class="reference internal" href="../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a></li>
+</ul>
+</div>
+<div class="library-document section" id="xtrabackup-parameters">
+<span id="id1"></span><h1>XtraBackup Parameters<a class="headerlink" href="#xtrabackup-parameters" title="Permalink to this headline">¶</a></h1>
+<p>When using <code class="docutils literal notranslate"><span class="pre">xtrabackup-v2</span></code> as your <a class="reference internal" href="glossary.html#term-state-snapshot-transfer"><span class="xref std std-term">State Snapshot Transfer</span></a> method, you can fine tune how the script operates using the <code class="docutils literal notranslate"><span class="pre">[sst]</span></code> unit in the <code class="docutils literal notranslate"><span class="pre">my.cnf</span></code> configuration file.</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="k">[mysqld]</span>
+<span class="na">wsrep_sst_method</span><span class="o">=</span><span class="s">xtrabackup-v2</span>
+
+<span class="k">[sst]</span>
+<span class="na">compressor</span><span class="o">=</span><span class="s">&quot;gzip&quot;</span>
+<span class="na">decompressor</span><span class="o">=</span><span class="s">&quot;gzip -dc&quot;</span>
+<span class="na">rebuild</span><span class="o">=</span><span class="s">ON</span>
+<span class="na">compact</span><span class="o">=</span><span class="s">ON</span>
+<span class="na">encrypt</span><span class="o">=</span><span class="s">3</span>
+<span class="na">tkey</span><span class="o">=</span><span class="s">&quot;/path/to/key.pem&quot;</span>
+<span class="na">tcert</span><span class="o">=</span><span class="s">&quot;/path/to/cert.pem&quot;</span>
+<span class="na">tca</span><span class="o">=</span><span class="s">&quot;/path/to/ca.pem&quot;</span>
+</pre></div>
+</div>
+<p>Bear in mind, some XtraBackup parameters require that you match the configuration on donor and joiner nodes, (as designated in the table below).</p>
+<table border="1" class="colwidths-given doc-options docutils">
+<colgroup>
+<col width="30%" />
+<col width="15%" />
+<col width="10%" />
+<col width="45%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Option</th>
+<th class="head">Default</th>
+<th class="head">Match</th>
+<th class="head">&#160;</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><a class="reference internal" href="#xtra-compressor"><span class="std std-ref">compressor</span></a></td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#xtra-cpat"><span class="std std-ref">cpat</span></a></td>
+<td><code class="docutils literal notranslate"><span class="pre">0</span></code></td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#xtra-decompressor"><span class="std std-ref">decompressor</span></a></td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#xtra-encrypt"><span class="std std-ref">encrypt</span></a></td>
+<td><code class="docutils literal notranslate"><span class="pre">0</span></code></td>
+<td>Yes</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#xtra-encrypt-algo"><span class="std std-ref">encrypt-algo</span></a></td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#xtra-progress"><span class="std std-ref">progress</span></a></td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#xtra-rebuild"><span class="std std-ref">rebuild</span></a></td>
+<td><code class="docutils literal notranslate"><span class="pre">0</span></code></td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#xtra-rlimit"><span class="std std-ref">rlimit</span></a></td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#xtra-sst-initial-timeout"><span class="std std-ref">sst_initial_timeout</span></a></td>
+<td><code class="docutils literal notranslate"><span class="pre">100</span></code></td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#xtra-sst-special-dirs"><span class="std std-ref">sst_special_dirs</span></a></td>
+<td><code class="docutils literal notranslate"><span class="pre">1</span></code></td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#xtra-sockopt"><span class="std std-ref">sockopt</span></a></td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#xtra-streamfmt"><span class="std std-ref">streamfmt</span></a></td>
+<td><code class="docutils literal notranslate"><span class="pre">xbstream</span></code></td>
+<td>Yes</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#xtra-tca"><span class="std std-ref">tca</span></a></td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#xtra-tcert"><span class="std std-ref">tcert</span></a></td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#xtra-time"><span class="std std-ref">time</span></a></td>
+<td><code class="docutils literal notranslate"><span class="pre">0</span></code></td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#xtra-transferfmt"><span class="std std-ref">transferfmt</span></a></td>
+<td><code class="docutils literal notranslate"><span class="pre">socat</span></code></td>
+<td>Yes</td>
+<td>&#160;</td>
+</tr>
+</tbody>
+</table>
+<p class="section-heading rubric" id="xtra-compressor"><code class="docutils literal notranslate"><span class="pre">compressor</span></code></p>
+<p>Defines the compression utility the donor node uses to compress the state transfer.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><th class="stub"><strong>System Variable</strong></th>
+<td>Name:</td>
+<td><code class="docutils literal notranslate"><span class="pre">compressor</span></code></td>
+</tr>
+<tr class="row-even"><th class="stub">&#160;</th>
+<td>Match:</td>
+<td>Yes</td>
+</tr>
+<tr class="row-odd"><th class="stub"><strong>Permitted Values</strong></th>
+<td>Type:</td>
+<td>String</td>
+</tr>
+<tr class="row-even"><th class="stub">&#160;</th>
+<td>Default Value:</td>
+<td>&#160;</td>
+</tr>
+</tbody>
+</table>
+<p>This parameter defines whether the donor node performs compression on the state transfer stream.  It also defines what compression utility it uses to perform the operation.  You can use any compression utility which works on a stream, such as <code class="docutils literal notranslate"><span class="pre">gzip</span></code> or <code class="docutils literal notranslate"><span class="pre">pigz</span></code>.  Given that the joiner node must decompress the state transfer before attempting to read it, you must match this parameter with the <a class="reference internal" href="#xtra-decompressor"><span class="std std-ref">decompressor</span></a> parameter, using the appropriate flags for each.</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">compression</span><span class="o">=</span><span class="s">&quot;gzip&quot;</span>
+</pre></div>
+</div>
+<p class="section-heading rubric" id="xtra-compact"><code class="docutils literal notranslate"><span class="pre">compact</span></code></p>
+<p>Defines whether the joiner node performs compaction when rebuilding indexes after applying a <a class="reference internal" href="glossary.html#term-state-snapshot-transfer"><span class="xref std std-term">State Snapshot Transfer</span></a>.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><th class="stub"><strong>System Variable</strong></th>
+<td>Name:</td>
+<td><code class="docutils literal notranslate"><span class="pre">compact</span></code></td>
+</tr>
+<tr class="row-even"><th class="stub">&#160;</th>
+<td>Match:</td>
+<td>No</td>
+</tr>
+<tr class="row-odd"><th class="stub"><strong>Permitted Values</strong></th>
+<td>Type:</td>
+<td>Boolean</td>
+</tr>
+<tr class="row-even"><th class="stub">&#160;</th>
+<td>Default Value:</td>
+<td><code class="docutils literal notranslate"><span class="pre">OFF</span></code></td>
+</tr>
+</tbody>
+</table>
+<p>This parameter operates on the joiner node with the <a class="reference internal" href="#xtra-rebuild"><span class="std std-ref">rebuild</span></a> parameter.  When enabled, the node performs compaction when rebuilding indexes after applying a state transfer.</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">rebuild</span><span class="o">=</span><span class="s">ON</span>
+<span class="na">compact</span><span class="o">=</span><span class="s">ON</span>
+</pre></div>
+</div>
+<p class="section-heading rubric" id="xtra-cpat"><code class="docutils literal notranslate"><span class="pre">cpat</span></code></p>
+<p>Defines what files to clean up from the datadir during state transfers.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><th class="stub"><strong>System Variable</strong></th>
+<td>Name:</td>
+<td><code class="docutils literal notranslate"><span class="pre">cpat</span></code></td>
+</tr>
+<tr class="row-even"><th class="stub">&#160;</th>
+<td>Match:</td>
+<td>No</td>
+</tr>
+<tr class="row-odd"><th class="stub"><strong>Permitted Values</strong></th>
+<td>Type:</td>
+<td>String</td>
+</tr>
+<tr class="row-even"><th class="stub">&#160;</th>
+<td>Default Value:</td>
+<td>&#160;</td>
+</tr>
+</tbody>
+</table>
+<p>When the donor node begins a <a class="reference internal" href="glossary.html#term-state-snapshot-transfer"><span class="xref std std-term">State Snapshot Transfer</span></a>, it cleans up various files from the datadir.  This ensures that the joiner node can cleanly apply the state transfer.  With this parameter, you can define what files you want the node to delete before the state transfer.</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">cpat</span><span class="o">=</span><span class="s">&quot;.*glaera\.cache$\|.*sst_in_progress$\|.*grastate\.dat$\|.*\.err&quot;</span>
+</pre></div>
+</div>
+<p class="section-heading rubric" id="xtra-decompressor"><code class="docutils literal notranslate"><span class="pre">decompressor</span></code></p>
+<p>Defines the decompression utility the joiner node uses to decompress the state transfer.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><th class="stub"><strong>System Variable</strong></th>
+<td>Name:</td>
+<td><code class="docutils literal notranslate"><span class="pre">decompressor</span></code></td>
+</tr>
+<tr class="row-even"><th class="stub">&#160;</th>
+<td>Match:</td>
+<td>No</td>
+</tr>
+<tr class="row-odd"><th class="stub"><strong>Permitted Values</strong></th>
+<td>Type:</td>
+<td>String</td>
+</tr>
+<tr class="row-even"><th class="stub">&#160;</th>
+<td>Default Value:</td>
+<td>&#160;</td>
+</tr>
+</tbody>
+</table>
+<p>This parameter defines whether the joiner node performs decompression on the state transfer stream.  It also defines what decompression utility it uses to perform the operation.  You can use any compression utility which works on a stream, such as <code class="docutils literal notranslate"><span class="pre">gzip</span></code> or <code class="docutils literal notranslate"><span class="pre">pigz</span></code>.  Given that the donor node must compress the state transfer before sending it, you must match this parameter with the <a class="reference internal" href="#xtra-compressor"><span class="std std-ref">compressor</span></a> parameter, using the appropriate flags for each.</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">decompressor</span><span class="o">=</span><span class="s">&quot;gzip -dc&quot;</span>
+</pre></div>
+</div>
+<p class="section-heading rubric" id="xtra-encrypt"><code class="docutils literal notranslate"><span class="pre">encrypt</span></code></p>
+<p>Defines whether the node uses SSL encryption for XtraBackup and what kind of encryption it uses.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><th class="stub"><strong>System Variable</strong></th>
+<td>Name:</td>
+<td><code class="docutils literal notranslate"><span class="pre">encrypt</span></code></td>
+</tr>
+<tr class="row-even"><th class="stub">&#160;</th>
+<td>Match:</td>
+<td>Yes</td>
+</tr>
+<tr class="row-odd"><th class="stub"><strong>Permitted Values</strong></th>
+<td>Type:</td>
+<td>Integer</td>
+</tr>
+<tr class="row-even"><th class="stub">&#160;</th>
+<td>Default Value:</td>
+<td><code class="docutils literal notranslate"><span class="pre">0</span></code></td>
+</tr>
+</tbody>
+</table>
+<p>This parameter determines the type of SSL encryption the node uses when sending state transfers through xtrabackup.  The recommended type is <code class="docutils literal notranslate"><span class="pre">2</span></code> when using the cluster over WAN.</p>
+<table border="1" class="colwidths-given doc-options docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Value</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">0</span></code></td>
+<td>No encryption.</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">1</span></code></td>
+<td>The node encrypts State Snapshot Transfers through XtraBackup.</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal notranslate"><span class="pre">2</span></code></td>
+<td>The node encrypts State Snapshot Transfers through OpenSSL, using Socat.</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal notranslate"><span class="pre">3</span></code></td>
+<td>The node encrypts State Snapshot Transfers through the key and certificate files implemented for Galera Cluster.</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">encrypt</span><span class="o">=</span><span class="s">3</span>
+<span class="na">tkey</span><span class="o">=</span><span class="s">&quot;/path/to/key.pem&quot;</span>
+<span class="na">tcert</span><span class="o">=</span><span class="s">&quot;/path/to/cert.pem&quot;</span>
+<span class="na">tca</span><span class="o">=</span><span class="s">&quot;/path/to/ca.pem&quot;</span>
+</pre></div>
+</div>
+<p class="section-heading rubric" id="xtra-encrypt-algo"><code class="docutils literal notranslate"><span class="pre">encrypt-algo</span></code></p>
+<p>Defines the SSL encryption type the node uses for XtraBackup state transfers.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><th class="stub"><strong>System Variable</strong></th>
+<td>Name:</td>
+<td><code class="docutils literal notranslate"><span class="pre">encrypt-algo</span></code></td>
+</tr>
+<tr class="row-even"><th class="stub">&#160;</th>
+<td>Match:</td>
+<td>No</td>
+</tr>
+<tr class="row-odd"><th class="stub"><strong>Permitted Values</strong></th>
+<td>Type:</td>
+<td>Integer</td>
+</tr>
+<tr class="row-even"><th class="stub">&#160;</th>
+<td>Default Value:</td>
+<td><code class="docutils literal notranslate"><span class="pre">0</span></code></td>
+</tr>
+</tbody>
+</table>
+<p>When using the <a class="reference internal" href="#xtra-encrypt"><span class="std std-ref">encrypt</span></a> parameter in both the <code class="docutils literal notranslate"><span class="pre">[xtrabackup]</span></code> and <code class="docutils literal notranslate"><span class="pre">[sst]</span></code> units, there is a potential issue in it having different meanings according to the unit under which it occurs.  That is, in <code class="docutils literal notranslate"><span class="pre">[xtrabackup]</span></code>, it turns encryption on while in <code class="docutils literal notranslate"><span class="pre">[sst]</span></code> it both turns it on as specifies the algorithm.</p>
+<p>In the event that you need to clarify the meaning, this parameter allows you to define the encryption algorithm separately from turning encryption on.  It is only read in the event that <a class="reference internal" href="#xtra-encrypt"><span class="std std-ref">encrypt</span></a> is set to <code class="docutils literal notranslate"><span class="pre">1</span></code></p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">encrypt</span><span class="o">=</span><span class="s">1</span>
+<span class="na">encrypt-algo</span><span class="o">=</span><span class="s">3</span>
+</pre></div>
+</div>
+<p class="section-heading rubric" id="xtra-progress"><code class="docutils literal notranslate"><span class="pre">progress</span></code></p>
+<p>Defines whether where the node reports <a class="reference internal" href="glossary.html#term-state-snapshot-transfer"><span class="xref std std-term">State Snapshot Transfer</span></a> progress.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><th class="stub"><strong>System Variable</strong></th>
+<td>Name:</td>
+<td><code class="docutils literal notranslate"><span class="pre">progress</span></code></td>
+</tr>
+<tr class="row-even"><th class="stub">&#160;</th>
+<td>Match:</td>
+<td>No</td>
+</tr>
+<tr class="row-odd"><th class="stub"><strong>Permitted Values</strong></th>
+<td>Type:</td>
+<td>String</td>
+</tr>
+<tr class="row-even"><th class="stub">&#160;</th>
+<td>Default Value:</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><th class="stub">&#160;</th>
+<td>Valid Values:</td>
+<td><code class="docutils literal notranslate"><span class="pre">1</span></code>; /path/to/file</td>
+</tr>
+</tbody>
+</table>
+<p>When you set this parameter, the node reports progress on XtraBackup progress in state transfers.  If you set the value to <code class="docutils literal notranslate"><span class="pre">1</span></code>, the node makes these reports to the database server stderr.  If you set the value to a file path, it writes the progress to that file.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Keep in mind, that a <code class="docutils literal notranslate"><span class="pre">0</span></code> value is invalid.  If you want to disable this parameter, delete or comment it out.</p>
+</div>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">progress</span><span class="o">=</span><span class="s">&quot;/var/log/mysql/xtrabackup-progress.log&quot;</span>
+</pre></div>
+</div>
+<p class="section-heading rubric" id="xtra-rebuild"><code class="docutils literal notranslate"><span class="pre">rebuild</span></code></p>
+<p>Defines whether the joiner node rebuilds indexes during a <a class="reference internal" href="glossary.html#term-state-snapshot-transfer"><span class="xref std std-term">State Snapshot Transfer</span></a>.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><th class="stub"><strong>System Variable</strong></th>
+<td>Name:</td>
+<td><code class="docutils literal notranslate"><span class="pre">rebuild</span></code></td>
+</tr>
+<tr class="row-even"><th class="stub">&#160;</th>
+<td>Match:</td>
+<td>No</td>
+</tr>
+<tr class="row-odd"><th class="stub"><strong>Permitted Values</strong></th>
+<td>Type:</td>
+<td>Boolean</td>
+</tr>
+<tr class="row-even"><th class="stub">&#160;</th>
+<td>Default Value:</td>
+<td><code class="docutils literal notranslate"><span class="pre">OFF</span></code></td>
+</tr>
+</tbody>
+</table>
+<p>This parameter operates on the joiner node.  When enabled, the node rebuilds indexes when applying the state transfer.  Bear in mind, this operation is separate from compaction.  Due to <a class="reference external" href="https://bugs.launchpad.net/percona-xtrabackup/+bug/1192834">Bug #1192834</a>, it is recommended that you use this parameter with <a class="reference internal" href="#xtra-compact"><span class="std std-ref">compact</span></a>.</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">rebuild</span><span class="o">=</span><span class="s">ON</span>
+<span class="na">compact</span><span class="o">=</span><span class="s">ON</span>
+</pre></div>
+</div>
+<p class="section-heading rubric" id="xtra-rlimit"><code class="docutils literal notranslate"><span class="pre">rlimit</span></code></p>
+<p>Defines the rate limit for the donor node.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><th class="stub"><strong>System Variable</strong></th>
+<td>Name:</td>
+<td><code class="docutils literal notranslate"><span class="pre">rlimit</span></code></td>
+</tr>
+<tr class="row-even"><th class="stub">&#160;</th>
+<td>Match:</td>
+<td>No</td>
+</tr>
+<tr class="row-odd"><th class="stub"><strong>Permitted Values</strong></th>
+<td>Type:</td>
+<td>Integer</td>
+</tr>
+<tr class="row-even"><th class="stub">&#160;</th>
+<td>Default Value:</td>
+<td>&#160;</td>
+</tr>
+</tbody>
+</table>
+<p>This parameter allows you to definite the rate-limit the donor node.  This allows you to keep state transfers from blocking regular cluster operations.</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">rlimit</span><span class="o">=</span><span class="s">300M</span>
+</pre></div>
+</div>
+<p class="section-heading rubric" id="xtra-sst-initial-timeout"><code class="docutils literal notranslate"><span class="pre">sst_initial_timeout</span></code></p>
+<p>Defines the initial timeout to receive the first state transfer packet.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><th class="stub"><strong>System Variable</strong></th>
+<td>Name:</td>
+<td><code class="docutils literal notranslate"><span class="pre">sst_initial_timeout</span></code></td>
+</tr>
+<tr class="row-even"><th class="stub">&#160;</th>
+<td>Match:</td>
+<td>No</td>
+</tr>
+<tr class="row-odd"><th class="stub"><strong>Permitted Values</strong></th>
+<td>Type:</td>
+<td>Integer</td>
+</tr>
+<tr class="row-even"><th class="stub">&#160;</th>
+<td>Default Value:</td>
+<td><code class="docutils literal notranslate"><span class="pre">100</span></code></td>
+</tr>
+</tbody>
+</table>
+<p>This parameter determines the initial timeout in seconds for the joiner to receive the first packet in a <a class="reference internal" href="glossary.html#term-state-snapshot-transfer"><span class="xref std std-term">State Snapshot Transfer</span></a>.  This keeps the joiner node from hanging in the event that the donor node crashes while starting the operation.</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">sst_initial_timeout</span><span class="o">=</span><span class="s">130</span>
+</pre></div>
+</div>
+<p class="section-heading rubric" id="xtra-sst-special-dirs"><code class="docutils literal notranslate"><span class="pre">sst_special_dirs</span></code></p>
+<p>Defines whether the node uses special InnoDB home and log directories.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><th class="stub"><strong>System Variable</strong></th>
+<td>Name:</td>
+<td><code class="docutils literal notranslate"><span class="pre">sst_special_dirs</span></code></td>
+</tr>
+<tr class="row-even"><th class="stub">&#160;</th>
+<td>Match:</td>
+<td>No</td>
+</tr>
+<tr class="row-odd"><th class="stub"><strong>Permitted Values</strong></th>
+<td>Type:</td>
+<td>Boolean</td>
+</tr>
+<tr class="row-even"><th class="stub">&#160;</th>
+<td>Default Value:</td>
+<td><code class="docutils literal notranslate"><span class="pre">OFF</span></code></td>
+</tr>
+</tbody>
+</table>
+<p>This parameter enables support for <code class="docutils literal notranslate"><span class="pre">innodb_data_home_dir</span></code> and <code class="docutils literal notranslate"><span class="pre">innodb_log_home_dir</span></code> parameters for XtraBackup.  It requires that you define <code class="docutils literal notranslate"><span class="pre">innodb_data_home_dir</span></code> and <code class="docutils literal notranslate"><span class="pre">innodb_log_group_home_dir</span></code> in the <code class="docutils literal notranslate"><span class="pre">[mysqld]</span></code> unit.</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="k">[mysqld]</span>
+<span class="na">innodb_data_home_dir</span><span class="o">=</span><span class="s">&quot;/var/mysqld/innodb&quot;</span>
+<span class="na">innodb_log_group_home_dir</span><span class="o">=</span><span class="s">&quot;/var/log/innodb&quot;</span>
+<span class="na">wsrep_sst_method</span><span class="o">=</span><span class="s">&quot;xtrabackup-v2&quot;</span>
+
+<span class="k">[sst]</span>
+<span class="na">sst_special_dirs</span><span class="o">=</span><span class="s">TRUE</span>
+</pre></div>
+</div>
+<p class="section-heading rubric" id="xtra-sockopt"><code class="docutils literal notranslate"><span class="pre">sockopt</span></code></p>
+<p>Defines socket options.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><th class="stub"><strong>System Variable</strong></th>
+<td>Name:</td>
+<td><code class="docutils literal notranslate"><span class="pre">sockopt</span></code></td>
+</tr>
+<tr class="row-even"><th class="stub">&#160;</th>
+<td>Match:</td>
+<td>No</td>
+</tr>
+<tr class="row-odd"><th class="stub"><strong>Permitted Values</strong></th>
+<td>Type:</td>
+<td>String</td>
+</tr>
+<tr class="row-even"><th class="stub">&#160;</th>
+<td>Default Value:</td>
+<td>&#160;</td>
+</tr>
+</tbody>
+</table>
+<p>This parameter allows you to define one or more socket options for XtraBackup using the Socat transfer format.</p>
+<p class="section-heading rubric" id="xtra-streamfmt"><code class="docutils literal notranslate"><span class="pre">streamfmt</span></code></p>
+<p>Defines the stream formatting utility.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><th class="stub"><strong>System Variable</strong></th>
+<td>Name:</td>
+<td><code class="docutils literal notranslate"><span class="pre">streamfmt</span></code></td>
+</tr>
+<tr class="row-even"><th class="stub">&#160;</th>
+<td>Match:</td>
+<td>Yes</td>
+</tr>
+<tr class="row-odd"><th class="stub"><strong>Permitted Values</strong></th>
+<td>Type:</td>
+<td>String</td>
+</tr>
+<tr class="row-even"><th class="stub">&#160;</th>
+<td>Default Value:</td>
+<td><code class="docutils literal notranslate"><span class="pre">xbstream</span></code></td>
+</tr>
+<tr class="row-odd"><th class="stub">&#160;</th>
+<td>Valid Values:</td>
+<td><code class="docutils literal notranslate"><span class="pre">tar</span></code>; <code class="docutils literal notranslate"><span class="pre">xbstream</span></code></td>
+</tr>
+</tbody>
+</table>
+<p>This parameter defines the utility the node uses to archive the node state before the transfer is sent and how to unarchive the state transfers that is receives.  There are two methods available: <code class="docutils literal notranslate"><span class="pre">tar</span></code> and <code class="docutils literal notranslate"><span class="pre">xbstream</span></code>.  Given that the receiving node needs to know how to read the stream, it is necessary that both nodes use the same values for this parameter.</p>
+<p>The default and recommended utility is <code class="docutils literal notranslate"><span class="pre">xbstream</span></code> given that it supports encryption, compression, parallel streaming, incremental backups and compaction.  <code class="docutils literal notranslate"><span class="pre">tar</span></code> does not support these features.</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">streamfmt</span><span class="o">=</span><span class="s">&#39;xbstream&#39;</span>
+</pre></div>
+</div>
+<p class="section-heading rubric" id="xtra-tca"><code class="docutils literal notranslate"><span class="pre">tca</span></code></p>
+<p>Defines the Certificate Authority (CA) to use in SSL encryption.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><th class="stub"><strong>System Variable</strong></th>
+<td>Name:</td>
+<td><code class="docutils literal notranslate"><span class="pre">tca</span></code></td>
+</tr>
+<tr class="row-even"><th class="stub">&#160;</th>
+<td>Match:</td>
+<td>No</td>
+</tr>
+<tr class="row-odd"><th class="stub"><strong>Permitted Values</strong></th>
+<td>Type:</td>
+<td>Path</td>
+</tr>
+<tr class="row-even"><th class="stub">&#160;</th>
+<td>Default Value:</td>
+<td>&#160;</td>
+</tr>
+</tbody>
+</table>
+<p>This parameter defines the Certificate Authority (CA) file that the node uses with XtraBackup state transfers.  In order to use SSL encryption with XtraBackup, you must configure  the <a class="reference internal" href="#xtra-transferfmt"><span class="std std-ref">transferfmt</span></a> parameter to use <code class="docutils literal notranslate"><span class="pre">socat</span></code>.</p>
+<p>For more information on using Socat with encryption, see <a class="reference external" href="https://www.dest-unreach.org/socat/doc/socat-openssltunnel.html">Securing Traffic between Two Socat Instances using SSL</a>.</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">transferfmt</span><span class="o">=</span><span class="s">&quot;socat&quot;</span>
+<span class="na">tca</span><span class="o">=</span><span class="s">&quot;/path/to/ca.pem&quot;</span>
+</pre></div>
+</div>
+<p class="section-heading rubric" id="xtra-tcert"><code class="docutils literal notranslate"><span class="pre">tcert</span></code></p>
+<p>Defines the certificate to use in SSL encryption.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><th class="stub"><strong>System Variable</strong></th>
+<td>Name:</td>
+<td><code class="docutils literal notranslate"><span class="pre">tcert</span></code></td>
+</tr>
+<tr class="row-even"><th class="stub">&#160;</th>
+<td>Match:</td>
+<td>No</td>
+</tr>
+<tr class="row-odd"><th class="stub"><strong>Permitted Values</strong></th>
+<td>Type:</td>
+<td>String</td>
+</tr>
+<tr class="row-even"><th class="stub">&#160;</th>
+<td>Default Value:</td>
+<td>&#160;</td>
+</tr>
+</tbody>
+</table>
+<p>This parameter defines the SSL certificate file that the node uses with SSL encryption on XtraBackup state transfers.  In order to use SSL encryption with XtraBackup, you must configure the <a class="reference internal" href="#xtra-transferfmt"><span class="std std-ref">transferfmt</span></a> parameter to use Socat.</p>
+<p>For more information on using Socat with encryption, see <a class="reference external" href="https://www.dest-unreach.org/socat/doc/socat-openssltunnel.html">Securing Traffic between Two Socat Instances using SSL</a>.</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">transferfmt</span><span class="o">=</span><span class="s">&quot;socat&quot;</span>
+<span class="na">tcert</span><span class="o">=</span><span class="s">&quot;/path/to/cert.pem&quot;</span>
+</pre></div>
+</div>
+<p class="section-heading rubric" id="xtra-time"><code class="docutils literal notranslate"><span class="pre">time</span></code></p>
+<p>Defines whether XtraBackup instruments key stages in the backup and restore process for state transfers.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><th class="stub"><strong>System Variable</strong></th>
+<td>Name:</td>
+<td><code class="docutils literal notranslate"><span class="pre">time</span></code></td>
+</tr>
+<tr class="row-even"><th class="stub">&#160;</th>
+<td>Match:</td>
+<td>No</td>
+</tr>
+<tr class="row-odd"><th class="stub"><strong>Permitted Values</strong></th>
+<td>Type:</td>
+<td>Boolean</td>
+</tr>
+<tr class="row-even"><th class="stub">&#160;</th>
+<td>Default Value:</td>
+<td><code class="docutils literal notranslate"><span class="pre">OFF</span></code></td>
+</tr>
+</tbody>
+</table>
+<p>This parameter instruments key stages of the backup and restore process for state transfers.</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">time</span><span class="o">=</span><span class="s">ON</span>
+</pre></div>
+</div>
+<p class="section-heading rubric" id="xtra-transferfmt"><code class="docutils literal notranslate"><span class="pre">transferfmt</span></code></p>
+<p>Defines the transfer stream utility.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><th class="stub"><strong>System Variable</strong></th>
+<td>Name:</td>
+<td><code class="docutils literal notranslate"><span class="pre">transferfmt</span></code></td>
+</tr>
+<tr class="row-even"><th class="stub">&#160;</th>
+<td>Match:</td>
+<td>YesNo”</td>
+</tr>
+<tr class="row-odd"><th class="stub"><strong>Permitted Values</strong></th>
+<td>Type:</td>
+<td>String</td>
+</tr>
+<tr class="row-even"><th class="stub">&#160;</th>
+<td>Default Value:</td>
+<td><code class="docutils literal notranslate"><span class="pre">socat</span></code></td>
+</tr>
+<tr class="row-odd"><th class="stub">&#160;</th>
+<td>Valid Values:</td>
+<td><code class="docutils literal notranslate"><span class="pre">socat</span></code>; <code class="docutils literal notranslate"><span class="pre">nc</span></code></td>
+</tr>
+</tbody>
+</table>
+<p>This parameter defines the utility that the node uses to format transfers sent from donor to joiner nodes.  There are two methods supported: Socat and <code class="docutils literal notranslate"><span class="pre">nc</span></code>.  Given that the receiving node needs to know how to interpret the transfer, it is necessary that both nodes use the same values for this parameter.</p>
+<p>The default and recommended utility is Socat, given that it allows for socket options, such as transfer buffer size.  For more information, see the <a class="reference external" href="https://www.dest-unreach.org/socat/doc/socat.html">socat Documentation</a>.</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">transferfmt</span><span class="o">=</span><span class="s">&quot;socat&quot;</span>
+</pre></div>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/logo.png" alt="Logo"/>
+            </a></p>
+<h1 class="logo"><a href="../index.html">Galera Cluster</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">The Codership Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="overview.html">Overview of Galera Cluster</a></li>
+<li class="toctree-l2"><a class="reference internal" href="technical-description.html">Technical Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html">Installing Galera Cluster</a></li>
+<li class="toctree-l2"><a class="reference internal" href="administration.html">Galera Cluster Administration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deployment.html">Deployment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="monitor.html">Cluster Monitoring</a></li>
+<li class="toctree-l2"><a class="reference internal" href="security.html">Security</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="reference.html">Reference</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="mysql-wsrep-options.html">MySQL wsrep Options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="wsrep-functions.html">Galera Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="galera-parameters.html">Galera Parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="galera-status-variables.html">Galera Status Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="system-tables.html">Galera System Tables</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">XtraBackup Parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="glb-parameters.html">Galera Load Balancer Parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="versioning-information.html">Versioning Information</a></li>
+<li class="toctree-l3"><a class="reference internal" href="legal-notice.html">Legal Notice</a></li>
+<li class="toctree-l3"><a class="reference internal" href="glossary.html">Glossary</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../kb/index.html">The Codership Knowledge Base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../training/index.html">Codership Training</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../whats-new.html">What’s New</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../editors/index.html">Codership Writers &amp; Editors</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">The Codership Documentation</a><ul>
+  <li><a href="reference.html">Reference</a><ul>
+      <li>Previous: <a href="galera-status-variables.html" title="previous chapter">Galera Status Variables</a></li>
+      <li>Next: <a href="glb-parameters.html" title="next chapter">Galera Load Balancer Parameters</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+	<div class="navbar">
+	<nav id="site-navigation" class="navigation main-navigation" role="navigation">
+	<div class="nav-bar-container">
+
+	<div id="menu-nav-bar" class="nav-menu">
+		<ul class="nav-link">
+			<li> </li>
+
+		</ul>
+
+	</div>
+	</nav>
+
+	<footer id="colophon" class="site-footer" role="contentinfo">
+	<div class="top">	<div class="powered-by"><p>Powered by Galera:</p>
+	<p><a href="https://mariadb.com/kb/en/galera/"><img class="alignleft size-full wp-image-237" alt="MariaDB" src="https://galeracluster.com/wp-content/uploads/2013/10/logo-mariadb.png" width="166" height="49" /></a></p>
+		</div></div>
+	<div class="footer-menu">
+	<div class="menu-main-menu-container">
+	<ul id="menu-main-menu-1" class="nav-menu">
+	<li class="link-home menu-item menu-item-type-post_type menu-item-object-page menu-item-359"><a href="https://galeracluster.com/">Home</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-35"><a href="https://galeracluster.com/products/">Products</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="https://galeracluster.com/downloads/">Downloads</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-12 current_page_item current-menu-ancestor current-menu-parent current_page_parent current_page_ancestor menu-item-has-children menu-item-33"><a href="https://galeracluster.com/support/">Support</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="https://galeracluster.com/community/">Community</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-31"><a href="https://galeracluster.com/company/">Company</a></li>
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-297"><a href="https://galeracluster.com/category/blog/">Blog</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-38"><a href="https://galeracluster.com/contact-us/">Contact us</a></li>
+	</ul></div>			</div><!-- .footer-menu -->
+
+
+	<div class="footer-bar">
+	<p class="copyright">2014 Codership Ltd.</p>
+	</div>
+	<div class="footnote">
+	<h2>Your data is invaluable. We're here to secure it. All of it.</h2>
+	</div>
+	</footer><!-- #colophon -->
+
+
+
+
+  </body>
+</html>

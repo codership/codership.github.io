@@ -1,0 +1,388 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><meta content="Scriptable State Snapshot Transfers" name="title" />
+<meta content="en-US" name="language" />
+<meta content="galera cluster, scriptable sst, state snapshot transfers" name="keywords" />
+<meta content="Codership Oy, 2014 - 2020. All Rights Reserved." name="copyright" />
+
+    <title>Scriptable State Snapshot Transfers &#8212; Galera Cluster Documentation</title>
+    <link rel="stylesheet" href="../_static/reset-style.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Galera System Tables" href="system-tables.html" />
+    <link rel="prev" title="Physical State Snapshot" href="sst-physical.html" />
+
+
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<link rel="stylesheet" href="/library/_static/basic-style.css">
+<link rel="stylesheet" href="/library/_static/header.css">
+<link rel="stylesheet" href="/library/_static/footer.css">
+<link rel="stylesheet" href="/library/_static/codership.css">
+<link rel="stylesheet" media="screen and (max-width: 500px)" href="/library/_static/mobile.css"/>
+<link rel="stylesheet" media="screen and (min-width:501px) and (max-width:1024px)" href="/library/_static/tablet.css"/>
+<link rel="stylesheet" media="screen and (prefers-color-scheme: dark)" href="/library/_static/dark.css"/>
+
+
+<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Feed" href="https://galeracluster.com/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Comments Feed" href="https://galeracluster.com/comments/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Support Comments Feed" href="https://galeracluster.com/support/feed/" />
+
+<script type='text/javascript' src='https://galeracluster.com/wp-includes/js/comment-reply.min.js?ver=3.8.3'></script>
+
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://galeracluster.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://galeracluster.com/wp-includes/wlwmanifest.xml" />
+<link rel='prev' title='Downloads' href='https://galeracluster.com/downloads/' />
+<link rel='next' title='Community' href='https://galeracluster.com/community/' />
+<meta name="generator" content="WordPress 3.8.3" />
+
+<link rel='shortlink' href='https://galeracluster.com/?p=12' />
+
+<style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>
+<style type="text/css" id="twentythirteen-header-css">
+			.site-title,
+			.site-description {
+				position: absolute;
+				clip: rect(1px 1px 1px 1px); /* IE7 */
+				clip: rect(1px, 1px, 1px, 1px);
+			}
+				.site-header .home-link {
+				min-height: 0;
+			}
+</style>
+
+<script type="text/javascript">
+
+		  var _gaq = _gaq || [];
+		  _gaq.push(['_setAccount', 'UA-35163478-6']);
+		  _gaq.push(['_trackPageview']);
+
+		  (function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'https://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		  })();
+
+</script>
+
+  </head><body>
+	<div id="fb-root"></div>
+	<script>(function(d, s, id) {
+		  var js, fjs = d.getElementsByTagName(s)[0];
+		  if (d.getElementById(id)) return;
+		  js = d.createElement(s); js.id = id;
+		  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+		  fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));
+	</script>
+
+	<div id="page" class="hfeed site">
+
+	<header id="masthead" class="site-header" role="banner">
+
+	<div class="top">
+	<a class="home-link" href="https://galeracluster.com/" title="Galera Cluster for MySQL" rel="home">
+	<h1 class="site-title">Galera Cluster for MySQL</h1>
+	<h2 class="site-description">The world&#039;s most advanced open source database cluster</h2>
+	</a>
+	</div>
+
+
+	<div id="navbar" class="navbar">
+	<nav id="site-navigation" class="navigation main-navigation" role="navigation">
+	<div class="menu-main-menu-container">
+
+	<ul id="menu-main-menu" class="nav-menu">
+	<li id="menu-item-359" class="link-home menu-item menu-item-type-post_type menu-item-object-page menu-item-359"><a href="https://galeracluster.com/">Home</a></li>
+	<li id="menu-item-35" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-35"><a href="https://galeracluster.com/products/">Products</a></li>
+	<li id="menu-item-34" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="https://galeracluster.com/downloads/">Downloads</a></li>
+	<li id="menu-item-33" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-12 current_page_item current-menu-ancestor current-menu-parent current_page_parent current_page_ancestor menu-item-has-children menu-item-33"><a href="https://galeracluster.com/support/">Support</a></li>
+	<li id="menu-item-32" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="https://galeracluster.com/community/">Community</a></li>
+	<li id="menu-item-31" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-31"><a href="https://galeracluster.com/company/">Company</a></li>
+	<li id="menu-item-297" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-297"><a href="https://galeracluster.com/category/blog/">Blog</a></li>
+	<li id="menu-item-38" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-38"><a href="https://galeracluster.com/contact-us/">Contact us</a></li>
+	</ul>
+	</div>
+
+
+	</nav><!-- #site-navigation -->
+
+	</div><!-- #navbar -->
+	</header><!-- #masthead -->
+
+
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="left-margin docutils container">
+<div class="left-margin-top docutils container">
+<a class="reference internal" href="../index.html"><span class="doc">The Library</span></a></div>
+<div class="left-margin-content docutils container">
+<ul class="here simple">
+<li><a class="reference internal" href="index.html"><span class="doc">Documentation</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../kb/index.html"><span class="doc">Knowledge Base</span></a></li>
+<li><a class="reference internal" href="../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="sub-links simple">
+<li><a class="reference internal" href="../training/tutorials/index.html"><span class="doc">Tutorial Articles</span></a></li>
+<li><a class="reference internal" href="../training/videos/index.html"><span class="doc">Training Videos</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a></li>
+</ul>
+<p>Related Documents</p>
+<ul class="simple">
+<li><a class="reference internal" href="mysql-wsrep-options.html#wsrep-sst-receive-address"><span class="std std-ref">wsrep_sst_receive_address</span></a></li>
+<li><a class="reference internal" href="mysql-wsrep-options.html#wsrep-sst-auth"><span class="std std-ref">wsrep_sst_auth</span></a></li>
+<li><a class="reference internal" href="mysql-wsrep-options.html#wsrep-sst-method"><span class="std std-ref">wsrep_sst_method</span></a></li>
+</ul>
+</div>
+</div>
+<div class="top-links docutils container">
+<ul class="simple">
+<li><a class="reference external" href="https://galeracluster.com">Home</a></li>
+</ul>
+<ul class="here simple">
+<li><a class="reference internal" href="index.html"><span class="doc">Docs</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../kb/index.html"><span class="doc">KB</span></a></li>
+</ul>
+<ul class="nav-wider simple">
+<li><a class="reference internal" href="../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a></li>
+</ul>
+</div>
+<div class="library-document section" id="scriptable-state-snapshot-transfers">
+<span id="scriptable-sst"></span><h1>Scriptable State Snapshot Transfers<a class="headerlink" href="#scriptable-state-snapshot-transfers" title="Permalink to this headline">¶</a></h1>
+<p>When a node sends and receives a <a class="reference internal" href="glossary.html#term-state-snapshot-transfer"><span class="xref std std-term">State Snapshot Transfer</span></a>, it manage it through processes that run external to the database server.  If you need more from these processes than the default behavior provides, Galera Cluster provides an interface for custom shell scripts to manage state snapshot transfers on the node.</p>
+<p class="section-heading rubric" id="writing-custom-sst">Using the Common SST Script</p>
+<p>Galera Cluster includes a common script for managing a <a class="reference internal" href="glossary.html#term-state-snapshot-transfer"><span class="xref std std-term">State Snapshot Transfer</span></a>, which you can use as a starting point in building your own custom script.  The filename is <code class="docutils literal notranslate"><span class="pre">wsrep_sst_common</span></code>.  For Linux users, the package manager typically installs it for you in <code class="docutils literal notranslate"><span class="pre">/usr/bin</span></code>.</p>
+<p>The common SST script provides ready functions for parsing argument lists, logging errors, and so on.  There are no constraints on the order or number of parameters it takes.  You can add new parameters and ignore any of the existing ones as you prefer.</p>
+<p>It assumes that the storage engine initialization on the receiving node takes place only after the state transfer is complete.  Meaning that it copies the contents of the source data directory to the destination data directory (with possible variations).</p>
+<p class="section-heading rubric" id="sst-script-parameters">State Transfer Script Parameters</p>
+<p>When Galera Cluster starts an external process for state snapshot transfers, it passes a number of parameters to the script, which you can use in configuring your own state transfer script.</p>
+<p class="sub-heading rubric" id="general-sst-script-parameters">General Parameters</p>
+<p>These parameters are passed to all state transfer scripts, regardless of method or whether the node is sending or receiving:</p>
+<p class="verbose-list"><code class="docutils literal notranslate"><span class="pre">--role</span></code> The script is given a string, either <code class="docutils literal notranslate"><span class="pre">donor</span></code> or <code class="docutils literal notranslate"><span class="pre">joiner</span></code>, to indicate whether the node is using it to send or receive a state snapshot transfer.</p>
+<p class="verbose-list"><code class="docutils literal notranslate"><span class="pre">--address</span></code> The script is given the IP address of the joiner node.</p>
+<p class="verbose-list">When the script is run by the joiner, the node uses the value of either the <a class="reference internal" href="mysql-wsrep-options.html#wsrep-sst-receive-address"><span class="std std-ref">wsrep_sst_receive_address</span></a> parameter or a sensible default formatted as <code class="docutils literal notranslate"><span class="pre">&lt;ip_address&gt;:&lt;port&gt;</span></code>.   When the script is run by the donor, the node uses the value from the state transfer request.</p>
+<p class="verbose-list"><code class="docutils literal notranslate"><span class="pre">--auth</span></code> The script is given the node authentication information.</p>
+<p class="verbose-list">When the script is run by the joiner, the node uses the value given to the <a class="reference internal" href="mysql-wsrep-options.html#wsrep-sst-auth"><span class="std std-ref">wsrep_sst_auth</span></a> parameter.  When the script is run by the donor, it uses the value given by the state transfer request.</p>
+<p class="verbose-list"><code class="docutils literal notranslate"><span class="pre">--datadir</span></code> The script is given the path to the data directory.  The value is drawn from the <code class="docutils literal notranslate"><span class="pre">mysql_real_data_home</span></code> parameter.</p>
+<p class="verbose-list"><code class="docutils literal notranslate"><span class="pre">--defaults-file</span></code> The script is given the path to the <code class="docutils literal notranslate"><span class="pre">my.cnf</span></code> configuration file.</p>
+<p>The values the node passes to these parameters varies depending on whether the node calls the script to send or receive a state snapshot transfer.  For more information, see <a class="reference internal" href="#calling-conventions"><span class="std std-ref">Calling Conventions</span></a> below.</p>
+<p class="sub-heading rubric" id="donor-sst-script-parameters">Donor-specific Parameters</p>
+<p>These parameters are passed only to state transfer scripts initiated by a node serving as the donor node, regardless of the method being used:</p>
+<p class="verbose-list"><code class="docutils literal notranslate"><span class="pre">--gtid</span></code> The node gives the <a class="reference internal" href="glossary.html#term-global-transaction-id"><span class="xref std std-term">Global Transaction ID</span></a>, which it forms from the state UUID and the sequence number, or seqno, of the last committed transaction.</p>
+<p class="verbose-list"><code class="docutils literal notranslate"><span class="pre">--socket</span></code> The node gives the local server socket for communications, if required.</p>
+<p class="verbose-list"><code class="docutils literal notranslate"><span class="pre">--bypass</span></code> The node specifies whether the script should skip the actual data transfer and only pass the Global Transaction ID to the receiving node.  That is, whether the node should initiate an <a class="reference internal" href="glossary.html#term-incremental-state-transfer"><span class="xref std std-term">Incremental State Transfer</span></a>.</p>
+<p class="sub-heading rubric" id="mysqldump-sst-parameters">Logical State Transfer-specific Parameters</p>
+<p>These parameters are passed only to the <code class="docutils literal notranslate"><span class="pre">wsrep_sst_mysqldump</span></code> state transfer script by both the sending and receiving nodes:</p>
+<p class="verbose-list"><code class="docutils literal notranslate"><span class="pre">--user</span></code> The node gives to the script the database user, which the script then uses to connect to both donor and joiner database servers.  Meaning, this user must be the same on both servers, as defined by the <a class="reference internal" href="mysql-wsrep-options.html#wsrep-sst-auth"><span class="std std-ref">wsrep_sst_auth</span></a> parameter.</p>
+<p class="verbose-list"><code class="docutils literal notranslate"><span class="pre">--password</span></code> The node gives to the script the password for the database user, as configured by the <a class="reference internal" href="mysql-wsrep-options.html#wsrep-sst-auth"><span class="std std-ref">wsrep_sst_auth</span></a> paraemter.</p>
+<p class="verbose-list"><code class="docutils literal notranslate"><span class="pre">--host</span></code> The node gives to the script the IP address of the joiner node.</p>
+<p class="verbose-list"><code class="docutils literal notranslate"><span class="pre">--port</span></code> The node gives to the script the port number to use with the joiner node.</p>
+<p class="verbose-list"><code class="docutils literal notranslate"><span class="pre">--local-port</span></code> The node gives to the script the port number to use in sending the state transfer.</p>
+<p class="section-heading rubric" id="calling-conventions">Calling Conventions</p>
+<p>In writing your own custom script for state snapshot transfers, there are certain conventions that you need to follow in order to accommodate how Galera Cluster calls the script.</p>
+<p class="sub-heading rubric" id="call-receiver">Receiver</p>
+<p>When the node calls for a state snapshot transfer as a joiner, it begins by passing a number of arguments to the state transfer script, as defined in <a class="reference internal" href="#general-sst-script-parameters"><span class="std std-ref">General Parameters</span></a> above.  For your own script you can choose to use or ignore these arguments as suits your needs.</p>
+<p>After the script receives these arguments, prepare the node to accept a state snapshot transfer.  For example, in the case of <code class="docutils literal notranslate"><span class="pre">wsrep_sst_rsync</span></code>, the script starts <code class="docutils literal notranslate"><span class="pre">rsync</span></code> in server mode.</p>
+<p>To signal that the node is ready to receive the state transfer, print the following string to standard output: <code class="docutils literal notranslate"><span class="pre">ready</span> <span class="pre">&lt;address&gt;:port\n</span></code>.  Use the IP address and port at which the node is waiting for the state snapshot.  For example:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">ready 192.168.1.1:4444</span>
+</pre></div>
+</div>
+<p>The node responds by sending a state transfer request to the donor node.  The node forms the request with the address and port number of the joiner node, the values given to <a class="reference internal" href="mysql-wsrep-options.html#wsrep-sst-auth"><span class="std std-ref">wsrep_sst_auth</span></a>, and the name of your script.  The donor receives the request and uses these values as input parameters in running your script on that node to send back the state transfer.</p>
+<p>When the joiner node receives the state transfer and finishes applying it, print to standard output the <a class="reference internal" href="glossary.html#term-global-transaction-id"><span class="xref std std-term">Global Transaction ID</span></a> of the received state.  For example:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">e2c9a15e-5485-11e0-0800-6bbb637e7211:8823450456</span>
+</pre></div>
+</div>
+<p>Then exit the script with a <code class="docutils literal notranslate"><span class="pre">0</span></code> status, to indicate that the state transfer was successful.</p>
+<p class="sub-heading rubric" id="call-sender">Sender</p>
+<p>When the node calls for a state snapshot transfer as a donor, it begins by passing a number of arguments to the state transfer script, as defined in <a class="reference internal" href="#general-sst-script-parameters"><span class="std std-ref">General Parameters</span></a> above.  For your own script, you can choose to use or ignore these arguments as suits your needs.</p>
+<p>While your script runs, Galera Cluster accepts the following signals.  You can trigger them by printing to standard output:</p>
+<p class="verbose-list"><code class="docutils literal notranslate"><span class="pre">flush</span> <span class="pre">tables\n</span></code> Optional signal that asks the database server to run <code class="docutils literal notranslate"><span class="pre">FLUSH</span> <span class="pre">TABLES</span></code>.  When complete, the database server creates a <code class="docutils literal notranslate"><span class="pre">tables_flushed</span></code> file in the data directory.</p>
+<p class="verbose-list"><code class="docutils literal notranslate"><span class="pre">continue\n</span></code> Optional signal that tells the database server that it can continue to commit transactions.</p>
+<p class="verbose-list"><code class="docutils literal notranslate"><span class="pre">done\n</span></code> Mandatory signal that tells the database server that the state transfer is complete and successful.</p>
+<p class="verbose-list">After your script sends the <code class="docutils literal notranslate"><span class="pre">done\n</span></code> signal, exit with a <code class="docutils literal notranslate"><span class="pre">0</span></code> return code.</p>
+<p>In the event of failure, Galera Cluster expects your script to return a code that corresponds to the error it encountered.  The donor node returns this code to the joiner through group communication.  Given that its data directory now holds an inconsistent state, the joiner node then leaves the cluster and aborts the state transfer.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Without the <code class="docutils literal notranslate"><span class="pre">continue\n</span></code> signal, your script runs in Total Order Isolation, which guarantees that no further commits occur until the script exits.</p>
+</div>
+<p class="section-heading rubric" id="enabling-ssst">Enabling Scriptable SST’s</p>
+<p>Whether you use <code class="docutils literal notranslate"><span class="pre">wsrep_sst_common</span></code> directly or decide to write a script of your own from scratch, the process for enabling it remains the same.  The filename must follow the convention of <code class="docutils literal notranslate"><span class="pre">wsrep_sst_&lt;name&gt;</span></code>, with <code class="docutils literal notranslate"><span class="pre">&lt;name&gt;</span></code> being the value that you give for the <a class="reference internal" href="mysql-wsrep-options.html#wsrep-sst-method"><span class="std std-ref">wsrep_sst_method</span></a> parameter in the configuration file.</p>
+<p>For example, if you write a script with the filename <code class="docutils literal notranslate"><span class="pre">wsrep_sst_galera-sst</span></code>, you would add the following line to your <code class="docutils literal notranslate"><span class="pre">my.cnf</span></code>:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">wsrep_sst_method</span> <span class="o">=</span> <span class="s">galera-sst</span>
+</pre></div>
+</div>
+<p>When the node starts, it uses your custom script for state snapshot transfers.</p>
+<div class="bottom-links docutils container">
+<p>Related Documents</p>
+<ul class="simple">
+<li><a class="reference internal" href="mysql-wsrep-options.html#wsrep-sst-receive-address"><span class="std std-ref">wsrep_sst_receive_address</span></a></li>
+<li><a class="reference internal" href="mysql-wsrep-options.html#wsrep-sst-auth"><span class="std std-ref">wsrep_sst_auth</span></a></li>
+<li><a class="reference internal" href="mysql-wsrep-options.html#wsrep-sst-method"><span class="std std-ref">wsrep_sst_method</span></a></li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/logo.png" alt="Logo"/>
+            </a></p>
+<h1 class="logo"><a href="../index.html">Galera Cluster</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">The Codership Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="overview.html">Overview of Galera Cluster</a></li>
+<li class="toctree-l2"><a class="reference internal" href="technical-description.html">Technical Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html">Installing Galera Cluster</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="administration.html">Galera Cluster Administration</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="node-provisioning.html">Node Provisioning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sst.html">State Snapshot Transfers</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Scriptable State Snapshot Transfers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="system-tables.html">Galera System Tables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="schema-upgrades.html">Schema Upgrades</a></li>
+<li class="toctree-l3"><a class="reference internal" href="upgrading.html">Upgrading Galera Cluster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pc-recovery.html">Recovering Primary Component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="quorum-reset.html">Resetting the Quorum</a></li>
+<li class="toctree-l3"><a class="reference internal" href="managing-fc.html">Managing Flow Control</a></li>
+<li class="toctree-l3"><a class="reference internal" href="auto-eviction.html">Auto-Eviction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="using-sr.html">Using Streaming Replication</a></li>
+<li class="toctree-l3"><a class="reference internal" href="arbitrator.html">Galera Arbitrator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="backup-cluster.html">Backing Up Cluster Data</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="deployment.html">Deployment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="monitor.html">Cluster Monitoring</a></li>
+<li class="toctree-l2"><a class="reference internal" href="security.html">Security</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference.html">Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../kb/index.html">The Codership Knowledge Base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../training/index.html">Codership Training</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../whats-new.html">What’s New</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../editors/index.html">Codership Writers &amp; Editors</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">The Codership Documentation</a><ul>
+  <li><a href="administration.html">Galera Cluster Administration</a><ul>
+      <li>Previous: <a href="sst-physical.html" title="previous chapter">Physical State Snapshot</a></li>
+      <li>Next: <a href="system-tables.html" title="next chapter">Galera System Tables</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+	<div class="navbar">
+	<nav id="site-navigation" class="navigation main-navigation" role="navigation">
+	<div class="nav-bar-container">
+
+	<div id="menu-nav-bar" class="nav-menu">
+		<ul class="nav-link">
+			<li> </li>
+
+		</ul>
+
+	</div>
+	</nav>
+
+	<footer id="colophon" class="site-footer" role="contentinfo">
+	<div class="top">	<div class="powered-by"><p>Powered by Galera:</p>
+	<p><a href="https://mariadb.com/kb/en/galera/"><img class="alignleft size-full wp-image-237" alt="MariaDB" src="https://galeracluster.com/wp-content/uploads/2013/10/logo-mariadb.png" width="166" height="49" /></a></p>
+		</div></div>
+	<div class="footer-menu">
+	<div class="menu-main-menu-container">
+	<ul id="menu-main-menu-1" class="nav-menu">
+	<li class="link-home menu-item menu-item-type-post_type menu-item-object-page menu-item-359"><a href="https://galeracluster.com/">Home</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-35"><a href="https://galeracluster.com/products/">Products</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="https://galeracluster.com/downloads/">Downloads</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-12 current_page_item current-menu-ancestor current-menu-parent current_page_parent current_page_ancestor menu-item-has-children menu-item-33"><a href="https://galeracluster.com/support/">Support</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="https://galeracluster.com/community/">Community</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-31"><a href="https://galeracluster.com/company/">Company</a></li>
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-297"><a href="https://galeracluster.com/category/blog/">Blog</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-38"><a href="https://galeracluster.com/contact-us/">Contact us</a></li>
+	</ul></div>			</div><!-- .footer-menu -->
+
+
+	<div class="footer-bar">
+	<p class="copyright">2014 Codership Ltd.</p>
+	</div>
+	<div class="footnote">
+	<h2>Your data is invaluable. We're here to secure it. All of it.</h2>
+	</div>
+	</footer><!-- #colophon -->
+
+
+
+
+  </body>
+</html>

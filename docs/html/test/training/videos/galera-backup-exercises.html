@@ -1,0 +1,391 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><meta content="Training Video Exercises |---| Making Back-Ups with Galera Cluster" name="title" />
+<meta content="en-US" name="language" />
+<meta content="Codership Oy, 2014 - 2020. All Rights Reserved." name="copyright" />
+
+    <title>Training Video Exercises &#8212; Galera Cluster Documentation</title>
+    <link rel="stylesheet" href="../../_static/reset-style.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="High Availability with Galera Cluster" href="galera-high-availability.html" />
+    <link rel="prev" title="Making Back-Ups with Galera Cluster" href="galera-backup.html" />
+
+
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<link rel="stylesheet" href="/library/_static/basic-style.css">
+<link rel="stylesheet" href="/library/_static/header.css">
+<link rel="stylesheet" href="/library/_static/footer.css">
+<link rel="stylesheet" href="/library/_static/codership.css">
+<link rel="stylesheet" media="screen and (max-width: 500px)" href="/library/_static/mobile.css"/>
+<link rel="stylesheet" media="screen and (min-width:501px) and (max-width:1024px)" href="/library/_static/tablet.css"/>
+<link rel="stylesheet" media="screen and (prefers-color-scheme: dark)" href="/library/_static/dark.css"/>
+
+
+<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Feed" href="https://galeracluster.com/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Comments Feed" href="https://galeracluster.com/comments/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Support Comments Feed" href="https://galeracluster.com/support/feed/" />
+
+<script type='text/javascript' src='https://galeracluster.com/wp-includes/js/comment-reply.min.js?ver=3.8.3'></script>
+
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://galeracluster.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://galeracluster.com/wp-includes/wlwmanifest.xml" />
+<link rel='prev' title='Downloads' href='https://galeracluster.com/downloads/' />
+<link rel='next' title='Community' href='https://galeracluster.com/community/' />
+<meta name="generator" content="WordPress 3.8.3" />
+
+<link rel='shortlink' href='https://galeracluster.com/?p=12' />
+
+<style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>
+<style type="text/css" id="twentythirteen-header-css">
+			.site-title,
+			.site-description {
+				position: absolute;
+				clip: rect(1px 1px 1px 1px); /* IE7 */
+				clip: rect(1px, 1px, 1px, 1px);
+			}
+				.site-header .home-link {
+				min-height: 0;
+			}
+</style>
+
+<script type="text/javascript">
+
+		  var _gaq = _gaq || [];
+		  _gaq.push(['_setAccount', 'UA-35163478-6']);
+		  _gaq.push(['_trackPageview']);
+
+		  (function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'https://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		  })();
+
+</script>
+
+  </head><body>
+	<div id="fb-root"></div>
+	<script>(function(d, s, id) {
+		  var js, fjs = d.getElementsByTagName(s)[0];
+		  if (d.getElementById(id)) return;
+		  js = d.createElement(s); js.id = id;
+		  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+		  fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));
+	</script>
+
+	<div id="page" class="hfeed site">
+
+	<header id="masthead" class="site-header" role="banner">
+
+	<div class="top">
+	<a class="home-link" href="https://galeracluster.com/" title="Galera Cluster for MySQL" rel="home">
+	<h1 class="site-title">Galera Cluster for MySQL</h1>
+	<h2 class="site-description">The world&#039;s most advanced open source database cluster</h2>
+	</a>
+	</div>
+
+
+	<div id="navbar" class="navbar">
+	<nav id="site-navigation" class="navigation main-navigation" role="navigation">
+	<div class="menu-main-menu-container">
+
+	<ul id="menu-main-menu" class="nav-menu">
+	<li id="menu-item-359" class="link-home menu-item menu-item-type-post_type menu-item-object-page menu-item-359"><a href="https://galeracluster.com/">Home</a></li>
+	<li id="menu-item-35" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-35"><a href="https://galeracluster.com/products/">Products</a></li>
+	<li id="menu-item-34" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="https://galeracluster.com/downloads/">Downloads</a></li>
+	<li id="menu-item-33" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-12 current_page_item current-menu-ancestor current-menu-parent current_page_parent current_page_ancestor menu-item-has-children menu-item-33"><a href="https://galeracluster.com/support/">Support</a></li>
+	<li id="menu-item-32" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="https://galeracluster.com/community/">Community</a></li>
+	<li id="menu-item-31" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-31"><a href="https://galeracluster.com/company/">Company</a></li>
+	<li id="menu-item-297" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-297"><a href="https://galeracluster.com/category/blog/">Blog</a></li>
+	<li id="menu-item-38" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-38"><a href="https://galeracluster.com/contact-us/">Contact us</a></li>
+	</ul>
+	</div>
+
+
+	</nav><!-- #site-navigation -->
+
+	</div><!-- #navbar -->
+	</header><!-- #masthead -->
+
+
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="left-margin docutils container">
+<div class="left-margin-top docutils container">
+<a class="reference internal" href="../../index.html"><span class="doc">The Library</span></a></div>
+<div class="left-margin-content docutils container">
+<ul>
+<li><p class="first"><a class="reference internal" href="../../documentation/index.html"><span class="doc">Documentation</span></a></p>
+</li>
+<li><p class="first"><a class="reference internal" href="../../kb/index.html"><span class="doc">Knowledge Base</span></a></p>
+</li>
+<li><p class="first"><a class="reference internal" href="../index.html"><span class="doc">Training</span></a></p>
+<ul class="sub-links simple">
+<li><a class="reference internal" href="../courses/index.html"><span class="doc">Training Courses</span></a></li>
+</ul>
+<ul class="sub-links here simple">
+<li><a class="reference internal" href="index.html"><span class="doc">Training Videos</span></a></li>
+</ul>
+<ul class="sub-links simple">
+<li><a class="reference internal" href="../tutorials/index.html"><span class="doc">Tutorial Articles</span></a></li>
+</ul>
+</li>
+</ul>
+<p>Related Documents</p>
+<ul class="simple">
+<li><a class="reference internal" href="../../documentation/firewall-settings.html"><span class="doc">Firewall Settings</span></a></li>
+<li><a class="reference internal" href="../../documentation/firewalld.html"><span class="doc">firewalld</span></a></li>
+<li><a class="reference internal" href="../../documentation/install.html"><span class="doc">Installing Galera</span></a></li>
+<li><a class="reference internal" href="../../documentation/node-provisioning.html"><span class="doc">Node Provisioning</span></a></li>
+<li><a class="reference internal" href="../../documentation/selinux.html"><span class="doc">SELinux</span></a></li>
+<li><a class="reference internal" href="../../documentation/state-transfer.html"><span class="doc">State Transfer</span></a></li>
+<li><a class="reference internal" href="../../documentation/mysql-wsrep-options.html"><span class="doc">wsrep Options</span></a></li>
+</ul>
+<p>Other Resources</p>
+<ul class="simple">
+<li><a class="reference internal" href="galera-mysql-installing.html"><span class="doc">Install MySQL Galera (video)</span></a></li>
+<li><a class="reference internal" href="galera-mariadb-installing.html"><span class="doc">Install MariaDB Galera (video)</span></a></li>
+<li><a class="reference external" href="http://releases.galeracluster.com/">Galera Repository</a></li>
+</ul>
+</div>
+</div>
+<div class="top-links docutils container">
+<ul class="simple">
+<li><a class="reference external" href="https://galeracluster.com">Home</a></li>
+<li><a class="reference internal" href="../../documentation/index.html"><span class="doc">Docs</span></a></li>
+<li><a class="reference internal" href="../../kb/index.html"><span class="doc">KB</span></a></li>
+</ul>
+<ul class="here nav-wider simple">
+<li><a class="reference internal" href="../index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../../faq.html"><span class="doc">FAQ</span></a></li>
+</ul>
+</div>
+<div class="library-article training-exercises section" id="training-video-exercises">
+<span id="exercises-galera-backup"></span><h1>Training Video Exercises<a class="headerlink" href="#training-video-exercises" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="making-back-ups-with-galera-cluster">
+<h2>Making Back-Ups with Galera Cluster<a class="headerlink" href="#making-back-ups-with-galera-cluster" title="Permalink to this headline">¶</a></h2>
+<div class="video-abstract list-col2-3 docutils container">
+<p>These exercises are part of the training video, <em>Making Back-Ups with Galera Cluster</em>.  There are exercises related to what was taught in each section, except for the section entitled <em>Back-Up &amp; Restoration Plan</em>.  That particular section is in a sense another set of exercises.</p>
+<p>Before starting these exercises, make sure you have all of the requirements and preparations in place.</p>
+</div>
+<div class="list-col1-3 docutils container">
+<p class="training-video-resources rubric">Requirements &amp; Preparation</p>
+<ul class="training-video-resources simple">
+<li>Test Servers:  4</li>
+<li>Operating System:  Linux</li>
+<li>Open Ports:  TCP 22, TCP 3306. TCP 4444, TCP &amp; UDP 4567, TCP 4568</li>
+<li>Database Software:  MySQL or MariaDB (vs. 10.4 or higher)</li>
+<li>Other Software: * Galera (Only 3)</li>
+</ul>
+<p class="training-video-resources rubric">Student Materials</p>
+<ul class="training-video-resources simple">
+<li><a class="reference external" href="https://galeracluster.com/library-media/databases/company.tgz">Company Database</a></li>
+</ul>
+</div>
+<div class="banner docutils container">
+<p class="section-heading rubric">Exercises</p>
+</div>
+<p>Before starting an exercise, read it fully and carefully. The headings for each set of exercises before correspond to the section with the same name in training video.</p>
+<p class="sub-heading rubric">Back-Up Basics</p>
+<p>Do these exercises after viewing the first two sections of the training video:  <em>Galera Cluster Overview</em>, and <em>Installing Software on Nodes</em>. Don’t configure the nodes until the next section.</p>
+<ol class="list-exercises arabic simple">
+<li>Download the sample database called, <code class="docutils literal notranslate"><span class="pre">company</span></code> from the Coderhsip site (see margin) onto one of the nodes. It’s a dump file made with <code class="docutils literal notranslate"><span class="pre">mysqldump</span></code>. With MySQL or MariaDB and Galera running, use the <code class="docutils literal notranslate"><span class="pre">mysql</span></code> client to load the data on one node.  When finished, check the other nodes to ensure they have replicated the <code class="docutils literal notranslate"><span class="pre">company</span></code> database.  Delete the dump file.</li>
+<li>Make a directory called, <code class="docutils literal notranslate"><span class="pre">backups</span></code>, and a sub-directory in it called, <code class="docutils literal notranslate"><span class="pre">temp</span></code>.  Use the <code class="docutils literal notranslate"><span class="pre">SET</span></code> statement to desync a different node.  Execute a <code class="docutils literal notranslate"><span class="pre">SHOW</span> <span class="pre">STATUS</span></code> statement to check that the node has a status of <em>Desync</em>. Execute <code class="docutils literal notranslate"><span class="pre">SHOW</span> <span class="pre">VARIABLES</span></code> to determine the data directory. Next, use <code class="docutils literal notranslate"><span class="pre">rsync</span></code> to back-up of all of the database to the <code class="docutils literal notranslate"><span class="pre">temp</span></code> sub-directory, in the <code class="docutils literal notranslate"><span class="pre">backups</span></code> directory.  When it’s finished, use <code class="docutils literal notranslate"><span class="pre">tar</span></code> to create a zipped archive file (e.g., <code class="docutils literal notranslate"><span class="pre">db-backup.tgz</span></code>). Disable desync on the node.</li>
+<li>On one of the Galera nodes, use the <code class="docutils literal notranslate"><span class="pre">DROP</span> <span class="pre">DATABASE</span></code> statement to drop the <code class="docutils literal notranslate"><span class="pre">company</span></code> database.  Check to see that it’s replicated on the other two nodes.  Now shutdown all of the nodes. When they’ve all stopped, use the back-up file to restore the data directory on the node where it’s located.  Then start that node and check if the <code class="docutils literal notranslate"><span class="pre">company</span></code> database is back.  After that, start the other two nodes.   Give them a couple of minutes before checking that the <code class="docutils literal notranslate"><span class="pre">company</span></code> database has been restored on them.</li>
+</ol>
+<p class="sub-heading rubric">Using Standard Replication</p>
+<p>This set of exercises require all four servers mentioned in the requirements above:  three with MySQL or MariaDB, and Galera installed and running; the fourth server with only MySQL or MariaDB.</p>
+<ol class="list-exercises arabic simple" start="4">
+<li>On one of the Galera nodes, configure it also to use standard replication, to be a master.  See the link in at the top under Student Materials for an example configuration file.  On the fourth server, the one without Galera Cluster, configure it to use standard replication, to be a slave to the master.  If you’re unfamiliar with standard replication, you might watch our training video on <em>Standard Replication and Galera Cluster</em>—or read the related article on the same topic.</li>
+<li>Create a user with <code class="docutils literal notranslate"><span class="pre">REPLICATION</span> <span class="pre">CLIENT</span></code> on the Galera node you’ve designated to be a master. Use <code class="docutils literal notranslate"><span class="pre">mysqldump</span></code> to make a copy of all of the databases on the master. Be sure to use the <code class="docutils literal notranslate"><span class="pre">--flush-logs</span></code> and <code class="docutils literal notranslate"><span class="pre">--master-data</span></code> options.</li>
+<li>Use the <code class="docutils literal notranslate"><span class="pre">scp</span></code> command to copy the dump file you created on the master, to the slave.  Load the data on the slave, using the <code class="docutils literal notranslate"><span class="pre">mysql</span></code> client. Execute the <code class="docutils literal notranslate"><span class="pre">CHANGE</span> <span class="pre">MASTER</span></code> statement to provide the IP address and port 3306, as well as the replication user name and password. Then start replication by executing the <code class="docutils literal notranslate"><span class="pre">START</span> <span class="pre">SLAVE</span></code> statement on the slave.  Check that replication is running fine with <code class="docutils literal notranslate"><span class="pre">SHOW</span> <span class="pre">SLAVE</span> <span class="pre">STATUS</span></code> on the slave. Try changing some data on the master and see if it replicates to the slave.</li>
+<li>Make a directory called <code class="docutils literal notranslate"><span class="pre">backups</span></code>, with a sub-directory within it called <code class="docutils literal notranslate"><span class="pre">temp</span></code>. Stop the slave and use <cite>mysqldump</cite> to make a back-up on it to a the <code class="docutils literal notranslate"><span class="pre">backups</span></code>, <code class="docutils literal notranslate"><span class="pre">temp</span></code> sub-directory.  Copy the binary log files, as well as the MySQL configuration file to the temporary back-up sub-directory.  Then tar and zip the back-up files. Start the slave again and make sure replication is running.</li>
+</ol>
+<p class="sub-heading rubric">Using Galera Arbitrator</p>
+<p>For the exercises in this section and the remaining sections, you won’t need the replication slave server. You can shut it down. You’ll only use the three servers with Galera installed on them.</p>
+<ol class="list-exercises arabic simple" start="8">
+<li>Create a configuration file for Galera Arbitrator (see link at the top under Student Materials for an example).  Write a simple back-up script that will use <code class="docutils literal notranslate"><span class="pre">rsync</span></code>—or use the one linked above. Execute it using <code class="docutils literal notranslate"><span class="pre">garbd</span></code> from the command-line. As soon as it starts, check the status of the donor node for comments to see if it’s desynced during the back-up.</li>
+<li>Write another simple back-up script that will use <code class="docutils literal notranslate"><span class="pre">mysqldump</span></code> and execute it. Make sure it gives a different name to the back-up file than in the previous exercise.</li>
+</ol>
+<p class="sub-heading rubric">Restoring Nodes and a Cluster</p>
+<ol class="list-exercises arabic simple" start="10">
+<li>Drop the <code class="docutils literal notranslate"><span class="pre">company</span></code> database on one of the nodes.  Check that the deletion of the database has occurred on all of the Galera nodes and the slave. Choose one Galera node for restoration. Shutdown the <code class="docutils literal notranslate"><span class="pre">mysqld</span></code> daemon on the other two nodes.</li>
+<li>Using the back-up you made with <code class="docutils literal notranslate"><span class="pre">rsync</span></code>, in the previous set of exercises, restore the data to one of the nodes. Start the other Galera nodes, one at a time.  Verify that they’ve been restored.</li>
+<li>Drop the <code class="docutils literal notranslate"><span class="pre">company</span></code> database again.  This time restore the data with the dump file, using the <code class="docutils literal notranslate"><span class="pre">mysql</span></code> client. After a reasonable amount of time, verify that they’ve all been restored.</li>
+</ol>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If you’re unfamiliar with how to install Galera Cluster, watch our training video on installing Galera with MySQL, or MariaDB (see the margin for links) or read the related articles. You’ll need to configure MySQL or MariaDB and Galera Cluster and start them.  There’s a link in the margin for the recommended configuration for certain sections here.</p>
+</div>
+<div class="bottom-links docutils container">
+<p>Related Documents</p>
+<ul class="simple">
+<li><a class="reference internal" href="../../documentation/firewall-settings.html"><span class="doc">Firewall Settings</span></a></li>
+<li><a class="reference internal" href="../../documentation/firewalld.html"><span class="doc">firewalld</span></a></li>
+<li><a class="reference internal" href="../../documentation/install.html"><span class="doc">Installing Galera</span></a></li>
+<li><a class="reference internal" href="../../documentation/node-provisioning.html"><span class="doc">Node Provisioning</span></a></li>
+<li><a class="reference internal" href="../../documentation/selinux.html"><span class="doc">SELinux</span></a></li>
+<li><a class="reference internal" href="../../documentation/state-transfer.html"><span class="doc">State Transfer</span></a></li>
+<li><a class="reference internal" href="../../documentation/mysql-wsrep-options.html"><span class="doc">wsrep Options</span></a></li>
+</ul>
+<p>Other Resources</p>
+<ul class="simple">
+<li><a class="reference internal" href="galera-mysql-installing.html"><span class="doc">Install MySQL Galera (video)</span></a></li>
+<li><a class="reference internal" href="galera-mariadb-installing.html"><span class="doc">Install MariaDB Galera (video)</span></a></li>
+<li><a class="reference external" href="http://releases.galeracluster.com/">Galera Repository</a></li>
+</ul>
+</div>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../../index.html">
+              <img class="logo" src="../../_static/logo.png" alt="Logo"/>
+            </a></p>
+<h1 class="logo"><a href="../../index.html">Galera Cluster</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../documentation/index.html">The Codership Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../kb/index.html">The Codership Knowledge Base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Codership Training</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../courses/index.html">Codership Training Courses</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorials/index.html">Codership Tutorials on Galera Cluster</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Codership Training Videos</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="galera-intro.html">Introduction to Galera Cluster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="galera-mysql-installing.html">Installing Galera Cluster with MySQL</a></li>
+<li class="toctree-l3"><a class="reference internal" href="galera-mariadb-installing.html">Installing Galera Cluster with MariaDB</a></li>
+<li class="toctree-l3"><a class="reference internal" href="galera-aws-installing.html">Installing a Galera Cluster on AWS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="galera-standard-replication.html">Standard Replication &amp; Galera Cluster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="galera-monitoring.html">Monitoring a Galera Cluster</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="galera-backup.html">Making Back-Ups with Galera Cluster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="galera-high-availability.html">High Availability with Galera Cluster</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../whats-new.html">What’s New</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../editors/index.html">Codership Writers &amp; Editors</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Codership Training</a><ul>
+  <li><a href="index.html">Codership Training Videos</a><ul>
+  <li><a href="galera-backup.html">Making Back-Ups with Galera Cluster</a><ul>
+      <li>Previous: <a href="galera-backup.html" title="previous chapter">Making Back-Ups with Galera Cluster</a></li>
+      <li>Next: <a href="galera-high-availability.html" title="next chapter">High Availability with Galera Cluster</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+	<div class="navbar">
+	<nav id="site-navigation" class="navigation main-navigation" role="navigation">
+	<div class="nav-bar-container">
+
+	<div id="menu-nav-bar" class="nav-menu">
+		<ul class="nav-link">
+			<li> </li>
+
+		</ul>
+
+	</div>
+	</nav>
+
+	<footer id="colophon" class="site-footer" role="contentinfo">
+	<div class="top">	<div class="powered-by"><p>Powered by Galera:</p>
+	<p><a href="https://mariadb.com/kb/en/galera/"><img class="alignleft size-full wp-image-237" alt="MariaDB" src="https://galeracluster.com/wp-content/uploads/2013/10/logo-mariadb.png" width="166" height="49" /></a></p>
+		</div></div>
+	<div class="footer-menu">
+	<div class="menu-main-menu-container">
+	<ul id="menu-main-menu-1" class="nav-menu">
+	<li class="link-home menu-item menu-item-type-post_type menu-item-object-page menu-item-359"><a href="https://galeracluster.com/">Home</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-35"><a href="https://galeracluster.com/products/">Products</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="https://galeracluster.com/downloads/">Downloads</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-12 current_page_item current-menu-ancestor current-menu-parent current_page_parent current_page_ancestor menu-item-has-children menu-item-33"><a href="https://galeracluster.com/support/">Support</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="https://galeracluster.com/community/">Community</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-31"><a href="https://galeracluster.com/company/">Company</a></li>
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-297"><a href="https://galeracluster.com/category/blog/">Blog</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-38"><a href="https://galeracluster.com/contact-us/">Contact us</a></li>
+	</ul></div>			</div><!-- .footer-menu -->
+
+
+	<div class="footer-bar">
+	<p class="copyright">2014 Codership Ltd.</p>
+	</div>
+	<div class="footnote">
+	<h2>Your data is invaluable. We're here to secure it. All of it.</h2>
+	</div>
+	</footer><!-- #colophon -->
+
+
+
+
+  </body>
+</html>

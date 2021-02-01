@@ -1,0 +1,510 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><meta content="Making Back-Ups with Galera Cluster" name="title" />
+<meta content="en-US" name="language" />
+<meta content="Codership Oy, 2014 - 2020. All Rights Reserved." name="copyright" />
+
+    <title>Making Back-Ups with Galera Cluster &#8212; Galera Cluster Documentation</title>
+    <link rel="stylesheet" href="../../_static/reset-style.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Getting Started Galera with Docker" href="getting-started-docker.html" />
+    <link rel="prev" title="Migrating to Galera Cluster" href="migration.html" />
+
+
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<link rel="stylesheet" href="/library/_static/basic-style.css">
+<link rel="stylesheet" href="/library/_static/header.css">
+<link rel="stylesheet" href="/library/_static/footer.css">
+<link rel="stylesheet" href="/library/_static/codership.css">
+<link rel="stylesheet" media="screen and (max-width: 500px)" href="/library/_static/mobile.css"/>
+<link rel="stylesheet" media="screen and (min-width:501px) and (max-width:1024px)" href="/library/_static/tablet.css"/>
+<link rel="stylesheet" media="screen and (prefers-color-scheme: dark)" href="/library/_static/dark.css"/>
+
+
+<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Feed" href="https://galeracluster.com/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Comments Feed" href="https://galeracluster.com/comments/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Support Comments Feed" href="https://galeracluster.com/support/feed/" />
+
+<script type='text/javascript' src='https://galeracluster.com/wp-includes/js/comment-reply.min.js?ver=3.8.3'></script>
+
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://galeracluster.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://galeracluster.com/wp-includes/wlwmanifest.xml" />
+<link rel='prev' title='Downloads' href='https://galeracluster.com/downloads/' />
+<link rel='next' title='Community' href='https://galeracluster.com/community/' />
+<meta name="generator" content="WordPress 3.8.3" />
+
+<link rel='shortlink' href='https://galeracluster.com/?p=12' />
+
+<style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>
+<style type="text/css" id="twentythirteen-header-css">
+			.site-title,
+			.site-description {
+				position: absolute;
+				clip: rect(1px 1px 1px 1px); /* IE7 */
+				clip: rect(1px, 1px, 1px, 1px);
+			}
+				.site-header .home-link {
+				min-height: 0;
+			}
+</style>
+
+<script type="text/javascript">
+
+		  var _gaq = _gaq || [];
+		  _gaq.push(['_setAccount', 'UA-35163478-6']);
+		  _gaq.push(['_trackPageview']);
+
+		  (function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'https://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		  })();
+
+</script>
+
+  </head><body>
+	<div id="fb-root"></div>
+	<script>(function(d, s, id) {
+		  var js, fjs = d.getElementsByTagName(s)[0];
+		  if (d.getElementById(id)) return;
+		  js = d.createElement(s); js.id = id;
+		  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+		  fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));
+	</script>
+
+	<div id="page" class="hfeed site">
+
+	<header id="masthead" class="site-header" role="banner">
+
+	<div class="top">
+	<a class="home-link" href="https://galeracluster.com/" title="Galera Cluster for MySQL" rel="home">
+	<h1 class="site-title">Galera Cluster for MySQL</h1>
+	<h2 class="site-description">The world&#039;s most advanced open source database cluster</h2>
+	</a>
+	</div>
+
+
+	<div id="navbar" class="navbar">
+	<nav id="site-navigation" class="navigation main-navigation" role="navigation">
+	<div class="menu-main-menu-container">
+
+	<ul id="menu-main-menu" class="nav-menu">
+	<li id="menu-item-359" class="link-home menu-item menu-item-type-post_type menu-item-object-page menu-item-359"><a href="https://galeracluster.com/">Home</a></li>
+	<li id="menu-item-35" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-35"><a href="https://galeracluster.com/products/">Products</a></li>
+	<li id="menu-item-34" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="https://galeracluster.com/downloads/">Downloads</a></li>
+	<li id="menu-item-33" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-12 current_page_item current-menu-ancestor current-menu-parent current_page_parent current_page_ancestor menu-item-has-children menu-item-33"><a href="https://galeracluster.com/support/">Support</a></li>
+	<li id="menu-item-32" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="https://galeracluster.com/community/">Community</a></li>
+	<li id="menu-item-31" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-31"><a href="https://galeracluster.com/company/">Company</a></li>
+	<li id="menu-item-297" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-297"><a href="https://galeracluster.com/category/blog/">Blog</a></li>
+	<li id="menu-item-38" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-38"><a href="https://galeracluster.com/contact-us/">Contact us</a></li>
+	</ul>
+	</div>
+
+
+	</nav><!-- #site-navigation -->
+
+	</div><!-- #navbar -->
+	</header><!-- #masthead -->
+
+
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="left-margin docutils container">
+<div class="left-margin-top docutils container">
+<a class="reference internal" href="../../index.html"><span class="doc">The Library</span></a></div>
+<div class="left-margin-content docutils container">
+<ul class="simple">
+<li><a class="reference internal" href="../../documentation/index.html"><span class="doc">Documentation</span></a></li>
+<li><a class="reference internal" href="../../kb/index.html"><span class="doc">Knowledge Base</span></a></li>
+<li><a class="reference internal" href="../index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="sub-links simple">
+<li><a class="reference internal" href="../courses/index.html"><span class="doc">Training Courses</span></a></li>
+<li><a class="reference internal" href="../videos/index.html"><span class="doc">Training Videos</span></a></li>
+</ul>
+<ul class="sub-links here simple">
+<li><a class="reference internal" href="index.html"><span class="doc">Tutorial Articles</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../../faq.html"><span class="doc">FAQ</span></a></li>
+</ul>
+<p>Related Documents</p>
+<ul class="simple">
+<li><a class="reference internal" href="../../documentation/install-mysql.html"><span class="doc">Install MySQL Galera</span></a></li>
+</ul>
+<p>Related Articles</p>
+<ul class="simple">
+<li><a class="reference internal" href="../videos/galera-backup.html"><span class="doc">Galera Back-Ups (video)</span></a></li>
+</ul>
+</div>
+</div>
+<div class="top-links docutils container">
+<ul class="simple">
+<li><a class="reference external" href="https://galeracluster.com">Home</a></li>
+<li><a class="reference internal" href="../../documentation/index.html"><span class="doc">Docs</span></a></li>
+<li><a class="reference internal" href="../../kb/index.html"><span class="doc">KB</span></a></li>
+</ul>
+<ul class="here nav-wider simple">
+<li><a class="reference internal" href="../index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../../faq.html"><span class="doc">FAQ</span></a></li>
+</ul>
+</div>
+<div class="library-article section" id="making-back-ups-with-galera-cluster">
+<span id="galera-backup"></span><h1>Making Back-Ups with Galera Cluster<a class="headerlink" href="#making-back-ups-with-galera-cluster" title="Permalink to this headline">¶</a></h1>
+<p class="article-stats">Length: 2693 words; Writer: Russell J.T Dyer: November 4, 2019; Topic: Administration</p>
+<p>Galera Cluster is a reliable, stable database replication clustering system. Nevertheless, there’s always the possibility that something will go wrong—in fact, it’s inevitable and unavoidable.  Therefore, as a database administrator, you should ensure that back-ups of the databases and related systems are made regularly and often.</p>
+<p>Using Galera Cluster, there are a few ways in which you might make a back-up. In this article, we’ll first look at the basics of back-ups. We’ll then look at some other methods involving replication and how to automate back-ups by using the functionality of Galera itself.</p>
+<div class="banner docutils container">
+<p class="section-heading rubric">Back-Up Basics</p>
+</div>
+<p>Back-ups are important for many reasons:  User errors are inevitable—such as tables dropped and rows deleted inadvertently—and there’s always the chance that a server crashes or is physically damaged in some other way. As a result, to ensure regular and good back-ups, you should develop some back-up policies.</p>
+<p>First, make sure your back-ups are complete. If you’re using binary logs, be sure that you make a back-up of them.  Also, make back-up copies of the database configuration files.</p>
+<p>Second, don’t rely on making back-ups manually. Instead, automate your back-ups by using a scheduling tool like <code class="docutils literal notranslate"><span class="pre">cron</span></code>.  Set the frequency to something reasonable, such as daily or twice a day. Make sure back-up files are stored in a different location than on the production server.</p>
+<p>There are two basic types of back-ups that can be made of a database: a physical back-up and logical back-up. We’ll consider each in the next two sections. Whatever method you use, occasionally check your back-ups by performing recovery tests.  This has the advantage of helping you to become more proficient at restoring data, which will be useful when under pressure to do so quickly.</p>
+<p class="sub-heading rubric">Physical Back-Ups</p>
+<p>A physical back-up is fast; It’s intuitive and simple:  You just copy the data directory using <code class="docutils literal notranslate"><span class="pre">cp</span></code> or <code class="docutils literal notranslate"><span class="pre">rsync</span></code>. It seems perfect, but there are many inherent problems with this method.</p>
+<p>To get a consistent back-up, you have to stop the <code class="docutils literal notranslate"><span class="pre">mysqld</span></code> daemon. That means no one can access the data while the back-up is being made. If any of the files are corrupted, you won’t know until you try to restore the back-up.</p>
+<p class="sub-heading rubric">Logical Backups</p>
+<p>Logical back-ups are generally preferred. They’re generated with a utility like <code class="docutils literal notranslate"><span class="pre">mysqldump</span></code> and produce text files with SQL statements which may be used to rebuild databases.</p>
+<p>One drawbacks to logical back-ups is that the back-up process requires tables or rows to be locked. This means that tables may be temporarily inaccessible for write traffic. Even read traffic may experience slow results.</p>
+<p>You’ll have to decide which method works best for you. Let’s see how you might make simple back-ups of a Galera node using both of these methods.</p>
+<p class="sub-heading rubric">Simple Galera Node Back-Ups</p>
+<p>Many DBAs will simply run <code class="docutils literal notranslate"><span class="pre">mysqldump</span></code> on one of the nodes without removing it from the cluster. This is definitely not a good idea since they may not get consistent data and it will slow the node and thereby affect the performance of the cluster.</p>
+<p>A beter method is to instruct Galera to desynchronize the node to use for making a back-up.  This is done by setting globally the <code class="docutils literal notranslate"><span class="pre">wsrep_desync</span></code> parameter to <code class="docutils literal notranslate"><span class="pre">ON</span></code>, as you see here:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>mysql -p -u root --execute &quot;SET wsrep_desync = ON&quot;
+</pre></div>
+</div>
+<p>Thus will stop the node from processing new transactions, although it will remain part of the cluster.  It will ensure consistency of data across tables while we make a back-up, but continue to receive transactions from the other nodes for when we’re finished what we’re doing.</p>
+<p>After that’s done, we can run whatever tool or utility we prefer to make a back-up of the databases on the node.  Two popular and simple utilities are <code class="docutils literal notranslate"><span class="pre">mysqldump</span></code> and <code class="docutils literal notranslate"><span class="pre">rsync</span></code>. Here’s how we might make a back-up with <code class="docutils literal notranslate"><span class="pre">mysqldump</span></code>:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>mysqldump -p -u admin_backup \
+          --flush-logs --all-databases \
+          &gt; /backups/db-backup-20191025.sql
+</pre></div>
+</div>
+<p>When it’s finished, we’ll set <code class="docutils literal notranslate"><span class="pre">wsrep_desync</span></code> back to <code class="docutils literal notranslate"><span class="pre">OFF</span></code>. The node will then process any transactions that are queued and waiting to be executed on the node.</p>
+<p>This simple method of making back-ups of a Galera node works well, but it still require us to take a node out of service. It supposes we’re using a load balancer to redirect traffic away from the node to the other nodes. Let’s look at some other methods.</p>
+<div class="banner docutils container">
+<p class="section-heading rubric">Using Standard Replication</p>
+</div>
+<p>Even though Galera is running on a node, it’s possible for it also to be running standard replication and act as a master to another server that’s not part of the cluster, that’s not using Galera software.</p>
+<p>With such an arrangement, the replication slave can be used to make back-ups without disturbing the Galera cluster.  When you want to make a back-up, just stop the slave from replicating. Then run whatever back-up utility you prefer. When you’re finished, just start the slave replicating again.</p>
+<p class="sub-heading rubric">Galera Master Configuration</p>
+<p>For a Galera node to be able also to serve as a standard replication master, we will have to add some extra parameters to the configuration file.  Let’s look at those settings.  Below is an excerpt from a database configuration file on the node that’s to be the master:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[mysqld]
+...
+server-id = 01
+
+log-bin = /var/lib/mysql/master-bin
+log-bin-index = /var/lib/mysql/master-bin.index
+
+log_slave_updates = ON
+</pre></div>
+</div>
+<p>Standard replication requires each server to have a unique identification number. This is set with the <code class="docutils literal notranslate"><span class="pre">server-id</span></code> parameter. Actually, so that any of the other nodes can be used as a master, you might add these parameters to all of the nodes, with the same values.  It’ll be fine as long as only one is part of the standard replication.</p>
+<p>Next, we’ll add the <code class="docutils literal notranslate"><span class="pre">log-bin</span></code> parameter on all nodes, to enable the binary log. Even though Galera doesn’t need this, it’s essential to the standard replication process. This will be a performance drain, but not much.</p>
+<p>So that Galera understands what’s going on, we’ll need to set the <code class="docutils literal notranslate"><span class="pre">log_slave_updates</span></code> parameter to <code class="docutils literal notranslate"><span class="pre">ON</span></code>.</p>
+<p>When we’re finished making these additions, we’ll have to restart all of the nodes and the cluster.  That means we’ll have to shut down all of the nodes first, before we start them again, so that there’s a new cluster.</p>
+<p>We’ll neeed to export the data from the master using a utility like <code class="docutils literal notranslate"><span class="pre">mysqldump</span></code> with the <code class="docutils literal notranslate"><span class="pre">--flush-logs</span></code> and <code class="docutils literal notranslate"><span class="pre">--master-data</span></code> options.  We’ll also need to create a user account on the master that has the IP address of the slave—with the <code class="docutils literal notranslate"><span class="pre">REPLICATION</span> <span class="pre">SLAVE</span></code> privilege.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>GRANT REPLICATION SLAVE ON *.*
+TO &#39;replicator&#39;@&#39;172.31.31.75&#39;
+IDENTIFIED BY &#39;Rover123!&#39;;
+</pre></div>
+</div>
+<p>Now we can configure the slave. Again, the slave is not a node in the Galera cluster.  It’s an extra server that will be replicating the transactions of one of the Galera nodes.</p>
+<p class="sub-heading rubric">Galera Slave Configuration &amp; Preparation</p>
+<p>To attach a server to a Galera node, so that it may act as a slave, we’ll need to add a few lines to its configuration file.  Actually, we only need <code class="docutils literal notranslate"><span class="pre">server-id</span></code> and <code class="docutils literal notranslate"><span class="pre">log-bin</span></code>.  You can see them below.  The rest are somewhat optional; They’re for choosing the name and path of logs and other files.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[mysqld]
+...
+server-id = 02
+
+log-bin = /var/log/mysql/slave-bin
+log-bin-index = /var/log/mysql/slave-bin.index
+binlog_format = MIXED
+
+relay-log-index = /var/lib/mysql/slave-relay-bin.index
+relay-log = /var/lib/mysql/slave-relay-bin
+
+read-only = 1
+innodb-read-only = 1
+</pre></div>
+</div>
+<p>The only other parameter worth mentioning is the <code class="docutils literal notranslate"><span class="pre">read-only</span></code> option to make sure no one will edit the data.</p>
+<p>Once we’ve configured the slave, we’ll need to restart it.  Then we have to load the data back-up dump file we made on the master, using the <code class="docutils literal notranslate"><span class="pre">mysql</span></code> client. And we’ll have to execute the CHANGE MASTER statement on the slave to tell it who is the master:</p>
+<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="k">CHANGE</span> <span class="n">MASTER</span> <span class="k">TO</span>
+<span class="n">MASTER_HOST</span><span class="o">=</span><span class="s1">&#39;172.31.31.202&#39;</span><span class="p">,</span>
+<span class="n">MASTER_PORT</span><span class="o">=</span><span class="mi">3306</span><span class="p">,</span>
+<span class="n">MASTER_USER</span><span class="o">=</span><span class="s1">&#39;replicator&#39;</span><span class="p">,</span>
+<span class="n">MASTER_PASSWORD</span><span class="o">=</span><span class="s1">&#39;Rover123!&#39;</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Once all of this is done, we’ll be ready to start replication and using the slave as a back-up source.</p>
+<p class="sub-heading rubric">Backing-Up a Slave</p>
+<p>With replication working, making back-ups is easy.  We just need to stop the slave from replicating and then start whatever back-up utility we want to use.  We’ll also copy the database configuration files.  Here’s how that might be done:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>mysql -p -u root -e &quot;STOP SLAVE&quot;
+
+mysqldump -p -u admin_backup --flush-logs --all-databases \
+          &gt; /backups/temp/backup-20191025.sql
+
+cp -r /etc/my.cnf* /backups/temp/
+</pre></div>
+</div>
+<p>In this example, everything it being copied into a temporary sub-directory. We would then use <code class="docutils literal notranslate"><span class="pre">tar</span></code> to make a single archive file and zip it:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>cd /backups
+
+tar -czf mysql-backup-20191025.tgz ./temp/*
+</pre></div>
+</div>
+<p>That’s all we have to do, except start the slave again. Actually, we could have started it before starting <code class="docutils literal notranslate"><span class="pre">tar</span></code>.</p>
+<p>This method works well, but it requires an extra server just for back-ups.  A better choice is to use Galera Arbitrator, to use it to conduct the back-ups.  Let’s look at its purpose and how we might utilize it for back-ups.</p>
+<div class="banner docutils container">
+<p class="section-heading rubric">Using Galera Arbitrator</p>
+</div>
+<p>The primary function of Galera Arbitrator, the daemon called, <code class="docutils literal notranslate"><span class="pre">garbd</span></code>, is to act as a virtual node.  When there’s a tie vote among nodes about two conflicting transactions, the Arbitrator will cast the deciding vote.  Then all of the nodes will execute the winning transaction and Galera will continue with all nodes in agreement. This is function is portrayed in the diagram here.</p>
+<p>Another function of Galera Arbitrator is to decide whether a joining node is in need of updates or a complete snapshot.  The former is known as an Increment State Transfer, an IST.  The latter is known as a State Snapshot Transfer, an SST.  New nodes will obviously need an SST.  The Arbitrator will then choose which node or nodes will provide the state transfer to the joining node.</p>
+<p>This second function of Galera Arbitrator can be used in the same way to make back-ups, but with a little bit of coding.  Let’s look at how that might be done.</p>
+<p class="sub-heading rubric">Back-Ups with Galera Arbitrator</p>
+<p>Although you can make a back-up fairly easily with <code class="docutils literal notranslate"><span class="pre">mysqldump</span></code> by removing a node from the cluster, and you can also make a back-up with <code class="docutils literal notranslate"><span class="pre">rsync</span></code> by shutting down <code class="docutils literal notranslate"><span class="pre">mysqld</span></code> on a node, it can be done more gracefully and with minimal interference with the Galera Cluster by using Galera Arbitrator.</p>
+<p>Galera Arbitrator can receive a request to make a back-up, manually from the command-line using the <code class="docutils literal notranslate"><span class="pre">garbd</span></code> daemon, or it can be initiated automatically by a scheduling tool like <code class="docutils literal notranslate"><span class="pre">cron</span></code>.</p>
+<p>The Arbitrator chooses a node to be the donor—unless we tell it which to use. That node is then desynced. Incidentally, the back-up can be requested from any node in the cluster, and any node can be used to make the back-up.</p>
+<p>The donor node will then execute the back-up script.  We’ll have to create such a script to use whatever tools we prefer and back-up how and where we want. Once the back-up is completed, the node will be re-synchronized.</p>
+<p>Let’s take a look at how to configure Galera Arbitrator. Then we’ll look at how to create a back-up script.</p>
+<p class="sub-heading rubric">Configure Galera Arbitrator</p>
+<p>Galera Arbitrator is included in the Galera Cluster software.  The Galera Arbitrator daemon may be called upon from the command-line for single functions, like making a back-up. To do this, we’ll have to construct a simple script to run whichever tool we prefer, such as <code class="docutils literal notranslate"><span class="pre">mysqldump</span></code>.</p>
+<p>First, using a plain text editor, we’ll create a configuration file for the Arbitrator daemon. Its file name and location aren’t important, but <code class="docutils literal notranslate"><span class="pre">/etc/garbd.cnf</span></code> is a good choice. Below is an example:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>group=&#39;galera-training&#39;
+address=&quot;gcomm://172.31.30.39:4567,172.31.18.53:4567,172.31.26.106:4567&quot;
+options=&quot;gmcast.listen_addr=tcp://0.0.0.0:4444&quot;
+donor=“galera-3&quot;
+log=&#39;/var/log/garbd.log&#39;
+sst=&#39;backup_mysqldump&#39;
+</pre></div>
+</div>
+<p>The group parameter is to give the name of the cluster. This is equivalent to the parameter <code class="docutils literal notranslate"><span class="pre">wsrep_cluster_name</span></code>. The address parameter is equivalent to the <code class="docutils literal notranslate"><span class="pre">wsrep_cluster_address</span></code> parameter, for listing the IP addresses of the nodes in the cluster and the ports to use.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">options</span></code> parameter is equivalent to <code class="docutils literal notranslate"><span class="pre">wsrep_provider_options</span></code>, but we have to specify <code class="docutils literal notranslate"><span class="pre">gmcast.listen_addr</span></code> and the address and port on which <code class="docutils literal notranslate"><span class="pre">garbd</span></code> daemon will listen for connections from other nodes.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">donor</span></code> parameter is used to specify which node will perform the backup. The <code class="docutils literal notranslate"><span class="pre">log</span></code> parameter is used to specify the path and name of the log file.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">sst</span></code> option provides the suffix of the back-up script.  It must be in the <code class="docutils literal notranslate"><span class="pre">/usr/bin</span></code> directory and start with the name <code class="docutils literal notranslate"><span class="pre">wsrep_sst_</span></code>. So in the example here, the script’s name is <code class="docutils literal notranslate"><span class="pre">wsrep_sst_backup_mysqldump</span></code>.</p>
+<p>Those are all of the settings we need for Galera Arbitrator. We can actually set any or all of them from the command-line, but a configuration file is more convenient.  Now we need a back-up script.</p>
+<p class="sub-heading rubric">Back-Up Script</p>
+<p>Below is a very simple back-up script which uses <code class="docutils literal notranslate"><span class="pre">bash</span></code> and <code class="docutils literal notranslate"><span class="pre">mysqldump</span></code>. However, any scripting language and back-up utility is acceptable.  For some readers, this may be a little complicated.  Don’t worry; we’ll go through it.  For other readers, this is amateurish. It’s meant to be simple. What’s important is the basic concepts of how a script might be constructed to use Galera Arbitrator to make a back-up of a node.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>#!/bin/bash
+
+# SET VARIABLES
+db_user=&#39;admin_backup&#39;
+db_passwd=&#39;Rover123!&#39;
+
+backup_dir=&#39;/backup&#39;
+backup_sub_dir=&#39;temp&#39;
+
+today=`date +&quot;%Y%m%d&quot;`
+backup_today=&quot;galera-mysqldump-$today.sql&quot;
+gtid_file=&quot;gtid-$today.dat&quot;
+
+
+# LOAD COMMON SCRIPT
+. /usr/bin/wsrep_sst_common
+
+
+# COPY CONFIGURATION FILES &amp; SAVE GTID
+cp /etc/my.cnf $backup_dir/$backup_sub_dir/
+cp /etc/garb.cnf $backup_dir/$backup_sub_dir/
+
+echo &quot;GTID: ${WSREP_SST_OPT_GTID}&quot; &gt; $backup_dir/$backup_sub_dir/$gtid_file
+
+
+# SAVE DATABASE TO DUMP FILE
+mysqldump --user=&quot;$db_user&quot; --password=&quot;$db_passwd&quot; \
+          --flush-logs --all-databases \
+          &gt; $backup_dir/$backup_sub_dir/$backup_today
+
+# ARCHIVE BACK-UP FILES
+cd $backup_sub_dir
+tar -czf $backup_dir/$backup_today.tgz * --transform &quot;s,^,$backup_today/,&quot;
+</pre></div>
+</div>
+<p>The first section defines some variables:  the user name and password it will use with <code class="docutils literal notranslate"><span class="pre">mysqldump</span></code>.  There are more secure ways to do this, but we’re trying to keep this script very straightforward. The next pair of variables contain the paths for storing the back-ups.  Then there’s a variables that will store today’s date to be part of the name of the back-up file.</p>
+<p>The next stanza assembles the names of files: the dump file (e.g., <code class="docutils literal notranslate"><span class="pre">galera-mysqldump-20191025.sql</span></code>), the data file for the GTID (e.g., <code class="docutils literal notranslate"><span class="pre">gtid-20191025.dat</span></code>)</p>
+<p>The second section is small, but it’s important. It loads the common SST script that Galera Arbitrator uses.  Among other things, it will contain some variables we can use. In particular, it has the variable which contains the GTID.</p>
+<p>In the third section, the script makes copies of the database configuration files (e.g., <code class="docutils literal notranslate"><span class="pre">my.cnf</span></code>) and the Galera Arbitrator configuration file (e.g., <code class="docutils literal notranslate"><span class="pre">garb.cnf</span></code>).  The last line in this section gets the GTID variable from the common script, and writes it to a text file.</p>
+<p>The next section uses <code class="docutils literal notranslate"><span class="pre">mysqldump</span></code> to generate a dump file containing all of the databases on the node. We looked at the options already, so we’ll move on.</p>
+<p>In the last section, the script will use the tar command to create an archive file that will contain all of the files in the back-up sub-directory, and then zip that file (e.g., <code class="docutils literal notranslate"><span class="pre">galera-mysqldump-20191025.tgz</span></code>). The <code class="docutils literal notranslate"><span class="pre">--transform</span></code> option is so that when it’s extracted, it will put everything in a directory named based on today’s date.</p>
+<p>That’s everything:  it’s everything we need.  Below is how we would execute this script from the command line, in conjunction with Galera Arbitrator:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>garbd --cfg /etc/garb.cnf
+</pre></div>
+</div>
+<p>This one option, <code class="docutils literal notranslate"><span class="pre">--cfg</span></code> is to give the path and name of the Galera Arbitrator configuration file.  The daemon will read it before doing anything.</p>
+<p class="section-heading rubric">Conclusion</p>
+<p>Those are the primary ways in which DBAs can make back-ups when using Galera Cluster. There are some third-party software that provide some more advanced methods (e.g., XtraBackup).  But these are the more straightforward and most common methods.</p>
+<div class="bottom-links docutils container">
+<p>Related Documents</p>
+<ul class="simple">
+<li><a class="reference internal" href="../../documentation/install-mysql.html"><span class="doc">Install MySQL Galera</span></a></li>
+</ul>
+<p>Related Articles</p>
+<ul class="simple">
+<li><a class="reference internal" href="../videos/galera-backup.html"><span class="doc">Galera Back-Ups (video)</span></a></li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../../index.html">
+              <img class="logo" src="../../_static/logo.png" alt="Logo"/>
+            </a></p>
+<h1 class="logo"><a href="../../index.html">Galera Cluster</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../documentation/index.html">The Codership Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../kb/index.html">The Codership Knowledge Base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Codership Training</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../courses/index.html">Codership Training Courses</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Codership Tutorials on Galera Cluster</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="getting-started.html">Getting Started with Galera Cluster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="galera-installation.html">Installing Galera Cluster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="configuration.html">System Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="wsrep-configuration.html">Replication Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="starting-cluster.html">Starting the Cluster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="testing-cluster.html">Testing a Cluster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="restarting-cluster.html">Restarting the Cluster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="galera-on-aws.html">Installing a Galera Cluster on AWS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="galera-monitoring.html">Monitoring a Galera Cluster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="migrate.html">Galera Cluster Migration Factors</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Making Back-Ups with Galera Cluster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="getting-started-docker.html">Getting Started Galera with Docker</a></li>
+<li class="toctree-l3"><a class="reference internal" href="achieving-read-after-write-semantics.html">Read-After-Write Semantics with Galera</a></li>
+<li class="toctree-l3"><a class="reference internal" href="debugging-transaction-conflicts.html">Debugging Transaction Conflicts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="debug-problems-with-sst.html">Debugging Problems with SST</a></li>
+<li class="toctree-l3"><a class="reference internal" href="geo-distributed-clusters.html">Geo-Distributed Database Clusters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="primary-component.html">The Primary Component in Galera Cluster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="supporting-transaction-isolation-levels.html">Support for Transaction Isolation Levels</a></li>
+<li class="toctree-l3"><a class="reference internal" href="safe-to-bootstrap-feature.html">The Safe-To-Bootstrap Feature</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sst-or-not.html">To SST or Not To SST?</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../videos/index.html">Codership Training Videos</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../whats-new.html">What’s New</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../editors/index.html">Codership Writers &amp; Editors</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Codership Training</a><ul>
+  <li><a href="index.html">Codership Tutorials on Galera Cluster</a><ul>
+      <li>Previous: <a href="migration.html" title="previous chapter">Migrating to Galera Cluster</a></li>
+      <li>Next: <a href="getting-started-docker.html" title="next chapter">Getting Started Galera with Docker</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+	<div class="navbar">
+	<nav id="site-navigation" class="navigation main-navigation" role="navigation">
+	<div class="nav-bar-container">
+
+	<div id="menu-nav-bar" class="nav-menu">
+		<ul class="nav-link">
+			<li> </li>
+
+		</ul>
+
+	</div>
+	</nav>
+
+	<footer id="colophon" class="site-footer" role="contentinfo">
+	<div class="top">	<div class="powered-by"><p>Powered by Galera:</p>
+	<p><a href="https://mariadb.com/kb/en/galera/"><img class="alignleft size-full wp-image-237" alt="MariaDB" src="https://galeracluster.com/wp-content/uploads/2013/10/logo-mariadb.png" width="166" height="49" /></a></p>
+		</div></div>
+	<div class="footer-menu">
+	<div class="menu-main-menu-container">
+	<ul id="menu-main-menu-1" class="nav-menu">
+	<li class="link-home menu-item menu-item-type-post_type menu-item-object-page menu-item-359"><a href="https://galeracluster.com/">Home</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-35"><a href="https://galeracluster.com/products/">Products</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="https://galeracluster.com/downloads/">Downloads</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-12 current_page_item current-menu-ancestor current-menu-parent current_page_parent current_page_ancestor menu-item-has-children menu-item-33"><a href="https://galeracluster.com/support/">Support</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="https://galeracluster.com/community/">Community</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-31"><a href="https://galeracluster.com/company/">Company</a></li>
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-297"><a href="https://galeracluster.com/category/blog/">Blog</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-38"><a href="https://galeracluster.com/contact-us/">Contact us</a></li>
+	</ul></div>			</div><!-- .footer-menu -->
+
+
+	<div class="footer-bar">
+	<p class="copyright">2014 Codership Ltd.</p>
+	</div>
+	<div class="footnote">
+	<h2>Your data is invaluable. We're here to secure it. All of it.</h2>
+	</div>
+	</footer><!-- #colophon -->
+
+
+
+
+  </body>
+</html>

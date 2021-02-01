@@ -1,0 +1,457 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><meta content="Getting Started Galera with Docker, Part 1" name="title" />
+<meta content="en-US" name="language" />
+<meta content="Codership Oy, 2014 - 2020. All Rights Reserved." name="copyright" />
+
+    <title>Getting Started Galera with Docker &#8212; Galera Cluster Documentation</title>
+    <link rel="stylesheet" href="../../_static/reset-style.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Read-After-Write Semantics with Galera" href="achieving-read-after-write-semantics.html" />
+    <link rel="prev" title="Making Back-Ups with Galera Cluster" href="galera-backup.html" />
+
+
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<link rel="stylesheet" href="/library/_static/basic-style.css">
+<link rel="stylesheet" href="/library/_static/header.css">
+<link rel="stylesheet" href="/library/_static/footer.css">
+<link rel="stylesheet" href="/library/_static/codership.css">
+<link rel="stylesheet" media="screen and (max-width: 500px)" href="/library/_static/mobile.css"/>
+<link rel="stylesheet" media="screen and (min-width:501px) and (max-width:1024px)" href="/library/_static/tablet.css"/>
+<link rel="stylesheet" media="screen and (prefers-color-scheme: dark)" href="/library/_static/dark.css"/>
+
+
+<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Feed" href="https://galeracluster.com/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Comments Feed" href="https://galeracluster.com/comments/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Support Comments Feed" href="https://galeracluster.com/support/feed/" />
+
+<script type='text/javascript' src='https://galeracluster.com/wp-includes/js/comment-reply.min.js?ver=3.8.3'></script>
+
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://galeracluster.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://galeracluster.com/wp-includes/wlwmanifest.xml" />
+<link rel='prev' title='Downloads' href='https://galeracluster.com/downloads/' />
+<link rel='next' title='Community' href='https://galeracluster.com/community/' />
+<meta name="generator" content="WordPress 3.8.3" />
+
+<link rel='shortlink' href='https://galeracluster.com/?p=12' />
+
+<style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>
+<style type="text/css" id="twentythirteen-header-css">
+			.site-title,
+			.site-description {
+				position: absolute;
+				clip: rect(1px 1px 1px 1px); /* IE7 */
+				clip: rect(1px, 1px, 1px, 1px);
+			}
+				.site-header .home-link {
+				min-height: 0;
+			}
+</style>
+
+<script type="text/javascript">
+
+		  var _gaq = _gaq || [];
+		  _gaq.push(['_setAccount', 'UA-35163478-6']);
+		  _gaq.push(['_trackPageview']);
+
+		  (function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'https://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		  })();
+
+</script>
+
+  </head><body>
+	<div id="fb-root"></div>
+	<script>(function(d, s, id) {
+		  var js, fjs = d.getElementsByTagName(s)[0];
+		  if (d.getElementById(id)) return;
+		  js = d.createElement(s); js.id = id;
+		  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+		  fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));
+	</script>
+
+	<div id="page" class="hfeed site">
+
+	<header id="masthead" class="site-header" role="banner">
+
+	<div class="top">
+	<a class="home-link" href="https://galeracluster.com/" title="Galera Cluster for MySQL" rel="home">
+	<h1 class="site-title">Galera Cluster for MySQL</h1>
+	<h2 class="site-description">The world&#039;s most advanced open source database cluster</h2>
+	</a>
+	</div>
+
+
+	<div id="navbar" class="navbar">
+	<nav id="site-navigation" class="navigation main-navigation" role="navigation">
+	<div class="menu-main-menu-container">
+
+	<ul id="menu-main-menu" class="nav-menu">
+	<li id="menu-item-359" class="link-home menu-item menu-item-type-post_type menu-item-object-page menu-item-359"><a href="https://galeracluster.com/">Home</a></li>
+	<li id="menu-item-35" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-35"><a href="https://galeracluster.com/products/">Products</a></li>
+	<li id="menu-item-34" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="https://galeracluster.com/downloads/">Downloads</a></li>
+	<li id="menu-item-33" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-12 current_page_item current-menu-ancestor current-menu-parent current_page_parent current_page_ancestor menu-item-has-children menu-item-33"><a href="https://galeracluster.com/support/">Support</a></li>
+	<li id="menu-item-32" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="https://galeracluster.com/community/">Community</a></li>
+	<li id="menu-item-31" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-31"><a href="https://galeracluster.com/company/">Company</a></li>
+	<li id="menu-item-297" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-297"><a href="https://galeracluster.com/category/blog/">Blog</a></li>
+	<li id="menu-item-38" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-38"><a href="https://galeracluster.com/contact-us/">Contact us</a></li>
+	</ul>
+	</div>
+
+
+	</nav><!-- #site-navigation -->
+
+	</div><!-- #navbar -->
+	</header><!-- #masthead -->
+
+
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="left-margin docutils container">
+<div class="left-margin-top docutils container">
+<a class="reference internal" href="../../index.html"><span class="doc">The Library</span></a></div>
+<div class="left-margin-content docutils container">
+<ul class="simple">
+<li><a class="reference internal" href="../../documentation/index.html"><span class="doc">Documentation</span></a></li>
+<li><a class="reference internal" href="../../kb/index.html"><span class="doc">Knowledge Base</span></a></li>
+<li><a class="reference internal" href="../index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="sub-links simple">
+<li><a class="reference internal" href="../courses/index.html"><span class="doc">Training Courses</span></a></li>
+<li><a class="reference internal" href="../videos/index.html"><span class="doc">Training Videos</span></a></li>
+</ul>
+<ul class="sub-links here simple">
+<li><a class="reference internal" href="index.html"><span class="doc">Tutorial Articles</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../../faq.html"><span class="doc">FAQ</span></a></li>
+</ul>
+</div>
+</div>
+<div class="top-links docutils container">
+<ul class="simple">
+<li><a class="reference external" href="https://galeracluster.com">Home</a></li>
+<li><a class="reference internal" href="../../documentation/index.html"><span class="doc">Docs</span></a></li>
+<li><a class="reference internal" href="../../kb/index.html"><span class="doc">KB</span></a></li>
+</ul>
+<ul class="here nav-wider simple">
+<li><a class="reference internal" href="../index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../../faq.html"><span class="doc">FAQ</span></a></li>
+</ul>
+</div>
+<div class="library-article section" id="getting-started-galera-with-docker">
+<span id="getting-started-docker"></span><h1>Getting Started Galera with Docker<a class="headerlink" href="#getting-started-galera-with-docker" title="Permalink to this headline">¶</a></h1>
+<p class="article-stats">Length: 1416 words; Writer: Erkan Yanar; Published: May 6, 2015; Topic: Container; Level: Intermediate</p>
+<p>Docker is an open platform for developers and sysadmins to build, ship, and run distributed applications. Consisting of Docker Engine, a portable, lightweight runtime and packaging tool, and Docker Hub, a cloud service for sharing applications and automating workflows, Docker enables apps to be quickly assembled from components and eliminates the friction between development, QA, and production environments. As a result, it can ship faster and run the same app, unchanged, on laptops, data center VMs, and any cloud.</p>
+<p>let’s first look at how to build a basic Docker Image, which we will extend later. Then we’ll deploy on a test cluster on a local machine. The examples here have been tested on Ubuntu 14.04 with Docker 1.5.</p>
+<p class="section-heading rubric">Build a Basic Docker Image</p>
+<p>In Docker, Dockerfiles are used to describe the Docker images we are going to use to start our Galera Cluster. We are using the following Dockerfile:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">FROM ubuntu:14.04</span>
+<span class="go">MAINTAINER Erkan Yanar &lt;erkan.yanar@linsenraum.de&gt;</span>
+<span class="go">ENV DEBIAN_FRONTEND noninteractive</span>
+
+<span class="go">RUN apt-get update</span>
+<span class="go">RUN apt-get install -y software-properties-common</span>
+<span class="go">RUN apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 BC19DDBA</span>
+<span class="go">RUN add-apt-repository &#39;deb https://releases.galeracluster.com/ubuntu trusty main&#39;</span>
+<span class="go">RUN apt-get update</span>
+<span class="go">RUN apt-get install -y galera-3 galera-arbitrator-3 mysql-wsrep-5.6 rsync lsof</span>
+<span class="go">COPY my.cnf /etc/mysql/my.cnf</span>
+<span class="go">ENTRYPOINT [&quot;mysqld&quot;]</span>
+</pre></div>
+</div>
+<p>This image builds on top of the Ubuntu 14.04 image. It simply installs Galera using the Codership repository and copies the my.cnf over.</p>
+<p>The <cite>my.cnf</cite> is quite simple.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">[mysqld]</span>
+<span class="go">user = mysql</span>
+<span class="go">bind-address = 0.0.0.0</span>
+<span class="go">wsrep_provider = /usr/lib/galera/libgalera_smm.so</span>
+<span class="go">wsrep_sst_method = rsync</span>
+<span class="go">default_storage_engine = innodb</span>
+<span class="go">binlog_format = row</span>
+<span class="go">innodb_autoinc_lock_mode = 2</span>
+<span class="go">innodb_flush_log_at_trx_commit = 0</span>
+<span class="go">query_cache_size = 0</span>
+<span class="go">query_cache_type = 0</span>
+</pre></div>
+</div>
+<p>A pre-built image is available from Docker Hub. You can pull it by running:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">sudo docker pull erkules/galera:basic</span>
+</pre></div>
+</div>
+<p>(All commands in this article need to run as root.)</p>
+<p class="section-heading rubric">Deploy on a Test Cluster on a Local Machine</p>
+<p>Next, we are going to start a Galera Cluster on the local host. The instructions below are for demonstration purposes only and will not work when deploying on multiple hosts, as networking between containers needs to be set up. Configuring Docker networking across multiple hosts will be described in a following post.</p>
+<p class="section-heading rubric">Starting a Cluster</p>
+<p>There have been a number of blog posts showing how to start Galera Cluster on a single host. This post is going to show the simplest way to do that in Docker by using simple commands, which will not work for a multi-host installation. First, if working on Ubuntu, we need to put AppArmor’s Docker profile in complain mode in advance.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> sudo aa-complain /etc/apparmor.d/docker
+</pre></div>
+</div>
+<p>Then we can start the first Galera node by instructing Docker to create a container and run mysqld in it.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> sudo docker run --detach<span class="o">=</span><span class="nb">true</span> --name node1 -h node1 erkules/galera:basic --wsrep-cluster-name<span class="o">=</span>local-test --wsrep-cluster-address<span class="o">=</span>gcomm://
+</pre></div>
+</div>
+<p>In addition to defining the internal name and hostname, we also define the name of the cluster.</p>
+<p>MySQLs error log is not configured explicitly, and Docker records STDOUT and STDERR of every container. So, using <cite>sudo docker logs node1</cite>, the log output from the first node can be displayed without having to enter the container.
+For the next two containers, we use a simple Docker trick. The <cite>–link</cite> option writes the name and the IP of host1 into the <cite>/etc/hosts</cite> file of the container. This way, we can connect the remaining nodes to node1 without having to obtain its IP from its container.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> sudo docker run --detach<span class="o">=</span><span class="nb">true</span> --name node2 -h node2 --link node1:node1 erkules/galera:basic --wsrep-cluster-name<span class="o">=</span>local-test --wsrep-cluster-address<span class="o">=</span>gcomm://node1
+<span class="gp">$</span> sudo docker run --detach<span class="o">=</span><span class="nb">true</span> --name node3 -h node3 --link node1:node1 erkules/galera:basic --wsrep-cluster-name<span class="o">=</span>local-test --wsrep-cluster-address<span class="o">=</span>gcomm://node1
+</pre></div>
+</div>
+<p>Now we have a running Galera cluster. We can check the number of nodes in the Cluster by running the mysql client from inside one of the containers:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> sudo docker <span class="nb">exec</span> -ti node1 mysql -e <span class="s1">&#39;show status like &quot;wsrep_cluster_size&quot;&#39;</span>
+
+<span class="go">+--------------------+-------+</span>
+<span class="go">| Variable_name      | Value |</span>
+<span class="go">+--------------------+-------+</span>
+<span class="go">| wsrep_cluster_size |     3 |</span>
+<span class="go">+--------------------+-------+</span>
+</pre></div>
+</div>
+<p>We built a simple Galera Cluster on one host, without using SSH and without the need to configure any IP addresses. This setup does not support restarting the container—you should remove the container and recreate it instead.</p>
+<p class="section-heading rubric">Deploying Galera on Mutiple Docker Hosts</p>
+<p>Now let’s discuss how to deploy Galera on multiple Docker hosts. By design, Docker containers are reachable using port-forwarded TCP ports only, even if the containers have IP addresses. So we will set up port forwarding for all TCP ports that are required for Galera to operate.</p>
+<p>The following TCP port are used by Galera:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">3306-MySQL port</span>
+<span class="go">4567-Galera Cluster</span>
+<span class="go">4568-IST port</span>
+<span class="go">4444-SST port</span>
+</pre></div>
+</div>
+<p>Before we start, we need to stop enforcing AppArmor for Docker:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> aa-complain /etc/apparmor.d/docker
+</pre></div>
+</div>
+<p class="section-heading rubric">Building a Multi-Node Cluster using the Default Ports</p>
+<p>Building a multi-node cluster using the default ports is not complicated. Besides mapping the ports 1:1, we also need to set <cite>–wsrep-node-address</cite> to the IP address of the host.</p>
+<p>We assume following 3 nodes</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">nodea 10.10.10.10</span>
+<span class="go">nodeb 10.10.10.11</span>
+<span class="go">nodec 10.10.10.12</span>
+</pre></div>
+</div>
+<p>A simple cluster setup would look like this:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">nodea$ docker run -d -p 3306:3306 -p 4567:4567 -p 4444:4444 -p 4568:4568</span>
+<span class="go">--name nodea erkules/galera:basic</span>
+<span class="go">--wsrep-cluster-address=gcomm:// --wsrep-node-address=10.10.10.10</span>
+<span class="go">nodeb$ docker run -d -p 3306:3306 -p 4567:4567 -p 4444:4444 -p 4568:4568</span>
+<span class="go">--name nodeb erkules/galera:basic</span>
+<span class="go">--wsrep-cluster-address=gcomm://10.10.10.10 --wsrep-node-address=10.10.10.11</span>
+<span class="go">nodec$ docker run -d -p 3306:3306 -p 4567:4567 -p 4444:4444 -p 4568:4568</span>
+<span class="go">--name nodec erkules/galera:basic</span>
+<span class="go">--wsrep-cluster-address=gcomm://10.10.10.10 --wsrep-node-address=10.10.10.12</span>
+<span class="go">nodea$ docker exec -t nodea mysql -e &#39;show status like &quot;wsrep_cluster_size&quot;&#39;</span>
+
+<span class="go">+--------------------+-------+</span>
+<span class="go">| Variable_name      | Value |</span>
+<span class="go">+--------------------+-------+</span>
+<span class="go">| wsrep_cluster_size |     3 |</span>
+<span class="go">+--------------------+-------+</span>
+</pre></div>
+</div>
+<p>In this example, we used the image from the previous blog post. Docker is going to download the image if it is not already present on the node.</p>
+<p class="section-heading rubric">Building a Multi-Node Cluster using Non-Default Ports</p>
+<p>In the long run, we may want to start more than one instance of Galera on a host in order to run more than one Galera cluster using the same set of hosts.</p>
+<p>For the purpose, we set Galera Cluster to use non-default ports and then map MySQL’s default port to 4306:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">MySQL port 3306 is mapped to 4306</span>
+<span class="go">Galera Cluster port 4567 is changed to 5567</span>
+<span class="go">Galera IST port 4568 is changed to 5678</span>
+<span class="go">Galera SST port 4444 is changed to 5444</span>
+</pre></div>
+</div>
+<p>The docker command line part is straightforward. Please note the additional command-line options used to configure Galera</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">nodea$ docker run -d -p 4306:3306 -p 5567:5567 -p 5444:5444 -p 5568:5568</span>
+<span class="go">--name nodea erkules/galera:basic --wsrep-cluster-address=gcomm://</span>
+<span class="go">--wsrep-node-address=10.10.10.10:5567 --wsrep-sst-receive-address=10.10.10.10:5444</span>
+<span class="go">--wsrep-provider-options=&quot;ist.recv_addr=10.10.10.10:5568&quot;</span>
+<span class="go">nodeb$ docker run -d -p 4306:3306 -p 5567:5567 -p 5444:5444 -p 5568:5568</span>
+<span class="go">--name nodeb erkules/galera:basic --wsrep-cluster-address=gcomm://10.10.10.10:5567</span>
+<span class="go">--wsrep-node-address=10.10.10.11:5567 --wsrep-sst-receive-address=10.10.10.11:5444</span>
+<span class="go">--wsrep-provider-options=&quot;ist.recv_addr=10.10.10.11:5568&quot;</span>
+<span class="go">nodec$ docker run -d -p 4306:3306 -p 5567:5567 -p 5444:5444 -p 5568:5568</span>
+<span class="go">--name nodec erkules/galera:basic --wsrep-cluster-address=gcomm://10.10.10.10:5567</span>
+<span class="go">--wsrep-node-address=10.10.10.12:5567 --wsrep-sst-receive-address=10.10.10.12:5444</span>
+<span class="go">--wsrep-provider-options=&quot;ist.recv_addr=10.10.10.12:5568&quot;</span>
+<span class="go">nodea$ docker exec -t nodea mysql -e &#39;show status like &quot;wsrep_cluster_size&quot;&#39;</span>
+
+<span class="go">+--------------------+-------+</span>
+<span class="go">| Variable_name      | Value |</span>
+<span class="go">+--------------------+-------+</span>
+<span class="go">| wsrep_cluster_size |     3 |</span>
+<span class="go">+--------------------+-------+</span>
+</pre></div>
+</div>
+<p>The following Galera Cluster configuration options are used to specify each port:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">4567 Galera Cluster is configured using `–wsrep-node-address`</span>
+<span class="go">4568 IST port is configured using `–wsrep-provider-options=”ist.recv_addr=”`</span>
+<span class="go">4444 SST port is configured using `–wsrep-sst-receive-address`</span>
+</pre></div>
+</div>
+<p class="section-heading rubric">Summary</p>
+<p>That concludes this tutorial. As you can see, it’s easy to run Galera on Docker and inside Docker on multiple hosts, even with non-standard ports. It is also possible to use solutions such as weave, socketplane.io and flannel that provide a multi-host network for the containers.</p>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../../index.html">
+              <img class="logo" src="../../_static/logo.png" alt="Logo"/>
+            </a></p>
+<h1 class="logo"><a href="../../index.html">Galera Cluster</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../documentation/index.html">The Codership Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../kb/index.html">The Codership Knowledge Base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Codership Training</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../courses/index.html">Codership Training Courses</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Codership Tutorials on Galera Cluster</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="getting-started.html">Getting Started with Galera Cluster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="galera-installation.html">Installing Galera Cluster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="configuration.html">System Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="wsrep-configuration.html">Replication Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="starting-cluster.html">Starting the Cluster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="testing-cluster.html">Testing a Cluster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="restarting-cluster.html">Restarting the Cluster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="galera-on-aws.html">Installing a Galera Cluster on AWS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="galera-monitoring.html">Monitoring a Galera Cluster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="migrate.html">Galera Cluster Migration Factors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="galera-backup.html">Making Back-Ups with Galera Cluster</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Getting Started Galera with Docker</a></li>
+<li class="toctree-l3"><a class="reference internal" href="achieving-read-after-write-semantics.html">Read-After-Write Semantics with Galera</a></li>
+<li class="toctree-l3"><a class="reference internal" href="debugging-transaction-conflicts.html">Debugging Transaction Conflicts</a></li>
+<li class="toctree-l3"><a class="reference internal" href="debug-problems-with-sst.html">Debugging Problems with SST</a></li>
+<li class="toctree-l3"><a class="reference internal" href="geo-distributed-clusters.html">Geo-Distributed Database Clusters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="primary-component.html">The Primary Component in Galera Cluster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="supporting-transaction-isolation-levels.html">Support for Transaction Isolation Levels</a></li>
+<li class="toctree-l3"><a class="reference internal" href="safe-to-bootstrap-feature.html">The Safe-To-Bootstrap Feature</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sst-or-not.html">To SST or Not To SST?</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../videos/index.html">Codership Training Videos</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../whats-new.html">What’s New</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../editors/index.html">Codership Writers &amp; Editors</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../index.html">Documentation overview</a><ul>
+  <li><a href="../index.html">Codership Training</a><ul>
+  <li><a href="index.html">Codership Tutorials on Galera Cluster</a><ul>
+      <li>Previous: <a href="galera-backup.html" title="previous chapter">Making Back-Ups with Galera Cluster</a></li>
+      <li>Next: <a href="achieving-read-after-write-semantics.html" title="next chapter">Read-After-Write Semantics with Galera</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+	<div class="navbar">
+	<nav id="site-navigation" class="navigation main-navigation" role="navigation">
+	<div class="nav-bar-container">
+
+	<div id="menu-nav-bar" class="nav-menu">
+		<ul class="nav-link">
+			<li> </li>
+
+		</ul>
+
+	</div>
+	</nav>
+
+	<footer id="colophon" class="site-footer" role="contentinfo">
+	<div class="top">	<div class="powered-by"><p>Powered by Galera:</p>
+	<p><a href="https://mariadb.com/kb/en/galera/"><img class="alignleft size-full wp-image-237" alt="MariaDB" src="https://galeracluster.com/wp-content/uploads/2013/10/logo-mariadb.png" width="166" height="49" /></a></p>
+		</div></div>
+	<div class="footer-menu">
+	<div class="menu-main-menu-container">
+	<ul id="menu-main-menu-1" class="nav-menu">
+	<li class="link-home menu-item menu-item-type-post_type menu-item-object-page menu-item-359"><a href="https://galeracluster.com/">Home</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-35"><a href="https://galeracluster.com/products/">Products</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="https://galeracluster.com/downloads/">Downloads</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-12 current_page_item current-menu-ancestor current-menu-parent current_page_parent current_page_ancestor menu-item-has-children menu-item-33"><a href="https://galeracluster.com/support/">Support</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="https://galeracluster.com/community/">Community</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-31"><a href="https://galeracluster.com/company/">Company</a></li>
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-297"><a href="https://galeracluster.com/category/blog/">Blog</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-38"><a href="https://galeracluster.com/contact-us/">Contact us</a></li>
+	</ul></div>			</div><!-- .footer-menu -->
+
+
+	<div class="footer-bar">
+	<p class="copyright">2014 Codership Ltd.</p>
+	</div>
+	<div class="footnote">
+	<h2>Your data is invaluable. We're here to secure it. All of it.</h2>
+	</div>
+	</footer><!-- #colophon -->
+
+
+
+
+  </body>
+</html>

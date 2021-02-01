@@ -1,0 +1,2902 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><meta content="Galera Cluster Parameters" name="title" />
+<meta content="en-US" name="language" />
+<meta content="galera cluster, galera parameters, options" name="keywords" />
+<meta content="Codership Oy, 2014 - 2020. All Rights Reserved." name="copyright" />
+
+    <title>Galera Parameters &#8212; Galera Cluster Documentation</title>
+    <link rel="stylesheet" href="../_static/reset-style.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Galera Status Variables" href="galera-status-variables.html" />
+    <link rel="prev" title="Galera Functions" href="wsrep-functions.html" />
+
+
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<link rel="stylesheet" href="/library/_static/basic-style.css">
+<link rel="stylesheet" href="/library/_static/header.css">
+<link rel="stylesheet" href="/library/_static/footer.css">
+<link rel="stylesheet" href="/library/_static/codership.css">
+<link rel="stylesheet" media="screen and (max-width: 500px)" href="/library/_static/mobile.css"/>
+<link rel="stylesheet" media="screen and (min-width:501px) and (max-width:1024px)" href="/library/_static/tablet.css"/>
+<link rel="stylesheet" media="screen and (prefers-color-scheme: dark)" href="/library/_static/dark.css"/>
+
+
+<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Feed" href="https://galeracluster.com/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Comments Feed" href="https://galeracluster.com/comments/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Support Comments Feed" href="https://galeracluster.com/support/feed/" />
+
+<script type='text/javascript' src='https://galeracluster.com/wp-includes/js/comment-reply.min.js?ver=3.8.3'></script>
+
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://galeracluster.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://galeracluster.com/wp-includes/wlwmanifest.xml" />
+<link rel='prev' title='Downloads' href='https://galeracluster.com/downloads/' />
+<link rel='next' title='Community' href='https://galeracluster.com/community/' />
+<meta name="generator" content="WordPress 3.8.3" />
+
+<link rel='shortlink' href='https://galeracluster.com/?p=12' />
+
+<style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>
+<style type="text/css" id="twentythirteen-header-css">
+			.site-title,
+			.site-description {
+				position: absolute;
+				clip: rect(1px 1px 1px 1px); /* IE7 */
+				clip: rect(1px, 1px, 1px, 1px);
+			}
+				.site-header .home-link {
+				min-height: 0;
+			}
+</style>
+
+<script type="text/javascript">
+
+		  var _gaq = _gaq || [];
+		  _gaq.push(['_setAccount', 'UA-35163478-6']);
+		  _gaq.push(['_trackPageview']);
+
+		  (function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'https://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		  })();
+
+</script>
+
+  </head><body>
+	<div id="fb-root"></div>
+	<script>(function(d, s, id) {
+		  var js, fjs = d.getElementsByTagName(s)[0];
+		  if (d.getElementById(id)) return;
+		  js = d.createElement(s); js.id = id;
+		  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+		  fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));
+	</script>
+
+	<div id="page" class="hfeed site">
+
+	<header id="masthead" class="site-header" role="banner">
+
+	<div class="top">
+	<a class="home-link" href="https://galeracluster.com/" title="Galera Cluster for MySQL" rel="home">
+	<h1 class="site-title">Galera Cluster for MySQL</h1>
+	<h2 class="site-description">The world&#039;s most advanced open source database cluster</h2>
+	</a>
+	</div>
+
+
+	<div id="navbar" class="navbar">
+	<nav id="site-navigation" class="navigation main-navigation" role="navigation">
+	<div class="menu-main-menu-container">
+
+	<ul id="menu-main-menu" class="nav-menu">
+	<li id="menu-item-359" class="link-home menu-item menu-item-type-post_type menu-item-object-page menu-item-359"><a href="https://galeracluster.com/">Home</a></li>
+	<li id="menu-item-35" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-35"><a href="https://galeracluster.com/products/">Products</a></li>
+	<li id="menu-item-34" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="https://galeracluster.com/downloads/">Downloads</a></li>
+	<li id="menu-item-33" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-12 current_page_item current-menu-ancestor current-menu-parent current_page_parent current_page_ancestor menu-item-has-children menu-item-33"><a href="https://galeracluster.com/support/">Support</a></li>
+	<li id="menu-item-32" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="https://galeracluster.com/community/">Community</a></li>
+	<li id="menu-item-31" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-31"><a href="https://galeracluster.com/company/">Company</a></li>
+	<li id="menu-item-297" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-297"><a href="https://galeracluster.com/category/blog/">Blog</a></li>
+	<li id="menu-item-38" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-38"><a href="https://galeracluster.com/contact-us/">Contact us</a></li>
+	</ul>
+	</div>
+
+
+	</nav><!-- #site-navigation -->
+
+	</div><!-- #navbar -->
+	</header><!-- #masthead -->
+
+
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="left-margin docutils container">
+<div class="left-margin-top docutils container">
+<a class="reference internal" href="../index.html"><span class="doc">The Library</span></a></div>
+<div class="left-margin-content docutils container">
+<ul class="here simple">
+<li><a class="reference internal" href="index.html"><span class="doc">Documentation</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../kb/index.html"><span class="doc">Knowledge Base</span></a></li>
+<li><a class="reference internal" href="../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="sub-links simple">
+<li><a class="reference internal" href="../training/tutorials/index.html"><span class="doc">Tutorial Articles</span></a></li>
+<li><a class="reference internal" href="../training/videos/index.html"><span class="doc">Training Videos</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a></li>
+</ul>
+<p>Related Documents</p>
+<ul class="simple">
+<li><a class="reference internal" href="auto-eviction.html"><span class="doc">Auto-Eviction</span></a></li>
+<li><a class="reference internal" href="ssl-cert.html"><span class="doc">SSL Certificates</span></a></li>
+</ul>
+</div>
+</div>
+<div class="top-links docutils container">
+<ul class="simple">
+<li><a class="reference external" href="https://galeracluster.com">Home</a></li>
+</ul>
+<ul class="here simple">
+<li><a class="reference internal" href="index.html"><span class="doc">Docs</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../kb/index.html"><span class="doc">KB</span></a></li>
+</ul>
+<ul class="nav-wider simple">
+<li><a class="reference internal" href="../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a></li>
+</ul>
+</div>
+<div class="library-document section" id="galera-parameters">
+<span id="id1"></span><h1>Galera Parameters<a class="headerlink" href="#galera-parameters" title="Permalink to this headline">¶</a></h1>
+<p>As of version 0.8, Galera Cluster accepts parameters as semicolon-separated key value pair lists, such as <code class="docutils literal notranslate"><span class="pre">key1</span> <span class="pre">=</span> <span class="pre">value1;</span> <span class="pre">key2</span> <span class="pre">=</span> <span class="pre">value2</span></code>.  In this way, you can configure an arbitrary number of Galera Cluster parameters in one call. A key consists of parameter group and parameter name: <code class="docutils literal notranslate"><span class="pre">&lt;group&gt;.&lt;name&gt;</span></code>, where <code class="docutils literal notranslate"><span class="pre">&lt;group&gt;</span></code> corresponds roughly to some Galera module.</p>
+<p>All <code class="docutils literal notranslate"><span class="pre">wsrep_provider_options</span></code> settings need to be specified on a single line. In case of multiple instances of <code class="docutils literal notranslate"><span class="pre">wsrep_provider_options</span></code>, only the last one is used.</p>
+<p>Below is a list of all of the Galera parameters.  Each is also a link to further down the page where you may find more information.  There are a few things to know about this table:</p>
+<ul class="simple">
+<li>For numeric values related to memory size, Galera Cluster accepts the numeric modifiers, <code class="docutils literal notranslate"><span class="pre">K</span></code>, <code class="docutils literal notranslate"><span class="pre">M</span></code>, <code class="docutils literal notranslate"><span class="pre">G</span></code>, and <code class="docutils literal notranslate"><span class="pre">T</span></code> to represent 2<sup>10</sup>, 2<sup>20</sup>, 2<sup>30</sup> and 2<sup>40</sup>, respectively.</li>
+<li>Galera Cluster accepts the following boolean values: <code class="docutils literal notranslate"><span class="pre">0</span></code>, <code class="docutils literal notranslate"><span class="pre">1</span></code>, <code class="docutils literal notranslate"><span class="pre">YES</span></code>, <code class="docutils literal notranslate"><span class="pre">NO</span></code>, <code class="docutils literal notranslate"><span class="pre">TRUE</span></code>, <code class="docutils literal notranslate"><span class="pre">FALSE</span></code>, <code class="docutils literal notranslate"><span class="pre">ON</span></code>, <code class="docutils literal notranslate"><span class="pre">OFF</span></code>.</li>
+<li>Time periods must be expressed in the ISO8601 format. See some of the examples below.</li>
+<li>The parameters that are noted as for debugging only are strictly for use in troubleshooting problems. You should not implement these in production environments.</li>
+</ul>
+<table border="1" class="colwidths-given doc-options docutils">
+<colgroup>
+<col width="30%" />
+<col width="40%" />
+<col width="10%" />
+<col width="10%" />
+<col width="10%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head"><br /> Parameter</th>
+<th class="head"><br /> Default</th>
+<th class="head"><br /> Dynamic</th>
+<th class="head">Debug <br /> Only</th>
+<th class="head">Initial <br /> Version</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><a class="reference internal" href="#base-host"><span class="std std-ref">base_host</span></a></td>
+<td>detected network address</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>1.0</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#base-port"><span class="std std-ref">base_port</span></a></td>
+<td><code class="docutils literal notranslate"><span class="pre">4567</span></code></td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>1.0</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#cert-log-conflicts"><span class="std std-ref">cert.log_conflicts</span></a></td>
+<td><code class="docutils literal notranslate"><span class="pre">NO</span></code></td>
+<td><blockquote class="first last">
+<div>Yes</div></blockquote>
+</td>
+<td>&#160;</td>
+<td>2.0</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#cert-optimistic-pa"><span class="std std-ref">cert.optimistic_pa</span></a></td>
+<td><code class="docutils literal notranslate"><span class="pre">YES</span></code></td>
+<td><blockquote class="first last">
+<div>Yes</div></blockquote>
+</td>
+<td>&#160;</td>
+<td>3.25</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#debug"><span class="std std-ref">debug</span></a></td>
+<td><code class="docutils literal notranslate"><span class="pre">NO</span></code></td>
+<td><blockquote class="first last">
+<div>Yes</div></blockquote>
+</td>
+<td>&#160;</td>
+<td>2.0</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#evs-auto-evict"><span class="std std-ref">evs.auto_evict</span></a></td>
+<td><code class="docutils literal notranslate"><span class="pre">0</span></code></td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&#160;</td>
+<td>3.8</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#evs-causal-keepalive-period"><span class="std std-ref">evs.causal_keepalive_period</span></a></td>
+<td><code class="docutils literal notranslate"><span class="pre">0</span></code></td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&#160;</td>
+<td>1.0</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#evs-consensus-timeout"><span class="std std-ref">evs.consensus_timeout</span></a></td>
+<td><code class="docutils literal notranslate"><span class="pre">PT30S</span></code></td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>Yes</td>
+<td>1.0, 2.0</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#evs-debug-log-mask"><span class="std std-ref">evs.debug_log_mask</span></a></td>
+<td><code class="docutils literal notranslate"><span class="pre">0x1</span></code></td>
+<td><blockquote class="first last">
+<div>Yes</div></blockquote>
+</td>
+<td>&#160;</td>
+<td>1.0</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#evs-delayed-keep-period"><span class="std std-ref">evs.delayed_keep_period</span></a></td>
+<td><code class="docutils literal notranslate"><span class="pre">PT30S</span></code></td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&#160;</td>
+<td>3.8</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#evs-delay-margin"><span class="std std-ref">evs.delay_margin</span></a></td>
+<td><code class="docutils literal notranslate"><span class="pre">PT1S</span></code></td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&#160;</td>
+<td>3.8</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#evs-evict"><span class="std std-ref">evs.evict</span></a></td>
+<td>&#160;</td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&#160;</td>
+<td>3.8</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#evs-inactive-check-period"><span class="std std-ref">evs.inactive_check_period</span></a></td>
+<td><code class="docutils literal notranslate"><span class="pre">PT1S</span></code></td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&#160;</td>
+<td>1.0</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#evs-inactive-timeout"><span class="std std-ref">evs.inactive_timeout</span></a></td>
+<td><code class="docutils literal notranslate"><span class="pre">PT15S</span></code></td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&#160;</td>
+<td>1.0</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#evs-info-log-mask"><span class="std std-ref">evs.info_log_mask</span></a></td>
+<td><code class="docutils literal notranslate"><span class="pre">0</span></code></td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&#160;</td>
+<td>1.0</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#evs-install-timeout"><span class="std std-ref">evs.install_timeout</span></a></td>
+<td><code class="docutils literal notranslate"><span class="pre">PT15S</span></code></td>
+<td><blockquote class="first last">
+<div>Yes</div></blockquote>
+</td>
+<td>&#160;</td>
+<td>1.0</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#evs-join-retrans-period"><span class="std std-ref">evs.join_retrans_period</span></a></td>
+<td><code class="docutils literal notranslate"><span class="pre">PT1S</span></code></td>
+<td><blockquote class="first last">
+<div>Yes</div></blockquote>
+</td>
+<td>&#160;</td>
+<td>1.0</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#evs-keepalive-period"><span class="std std-ref">evs.keepalive_period</span></a></td>
+<td><code class="docutils literal notranslate"><span class="pre">PT1S</span></code></td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&#160;</td>
+<td>1.0</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#evs-max-install-timeouts"><span class="std std-ref">evs.max_install_timeouts</span></a></td>
+<td><code class="docutils literal notranslate"><span class="pre">1</span></code></td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&#160;</td>
+<td>1.0</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#evs-send-window"><span class="std std-ref">evs.send_window</span></a></td>
+<td><code class="docutils literal notranslate"><span class="pre">4</span></code></td>
+<td><blockquote class="first last">
+<div>Yes</div></blockquote>
+</td>
+<td>&#160;</td>
+<td>1.0</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#evs-stats-report-period"><span class="std std-ref">evs.stats_report_period</span></a></td>
+<td><code class="docutils literal notranslate"><span class="pre">PT1M</span></code></td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&#160;</td>
+<td>1.0</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#evs-suspect-timeout"><span class="std std-ref">evs.suspect_timeout</span></a></td>
+<td><code class="docutils literal notranslate"><span class="pre">PT5S</span></code></td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&#160;</td>
+<td>1.0</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#evs-use-aggregate"><span class="std std-ref">evs.use_aggregate</span></a></td>
+<td><code class="docutils literal notranslate"><span class="pre">TRUE</span></code></td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&#160;</td>
+<td>1.0</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#evs-user-send-window"><span class="std std-ref">evs.user_send_window</span></a></td>
+<td><code class="docutils literal notranslate"><span class="pre">2</span></code></td>
+<td><blockquote class="first last">
+<div>Yes</div></blockquote>
+</td>
+<td>&#160;</td>
+<td>1.0</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#evs-view-forget-timeout"><span class="std std-ref">evs.view_forget_timeout</span></a></td>
+<td><code class="docutils literal notranslate"><span class="pre">PT5M</span></code></td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&#160;</td>
+<td>1.0</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#evs-version"><span class="std std-ref">evs.version</span></a></td>
+<td><code class="docutils literal notranslate"><span class="pre">0</span></code></td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>Yes</td>
+<td>1.0</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#gcache-dir"><span class="std std-ref">gcache.dir</span></a></td>
+<td>working directory</td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&#160;</td>
+<td>1.0</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#gcache-name"><span class="std std-ref">gcache.name</span></a></td>
+<td><code class="docutils literal notranslate"><span class="pre">galera.cache</span></code></td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&#160;</td>
+<td>1.0</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#gcache-keep-pages-size"><span class="std std-ref">gcache.keep_pages_size</span></a></td>
+<td><code class="docutils literal notranslate"><span class="pre">0</span></code></td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&#160;</td>
+<td>1.0</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#gcache-page-size"><span class="std std-ref">gcache.page_size</span></a></td>
+<td><code class="docutils literal notranslate"><span class="pre">128Mb</span></code></td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&#160;</td>
+<td>1.0</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#gcache-recover"><span class="std std-ref">gcache.recover</span></a></td>
+<td><code class="docutils literal notranslate"><span class="pre">no</span></code></td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&#160;</td>
+<td>3.19</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#gcache-size"><span class="std std-ref">gcache.size</span></a></td>
+<td><code class="docutils literal notranslate"><span class="pre">128Mb</span></code></td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&#160;</td>
+<td>1.0</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#gcomm-thread-prio"><span class="std std-ref">gcomm.thread_prio</span></a></td>
+<td>&#160;</td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&#160;</td>
+<td>3.0</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#gcs-fc-debug"><span class="std std-ref">gcs.fc_debug</span></a></td>
+<td><code class="docutils literal notranslate"><span class="pre">0</span></code></td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&#160;</td>
+<td>1.0</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#gcs-fc-factor"><span class="std std-ref">gcs.fc_factor</span></a></td>
+<td><code class="docutils literal notranslate"><span class="pre">1.0</span></code></td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&#160;</td>
+<td>1.0</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#gcs-fc-limit"><span class="std std-ref">gcs.fc_limit</span></a></td>
+<td><code class="docutils literal notranslate"><span class="pre">16</span></code></td>
+<td><blockquote class="first last">
+<div>Yes</div></blockquote>
+</td>
+<td>&#160;</td>
+<td>1.0</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#gcs-fc-master-slave"><span class="std std-ref">gcs.fc_master_slave</span></a></td>
+<td><code class="docutils literal notranslate"><span class="pre">NO</span></code></td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&#160;</td>
+<td>1.0</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#gcs-max-packet-size"><span class="std std-ref">gcs.max_packet_size</span></a></td>
+<td><code class="docutils literal notranslate"><span class="pre">32616</span></code></td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&#160;</td>
+<td>1.0</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#gcs-max-throttle"><span class="std std-ref">gcs.max_throttle</span></a></td>
+<td><code class="docutils literal notranslate"><span class="pre">0.25</span></code></td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&#160;</td>
+<td>1.0</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#gcs-recv-q-hard-limit"><span class="std std-ref">gcs.recv_q_hard_limit</span></a></td>
+<td><code class="docutils literal notranslate"><span class="pre">LLONG_MAX</span></code></td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&#160;</td>
+<td>1.0</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#gcs-recv-q-soft-limit"><span class="std std-ref">gcs.recv_q_soft_limit</span></a></td>
+<td><code class="docutils literal notranslate"><span class="pre">0.25</span></code></td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&#160;</td>
+<td>1.0</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#gcs-sync-donor"><span class="std std-ref">gcs.sync_donor</span></a></td>
+<td><code class="docutils literal notranslate"><span class="pre">NO</span></code></td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&#160;</td>
+<td>1.0</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#gmcast-listen-addr"><span class="std std-ref">gmcast.listen_addr</span></a></td>
+<td><code class="docutils literal notranslate"><span class="pre">tcp://0.0.0.0:4567</span></code></td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&#160;</td>
+<td>1.0</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#gmcast-mcast-addr"><span class="std std-ref">gmcast.mcast_addr</span></a></td>
+<td>&#160;</td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&#160;</td>
+<td>1.0</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#gmcast-mcast-ttl"><span class="std std-ref">gmcast.mcast_ttl</span></a></td>
+<td><code class="docutils literal notranslate"><span class="pre">1</span></code></td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&#160;</td>
+<td>1.0</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#gmcast-peer-timeout"><span class="std std-ref">gmcast.peer_timeout</span></a></td>
+<td><code class="docutils literal notranslate"><span class="pre">PT3S</span></code></td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&#160;</td>
+<td>1.0</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#gmcast-segment"><span class="std std-ref">gmcast.segment</span></a></td>
+<td><code class="docutils literal notranslate"><span class="pre">0</span></code></td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&#160;</td>
+<td>3.0</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#gmcast-time-wait"><span class="std std-ref">gmcast.time_wait</span></a></td>
+<td><code class="docutils literal notranslate"><span class="pre">PT5S</span></code></td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&#160;</td>
+<td>1.0</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#gmcast-version"><span class="std std-ref">gmcast.version</span></a></td>
+<td>n/a</td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>Yes</td>
+<td>1.0</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#ist-recv-addr"><span class="std std-ref">ist.recv_addr</span></a></td>
+<td>&#160;</td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&#160;</td>
+<td>1.0</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#ist-recv-bind"><span class="std std-ref">ist.recv_bind</span></a></td>
+<td>&#160;</td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&#160;</td>
+<td>3.0</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#pc-recovery"><span class="std std-ref">pc.recovery</span></a></td>
+<td><code class="docutils literal notranslate"><span class="pre">TRUE</span></code></td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&#160;</td>
+<td>3.0</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#pc-bootstrap"><span class="std std-ref">pc.bootstrap</span></a></td>
+<td>n/a</td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&#160;</td>
+<td>2.0</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#pc-announce-timeout"><span class="std std-ref">pc.announce_timeout</span></a></td>
+<td><code class="docutils literal notranslate"><span class="pre">PT3S</span></code></td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&#160;</td>
+<td>2.0</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#pc-checksum"><span class="std std-ref">pc.checksum</span></a></td>
+<td><code class="docutils literal notranslate"><span class="pre">FALSE</span></code></td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&#160;</td>
+<td>1.0</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#pc-ignore-sb"><span class="std std-ref">pc.ignore_sb</span></a></td>
+<td><code class="docutils literal notranslate"><span class="pre">FALSE</span></code></td>
+<td><blockquote class="first last">
+<div>Yes</div></blockquote>
+</td>
+<td>&#160;</td>
+<td>1.0</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#pc-ignore-quorum"><span class="std std-ref">pc.ignore_quorum</span></a></td>
+<td><code class="docutils literal notranslate"><span class="pre">FALSE</span></code></td>
+<td><blockquote class="first last">
+<div>Yes</div></blockquote>
+</td>
+<td>&#160;</td>
+<td>1.0</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#pc-linger"><span class="std std-ref">pc.linger</span></a></td>
+<td><code class="docutils literal notranslate"><span class="pre">PT2S</span></code></td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&#160;</td>
+<td>1.0</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#pc-npvo"><span class="std std-ref">pc.npvo</span></a></td>
+<td><code class="docutils literal notranslate"><span class="pre">FALSE</span></code></td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&#160;</td>
+<td>1.0</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#pc-wait-prim"><span class="std std-ref">pc.wait_prim</span></a></td>
+<td><code class="docutils literal notranslate"><span class="pre">TRUE</span></code></td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&#160;</td>
+<td>1.0</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#pc-wait-prim-timeout"><span class="std std-ref">pc.wait_prim_timeout</span></a></td>
+<td><code class="docutils literal notranslate"><span class="pre">PT30S</span></code></td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&#160;</td>
+<td>2.0</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#pc-weight"><span class="std std-ref">pc.weight</span></a></td>
+<td><code class="docutils literal notranslate"><span class="pre">1</span></code></td>
+<td><blockquote class="first last">
+<div>Yes</div></blockquote>
+</td>
+<td>&#160;</td>
+<td>2.4</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#pc-version"><span class="std std-ref">pc.version</span></a></td>
+<td>n/a</td>
+<td>No</td>
+<td>Yes</td>
+<td>1.0</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#protonet-backend"><span class="std std-ref">protonet.backend</span></a></td>
+<td><code class="docutils literal notranslate"><span class="pre">asio</span></code></td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&#160;</td>
+<td>1.0</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#protonet-version"><span class="std std-ref">protonet.version</span></a></td>
+<td>n/a</td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>Yes</td>
+<td>1.0</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#repl-commit-order"><span class="std std-ref">repl.commit_order</span></a></td>
+<td><code class="docutils literal notranslate"><span class="pre">3</span></code></td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&#160;</td>
+<td>1.0</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#repl-causal-read-timeout"><span class="std std-ref">repl.causal_read_timeout</span></a></td>
+<td><code class="docutils literal notranslate"><span class="pre">PT30S</span></code></td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&#160;</td>
+<td>1.0</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#repl-key-format"><span class="std std-ref">repl.key_format</span></a></td>
+<td><code class="docutils literal notranslate"><span class="pre">FLAT8</span></code></td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&#160;</td>
+<td>3.0</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#repl-max-ws-size"><span class="std std-ref">repl.max_ws_size</span></a></td>
+<td><code class="docutils literal notranslate"><span class="pre">2147483647</span></code></td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&#160;</td>
+<td>3.0</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#repl-proto-max"><span class="std std-ref">repl.proto_max</span></a></td>
+<td><code class="docutils literal notranslate"><span class="pre">5</span></code></td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&#160;</td>
+<td>2.0</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#socket-recv-buf-size"><span class="std std-ref">socket.recv_buf_size</span></a></td>
+<td><code class="docutils literal notranslate"><span class="pre">auto</span></code></td>
+<td><blockquote class="first last">
+<div>Yes</div></blockquote>
+</td>
+<td>&#160;</td>
+<td>3.17</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#socket-send-buf-size"><span class="std std-ref">socket.send_buf_size</span></a></td>
+<td><code class="docutils literal notranslate"><span class="pre">auto</span></code></td>
+<td><blockquote class="first last">
+<div>Yes</div></blockquote>
+</td>
+<td>&#160;</td>
+<td>3.29</td>
+</tr>
+<tr class="row-even"><td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#socket-ssl-ca"><span class="std std-ref">socket.ssl_ca</span></a></td>
+<td>&#160;</td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&#160;</td>
+<td>1.0</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#socket-ssl-cert"><span class="std std-ref">socket.ssl_cert</span></a></td>
+<td>&#160;</td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&#160;</td>
+<td>1.0</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#socket-checksum"><span class="std std-ref">socket.checksum</span></a></td>
+<td><code class="docutils literal notranslate"><span class="pre">1</span></code> (vs. 2); <code class="docutils literal notranslate"><span class="pre">2</span></code> (vs. 3)</td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&#160;</td>
+<td>2.0</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#socket-ssl-cipher"><span class="std std-ref">socket.ssl_cipher</span></a></td>
+<td><code class="docutils literal notranslate"><span class="pre">AES128-SHA</span></code> (vs. 1); <br /> system default (vs. 3.24)</td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&#160;</td>
+<td>1.0</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#socket-ssl-compression"><span class="std std-ref">socket.ssl_compression</span></a></td>
+<td><code class="docutils literal notranslate"><span class="pre">YES</span></code></td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&#160;</td>
+<td>1.0</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#socket-ssl-key"><span class="std std-ref">socket.ssl_key</span></a></td>
+<td>&#160;</td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&#160;</td>
+<td>1.0</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#socket-ssl-password-file"><span class="std std-ref">socket.ssl_password_file</span></a></td>
+<td>&#160;</td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&#160;</td>
+<td>1.0</td>
+</tr>
+</tbody>
+</table>
+<p class="section-heading rubric" id="base-host"><code class="docutils literal notranslate"><span class="pre">base_host</span></code></p>
+<p id="index-0">Global variable for internal use.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Default Value</td>
+<td>detected network address</td>
+</tr>
+<tr class="row-even"><td>Dynamic</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>Initial Version</td>
+<td>???</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Since this is for internal use only, don’t manually set the <code class="docutils literal notranslate"><span class="pre">base_host</span></code> variable.</p>
+</div>
+<p class="section-heading rubric" id="base-port"><code class="docutils literal notranslate"><span class="pre">base_port</span></code></p>
+<p id="index-1">Global variable for internal use.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Default Value</td>
+<td><code class="docutils literal notranslate"><span class="pre">4567</span></code></td>
+</tr>
+<tr class="row-even"><td>Dynamic</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td>Initial Version</td>
+<td>???</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Since this is for internal use only, don’t manually set the <code class="docutils literal notranslate"><span class="pre">base_port</span></code> variable.</p>
+</div>
+<p class="section-heading rubric" id="cert-log-conflicts"><code class="docutils literal notranslate"><span class="pre">cert.log_conflicts</span></code></p>
+<p id="index-2">Log details of certification failures.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Default Value</td>
+<td><code class="docutils literal notranslate"><span class="pre">NO</span></code></td>
+</tr>
+<tr class="row-even"><td>Dynamic</td>
+<td>Yes</td>
+</tr>
+<tr class="row-odd"><td>Initial Version</td>
+<td>2.0</td>
+</tr>
+</tbody>
+</table>
+<p>The excerpt below is an example of how this Galera parameter might look in the configuration file:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;cert.log_conflicts=NO&quot;</span>
+</pre></div>
+</div>
+<p class="section-heading rubric" id="cert-optimistic-pa"><code class="docutils literal notranslate"><span class="pre">cert.optimistic_pa</span></code></p>
+<p id="index-3">Controls parallel applying of slave actions. When enabled allows full range
+of parallelization as determined by certification algorithm. When disabled
+limits parallel applying window to not exceed that seen on master. In other
+words, the action starts applying no sooner than all actions it has seen
+on the master are committed.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Default Value</td>
+<td><code class="docutils literal notranslate"><span class="pre">YES</span></code></td>
+</tr>
+<tr class="row-even"><td>Dynamic</td>
+<td>Yes</td>
+</tr>
+<tr class="row-odd"><td>Initial Version</td>
+<td>3.25</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;cert.optimistic_pa=NO&quot;</span>
+</pre></div>
+</div>
+<p class="section-heading rubric" id="debug"><code class="docutils literal notranslate"><span class="pre">debug</span></code></p>
+<p id="index-4">Enable debugging.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Default Value</td>
+<td><code class="docutils literal notranslate"><span class="pre">NO</span></code></td>
+</tr>
+<tr class="row-even"><td>Dynamic</td>
+<td>Yes</td>
+</tr>
+<tr class="row-odd"><td>Initial Version</td>
+<td>2.0</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;debug=NO&quot;</span>
+</pre></div>
+</div>
+<p class="section-heading rubric" id="evs-auto-evict"><code class="docutils literal notranslate"><span class="pre">evs.auto_evict</span></code></p>
+<p id="index-5">Defines how many entries the node allows for given a delayed node before it triggers the Auto Eviction protocol.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Default Value</td>
+<td><code class="docutils literal notranslate"><span class="pre">0</span></code></td>
+</tr>
+<tr class="row-even"><td>Dynamic</td>
+<td>No</td>
+</tr>
+<tr class="row-odd"><td>Initial Version</td>
+<td>3.8</td>
+</tr>
+</tbody>
+</table>
+<p>Each cluster node monitors the group communication response times from all other nodes.  When the cluster registers delayed response from a given node, it adds an entry for that node to its delayed list.  If the majority of the cluster nodes show the node as delayed, the node is permanently evicted from the cluster.</p>
+<p>This parameter determines how many entries a given node can receive before it triggers Auto Eviction.</p>
+<p>When this parameter is set to <code class="docutils literal notranslate"><span class="pre">0</span></code>, it disables the Auto Eviction protocol for this node.  Even when you disable Auto Eviction, though; the node continues to monitor response times from the cluster.</p>
+<p>The excerpt below is an example of how this Galera parameter might look in the configuration file:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;evs.auto_evict=5&quot;</span>
+</pre></div>
+</div>
+<p>For more information on the Auto Eviction process, see <a class="reference internal" href="auto-eviction.html"><span class="doc">Auto-Eviction</span></a>.</p>
+<p class="section-heading rubric" id="evs-causal-keepalive-period"><code class="docutils literal notranslate"><span class="pre">evs.causal_keepalive_period</span></code></p>
+<p id="index-6">For developer use only. Defaults to <code class="docutils literal notranslate"><span class="pre">evs.keepalive_period</span></code>.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Default Value</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>Dynamic</td>
+<td>No</td>
+</tr>
+<tr class="row-odd"><td>Initial Version</td>
+<td>1.0</td>
+</tr>
+</tbody>
+</table>
+<p class="section-heading rubric" id="evs-consensus-timeout"><code class="docutils literal notranslate"><span class="pre">evs.consensus_timeout</span></code></p>
+<p id="index-7">Timeout on reaching the consensus about cluster membership.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Default Value</td>
+<td><code class="docutils literal notranslate"><span class="pre">PT30S</span></code></td>
+</tr>
+<tr class="row-even"><td>Dynamic</td>
+<td>No</td>
+</tr>
+<tr class="row-odd"><td>Initial Version</td>
+<td>1.0</td>
+</tr>
+<tr class="row-even"><td>Deprecated</td>
+<td>2.0</td>
+</tr>
+</tbody>
+</table>
+<p>This variable is mostly used for troubleshooting purposes and should not be implemented in a production environment.</p>
+<p>The excerpt below is an example of how this Galera parameter might look in the configuration file:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;evs.consensus_timeout=PT30S&quot;</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This feature has been <strong>deprecated</strong>. It is succeeded by <a class="reference internal" href="#evs-install-timeout"><span class="std std-ref">evs.install_timeout</span></a>.</p>
+</div>
+<p class="section-heading rubric" id="evs-debug-log-mask"><code class="docutils literal notranslate"><span class="pre">evs.debug_log_mask</span></code></p>
+<p id="index-8">Control EVS debug logging, only effective when <code class="docutils literal notranslate"><span class="pre">wsrep_debug</span></code> is in use.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Default Value</td>
+<td><code class="docutils literal notranslate"><span class="pre">0x1</span></code></td>
+</tr>
+<tr class="row-even"><td>Dynamic</td>
+<td>Yes</td>
+</tr>
+<tr class="row-odd"><td>Initial Version</td>
+<td>1.0</td>
+</tr>
+</tbody>
+</table>
+<p>The excerpt below is an example of how this Galera parameter might look in the configuration file:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;evs.debug_log_mask=0x1&quot;</span>
+</pre></div>
+</div>
+<p class="section-heading rubric" id="evs-delayed-keep-period"><code class="docutils literal notranslate"><span class="pre">evs.delayed_keep_period</span></code></p>
+<p id="index-9">Defines how long this node requires a delayed node to remain responsive before it removes an entry from the delayed list.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Default Value</td>
+<td><code class="docutils literal notranslate"><span class="pre">PT30S</span></code></td>
+</tr>
+<tr class="row-even"><td>Dynamic</td>
+<td>No</td>
+</tr>
+<tr class="row-odd"><td>Initial Version</td>
+<td>3.8</td>
+</tr>
+</tbody>
+</table>
+<p>Each cluster node monitors the group communication response times from all other nodes.  When the cluster registered delayed responses from a given node, it adds an entry for that node to its delayed list.  Nodes that remain on the delayed list can trigger Auto Eviction, which removes them permanently from the cluster.</p>
+<p>This parameter determines how long a node on the delayed list must remain responsive before it removes one entry. The number of entries on the delayed list and how long it takes before the node removes all entries depends on how long the delayed node was unresponsive.</p>
+<p>The excerpt below is an example of how this Galera parameter might look in the configuration file:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;evs.delayed_keep_period=PT45S&quot;</span>
+</pre></div>
+</div>
+<p>For more information on the delayed list and the Auto Eviction process, see <a class="reference internal" href="auto-eviction.html"><span class="doc">Auto-Eviction</span></a>.</p>
+<p class="section-heading rubric" id="evs-delay-margin"><code class="docutils literal notranslate"><span class="pre">evs.delay_margin</span></code></p>
+<p id="index-10">Defines how long the node allows response times to deviate before adding an entry to the delayed list.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Default Value</td>
+<td>PT1S</td>
+</tr>
+<tr class="row-even"><td>Dynamic</td>
+<td>No</td>
+</tr>
+<tr class="row-odd"><td>Initial Version</td>
+<td>3.8</td>
+</tr>
+</tbody>
+</table>
+<p>Each cluster node monitors group communication response times from all other nodes.  When the cluster registers a delayed response from a given node, it adds an entry for that node to its delayed list.  Delayed nodes can trigger Auto Eviction, which removes them permanently from the cluster.</p>
+<p>This parameter determines how long a delay can run before the node adds an entry to the delayed list.  You must set this parameter to a value higher than the round-trip delay time (RTT) between the nodes.</p>
+<p>The excerpt below is an example of how this Galera parameter might look in the configuration file:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;evs.delay_margin=PT5S&quot;</span>
+</pre></div>
+</div>
+<p>For more information on the delayed list and the Auto Eviction process, see <a class="reference internal" href="auto-eviction.html"><span class="doc">Auto-Eviction</span></a>.</p>
+<p class="section-heading rubric" id="evs-evict"><code class="docutils literal notranslate"><span class="pre">evs.evict</span></code></p>
+<p id="index-11">If set to the gcomm UUID of some node, that node will be evicted from the cluster.  Setting this parameter to an empty string causes the eviction list to be cleared on the node where it is set.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Default Value</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>Dynamic</td>
+<td>No</td>
+</tr>
+<tr class="row-odd"><td>Initial Version</td>
+<td>3.8</td>
+</tr>
+</tbody>
+</table>
+<p>For more information on the eviction and Auto Eviction process, see <a class="reference internal" href="auto-eviction.html"><span class="doc">Auto-Eviction</span></a>.</p>
+<p class="section-heading rubric" id="evs-inactive-check-period"><code class="docutils literal notranslate"><span class="pre">evs.inactive_check_period</span></code></p>
+<p id="index-12">Defines how often you want the node to check for peer inactivity.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Default Value</td>
+<td><code class="docutils literal notranslate"><span class="pre">PT1S</span></code></td>
+</tr>
+<tr class="row-even"><td>Dynamic</td>
+<td>No</td>
+</tr>
+<tr class="row-odd"><td>Initial Version</td>
+<td>1.0</td>
+</tr>
+</tbody>
+</table>
+<p>Each cluster node monitors group communication response times from all other nodes.  When the cluster registers a delayed response from a given node, it adds an entry for that node to its delayed list, which can lead to the delayed node’s eviction from the cluster.</p>
+<p>This parameter determines how often you want the node to check for delays in the group communication responses from other cluster nodes.</p>
+<p>The excerpt below is an example of how this Galera parameter might look in the configuration file:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;evs.inactive_check_period=PT1S&quot;</span>
+</pre></div>
+</div>
+<p class="section-heading rubric" id="evs-inactive-timeout"><code class="docutils literal notranslate"><span class="pre">evs.inactive_timeout</span></code></p>
+<p id="index-13">Defines a hard limit on node inactivity.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Default Value</td>
+<td><code class="docutils literal notranslate"><span class="pre">PT15S</span></code></td>
+</tr>
+<tr class="row-even"><td>Dynamic</td>
+<td>No</td>
+</tr>
+<tr class="row-odd"><td>Initial Version</td>
+<td>1.0</td>
+</tr>
+</tbody>
+</table>
+<p>Hard limit on the inactivity period, after which the node is pronounced dead.</p>
+<p>Each cluster node monitors group communication response times from all other nodes.  When the cluster registers a delayed response from a given node, it add an entry for that node to its delayed list, which can lead tot he delayed node’s eviction from the cluster.</p>
+<p>The excerpt below is an example of how this Galera parameter might look in the configuration file:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;evs.inactive_timeout=PT15S&quot;</span>
+</pre></div>
+</div>
+<p>This parameter sets a hard limit for node inactivity.  If a delayed node remains unresponsive for longer than this period, the node pronounces the delayed node as dead.</p>
+<p class="section-heading rubric" id="evs-info-log-mask"><code class="docutils literal notranslate"><span class="pre">evs.info_log_mask</span></code></p>
+<p id="index-14">Defines additional logging options for the EVS Protocol.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Default Value</td>
+<td><code class="docutils literal notranslate"><span class="pre">0</span></code></td>
+</tr>
+<tr class="row-even"><td>Dynamic</td>
+<td>No</td>
+</tr>
+<tr class="row-odd"><td>Initial Version</td>
+<td>1.0</td>
+</tr>
+</tbody>
+</table>
+<p>The EVS Protocol monitors group communication response times and controls the node eviction and auto eviction processes.  This parameter allows you to enable additional logging options, through a bitmask value.</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">0x1</span></code> Provides extra view change info.</li>
+<li><code class="docutils literal notranslate"><span class="pre">0x2</span></code> Provides extra state change info</li>
+<li><code class="docutils literal notranslate"><span class="pre">0x4</span></code> Provides statistics</li>
+<li><code class="docutils literal notranslate"><span class="pre">0x8</span></code> Provides profiling (only in builds with profiling enabled)</li>
+</ul>
+<p>The excerpt below is an example of how this Galera parameter might look in the configuration file:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;evs.info_log_mask=0x4&quot;</span>
+</pre></div>
+</div>
+<p class="section-heading rubric" id="evs-install-timeout"><code class="docutils literal notranslate"><span class="pre">evs.install_timeout</span></code></p>
+<p id="index-15">Defines the timeout for install message acknowledgments.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Default Value</td>
+<td><code class="docutils literal notranslate"><span class="pre">PT15S</span></code></td>
+</tr>
+<tr class="row-even"><td>Dynamic</td>
+<td>Yes</td>
+</tr>
+<tr class="row-odd"><td>Initial Version</td>
+<td>1.0</td>
+</tr>
+</tbody>
+</table>
+<p>Each cluster node monitors group communication response times from all other nodes, checking whether they are responsive or delayed.  This parameter determines how long you want the node to wait on install message acknowledgments.</p>
+<p>The excerpt below is an example of how this Galera parameter might look in the configuration file:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;evs.install_timeout=PT15S&quot;</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This parameter replaces <a class="reference internal" href="#evs-consensus-timeout"><span class="std std-ref">evs.consensus_timeout</span></a>.</p>
+</div>
+<p class="section-heading rubric" id="evs-join-retrans-period"><code class="docutils literal notranslate"><span class="pre">evs.join_retrans_period</span></code></p>
+<p id="index-16">Defines how often the node retransmits EVS join messages when forming cluster membership.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Default Value</td>
+<td><code class="docutils literal notranslate"><span class="pre">PT1S</span></code></td>
+</tr>
+<tr class="row-even"><td>Dynamic</td>
+<td>Yes</td>
+</tr>
+<tr class="row-odd"><td>Initial Version</td>
+<td>1.0</td>
+</tr>
+</tbody>
+</table>
+<p>The excerpt below is an example of how this Galera parameter might look in the configuration file:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;evs.join_retrans_period=PT1S&quot;</span>
+</pre></div>
+</div>
+<p class="section-heading rubric" id="evs-keepalive-period"><code class="docutils literal notranslate"><span class="pre">evs.keepalive_period</span></code></p>
+<p id="index-17">Defines how often the node emits keepalive signals.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Default Value</td>
+<td><code class="docutils literal notranslate"><span class="pre">PT1S</span></code></td>
+</tr>
+<tr class="row-even"><td>Dynamic</td>
+<td>No</td>
+</tr>
+<tr class="row-odd"><td>Initial Version</td>
+<td>1.0</td>
+</tr>
+</tbody>
+</table>
+<p>Each cluster node monitors group communication response times from all other nodes.  When there is no traffic going out for the cluster to monitor, nodes emit keepalive signals so that other nodes have something to measure.  This parameter determines how often the node emits a keepalive signal, absent any other traffic.</p>
+<p>The excerpt below is an example of how this Galera parameter might look in the configuration file:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;evs.keepalive_period=PT1S&quot;</span>
+</pre></div>
+</div>
+<p class="section-heading rubric" id="evs-max-install-timeouts"><code class="docutils literal notranslate"><span class="pre">evs.max_install_timeouts</span></code></p>
+<p id="index-18">Defines the number of membership install rounds to try before giving up.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Default Value</td>
+<td><code class="docutils literal notranslate"><span class="pre">1</span></code></td>
+</tr>
+<tr class="row-even"><td>Dynamic</td>
+<td>No</td>
+</tr>
+<tr class="row-odd"><td>Initial Version</td>
+<td>1.0</td>
+</tr>
+</tbody>
+</table>
+<p>This parameter determines the maximum number of times that the node tries for a membership install acknowledgment, before it stops trying.  The total number of rounds it tries is this value plus 2.</p>
+<p>The excerpt below is an example of how this Galera parameter might look in the configuration file:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;evs.max_install_timeouts=1&quot;</span>
+</pre></div>
+</div>
+<p class="section-heading rubric" id="evs-send-window"><code class="docutils literal notranslate"><span class="pre">evs.send_window</span></code></p>
+<p id="index-19">Defines the maximum number of packets at a time in replication.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Default Value</td>
+<td><code class="docutils literal notranslate"><span class="pre">4</span></code></td>
+</tr>
+<tr class="row-even"><td>Dynamic</td>
+<td>Yes</td>
+</tr>
+<tr class="row-odd"><td>Initial Version</td>
+<td>1.0</td>
+</tr>
+</tbody>
+</table>
+<p>This parameter determines the maximum number of packets the node uses at a time in replication.  For clusters implemented over <abbr title="Wide Area Network">WAN</abbr>, you can set this value considerably higher, (for example, 512), than for clusters implemented over <abbr title="Local Area Network">LAN</abbr>.</p>
+<p>You must use a value that is greater than <a class="reference internal" href="#evs-user-send-window"><span class="std std-ref">evs.user_send_window</span></a>.  The recommended value is double <a class="reference internal" href="#evs-user-send-window"><span class="std std-ref">evs.user_send_window</span></a>.</p>
+<p>The excerpt below is an example of how this Galera parameter might look in the configuration file:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;evs.send_window=4&quot;</span>
+</pre></div>
+</div>
+<p class="section-heading rubric" id="evs-stats-report-period"><code class="docutils literal notranslate"><span class="pre">evs.stats_report_period</span></code></p>
+<p id="index-20">Control period of EVS statistics reporting. The node is pronounced dead.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Default Value</td>
+<td><code class="docutils literal notranslate"><span class="pre">PT1M</span></code></td>
+</tr>
+<tr class="row-even"><td>Dynamic</td>
+<td>No</td>
+</tr>
+<tr class="row-odd"><td>Initial Version</td>
+<td>1.0</td>
+</tr>
+</tbody>
+</table>
+<p>The excerpt below is an example of how this Galera parameter might look in the configuration file:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;evs.stats_report_period=PT1M&quot;</span>
+</pre></div>
+</div>
+<p class="section-heading rubric" id="evs-suspect-timeout"><code class="docutils literal notranslate"><span class="pre">evs.suspect_timeout</span></code></p>
+<p id="index-21">Defines the inactivity period after which a node is <em>suspected</em> as dead.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Default Value</td>
+<td><code class="docutils literal notranslate"><span class="pre">PT5S</span></code></td>
+</tr>
+<tr class="row-even"><td>Dynamic</td>
+<td>No</td>
+</tr>
+<tr class="row-odd"><td>Initial Version</td>
+<td>1.0</td>
+</tr>
+</tbody>
+</table>
+<p>Each node in the cluster monitors group communications from all other nodes in the cluster.  This parameter determines the period of inactivity before the node suspects another of being dead.  If all nodes agree on that, the cluster drops the inactive node.</p>
+<p>The excerpt below is an example of how this Galera parameter might look in the configuration file:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;evs.suspect_timeout=PT5S&quot;</span>
+</pre></div>
+</div>
+<p class="section-heading rubric" id="evs-use-aggregate"><code class="docutils literal notranslate"><span class="pre">evs.use_aggregate</span></code></p>
+<p id="index-22">Defines whether the node aggregates small packets into one when possible.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Default Value</td>
+<td><code class="docutils literal notranslate"><span class="pre">TRUE</span></code></td>
+</tr>
+<tr class="row-even"><td>Dynamic</td>
+<td>No</td>
+</tr>
+<tr class="row-odd"><td>Initial Version</td>
+<td>1.0</td>
+</tr>
+</tbody>
+</table>
+<p>The excerpt below is an example of how this Galera parameter might look in the configuration file:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;evs.use_aggregate=TRUE&quot;</span>
+</pre></div>
+</div>
+<p class="section-heading rubric" id="evs-user-send-window"><code class="docutils literal notranslate"><span class="pre">evs.user_send_window</span></code></p>
+<p id="index-23">Defines the maximum number of data packets at a time in replication.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Default Value</td>
+<td><code class="docutils literal notranslate"><span class="pre">2</span></code></td>
+</tr>
+<tr class="row-even"><td>Dynamic</td>
+<td>Yes</td>
+</tr>
+<tr class="row-odd"><td>Initial Version</td>
+<td>1.0</td>
+</tr>
+</tbody>
+</table>
+<p>This parameter determines the maximum number of data packets the node uses at a time in replication.  For clusters implemented over <abbr title="Wide Area Network">WAN</abbr>, you can set this to a value considerably higher than cluster implementations over <abbr title="Local Area Network">LAN</abbr>, (for example, 512).</p>
+<p>You must use a value that is smaller than <a class="reference internal" href="#evs-send-window"><span class="std std-ref">evs.send_window</span></a>.  The recommended value is half <a class="reference internal" href="#evs-send-window"><span class="std std-ref">evs.send_window</span></a>.</p>
+<p>The excerpt below is an example of how this Galera parameter might look in the configuration file:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;evs.user_send_window=2&quot;</span>
+</pre></div>
+</div>
+<p>For more information, see <a class="reference internal" href="#evs-send-window"><span class="std std-ref">evs.send_window</span></a>.</p>
+<p class="section-heading rubric" id="evs-view-forget-timeout"><code class="docutils literal notranslate"><span class="pre">evs.view_forget_timeout</span></code></p>
+<p id="index-24">Defines how long the node saves past views from the view history.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Default Value</td>
+<td><code class="docutils literal notranslate"><span class="pre">PT5M</span></code></td>
+</tr>
+<tr class="row-even"><td>Dynamic</td>
+<td>No</td>
+</tr>
+<tr class="row-odd"><td>Initial Version</td>
+<td>1.0</td>
+</tr>
+</tbody>
+</table>
+<p>Each node maintains a history of past views.  This parameter determines how long you want the node to save past views before dropping them from the table.</p>
+<p>The excerpt below is an example of how this Galera parameter might look in the configuration file:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;evs.view_forget_timeout=PT5M&quot;</span>
+</pre></div>
+</div>
+<p class="section-heading rubric" id="evs-version"><code class="docutils literal notranslate"><span class="pre">evs.version</span></code></p>
+<p id="index-25">Defines the EVS Protocol version.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Default Value</td>
+<td><code class="docutils literal notranslate"><span class="pre">0</span></code></td>
+</tr>
+<tr class="row-even"><td>Dynamic</td>
+<td>No</td>
+</tr>
+<tr class="row-odd"><td>Initial Version</td>
+<td>1.0</td>
+</tr>
+</tbody>
+</table>
+<p>This parameter determines which version of the EVS Protocol the node uses.  In order to ensure backwards compatibility, the parameter defaults to <code class="docutils literal notranslate"><span class="pre">0</span></code>.  Certain EVS Protocol features, such as Auto Eviction, require you to upgrade to more recent versions.</p>
+<p>The excerpt below is an example of how this Galera parameter might look in the configuration file:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;evs.version=1&quot;</span>
+</pre></div>
+</div>
+<p>For more information on the procedure to upgrade from one version to another, see <a class="reference internal" href="auto-eviction.html#upgrade-evs"><span class="std std-ref">Upgrading the EVS Protocol</span></a>.</p>
+<p class="section-heading rubric" id="gcache-dir"><code class="docutils literal notranslate"><span class="pre">gcache.dir</span></code></p>
+<p id="index-26">Defines the directory where the write-set cache places its files.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Default Value</td>
+<td><code class="docutils literal notranslate"><span class="pre">/path/to/working_dir</span></code></td>
+</tr>
+<tr class="row-even"><td>Dynamic</td>
+<td>No</td>
+</tr>
+<tr class="row-odd"><td>Initial Version</td>
+<td>1.0</td>
+</tr>
+</tbody>
+</table>
+<p>When nodes receive state transfers they cannot process incoming write-sets until they finish updating their state.  Under certain methods, the node that sends the state transfer is similarly blocked.  To prevent the database from falling further behind, GCache saves the incoming write-sets on memory mapped files to disk.</p>
+<p>This parameter determines where you want the node to save these files for write-set caching.  By default, GCache uses the working directory for the database server.</p>
+<p>The excerpt below is an example of how this Galera parameter might look in the configuration file:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;gcache.dir=/usr/share/galera&quot;</span>
+</pre></div>
+</div>
+<p class="section-heading rubric" id="gcache-keep-pages-size"><code class="docutils literal notranslate"><span class="pre">gcache.keep_pages_size</span></code></p>
+<p id="index-27">Total size of the page storage pages to keep for caching purposes. If only page storage is enabled, one page is always present.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Default Value</td>
+<td><code class="docutils literal notranslate"><span class="pre">0</span></code></td>
+</tr>
+<tr class="row-even"><td>Dynamic</td>
+<td>No</td>
+</tr>
+<tr class="row-odd"><td>Initial Version</td>
+<td>1.0</td>
+</tr>
+</tbody>
+</table>
+<p>The excerpt below is an example of how this Galera parameter might look in the configuration file:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;gcache.keep_pages_size=0&quot;</span>
+</pre></div>
+</div>
+<p class="section-heading rubric" id="gcache-name"><code class="docutils literal notranslate"><span class="pre">gcache.name</span></code></p>
+<p id="index-28">Defines the filename for the write-set cache.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Default Value</td>
+<td><code class="docutils literal notranslate"><span class="pre">galera.cache</span></code></td>
+</tr>
+<tr class="row-even"><td>Dynamic</td>
+<td>No</td>
+</tr>
+<tr class="row-odd"><td>Initial Version</td>
+<td>1.0</td>
+</tr>
+</tbody>
+</table>
+<p>When nodes receive state transfers they cannot process incoming write-sets until they finish updating their state.  Under certain methods, the node that sends the state transfer is similarly blocked.  To prevent the database from falling further behind, GCache saves the incoming write-sets on memory-mapped files to disk.</p>
+<p>This parameter determines the name you want the node to use for this ring buffer storage file.</p>
+<p>The excerpt below is an example of how this Galera parameter might look in the configuration file:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;gcache.name=galera.cache&quot;</span>
+</pre></div>
+</div>
+<p class="section-heading rubric" id="gcache-page-size"><code class="docutils literal notranslate"><span class="pre">gcache.page_size</span></code></p>
+<p id="index-29">Size of the page files in page storage. The limit on overall page storage is the size of the disk.  Pages are prefixed by <code class="docutils literal notranslate"><span class="pre">gcache.page</span></code>.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Default Value</td>
+<td><code class="docutils literal notranslate"><span class="pre">128M</span></code></td>
+</tr>
+<tr class="row-even"><td>Dynamic</td>
+<td>No</td>
+</tr>
+<tr class="row-odd"><td>Initial Version</td>
+<td>1.0</td>
+</tr>
+</tbody>
+</table>
+<p>The excerpt below is an example of how this Galera parameter might look in the configuration file:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;gcache.page_size=128Mb&quot;</span>
+</pre></div>
+</div>
+<p class="section-heading rubric" id="gcache-recover"><code class="docutils literal notranslate"><span class="pre">gcache.recover</span></code></p>
+<p id="index-30">Determines whether gcache recovery takes place on node startup. If gcache could be recovered successfully, the node can then provide IST to other joining nodes, which is useful when the whole cluster is being restarted.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Default Value</td>
+<td><code class="docutils literal notranslate"><span class="pre">no</span></code></td>
+</tr>
+<tr class="row-even"><td>Dynamic</td>
+<td>No</td>
+</tr>
+<tr class="row-odd"><td>Initial Version</td>
+<td>3.19</td>
+</tr>
+</tbody>
+</table>
+<p>The excerpt below is an example of how this Galera parameter might look in the configuration file:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;gcache.recover=yes&quot;</span>
+</pre></div>
+</div>
+<p class="section-heading rubric" id="gcache-size"><code class="docutils literal notranslate"><span class="pre">gcache.size</span></code></p>
+<p id="index-31">Defines the disk space you want to node to use in caching write-sets.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Default Value</td>
+<td><code class="docutils literal notranslate"><span class="pre">128M</span></code></td>
+</tr>
+<tr class="row-even"><td>Dynamic</td>
+<td>No</td>
+</tr>
+<tr class="row-odd"><td>Initial Version</td>
+<td>1.0</td>
+</tr>
+</tbody>
+</table>
+<p>When nodes receive state transfers they cannot process incoming write-sets until they finish updating their state.  Under certain methods, the node that sends the state transfer is similarly blocked.  To prevent the database from falling further behind, GCache saves the incoming write-sets on memory-mapped files to disk.</p>
+<p>This parameter defines the amount of disk space you want to allocate for the present ring buffer storage.  The node allocates this space when it starts the database server.</p>
+<p>The excerpt below is an example of how this Galera parameter might look in the configuration file:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;gcache.size=128Mb&quot;</span>
+</pre></div>
+</div>
+<p>For more information on customizing the write-set cache, see the <a class="reference internal" href="../kb/index.html"><span class="doc">Best Practice Articles</span></a>.</p>
+<p class="section-heading rubric" id="gcomm-thread-prio"><code class="docutils literal notranslate"><span class="pre">gcomm.thread_prio</span></code></p>
+<p id="index-32">Defines the policy and priority for the gcomm thread.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Default Value</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>Dynamic</td>
+<td>No</td>
+</tr>
+<tr class="row-odd"><td>Initial Version</td>
+<td>3.0</td>
+</tr>
+</tbody>
+</table>
+<p>Using this option, you can raise the priority of the gcomm thread to a higher level than it normally uses.  You may find this useful in situations where Galera Cluster threads do not receive sufficient CPU time, due to competition with other MySQL threads.  In these cases, when the thread scheduler for the operating system does not run the Galera threads frequently enough, timeouts may occur, causing the node to drop from the cluster.</p>
+<p>The format for this option is: <code class="docutils literal notranslate"><span class="pre">&lt;policy&gt;:&lt;priority&gt;</span></code>.  The priority value is an integer.  The policy value supports the following options:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">other</span></code> Designates the default time-sharing scheduling in Linux.  They can run until they are blocked by an I/O request or preempted by higher priorities or superior scheduling designations.</li>
+<li><code class="docutils literal notranslate"><span class="pre">fifo</span></code> Designates first-in out scheduling.  These threads always immediately preempt any currently running other, batch or idle threads.  They can run until they are either blocked by an I/O request or preempted by a FIFO thread of a higher priority.</li>
+<li><code class="docutils literal notranslate"><span class="pre">rr</span></code> Designates round-robin scheduling.  These threads always preempt any currently running other, batch or idle threads.  The scheduler allows these threads to run for a fixed period of a time.  If the thread is still running when this time period is exceeded, they are stopped and moved to the end of the list, allowing another round-robin thread of the same priority to run in their place.  They can otherwise continue to run until they are blocked by an I/O request or are preempted by threads of a higher priority.</li>
+</ul>
+<p>The excerpt below is an example of how this Galera parameter might look in the configuration file:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;gcomm.thread_prio=rr:2&quot;</span>
+</pre></div>
+</div>
+<p class="section-heading rubric" id="gcs-fc-debug"><code class="docutils literal notranslate"><span class="pre">gcs.fc_debug</span></code></p>
+<p id="index-33">Post debug statistics about replication flow every this number of writesets.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Default Value</td>
+<td><code class="docutils literal notranslate"><span class="pre">0</span></code></td>
+</tr>
+<tr class="row-even"><td>Dynamic</td>
+<td>No</td>
+</tr>
+<tr class="row-odd"><td>Initial Version</td>
+<td>1.0</td>
+</tr>
+</tbody>
+</table>
+<p>The excerpt below is an example of how this Galera parameter might look in the configuration file:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;gcs.fc_debug=0&quot;</span>
+</pre></div>
+</div>
+<p class="section-heading rubric" id="gcs-fc-factor"><code class="docutils literal notranslate"><span class="pre">gcs.fc_factor</span></code></p>
+<p id="index-34">Resume replication after recv queue drops below this fraction of <code class="docutils literal notranslate"><span class="pre">gcs.fc_limit</span></code>.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Default Value</td>
+<td><code class="docutils literal notranslate"><span class="pre">0.5</span></code></td>
+</tr>
+<tr class="row-even"><td>Dynamic</td>
+<td>Yes</td>
+</tr>
+<tr class="row-odd"><td>Initial Version</td>
+<td>1.0</td>
+</tr>
+</tbody>
+</table>
+<p>The excerpt below is an example of how this Galera parameter might look in the configuration file:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;gcs.fc_factor=0.5&quot;</span>
+</pre></div>
+</div>
+<p class="section-heading rubric" id="gcs-fc-limit"><code class="docutils literal notranslate"><span class="pre">gcs.fc_limit</span></code></p>
+<p id="index-35">Pause replication if recv queue exceeds this number of  writesets. For master-slave setups this number can be increased considerably.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Default Value</td>
+<td><code class="docutils literal notranslate"><span class="pre">16</span></code></td>
+</tr>
+<tr class="row-even"><td>Dynamic</td>
+<td>Yes</td>
+</tr>
+<tr class="row-odd"><td>Initial Version</td>
+<td>1.0</td>
+</tr>
+</tbody>
+</table>
+<p>The excerpt below is an example of how this Galera parameter might look in the configuration file:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;gcs.fc_limit=16&quot;</span>
+</pre></div>
+</div>
+<p class="section-heading rubric" id="gcs-fc-master-slave"><code class="docutils literal notranslate"><span class="pre">gcs.fc_master_slave</span></code></p>
+<p id="index-36">Defines whether there is only one master node in the group.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Default Value</td>
+<td><code class="docutils literal notranslate"><span class="pre">NO</span></code></td>
+</tr>
+<tr class="row-even"><td>Dynamic</td>
+<td>No</td>
+</tr>
+<tr class="row-odd"><td>Initial Version</td>
+<td>1.0</td>
+</tr>
+</tbody>
+</table>
+<p>The excerpt below is an example of how this Galera parameter might look in the configuration file:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;gcs.fc_master_slave=NO&quot;</span>
+</pre></div>
+</div>
+<p class="section-heading rubric" id="gcs-max-packet-size"><code class="docutils literal notranslate"><span class="pre">gcs.max_packet_size</span></code></p>
+<p id="index-37">All writesets exceeding that size will be fragmented.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Default Value</td>
+<td><code class="docutils literal notranslate"><span class="pre">32616</span></code></td>
+</tr>
+<tr class="row-even"><td>Dynamic</td>
+<td>No</td>
+</tr>
+<tr class="row-odd"><td>Initial Version</td>
+<td>1.0</td>
+</tr>
+</tbody>
+</table>
+<p>The excerpt below is an example of how this Galera parameter might look in the configuration file:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;gcs.max_packet_size=32616&quot;</span>
+</pre></div>
+</div>
+<p class="section-heading rubric" id="gcs-max-throttle"><code class="docutils literal notranslate"><span class="pre">gcs.max_throttle</span></code></p>
+<p id="index-38">How much to throttle replication rate during state transfer (to avoid running out of memory). Set the value to 0.0 if stopping replication is acceptable for completing state transfer.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Default Value</td>
+<td><code class="docutils literal notranslate"><span class="pre">0.25</span></code></td>
+</tr>
+<tr class="row-even"><td>Dynamic</td>
+<td>No</td>
+</tr>
+<tr class="row-odd"><td>Initial Version</td>
+<td>1.0</td>
+</tr>
+</tbody>
+</table>
+<p>The excerpt below is an example of how this Galera parameter might look in the configuration file:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;gcs.max_throttle=0.25&quot;</span>
+</pre></div>
+</div>
+<p class="section-heading rubric" id="gcs-recv-q-hard-limit"><code class="docutils literal notranslate"><span class="pre">gcs.recv_q_hard_limit</span></code></p>
+<p id="index-39">Maximum allowed size of recv queue. This should normally be half of (RAM + swap). If this limit is exceeded, Galera Cluster will abort the server.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Default Value</td>
+<td><code class="docutils literal notranslate"><span class="pre">LLONG_MAX</span></code></td>
+</tr>
+<tr class="row-even"><td>Dynamic</td>
+<td>No</td>
+</tr>
+<tr class="row-odd"><td>Initial Version</td>
+<td>1.0</td>
+</tr>
+</tbody>
+</table>
+<p>The excerpt below is an example of how this Galera parameter might look in the configuration file:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;gcs.recv_q_hard_limit=LLONG_MAX&quot;</span>
+</pre></div>
+</div>
+<p class="section-heading rubric" id="gcs-recv-q-soft-limit"><code class="docutils literal notranslate"><span class="pre">gcs.recv_q_soft_limit</span></code></p>
+<p id="index-40">The fraction of <a class="reference internal" href="#gcs-recv-q-hard-limit"><span class="std std-ref">gcs.recv_q_hard_limit</span></a> after which replication rate will be throttled.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Default Value</td>
+<td><code class="docutils literal notranslate"><span class="pre">0.25</span></code></td>
+</tr>
+<tr class="row-even"><td>Dynamic</td>
+<td>No</td>
+</tr>
+<tr class="row-odd"><td>Initial Version</td>
+<td>1.0</td>
+</tr>
+</tbody>
+</table>
+<p>The degree of throttling is a linear function of recv queue size and goes from 1.0 (<code class="docutils literal notranslate"><span class="pre">full</span> <span class="pre">rate</span></code>)
+at <a class="reference internal" href="#gcs-recv-q-soft-limit"><span class="std std-ref">gcs.recv_q_soft_limit</span></a> to <a class="reference internal" href="#gcs-max-throttle"><span class="std std-ref">gcs.max_throttle</span></a> at <a class="reference internal" href="#gcs-recv-q-hard-limit"><span class="std std-ref">gcs.recv_q_hard_limit</span></a> Note that <code class="docutils literal notranslate"><span class="pre">full</span> <span class="pre">rate</span></code>, as estimated between 0 and <a class="reference internal" href="#gcs-recv-q-soft-limit"><span class="std std-ref">gcs.recv_q_soft_limit</span></a> is a very imprecise estimate of a regular replication rate.</p>
+<p>The excerpt below is an example of how this Galera parameter might look in the configuration file:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;gcs.recv_q_soft_limit=0.25&quot;</span>
+</pre></div>
+</div>
+<p class="section-heading rubric" id="gcs-sync-donor"><code class="docutils literal notranslate"><span class="pre">gcs.sync_donor</span></code></p>
+<p id="index-41">Should the rest of the cluster keep in sync with the donor? <code class="docutils literal notranslate"><span class="pre">YES</span></code> means that if the donor is blocked by state transfer, the whole cluster is blocked with it.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Default Value</td>
+<td><code class="docutils literal notranslate"><span class="pre">NO</span></code></td>
+</tr>
+<tr class="row-even"><td>Dynamic</td>
+<td>No</td>
+</tr>
+<tr class="row-odd"><td>Initial Version</td>
+<td>1.0</td>
+</tr>
+</tbody>
+</table>
+<p>If you choose to use value <code class="docutils literal notranslate"><span class="pre">YES</span></code>, it is theoretically possible that the donor node cannot keep up with the rest of the cluster due to the extra load from the SST. If the node lags behind, it may send flow control messages stalling the whole cluster. However, you can monitor this using the <a class="reference internal" href="galera-status-variables.html#wsrep-flow-control-paused"><span class="std std-ref">wsrep_flow_control_paused</span></a> status variable.</p>
+<p>The excerpt below is an example of how this Galera parameter might look in the configuration file:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;gcs.sync_donor=NO&quot;</span>
+</pre></div>
+</div>
+<p class="section-heading rubric" id="gmcast-listen-addr"><code class="docutils literal notranslate"><span class="pre">gmcast.listen_addr</span></code></p>
+<p id="index-42">Address at which <em>Galera Cluster</em> listens to connections from other nodes. By default the port to listen at is taken from the connection address. This setting can be used to overwrite that.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Default Value</td>
+<td><code class="docutils literal notranslate"><span class="pre">tcp://0.0.0.0:4567</span></code></td>
+</tr>
+<tr class="row-even"><td>Dynamic</td>
+<td>No</td>
+</tr>
+<tr class="row-odd"><td>Initial Version</td>
+<td>1.0</td>
+</tr>
+</tbody>
+</table>
+<p>The excerpt below is an example of how this Galera parameter might look in the configuration file:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;gmcast.listen_addr=tcp://0.0.0.0:4567&quot;</span>
+</pre></div>
+</div>
+<p class="section-heading rubric" id="gmcast-mcast-addr"><code class="docutils literal notranslate"><span class="pre">gmcast.mcast_addr</span></code></p>
+<p id="index-43">If set, UDP multicast will be used for replication, for example:</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Default Value</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>Dynamic</td>
+<td>No</td>
+</tr>
+<tr class="row-odd"><td>Initial Version</td>
+<td>1.0</td>
+</tr>
+</tbody>
+</table>
+<p>The value must be the same on all nodes.</p>
+<p>If you are planning to build a large cluster, we recommend using UDP.</p>
+<p>The excerpt below is an example of how this Galera parameter might look in the configuration file:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;gmcast.mcast_addr=239.192.0.11&quot;</span>
+</pre></div>
+</div>
+<p class="section-heading rubric" id="gmcast-mcast-ttl"><code class="docutils literal notranslate"><span class="pre">gmcast.mcast_ttl</span></code></p>
+<p id="index-44">Time to live value for multicast packets.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Default Value</td>
+<td><code class="docutils literal notranslate"><span class="pre">1</span></code></td>
+</tr>
+<tr class="row-even"><td>Dynamic</td>
+<td>No</td>
+</tr>
+<tr class="row-odd"><td>Initial Version</td>
+<td>1.0</td>
+</tr>
+</tbody>
+</table>
+<p>The excerpt below is an example of how this Galera parameter might look in the configuration file:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;gmcast.mcast_ttl=1&quot;</span>
+</pre></div>
+</div>
+<p class="section-heading rubric" id="gmcast-peer-timeout"><code class="docutils literal notranslate"><span class="pre">gmcast.peer_timeout</span></code></p>
+<p id="index-45">Connection timeout to initiate message relaying.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Default Value</td>
+<td><code class="docutils literal notranslate"><span class="pre">PT3S</span></code></td>
+</tr>
+<tr class="row-even"><td>Dynamic</td>
+<td>No</td>
+</tr>
+<tr class="row-odd"><td>Initial Version</td>
+<td>1.0</td>
+</tr>
+</tbody>
+</table>
+<p>The excerpt below is an example of how this Galera parameter might look in the configuration file:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;gmcast.peer_timeout=PT3S&quot;</span>
+</pre></div>
+</div>
+<p class="section-heading rubric" id="gmcast-segment"><code class="docutils literal notranslate"><span class="pre">gmcast.segment</span></code></p>
+<p id="index-46">Define which network segment this node is in. Optimisations on communication are performed to minimise the amount of traffic between network segments including writeset relaying and IST and SST donor selection.  The <a class="reference internal" href="#gmcast-segment"><span class="std std-ref">gmcast.segment</span></a> value is an integer from <code class="docutils literal notranslate"><span class="pre">0</span></code> to <code class="docutils literal notranslate"><span class="pre">255</span></code>. By default all nodes are placed in the same segment (<code class="docutils literal notranslate"><span class="pre">0</span></code>).</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Default Value</td>
+<td><code class="docutils literal notranslate"><span class="pre">0</span></code></td>
+</tr>
+<tr class="row-even"><td>Dynamic</td>
+<td>No</td>
+</tr>
+<tr class="row-odd"><td>Initial Version</td>
+<td>3.0</td>
+</tr>
+</tbody>
+</table>
+<p>The excerpt below is an example of how this Galera parameter might look in the configuration file:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;gmcast.segment=0&quot;</span>
+</pre></div>
+</div>
+<p class="section-heading rubric" id="gmcast-time-wait"><code class="docutils literal notranslate"><span class="pre">gmcast.time_wait</span></code></p>
+<p id="index-47">Time to wait until allowing peer declared outside of stable view to reconnect.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Default Value</td>
+<td><code class="docutils literal notranslate"><span class="pre">PT5S</span></code></td>
+</tr>
+<tr class="row-even"><td>Dynamic</td>
+<td>No</td>
+</tr>
+<tr class="row-odd"><td>Initial Version</td>
+<td>1.0</td>
+</tr>
+</tbody>
+</table>
+<p>The excerpt below is an example of how this Galera parameter might look in the configuration file:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;gmcast.time_wait=PT5S&quot;</span>
+</pre></div>
+</div>
+<p class="section-heading rubric" id="gmcast-version"><code class="docutils literal notranslate"><span class="pre">gmcast.version</span></code></p>
+<p id="index-48">This status variable is used to check which gmcast protocol version is used.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Default Value</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>Dynamic</td>
+<td>No</td>
+</tr>
+<tr class="row-odd"><td>Initial Version</td>
+<td>1.0</td>
+</tr>
+</tbody>
+</table>
+<p>This variable is mostly used for troubleshooting purposes and should not be implemented in a production environment.</p>
+<p class="section-heading rubric" id="ist-recv-addr"><code class="docutils literal notranslate"><span class="pre">ist.recv_addr</span></code></p>
+<p id="index-49">Address to listen on for Incremental State Transfer. By default this is the <code class="docutils literal notranslate"><span class="pre">&lt;address&gt;:&lt;port+1&gt;</span></code> from <a class="reference internal" href="mysql-wsrep-options.html#wsrep-node-address"><span class="std std-ref">wsrep_node_address</span></a>.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Default Value</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>Dynamic</td>
+<td>No</td>
+</tr>
+<tr class="row-odd"><td>Initial Version</td>
+<td>2.0</td>
+</tr>
+</tbody>
+</table>
+<p>The excerpt below is an example of how this Galera parameter might look in the configuration file:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;ist.recv_addr=192.168.1.1&quot;</span>
+</pre></div>
+</div>
+<p class="section-heading rubric" id="ist-recv-bind"><code class="docutils literal notranslate"><span class="pre">ist.recv_bind</span></code></p>
+<p id="index-50">Defines the address that the node binds on for receiving an <a class="reference internal" href="glossary.html#term-incremental-state-transfer"><span class="xref std std-term">Incremental State Transfer</span></a>.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Default Value</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>Dynamic</td>
+<td>No</td>
+</tr>
+<tr class="row-odd"><td>Initial Version</td>
+<td>3.16</td>
+</tr>
+</tbody>
+</table>
+<p>This option defines the address to which the node will bind in order to receive Incremental State Transfers.  When this option is not set, it takes its value from <a class="reference internal" href="#ist-recv-addr"><span class="std std-ref">ist.recv_addr</span></a> or, in the event that that is also not set, from <a class="reference internal" href="mysql-wsrep-options.html#wsrep-node-address"><span class="std std-ref">wsrep_node_address</span></a>.  You may find it useful when the node runs behind a NAT or in similar cases where the public and private addresses differ.</p>
+<p>The excerpt below is an example of how this Galera parameter might look in the configuration file:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;ist.recv_bind=192.168.1.1&quot;</span>
+</pre></div>
+</div>
+<p class="section-heading rubric" id="pc-recovery"><code class="docutils literal notranslate"><span class="pre">pc.recovery</span></code></p>
+<span class="target" id="index-51"></span><p id="index-52">When set to <code class="docutils literal notranslate"><span class="pre">TRUE</span></code>, the node stores the Primary Component state to disk, in the <code class="docutils literal notranslate"><span class="pre">gvwstate.dat</span></code> file.  The Primary Component can then recover automatically when all nodes that were part of the last saved state reestablish communications with each other.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Default Value</td>
+<td><code class="docutils literal notranslate"><span class="pre">TRUE</span></code></td>
+</tr>
+<tr class="row-even"><td>Dynamic</td>
+<td>No</td>
+</tr>
+<tr class="row-odd"><td>Initial Version</td>
+<td>3.0</td>
+</tr>
+</tbody>
+</table>
+<p>This allows for:</p>
+<ul class="simple">
+<li>Automatic recovery from full cluster crashes, such as in the case of a data center power outage.</li>
+<li>Graceful full cluster restarts without the need for explicitly bootstrapping a new Primary Component.</li>
+</ul>
+<p>The excerpt below is an example of how this Galera parameter might look in the configuration file:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;pc.recovery=TRUE&quot;</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">In the event that the wsrep position differs between nodes, recovery also requires a full State Snapshot Transfer.</p>
+</div>
+<p class="section-heading rubric" id="pc-bootstrap"><code class="docutils literal notranslate"><span class="pre">pc.bootstrap</span></code></p>
+<p id="index-53">If you set this value to <code class="docutils literal notranslate"><span class="pre">TRUE</span></code> is a signal to turn a <code class="docutils literal notranslate"><span class="pre">NON-PRIMARY</span></code> component into <code class="docutils literal notranslate"><span class="pre">PRIMARY</span></code>.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Default Value</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>Dynamic</td>
+<td>Yes</td>
+</tr>
+<tr class="row-odd"><td>Initial Version</td>
+<td>2.0</td>
+</tr>
+</tbody>
+</table>
+<p>The excerpt below is an example of how this Galera parameter might look in the configuration file:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;pc.bootstrap=TRUE&quot;</span>
+</pre></div>
+</div>
+<p class="section-heading rubric" id="pc-announce-timeout"><code class="docutils literal notranslate"><span class="pre">pc.announce_timeout</span></code></p>
+<p id="index-54">Cluster joining announcements are sent every <span class="math notranslate nohighlight">\(\frac{1}{2}\)</span> second for this period of time or less if the other nodes are discovered.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Default Value</td>
+<td><code class="docutils literal notranslate"><span class="pre">PT3S</span></code></td>
+</tr>
+<tr class="row-even"><td>Dynamic</td>
+<td>No</td>
+</tr>
+<tr class="row-odd"><td>Initial Version</td>
+<td>2.0</td>
+</tr>
+</tbody>
+</table>
+<p>The excerpt below is an example of how this Galera parameter might look in the configuration file:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;pc.announce_timeout=PT3S&quot;</span>
+</pre></div>
+</div>
+<p class="section-heading rubric" id="pc-checksum"><code class="docutils literal notranslate"><span class="pre">pc.checksum</span></code></p>
+<p id="index-55">Checksum replicated messages.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Default Value</td>
+<td><code class="docutils literal notranslate"><span class="pre">FALSE</span></code></td>
+</tr>
+<tr class="row-even"><td>Dynamic</td>
+<td>No</td>
+</tr>
+<tr class="row-odd"><td>Initial Version</td>
+<td>1.0</td>
+</tr>
+</tbody>
+</table>
+<p>The excerpt below is an example of how this Galera parameter might look in the configuration file:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;pc.checksum=TRUE&quot;</span>
+</pre></div>
+</div>
+<p class="section-heading rubric" id="pc-ignore-sb"><code class="docutils literal notranslate"><span class="pre">pc.ignore_sb</span></code></p>
+<p id="index-56">Should we allow nodes to process updates even in the case of split brain? This is a dangerous setting in multi-master setup, but should simplify things in master-slave cluster (especially if only 2 nodes are used).</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Default Value</td>
+<td><code class="docutils literal notranslate"><span class="pre">FALSE</span></code></td>
+</tr>
+<tr class="row-even"><td>Dynamic</td>
+<td>Yes</td>
+</tr>
+<tr class="row-odd"><td>Initial Version</td>
+<td>1.0</td>
+</tr>
+</tbody>
+</table>
+<p>The excerpt below is an example of how this Galera parameter might look in the configuration file:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;pc.ignore_sb=FALSE&quot;</span>
+</pre></div>
+</div>
+<p class="section-heading rubric" id="pc-ignore-quorum"><code class="docutils literal notranslate"><span class="pre">pc.ignore_quorum</span></code></p>
+<p id="index-57">Completely ignore quorum calculations. For example if the master splits from several slaves it still remains operational. Use with extreme caution even in master-slave setups, as slaves will not automatically reconnect to master in this case.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Default Value</td>
+<td><code class="docutils literal notranslate"><span class="pre">FALSE</span></code></td>
+</tr>
+<tr class="row-even"><td>Dynamic</td>
+<td>Yes</td>
+</tr>
+<tr class="row-odd"><td>Initial Version</td>
+<td>1.0</td>
+</tr>
+</tbody>
+</table>
+<p>The excerpt below is an example of how this Galera parameter might look in the configuration file:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;pc.ignore_quorum=FALSE&quot;</span>
+</pre></div>
+</div>
+<p class="section-heading rubric" id="pc-linger"><code class="docutils literal notranslate"><span class="pre">pc.linger</span></code></p>
+<p id="index-58">The period for which the PC protocol waits for the EVS termination.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Default Value</td>
+<td><code class="docutils literal notranslate"><span class="pre">PT2S</span></code></td>
+</tr>
+<tr class="row-even"><td>Dynamic</td>
+<td>No</td>
+</tr>
+<tr class="row-odd"><td>Initial Version</td>
+<td>1.0</td>
+</tr>
+</tbody>
+</table>
+<p>The excerpt below is an example of how this Galera parameter might look in the configuration file:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;pc.linger=PT2S&quot;</span>
+</pre></div>
+</div>
+<p class="section-heading rubric" id="pc-npvo"><code class="docutils literal notranslate"><span class="pre">pc.npvo</span></code></p>
+<p id="index-59">If set to <code class="docutils literal notranslate"><span class="pre">TRUE</span></code>, the more recent primary component overrides older ones in the case of conflicting primaries.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Default Value</td>
+<td><code class="docutils literal notranslate"><span class="pre">FALSE</span></code></td>
+</tr>
+<tr class="row-even"><td>Dynamic</td>
+<td>No</td>
+</tr>
+<tr class="row-odd"><td>Initial Version</td>
+<td>1.0</td>
+</tr>
+</tbody>
+</table>
+<p>The excerpt below is an example of how this Galera parameter might look in the configuration file:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;pc.npvo=FALSE&quot;</span>
+</pre></div>
+</div>
+<p class="section-heading rubric" id="pc-wait-prim"><code class="docutils literal notranslate"><span class="pre">pc.wait_prim</span></code></p>
+<p id="index-60">If set to <code class="docutils literal notranslate"><span class="pre">TRUE</span></code>, the node waits for the <a class="reference internal" href="#pc-wait-prim-timeout"><span class="std std-ref">pc.wait_prim_timeout</span></a> time period. Useful to bring up a non-primary component and make it primary with <a class="reference internal" href="#pc-bootstrap"><span class="std std-ref">pc.bootstrap</span></a>.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Default Value</td>
+<td><code class="docutils literal notranslate"><span class="pre">TRUE</span></code></td>
+</tr>
+<tr class="row-even"><td>Dynamic</td>
+<td>No</td>
+</tr>
+<tr class="row-odd"><td>Initial Version</td>
+<td>1.0</td>
+</tr>
+</tbody>
+</table>
+<p>The excerpt below is an example of how this Galera parameter might look in the configuration file:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;pc.wait_prim=FALSE&quot;</span>
+</pre></div>
+</div>
+<p class="section-heading rubric" id="pc-wait-prim-timeout"><code class="docutils literal notranslate"><span class="pre">pc.wait_prim_timeout</span></code></p>
+<p id="index-61">The period of time to wait for a primary component.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Default Value</td>
+<td><code class="docutils literal notranslate"><span class="pre">PT30S</span></code></td>
+</tr>
+<tr class="row-even"><td>Dynamic</td>
+<td>No</td>
+</tr>
+<tr class="row-odd"><td>Initial Version</td>
+<td>2.0</td>
+</tr>
+</tbody>
+</table>
+<p>The excerpt below is an example of how this Galera parameter might look in the configuration file:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;pc.wait_prim_timeout=PT30S&quot;</span>
+</pre></div>
+</div>
+<p class="section-heading rubric" id="pc-weight"><code class="docutils literal notranslate"><span class="pre">pc.weight</span></code></p>
+<p id="index-62">As of version 2.4. Node weight for quorum calculation.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Default Value</td>
+<td><code class="docutils literal notranslate"><span class="pre">1</span></code></td>
+</tr>
+<tr class="row-even"><td>Dynamic</td>
+<td>Yes</td>
+</tr>
+<tr class="row-odd"><td>Initial Version</td>
+<td>2.4</td>
+</tr>
+</tbody>
+</table>
+<p>The excerpt below is an example of how this Galera parameter might look in the configuration file:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;pc.weight=1&quot;</span>
+</pre></div>
+</div>
+<p class="section-heading rubric" id="pc-version"><code class="docutils literal notranslate"><span class="pre">pc.version</span></code></p>
+<p id="index-63">This status variable is used to check which pc protocol version is used.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Default Value</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>Dynamic</td>
+<td>No</td>
+</tr>
+<tr class="row-odd"><td>Initial Version</td>
+<td>1.0</td>
+</tr>
+</tbody>
+</table>
+<p>This variable is mostly used for troubleshooting purposes and should not be implemented in a production environment.</p>
+<p class="section-heading rubric" id="protonet-backend"><code class="docutils literal notranslate"><span class="pre">protonet.backend</span></code></p>
+<p id="index-64">Which transport backend to use. Currently only ASIO is supported.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Default Value</td>
+<td><code class="docutils literal notranslate"><span class="pre">asio</span></code></td>
+</tr>
+<tr class="row-even"><td>Dynamic</td>
+<td>No</td>
+</tr>
+<tr class="row-odd"><td>Initial Version</td>
+<td>1.0</td>
+</tr>
+</tbody>
+</table>
+<p>The excerpt below is an example of how this Galera parameter might look in the configuration file:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;protonet.backend=asio&quot;</span>
+</pre></div>
+</div>
+<p class="section-heading rubric" id="protonet-version"><code class="docutils literal notranslate"><span class="pre">protonet.version</span></code></p>
+<p id="index-65">This status variable is used to check which transport backend protocol version is used.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Default Value</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>Dynamic</td>
+<td>No</td>
+</tr>
+<tr class="row-odd"><td>Initial Version</td>
+<td>1.0</td>
+</tr>
+</tbody>
+</table>
+<p>This variable is mostly used for troubleshooting purposes and should not be implemented in a production environment.</p>
+<p class="section-heading rubric" id="repl-commit-order"><code class="docutils literal notranslate"><span class="pre">repl.commit_order</span></code></p>
+<p id="index-66">Whether to allow Out-Of-Order committing (improves parallel applying performance).</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Default Value</td>
+<td><code class="docutils literal notranslate"><span class="pre">3</span></code></td>
+</tr>
+<tr class="row-even"><td>Dynamic</td>
+<td>No</td>
+</tr>
+<tr class="row-odd"><td>Initial Version</td>
+<td>1.0</td>
+</tr>
+</tbody>
+</table>
+<p>Possible settings:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">0</span></code> or <code class="docutils literal notranslate"><span class="pre">BYPASS</span></code> All commit order monitoring is switched off (useful for measuring performance penalty).</li>
+<li><code class="docutils literal notranslate"><span class="pre">1</span></code> or <code class="docutils literal notranslate"><span class="pre">OOOC</span></code> Allows out of order committing for all transactions.</li>
+<li><code class="docutils literal notranslate"><span class="pre">2</span></code> or <code class="docutils literal notranslate"><span class="pre">LOCAL_OOOC</span></code>  Allows out of order committing only for local transactions.</li>
+<li><code class="docutils literal notranslate"><span class="pre">3</span></code> or <code class="docutils literal notranslate"><span class="pre">NO_OOOC</span></code> No out of order committing is allowed (strict total order committing)</li>
+</ul>
+<p>The excerpt below is an example of how this Galera parameter might look in the configuration file:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;repl.commit_order=2&quot;</span>
+</pre></div>
+</div>
+<p class="section-heading rubric" id="repl-causal-read-timeout"><code class="docutils literal notranslate"><span class="pre">repl.causal_read_timeout</span></code></p>
+<p id="index-67">Sometimes causal reads need to timeout.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Default Value</td>
+<td><code class="docutils literal notranslate"><span class="pre">PT30S</span></code></td>
+</tr>
+<tr class="row-even"><td>Dynamic</td>
+<td>No</td>
+</tr>
+<tr class="row-odd"><td>Initial Version</td>
+<td>1.0</td>
+</tr>
+</tbody>
+</table>
+<p>The excerpt below is an example of how this Galera parameter might look in the configuration file:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;repl.causal_read_timeout=PT30S&quot;</span>
+</pre></div>
+</div>
+<p class="section-heading rubric" id="repl-key-format"><code class="docutils literal notranslate"><span class="pre">repl.key_format</span></code></p>
+<p id="index-68">The hash size to use for key formats (in bytes). An <code class="docutils literal notranslate"><span class="pre">A</span></code> suffix annotates the version.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Default Value</td>
+<td><code class="docutils literal notranslate"><span class="pre">FLAT8</span></code></td>
+</tr>
+<tr class="row-even"><td>Dynamic</td>
+<td>No</td>
+</tr>
+<tr class="row-odd"><td>Initial Version</td>
+<td>3.0</td>
+</tr>
+</tbody>
+</table>
+<p>Possible settings:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">FLAT8</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">FLAT8A</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">FLAT16</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">FLAT16A</span></code></li>
+</ul>
+<p>The excerpt below is an example of how this Galera parameter might look in the configuration file:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;repl.key_format=FLAT8&quot;</span>
+</pre></div>
+</div>
+<p class="section-heading rubric" id="repl-max-ws-size"><code class="docutils literal notranslate"><span class="pre">repl.max_ws_size</span></code></p>
+<p id="index-69">The maximum size of a write-set in bytes. This is limited to 2G.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Default Value</td>
+<td><code class="docutils literal notranslate"><span class="pre">2147483647</span></code></td>
+</tr>
+<tr class="row-even"><td>Dynamic</td>
+<td>No</td>
+</tr>
+<tr class="row-odd"><td>Initial Version</td>
+<td>3.0</td>
+</tr>
+</tbody>
+</table>
+<p>The excerpt below is an example of how this Galera parameter might look in the configuration file:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;repl.max_ws_size=2147483647&quot;</span>
+</pre></div>
+</div>
+<p class="section-heading rubric" id="repl-proto-max"><code class="docutils literal notranslate"><span class="pre">repl.proto_max</span></code></p>
+<p id="index-70">The maximum protocol version in replication. Changes to this parameter will only take effect after a provider restart.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Default Value</td>
+<td><code class="docutils literal notranslate"><span class="pre">5</span></code></td>
+</tr>
+<tr class="row-even"><td>Dynamic</td>
+<td>No</td>
+</tr>
+<tr class="row-odd"><td>Initial Version</td>
+<td>2.0</td>
+</tr>
+</tbody>
+</table>
+<p>The excerpt below is an example of how this Galera parameter might look in the configuration file:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;repl.proto_max=5&quot;</span>
+</pre></div>
+</div>
+<p class="section-heading rubric" id="socket-recv-buf-size"><code class="docutils literal notranslate"><span class="pre">socket.recv_buf_size</span></code></p>
+<p id="index-71">The size of the receive buffer that used on the network sockets between nodes. Galera passes the value to the kernel via the <code class="docutils literal notranslate"><span class="pre">SO_RCVBUF</span></code> socket option. The value is either numeric value in bytes or <code class="docutils literal notranslate"><span class="pre">auto</span></code> which allows the kernel to autotune the receive buffer. The default was changed from <code class="docutils literal notranslate"><span class="pre">212992</span></code> to <code class="docutils literal notranslate"><span class="pre">auto</span></code> in 3.29.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Default Value</td>
+<td><code class="docutils literal notranslate"><span class="pre">auto</span></code></td>
+</tr>
+<tr class="row-even"><td>Dynamic</td>
+<td>No</td>
+</tr>
+<tr class="row-odd"><td>Initial Version</td>
+<td>3.17</td>
+</tr>
+</tbody>
+</table>
+<p>The excerpt below is an example of how this Galera parameter might look in the configuration file:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;socket.recv_buf_size=212992&quot;</span>
+</pre></div>
+</div>
+<p class="section-heading rubric" id="socket-send-buf-size"><code class="docutils literal notranslate"><span class="pre">socket.send_buf_size</span></code></p>
+<p id="index-72">The size of the send buffer that used on the network sockets between nodes. Galera passes the value to the kernel via the <code class="docutils literal notranslate"><span class="pre">SO_SNDBUF</span></code> socket option. The value is either numeric value in bytes or <code class="docutils literal notranslate"><span class="pre">auto</span></code> which allows the kernel to autotune the send buffer.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Default Value</td>
+<td><code class="docutils literal notranslate"><span class="pre">auto</span></code></td>
+</tr>
+<tr class="row-even"><td>Dynamic</td>
+<td>No</td>
+</tr>
+<tr class="row-odd"><td>Initial Version</td>
+<td>3.29</td>
+</tr>
+</tbody>
+</table>
+<p>The excerpt below is an example of how this Galera parameter might look in the configuration file:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;socket.send_buf_size=212992&quot;</span>
+</pre></div>
+</div>
+<p class="section-heading rubric" id="socket-ssl-ca"><code class="docutils literal notranslate"><span class="pre">socket.ssl_ca</span></code></p>
+<p id="index-73">Defines the path to the SSL Certificate Authority (CA) file.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Default Value</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>Dynamic</td>
+<td>No</td>
+</tr>
+<tr class="row-odd"><td>Initial Version</td>
+<td>1.0</td>
+</tr>
+</tbody>
+</table>
+<p>The node uses the CA file to verify the signature on the certificate.  You can use either an absolute path or one relative to the working directory.  The file must use PEM format.</p>
+<p>The excerpt below is an example of how this Galera parameter might look in the configuration file:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&#39;socket.ssl_ca=/path/to/ca-cert.pem&#39;</span>
+</pre></div>
+</div>
+<p>For more information on generating <abbr title="Secure Socket Layer">SSL</abbr> certificate files for your cluster, see <a class="reference internal" href="ssl-cert.html"><span class="doc">SSL Certificates</span></a>.</p>
+<p class="section-heading rubric" id="socket-ssl-cert"><code class="docutils literal notranslate"><span class="pre">socket.ssl_cert</span></code></p>
+<p id="index-74">Defines the path to the <abbr title="Secure Socket Layer">SSL</abbr> certificate.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Default Value</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>Dynamic</td>
+<td>No</td>
+</tr>
+<tr class="row-odd"><td>Initial Version</td>
+<td>1.0</td>
+</tr>
+</tbody>
+</table>
+<p>The node uses the certificate as a self-signed public key in encrypting replication traffic over <abbr title="Secure Socket Layer">SSL</abbr>.  You can use either an absolute path or one relative to the working directory.  The file must use PEM format.</p>
+<p>The excerpt below is an example of how this Galera parameter might look in the configuration file:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;socket.ssl_cert=/path/to/server-cert.pem&quot;</span>
+</pre></div>
+</div>
+<p>For more information on generating <abbr title="Secure Socket Layer">SSL</abbr> certificate files for your cluster, see <a class="reference internal" href="ssl-cert.html"><span class="doc">SSL Certificates</span></a>.</p>
+<p class="section-heading rubric" id="socket-checksum"><code class="docutils literal notranslate"><span class="pre">socket.checksum</span></code></p>
+<p id="index-75">Checksum to use on socket layer.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Default Value</td>
+<td><code class="docutils literal notranslate"><span class="pre">1</span></code> (before vs. 3), <code class="docutils literal notranslate"><span class="pre">2</span></code></td>
+</tr>
+<tr class="row-even"><td>Dynamic</td>
+<td>No</td>
+</tr>
+<tr class="row-odd"><td>Initial Version</td>
+<td>2.0</td>
+</tr>
+</tbody>
+</table>
+<p>Possible Values;</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">0</span></code> - disable checksum</li>
+<li><code class="docutils literal notranslate"><span class="pre">1</span></code> - CRC32</li>
+<li><code class="docutils literal notranslate"><span class="pre">2</span></code> - CRC-32C (optimized and potentially HW-accelerated on Intel CPUs)</li>
+</ul>
+<p>The excerpt below is an example of how this Galera parameter might look in the configuration file:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;socket.checksum=2&quot;</span>
+</pre></div>
+</div>
+<p class="section-heading rubric" id="socket-ssl-cipher"><code class="docutils literal notranslate"><span class="pre">socket.ssl_cipher</span></code></p>
+<p id="index-76">Symmetric cipher to use. By default SSL library implementation default cipher is used.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Default Value</td>
+<td><code class="docutils literal notranslate"><span class="pre">AES128-SHA</span></code> (before vs. 3.24), <code class="docutils literal notranslate"><span class="pre">system</span> <span class="pre">default</span></code></td>
+</tr>
+<tr class="row-even"><td>Dynamic</td>
+<td>No</td>
+</tr>
+<tr class="row-odd"><td>Initial Version</td>
+<td>1.0</td>
+</tr>
+</tbody>
+</table>
+<p>The excerpt below is an example of how this Galera parameter might look in the configuration file:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;socket.ssl_cipher=AES128-SHA256&quot;</span>
+</pre></div>
+</div>
+<p class="section-heading rubric" id="socket-ssl-compression"><code class="docutils literal notranslate"><span class="pre">socket.ssl_compression</span></code></p>
+<p id="index-77">Whether to enable compression on SSL connections.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Default Value</td>
+<td><code class="docutils literal notranslate"><span class="pre">YES</span></code></td>
+</tr>
+<tr class="row-even"><td>Dynamic</td>
+<td>No</td>
+</tr>
+<tr class="row-odd"><td>Initial Version</td>
+<td>1.0</td>
+</tr>
+</tbody>
+</table>
+<p>The excerpt below is an example of how this Galera parameter might look in the configuration file:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;socket.ssl_compression=YES&quot;</span>
+</pre></div>
+</div>
+<p class="section-heading rubric" id="socket-ssl-key"><code class="docutils literal notranslate"><span class="pre">socket.ssl_key</span></code></p>
+<p id="index-78">Defines the path to the <abbr title="Secure Socket Layer">SSL</abbr> certificate key.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Default Value</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>Dynamic</td>
+<td>No</td>
+</tr>
+<tr class="row-odd"><td>Initial Version</td>
+<td>1.0</td>
+</tr>
+</tbody>
+</table>
+<p>The node uses the certificate key a self-signed private key in encrypting replication traffic over  <abbr title="Secure Socket Layer">SSL</abbr>.  You can use either an absolute path or one relative to the working directory.  The file must use PEM format.</p>
+<p>The excerpt below is an example of how this Galera parameter might look in the configuration file:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;socket.ssl_key=/path/to/server-key.pem&quot;</span>
+</pre></div>
+</div>
+<p>For more information on generating <abbr title="Secure Socket Layer">SSL</abbr> certificate files for your cluster, see <a class="reference internal" href="ssl-cert.html"><span class="doc">SSL Certificates</span></a>.</p>
+<p class="section-heading rubric" id="socket-ssl-password-file"><code class="docutils literal notranslate"><span class="pre">socket.ssl_password_file</span></code></p>
+<p id="index-79">Defines a password file for use in <abbr title="Secure Socket Layer">SSL</abbr> connections.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Default Value</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>Dynamic</td>
+<td>No</td>
+</tr>
+<tr class="row-odd"><td>Initial Version</td>
+<td>1.0</td>
+</tr>
+</tbody>
+</table>
+<p>In the event that you have your SSL key file encrypted, the node uses the SSL password file to decrypt the key file.</p>
+<p>The excerpt below is an example of how this Galera parameter might look in the configuration file:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;socket.ssl_password_file=/path/to/password-file&quot;</span>
+</pre></div>
+</div>
+<div class="section" id="setting-galera-parameters-in-mysql">
+<span id="id2"></span><h2>Setting Galera Parameters in MySQL<a class="headerlink" href="#setting-galera-parameters-in-mysql" title="Permalink to this headline">¶</a></h2>
+<span class="target" id="index-80"></span><p id="index-81">You can set <em>Galera Cluster</em> parameters in the <code class="docutils literal notranslate"><span class="pre">my.cnf</span></code> configuration file as follows:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;gcs.fc_limit=256;gcs.fc_factor=0.9&quot;</span>
+</pre></div>
+</div>
+<p>This is useful in master-slave setups.</p>
+<p>You can set Galera Cluster parameters through a MySQL client with the following query:</p>
+<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="kt">SET</span> <span class="n">GLOBAL</span> <span class="n">wsrep_provider_options</span><span class="o">=</span><span class="s2">&quot;evs.send_window=16&quot;</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>This query  only changes the <a class="reference internal" href="#evs-send-window"><span class="std std-ref">evs.send_window</span></a> value.</p>
+<p>To check which parameters are used in Galera Cluster, enter the following query:</p>
+<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="k">SHOW</span> <span class="n">VARIABLES</span> <span class="k">LIKE</span> <span class="s1">&#39;wsrep_provider_options&#39;</span><span class="p">;</span>
+</pre></div>
+</div>
+<div class="bottom-links docutils container">
+<p>Related Documents</p>
+<ul class="simple">
+<li><a class="reference internal" href="auto-eviction.html"><span class="doc">Auto-Eviction</span></a></li>
+<li><a class="reference internal" href="ssl-cert.html"><span class="doc">SSL Certificates</span></a></li>
+</ul>
+</div>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/logo.png" alt="Logo"/>
+            </a></p>
+<h1 class="logo"><a href="../index.html">Galera Cluster</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">The Codership Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="overview.html">Overview of Galera Cluster</a></li>
+<li class="toctree-l2"><a class="reference internal" href="technical-description.html">Technical Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html">Installing Galera Cluster</a></li>
+<li class="toctree-l2"><a class="reference internal" href="administration.html">Galera Cluster Administration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deployment.html">Deployment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="monitor.html">Cluster Monitoring</a></li>
+<li class="toctree-l2"><a class="reference internal" href="security.html">Security</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="reference.html">Reference</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="mysql-wsrep-options.html">MySQL wsrep Options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="wsrep-functions.html">Galera Functions</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Galera Parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="galera-status-variables.html">Galera Status Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="system-tables.html">Galera System Tables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="xtrabackup-options.html">XtraBackup Parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="glb-parameters.html">Galera Load Balancer Parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="versioning-information.html">Versioning Information</a></li>
+<li class="toctree-l3"><a class="reference internal" href="legal-notice.html">Legal Notice</a></li>
+<li class="toctree-l3"><a class="reference internal" href="glossary.html">Glossary</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../kb/index.html">The Codership Knowledge Base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../training/index.html">Codership Training</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../whats-new.html">What’s New</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../editors/index.html">Codership Writers &amp; Editors</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">The Codership Documentation</a><ul>
+  <li><a href="reference.html">Reference</a><ul>
+      <li>Previous: <a href="wsrep-functions.html" title="previous chapter">Galera Functions</a></li>
+      <li>Next: <a href="galera-status-variables.html" title="next chapter">Galera Status Variables</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+	<div class="navbar">
+	<nav id="site-navigation" class="navigation main-navigation" role="navigation">
+	<div class="nav-bar-container">
+
+	<div id="menu-nav-bar" class="nav-menu">
+		<ul class="nav-link">
+			<li> </li>
+
+		</ul>
+
+	</div>
+	</nav>
+
+	<footer id="colophon" class="site-footer" role="contentinfo">
+	<div class="top">	<div class="powered-by"><p>Powered by Galera:</p>
+	<p><a href="https://mariadb.com/kb/en/galera/"><img class="alignleft size-full wp-image-237" alt="MariaDB" src="https://galeracluster.com/wp-content/uploads/2013/10/logo-mariadb.png" width="166" height="49" /></a></p>
+		</div></div>
+	<div class="footer-menu">
+	<div class="menu-main-menu-container">
+	<ul id="menu-main-menu-1" class="nav-menu">
+	<li class="link-home menu-item menu-item-type-post_type menu-item-object-page menu-item-359"><a href="https://galeracluster.com/">Home</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-35"><a href="https://galeracluster.com/products/">Products</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="https://galeracluster.com/downloads/">Downloads</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-12 current_page_item current-menu-ancestor current-menu-parent current_page_parent current_page_ancestor menu-item-has-children menu-item-33"><a href="https://galeracluster.com/support/">Support</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="https://galeracluster.com/community/">Community</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-31"><a href="https://galeracluster.com/company/">Company</a></li>
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-297"><a href="https://galeracluster.com/category/blog/">Blog</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-38"><a href="https://galeracluster.com/contact-us/">Contact us</a></li>
+	</ul></div>			</div><!-- .footer-menu -->
+
+
+	<div class="footer-bar">
+	<p class="copyright">2014 Codership Ltd.</p>
+	</div>
+	<div class="footnote">
+	<h2>Your data is invaluable. We're here to secure it. All of it.</h2>
+	</div>
+	</footer><!-- #colophon -->
+
+
+
+
+  </body>
+</html>

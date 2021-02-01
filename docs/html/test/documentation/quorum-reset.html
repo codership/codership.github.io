@@ -1,0 +1,405 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><meta content="Resetting a Galera Cluster Quorum" name="title" />
+<meta content="&quot;Provides an explanation of how determine if a cluster needs to be restarted and how to do it.&quot;" name="description" />
+<meta content="en-US" name="language" />
+<meta content="galera cluster, quorum, split-brain, recovery, primary component, restarting cluster" name="keywords" />
+<meta content="Codership Oy, 2014 - 2020. All Rights Reserved." name="copyright" />
+
+    <title>Resetting the Quorum &#8212; Galera Cluster Documentation</title>
+    <link rel="stylesheet" href="../_static/reset-style.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Managing Flow Control" href="managing-fc.html" />
+    <link rel="prev" title="Recovering Primary Component" href="pc-recovery.html" />
+
+
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<link rel="stylesheet" href="/library/_static/basic-style.css">
+<link rel="stylesheet" href="/library/_static/header.css">
+<link rel="stylesheet" href="/library/_static/footer.css">
+<link rel="stylesheet" href="/library/_static/codership.css">
+<link rel="stylesheet" media="screen and (max-width: 500px)" href="/library/_static/mobile.css"/>
+<link rel="stylesheet" media="screen and (min-width:501px) and (max-width:1024px)" href="/library/_static/tablet.css"/>
+<link rel="stylesheet" media="screen and (prefers-color-scheme: dark)" href="/library/_static/dark.css"/>
+
+
+<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Feed" href="https://galeracluster.com/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Comments Feed" href="https://galeracluster.com/comments/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Support Comments Feed" href="https://galeracluster.com/support/feed/" />
+
+<script type='text/javascript' src='https://galeracluster.com/wp-includes/js/comment-reply.min.js?ver=3.8.3'></script>
+
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://galeracluster.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://galeracluster.com/wp-includes/wlwmanifest.xml" />
+<link rel='prev' title='Downloads' href='https://galeracluster.com/downloads/' />
+<link rel='next' title='Community' href='https://galeracluster.com/community/' />
+<meta name="generator" content="WordPress 3.8.3" />
+
+<link rel='shortlink' href='https://galeracluster.com/?p=12' />
+
+<style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>
+<style type="text/css" id="twentythirteen-header-css">
+			.site-title,
+			.site-description {
+				position: absolute;
+				clip: rect(1px 1px 1px 1px); /* IE7 */
+				clip: rect(1px, 1px, 1px, 1px);
+			}
+				.site-header .home-link {
+				min-height: 0;
+			}
+</style>
+
+<script type="text/javascript">
+
+		  var _gaq = _gaq || [];
+		  _gaq.push(['_setAccount', 'UA-35163478-6']);
+		  _gaq.push(['_trackPageview']);
+
+		  (function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'https://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		  })();
+
+</script>
+
+  </head><body>
+	<div id="fb-root"></div>
+	<script>(function(d, s, id) {
+		  var js, fjs = d.getElementsByTagName(s)[0];
+		  if (d.getElementById(id)) return;
+		  js = d.createElement(s); js.id = id;
+		  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+		  fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));
+	</script>
+
+	<div id="page" class="hfeed site">
+
+	<header id="masthead" class="site-header" role="banner">
+
+	<div class="top">
+	<a class="home-link" href="https://galeracluster.com/" title="Galera Cluster for MySQL" rel="home">
+	<h1 class="site-title">Galera Cluster for MySQL</h1>
+	<h2 class="site-description">The world&#039;s most advanced open source database cluster</h2>
+	</a>
+	</div>
+
+
+	<div id="navbar" class="navbar">
+	<nav id="site-navigation" class="navigation main-navigation" role="navigation">
+	<div class="menu-main-menu-container">
+
+	<ul id="menu-main-menu" class="nav-menu">
+	<li id="menu-item-359" class="link-home menu-item menu-item-type-post_type menu-item-object-page menu-item-359"><a href="https://galeracluster.com/">Home</a></li>
+	<li id="menu-item-35" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-35"><a href="https://galeracluster.com/products/">Products</a></li>
+	<li id="menu-item-34" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="https://galeracluster.com/downloads/">Downloads</a></li>
+	<li id="menu-item-33" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-12 current_page_item current-menu-ancestor current-menu-parent current_page_parent current_page_ancestor menu-item-has-children menu-item-33"><a href="https://galeracluster.com/support/">Support</a></li>
+	<li id="menu-item-32" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="https://galeracluster.com/community/">Community</a></li>
+	<li id="menu-item-31" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-31"><a href="https://galeracluster.com/company/">Company</a></li>
+	<li id="menu-item-297" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-297"><a href="https://galeracluster.com/category/blog/">Blog</a></li>
+	<li id="menu-item-38" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-38"><a href="https://galeracluster.com/contact-us/">Contact us</a></li>
+	</ul>
+	</div>
+
+
+	</nav><!-- #site-navigation -->
+
+	</div><!-- #navbar -->
+	</header><!-- #masthead -->
+
+
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="left-margin docutils container">
+<div class="left-margin-top docutils container">
+<a class="reference internal" href="../index.html"><span class="doc">The Library</span></a></div>
+<div class="left-margin-content docutils container">
+<ul class="here simple">
+<li><a class="reference internal" href="index.html"><span class="doc">Documentation</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../kb/index.html"><span class="doc">Knowledge Base</span></a></li>
+<li><a class="reference internal" href="../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="sub-links simple">
+<li><a class="reference internal" href="../training/tutorials/index.html"><span class="doc">Tutorial Articles</span></a></li>
+<li><a class="reference internal" href="../training/videos/index.html"><span class="doc">Training Videos</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a></li>
+</ul>
+<p>Related Documents</p>
+<ul class="simple">
+<li><a class="reference internal" href="galera-status-variables.html#wsrep-cluster-status"><span class="std std-ref">wsrep_cluster_status</span></a></li>
+<li><a class="reference internal" href="galera-status-variables.html#wsrep-last-committed"><span class="std std-ref">wsrep_last_committed</span></a></li>
+<li><a class="reference internal" href="galera-parameters.html#pc-bootstrap"><span class="std std-ref">pc.bootstrap</span></a></li>
+<li><a class="reference internal" href="mysql-wsrep-options.html#wsrep-provider-options"><span class="std std-ref">wsrep_provider_options</span></a></li>
+</ul>
+</div>
+</div>
+<div class="top-links docutils container">
+<ul class="simple">
+<li><a class="reference external" href="https://galeracluster.com">Home</a></li>
+</ul>
+<ul class="here simple">
+<li><a class="reference internal" href="index.html"><span class="doc">Docs</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../kb/index.html"><span class="doc">KB</span></a></li>
+</ul>
+<ul class="nav-wider simple">
+<li><a class="reference internal" href="../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a></li>
+</ul>
+</div>
+<div class="library-document section" id="resetting-the-quorum">
+<span id="quorum-reset"></span><h1>Resetting the Quorum<a class="headerlink" href="#resetting-the-quorum" title="Permalink to this headline">¶</a></h1>
+<span class="target" id="index-0"></span><span class="target" id="index-1"></span><span class="target" id="index-2"></span><span class="target" id="index-3"></span><p id="index-4">Although it’s unlikely, you may find your nodes no longer consider themselves part of the <a class="reference internal" href="glossary.html#term-primary-component"><span class="xref std std-term">Primary Component</span></a>.  There might have been a network failure; perhaps more than half of the cluster failed; or there is a split-brain situation.  In these cases, the node come to suspect that there is another Primary Component, to which they are no longer connected.</p>
+<p>This loss of integrity can be a problem. When it occurs, the nodes will start to return an <code class="docutils literal notranslate"><span class="pre">Unknown</span> <span class="pre">command</span></code> error to all of queries they’re given to execute: they simply stop performing their duties for fear of making the situation worse by becoming too out-of-sync with their true cluster.</p>
+<p>You can see if this is happening by executing the <code class="docutils literal notranslate"><span class="pre">SHOW</span> <span class="pre">STATUS</span></code> statement and checking the <a class="reference internal" href="galera-status-variables.html#wsrep-cluster-status"><span class="std std-ref">wsrep_cluster_status</span></a> status variable.  Specifically, this is done by executing the following SQL statement on each node:</p>
+<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="k">SHOW</span> <span class="n">GLOBAL</span> <span class="n">STATUS</span> <span class="k">LIKE</span> <span class="s1">&#39;wsrep_cluster_status&#39;</span><span class="p">;</span>
+
+<span class="o">+----------------------+---------+</span>
+<span class="o">|</span> <span class="n">Variable_name</span>        <span class="o">|</span> <span class="n">Value</span>   <span class="o">|</span>
+<span class="o">+----------------------+---------+</span>
+<span class="o">|</span> <span class="n">wsrep_cluster_status</span> <span class="o">|</span> <span class="k">Primary</span> <span class="o">|</span>
+<span class="o">+----------------------+---------+</span>
+</pre></div>
+</div>
+<p>The return value <code class="docutils literal notranslate"><span class="pre">Primary</span></code> indicates that the node on which it was executed is part of the Primary Component.  When the query returns any other value it indicates that the node is part of a non-operational component.  If none of the nodes return the value <code class="docutils literal notranslate"><span class="pre">Primary</span></code>, you need to reset the quorum.</p>
+<p>Situations in which none of the nodes show they are part of the Primary Component are very rare.  If you discover one or more nodes wtih a value <code class="docutils literal notranslate"><span class="pre">Primary</span></code>, it may indicate a problem with network connectivity, rather than a need to reset the quorum.  Investigate the connection possibility.  Once the nodes regain network connectivity they automatically resynchronize with the Primary Component.</p>
+<p class="section-heading rubric" id="finding-most-advanced-node">Finding the Most Advanced Node</p>
+<p>Before you can reset the quorum, you need to identify the most advanced node in the cluster.  That is, you must find the node whose local database committed the last transaction.  Regardless of the method you use in resetting the quorum, this node should serve as the starting point for the new <a class="reference internal" href="glossary.html#term-primary-component"><span class="xref std std-term">Primary Component</span></a>.</p>
+<p>Identifying the most advanced node requires that you find the node with the highest sequence number (i.e., seqno).  You can determine this by checking the <a class="reference internal" href="galera-status-variables.html#wsrep-last-committed"><span class="std std-ref">wsrep_last_committed</span></a> status variable. From the database client on each node, run the following query:</p>
+<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="k">SHOW</span> <span class="n">STATUS</span> <span class="k">LIKE</span> <span class="s1">&#39;wsrep_last_committed&#39;</span><span class="p">;</span>
+
+<span class="o">+----------------------+--------+</span>
+<span class="o">|</span> <span class="n">Variable_name</span>        <span class="o">|</span> <span class="n">Value</span>  <span class="o">|</span>
+<span class="o">+----------------------+--------+</span>
+<span class="o">|</span> <span class="n">wsrep_last_committed</span> <span class="o">|</span> <span class="mi">409745</span> <span class="o">|</span>
+<span class="o">+----------------------+--------+</span>
+</pre></div>
+</div>
+<p>The return value is the sequence number for the last transaction the node committed.  If the <code class="docutils literal notranslate"><span class="pre">mysqld</span></code> daemon is down, you can restart <code class="docutils literal notranslate"><span class="pre">mysqld</span></code> without starting Galera.  If you don’t want to restart the databases, you may be able to ascertain the sequence number from the <code class="docutils literal notranslate"><span class="pre">grastate.dat</span></code> file, located in the data directory.</p>
+<p>Once you’ve found the sequence numbers of each node, the one with the highest value is the most advanced one in the cluster.  Use that node as the starting point when bootstrapping the new Primary Component. This is explained in the next section here.</p>
+<p class="section-heading rubric" id="resetting-quorum">Resetting the Quorum</p>
+<p>When you reset the quorum, what you’re doing is bootstrapping the <a class="reference internal" href="glossary.html#term-primary-component"><span class="xref std std-term">Primary Component</span></a> on the most advanced node you have available.  This node then functions as the new Primary Component, bringing the rest of the cluster into line with its state.</p>
+<p>There are two methods available to you in this process: automatic and manual. The recommended one for a quorum reset is the automatic method.  Unlike the manual method, automatic bootstrapping preserve the write-set cache, or GCache, on each node.  What this means is that when the new Primary Component starts, some or all of the joining nodes can be provisioned quickly using the <a class="reference internal" href="glossary.html#term-incremental-state-transfer"><span class="xref std std-term">Incremental State Transfer</span></a> (IST) method, rather than the slower <a class="reference internal" href="glossary.html#term-state-snapshot-transfer"><span class="xref std std-term">State Snapshot Transfer</span></a> (SST) method.</p>
+<p class="sub-heading rubric" id="automatic-bootstrap">Automatic Bootstrap</p>
+<p>Resetting the quorum will bootstrap the <a class="reference internal" href="glossary.html#term-primary-component"><span class="xref std std-term">Primary Component</span></a> onto the most advanced node.  With the automatic method, this is done by dynamically enabling <a class="reference internal" href="galera-parameters.html#pc-bootstrap"><span class="std std-ref">pc.bootstrap</span></a> through the <a class="reference internal" href="mysql-wsrep-options.html#wsrep-provider-options"><span class="std std-ref">wsrep_provider_options</span></a> through the database client—it’s not done through the configuration file.  Once you set this option, it will make the node a new Primary Component.</p>
+<p>To perform an automatic bootstrap, run the following command using the <code class="docutils literal notranslate"><span class="pre">mysql</span></code> client of the most advanced node:</p>
+<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="kt">SET</span> <span class="n">GLOBAL</span> <span class="n">wsrep_provider_options</span><span class="o">=</span><span class="s1">&#39;pc.bootstrap=YES&#39;</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>The node now operates as the starting node in a new Primary Component.  Nodes in nonoperational components that have network connectivity attempt to initiate incremental state transfers if possible, state snapshot transfers if not, with this node, bringing their own databases up-to-date.</p>
+<p class="sub-heading rubric" id="manual-bootstrap">Manual Bootstrap</p>
+<p>Resetting the quorum bootstraps the <a class="reference internal" href="glossary.html#term-primary-component"><span class="xref std std-term">Primary Component</span></a> onto the most advanced node.  With the manual method, this is done by shutting down the cluster—shutting down <code class="docutils literal notranslate"><span class="pre">mysqld</span></code> on all of the nodes—and then starting <code class="docutils literal notranslate"><span class="pre">mysqld</span></code> with Galera on each node, beginning with the most advanced one.</p>
+<p>To bootstrap manually a cluster, first determine the most advanced node by executing the following from the command-line on each node:</p>
+<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="n">mysql</span> <span class="o">-</span><span class="n">u</span> <span class="n">root</span> <span class="o">-</span><span class="n">p</span> <span class="o">-</span><span class="n">e</span> <span class="s2">&quot;SHOW STATUS LIKE &#39;wsrep_last_committed&#39;&quot;</span>
+</pre></div>
+</div>
+<p>Once you’ve determined which node has the highest sequence number, you can begin shutting down the cluster.  Just shut down <code class="docutils literal notranslate"><span class="pre">mysqld</span></code> on all of the nodes in the cluster—leaving the most advanced node until last.  For servers that use <code class="docutils literal notranslate"><span class="pre">init</span></code>, enter the following from the command-line:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">service mysql stop</span>
+</pre></div>
+</div>
+<p>For servers that use <code class="docutils literal notranslate"><span class="pre">systemd</span></code>, execute instead this from the command-line:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">systemctl stop mysql</span>
+</pre></div>
+</div>
+<p>You’re now ready to start the cluster again.  Start the most advanced node with the <code class="docutils literal notranslate"><span class="pre">--wsrep-new-cluster</span></code> option—not the other nodes.  For servers that use <code class="docutils literal notranslate"><span class="pre">init</span></code>, run the following command:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">service mysql start --wsrep-new-cluster</span>
+</pre></div>
+</div>
+<p>For servers that use <code class="docutils literal notranslate"><span class="pre">systemd</span></code> and Galera Cluster 5.5 or 5.6, enter instead the following from the command-line:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">systemctl start mysqld --wsrep-new-cluster</span>
+</pre></div>
+</div>
+<p>For MySQL servers that use <code class="docutils literal notranslate"><span class="pre">systemd</span></code> and at least version 5.7 of Galera Cluster, you can execute the following script from the command-line only on the first node:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">mysqld_bootstrap</span>
+</pre></div>
+</div>
+<p>For MariaDB servers that use <code class="docutils literal notranslate"><span class="pre">systemd</span></code>, you might try to execute the following script from the command-line—again, only on the first node:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">galera_new_cluster</span>
+</pre></div>
+</div>
+<p>With that first node running and acting as Primary Component, you’re not ready to start all of the other nodes in the cluster.  For servers that use <code class="docutils literal notranslate"><span class="pre">init</span></code>, run the following command:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">service mysql start</span>
+</pre></div>
+</div>
+<p>For servers that use <code class="docutils literal notranslate"><span class="pre">systemd</span></code>, instead run this command:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">systemctl start mysqld</span>
+</pre></div>
+</div>
+<p>Written into all of these scripts is the <code class="docutils literal notranslate"><span class="pre">--wsrep-new-cluster</span></code> option, but it’s done with a certain finesse.  Whichever method or script you use, when the first node starts with the <code class="docutils literal notranslate"><span class="pre">--wsrep-new-cluster</span></code> option, it initializes a new cluster using the data from the most advanced state available from the previous cluster.  As the other nodes start, they connect to this node and request state snapshot transfers, to bring their own databases up-to-date.  In a short amount of time, they all should become synchronized and running smoothly.</p>
+<div class="bottom-links docutils container">
+<p>Related Documents</p>
+<ul class="simple">
+<li><a class="reference internal" href="galera-status-variables.html#wsrep-cluster-status"><span class="std std-ref">wsrep_cluster_status</span></a></li>
+<li><a class="reference internal" href="galera-status-variables.html#wsrep-last-committed"><span class="std std-ref">wsrep_last_committed</span></a></li>
+<li><a class="reference internal" href="galera-parameters.html#pc-bootstrap"><span class="std std-ref">pc.bootstrap</span></a></li>
+<li><a class="reference internal" href="mysql-wsrep-options.html#wsrep-provider-options"><span class="std std-ref">wsrep_provider_options</span></a></li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/logo.png" alt="Logo"/>
+            </a></p>
+<h1 class="logo"><a href="../index.html">Galera Cluster</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">The Codership Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="overview.html">Overview of Galera Cluster</a></li>
+<li class="toctree-l2"><a class="reference internal" href="technical-description.html">Technical Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html">Installing Galera Cluster</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="administration.html">Galera Cluster Administration</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="node-provisioning.html">Node Provisioning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sst.html">State Snapshot Transfers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="scriptable-sst.html">Scriptable State Snapshot Transfers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="system-tables.html">Galera System Tables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="schema-upgrades.html">Schema Upgrades</a></li>
+<li class="toctree-l3"><a class="reference internal" href="upgrading.html">Upgrading Galera Cluster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pc-recovery.html">Recovering Primary Component</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Resetting the Quorum</a></li>
+<li class="toctree-l3"><a class="reference internal" href="managing-fc.html">Managing Flow Control</a></li>
+<li class="toctree-l3"><a class="reference internal" href="auto-eviction.html">Auto-Eviction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="using-sr.html">Using Streaming Replication</a></li>
+<li class="toctree-l3"><a class="reference internal" href="arbitrator.html">Galera Arbitrator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="backup-cluster.html">Backing Up Cluster Data</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="deployment.html">Deployment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="monitor.html">Cluster Monitoring</a></li>
+<li class="toctree-l2"><a class="reference internal" href="security.html">Security</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference.html">Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../kb/index.html">The Codership Knowledge Base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../training/index.html">Codership Training</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../whats-new.html">What’s New</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../editors/index.html">Codership Writers &amp; Editors</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">The Codership Documentation</a><ul>
+  <li><a href="administration.html">Galera Cluster Administration</a><ul>
+      <li>Previous: <a href="pc-recovery.html" title="previous chapter">Recovering Primary Component</a></li>
+      <li>Next: <a href="managing-fc.html" title="next chapter">Managing Flow Control</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+	<div class="navbar">
+	<nav id="site-navigation" class="navigation main-navigation" role="navigation">
+	<div class="nav-bar-container">
+
+	<div id="menu-nav-bar" class="nav-menu">
+		<ul class="nav-link">
+			<li> </li>
+
+		</ul>
+
+	</div>
+	</nav>
+
+	<footer id="colophon" class="site-footer" role="contentinfo">
+	<div class="top">	<div class="powered-by"><p>Powered by Galera:</p>
+	<p><a href="https://mariadb.com/kb/en/galera/"><img class="alignleft size-full wp-image-237" alt="MariaDB" src="https://galeracluster.com/wp-content/uploads/2013/10/logo-mariadb.png" width="166" height="49" /></a></p>
+		</div></div>
+	<div class="footer-menu">
+	<div class="menu-main-menu-container">
+	<ul id="menu-main-menu-1" class="nav-menu">
+	<li class="link-home menu-item menu-item-type-post_type menu-item-object-page menu-item-359"><a href="https://galeracluster.com/">Home</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-35"><a href="https://galeracluster.com/products/">Products</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="https://galeracluster.com/downloads/">Downloads</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-12 current_page_item current-menu-ancestor current-menu-parent current_page_parent current_page_ancestor menu-item-has-children menu-item-33"><a href="https://galeracluster.com/support/">Support</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="https://galeracluster.com/community/">Community</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-31"><a href="https://galeracluster.com/company/">Company</a></li>
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-297"><a href="https://galeracluster.com/category/blog/">Blog</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-38"><a href="https://galeracluster.com/contact-us/">Contact us</a></li>
+	</ul></div>			</div><!-- .footer-menu -->
+
+
+	<div class="footer-bar">
+	<p class="copyright">2014 Codership Ltd.</p>
+	</div>
+	<div class="footnote">
+	<h2>Your data is invaluable. We're here to secure it. All of it.</h2>
+	</div>
+	</footer><!-- #colophon -->
+
+
+
+
+  </body>
+</html>

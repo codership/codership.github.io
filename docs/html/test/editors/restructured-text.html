@@ -1,0 +1,473 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><meta content="Sphinx &amp; Restructured Text" name="title" />
+<meta content="Instructions and examples on using Restructured Text mark-up." name="description" />
+<meta content="en-US" name="language" />
+<meta content="sphinx, restructured text, restructuredtext" name="keywords" />
+<meta content="Codership Oy, 2014 - 2019. All Rights Reserved." name="copyright" />
+
+    <title>Sphinx &amp; reStructuredText &#8212; Galera Cluster Documentation</title>
+    <link rel="stylesheet" href="../_static/reset-style.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="The Codership Style Guide" href="style-guide.html" />
+    <link rel="prev" title="The Codership Library Mission &amp; Goals" href="mission-goals.html" />
+
+
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<link rel="stylesheet" href="/library/_static/basic-style.css">
+<link rel="stylesheet" href="/library/_static/header.css">
+<link rel="stylesheet" href="/library/_static/footer.css">
+<link rel="stylesheet" href="/library/_static/codership.css">
+<link rel="stylesheet" media="screen and (max-width: 500px)" href="/library/_static/mobile.css"/>
+<link rel="stylesheet" media="screen and (min-width:501px) and (max-width:1024px)" href="/library/_static/tablet.css"/>
+<link rel="stylesheet" media="screen and (prefers-color-scheme: dark)" href="/library/_static/dark.css"/>
+
+
+<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Feed" href="https://galeracluster.com/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Comments Feed" href="https://galeracluster.com/comments/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Support Comments Feed" href="https://galeracluster.com/support/feed/" />
+
+<script type='text/javascript' src='https://galeracluster.com/wp-includes/js/comment-reply.min.js?ver=3.8.3'></script>
+
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://galeracluster.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://galeracluster.com/wp-includes/wlwmanifest.xml" />
+<link rel='prev' title='Downloads' href='https://galeracluster.com/downloads/' />
+<link rel='next' title='Community' href='https://galeracluster.com/community/' />
+<meta name="generator" content="WordPress 3.8.3" />
+
+<link rel='shortlink' href='https://galeracluster.com/?p=12' />
+
+<style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>
+<style type="text/css" id="twentythirteen-header-css">
+			.site-title,
+			.site-description {
+				position: absolute;
+				clip: rect(1px 1px 1px 1px); /* IE7 */
+				clip: rect(1px, 1px, 1px, 1px);
+			}
+				.site-header .home-link {
+				min-height: 0;
+			}
+</style>
+
+<script type="text/javascript">
+
+		  var _gaq = _gaq || [];
+		  _gaq.push(['_setAccount', 'UA-35163478-6']);
+		  _gaq.push(['_trackPageview']);
+
+		  (function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'https://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		  })();
+
+</script>
+
+  </head><body>
+	<div id="fb-root"></div>
+	<script>(function(d, s, id) {
+		  var js, fjs = d.getElementsByTagName(s)[0];
+		  if (d.getElementById(id)) return;
+		  js = d.createElement(s); js.id = id;
+		  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+		  fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));
+	</script>
+
+	<div id="page" class="hfeed site">
+
+	<header id="masthead" class="site-header" role="banner">
+
+	<div class="top">
+	<a class="home-link" href="https://galeracluster.com/" title="Galera Cluster for MySQL" rel="home">
+	<h1 class="site-title">Galera Cluster for MySQL</h1>
+	<h2 class="site-description">The world&#039;s most advanced open source database cluster</h2>
+	</a>
+	</div>
+
+
+	<div id="navbar" class="navbar">
+	<nav id="site-navigation" class="navigation main-navigation" role="navigation">
+	<div class="menu-main-menu-container">
+
+	<ul id="menu-main-menu" class="nav-menu">
+	<li id="menu-item-359" class="link-home menu-item menu-item-type-post_type menu-item-object-page menu-item-359"><a href="https://galeracluster.com/">Home</a></li>
+	<li id="menu-item-35" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-35"><a href="https://galeracluster.com/products/">Products</a></li>
+	<li id="menu-item-34" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="https://galeracluster.com/downloads/">Downloads</a></li>
+	<li id="menu-item-33" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-12 current_page_item current-menu-ancestor current-menu-parent current_page_parent current_page_ancestor menu-item-has-children menu-item-33"><a href="https://galeracluster.com/support/">Support</a></li>
+	<li id="menu-item-32" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="https://galeracluster.com/community/">Community</a></li>
+	<li id="menu-item-31" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-31"><a href="https://galeracluster.com/company/">Company</a></li>
+	<li id="menu-item-297" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-297"><a href="https://galeracluster.com/category/blog/">Blog</a></li>
+	<li id="menu-item-38" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-38"><a href="https://galeracluster.com/contact-us/">Contact us</a></li>
+	</ul>
+	</div>
+
+
+	</nav><!-- #site-navigation -->
+
+	</div><!-- #navbar -->
+	</header><!-- #masthead -->
+
+
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="left-margin docutils container">
+<div class="left-margin-top docutils container">
+<a class="reference internal" href="../index.html"><span class="doc">The Library</span></a></div>
+<div class="left-margin-content docutils container">
+<ul class="simple">
+<li><a class="reference internal" href="../documentation/index.html"><span class="doc">Documentation</span></a></li>
+<li><a class="reference internal" href="../kb/index.html"><span class="doc">Knowledge Base</span></a></li>
+<li><a class="reference internal" href="../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="sub-links simple">
+<li><a class="reference internal" href="../training/tutorials/index.html"><span class="doc">Tutorial Articles</span></a></li>
+<li><a class="reference internal" href="../training/videos/index.html"><span class="doc">Training Videos</span></a></li>
+</ul>
+</div>
+</div>
+<div class="top-links docutils container">
+<ul class="simple">
+<li><a class="reference external" href="https://galeracluster.com">Home</a></li>
+<li><a class="reference internal" href="../documentation/index.html"><span class="doc">Docs</span></a></li>
+<li><a class="reference internal" href="index.html"><span class="doc">KB</span></a></li>
+</ul>
+<ul class="nav-wider simple">
+<li><a class="reference internal" href="../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a></li>
+</ul>
+</div>
+<div class="library-index section" id="sphinx-restructuredtext">
+<span id="sphinx-restructured-text"></span><h1>Sphinx &amp; reStructuredText<a class="headerlink" href="#sphinx-restructuredtext" title="Permalink to this headline">¶</a></h1>
+<p>The Codership Library uses a Python documentation system called, Sphinx.  It converts reStructuredText files into HTML web pages, as well as other formats (e.g., PDF and EPub). As for reStructuredText, it’s a lightweight mark-up language that can be processed by Sphinx, and is easily readable by people.</p>
+<p>This page of the Library, in the Editors section provides some examples of how to use reStructuredText to format text and organize document pages in the Library.  This is not a comprehensive list of formatting codes available, but rather a list of what we use in the Library—and only those we thought to add to this page.</p>
+<div class="section" id="text-formatting">
+<h2>Text Formatting<a class="headerlink" href="#text-formatting" title="Permalink to this headline">¶</a></h2>
+<p>How to format text on pages of the Library is easiest and primary use of any mark-up language. Below are examples of how to format text, how to italicize, bold-face, and other basic formatting.</p>
+<table border="1" class="doc-options docutils" id="id1">
+<caption><span class="caption-text">Inline Formatting</span><a class="headerlink" href="#id1" title="Permalink to this table">¶</a></caption>
+<colgroup>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">format</th>
+<th class="head">example</th>
+<th class="head">results</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>italics</td>
+<td>*text*, `text`</td>
+<td><em>text</em></td>
+</tr>
+<tr class="row-odd"><td>bold</td>
+<td>**text**</td>
+<td><strong>text</strong></td>
+</tr>
+<tr class="row-even"><td>monospace font</td>
+<td>``text``</td>
+<td><code class="docutils literal notranslate"><span class="pre">text</span></code></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="lists">
+<h2>Lists<a class="headerlink" href="#lists" title="Permalink to this headline">¶</a></h2>
+<p>If you want to present a list of items, you can use bullets.  In HTML, these are &lt;li&gt; tags for each list item, grouped withing a pair &lt;ul&gt; tags for an unnumbered list.  To generate these in restructuredtext,  you need only preface a bullet item with a hyphen and a space like so:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>- some text
+- more text
+  + some sub-text
+  + more sub-text
+- other text
+</pre></div>
+</div>
+<p>The lines preceded by hyphens will produce bullets.  The items preceded by plus-signs will produce a sub-bullet list. Notice that there’s nothing to enter for the &lt;ul&gt; tags. Below is the HTML text the code above will produce:</p>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">ul</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;simple&quot;</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;</span>some text<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;</span>more text<span class="p">&lt;</span><span class="nt">ul</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;</span>some sub-text<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;</span>more sub-text<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">li</span><span class="p">&gt;</span>other text<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+<p>numbered bullets:       #. text</p>
+<p>Adding class to &lt;ul&gt; tag</p>
+<blockquote>
+<div><div class="highlight-text notranslate"><div class="highlight"><pre><span></span>.. rst-class:: video-stats
+
+- Speaker:  Sakari Keskitalo, Philip Stoev
+- Date:  February 22, 2017
+- Length of Video:  52 minutes
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="special-characters">
+<h2>Special Characters<a class="headerlink" href="#special-characters" title="Permalink to this headline">¶</a></h2>
+<p>If you want to use an emdash, you would enter three hyphens enclosed in a pair of bars, with spaces on both sides (i.e., <code class="docutils literal notranslate"><span class="pre">|---|</span></code> ).   At the bottom of the document, place the following code:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>.. |---|   unicode:: U+2014 .. EM DASH
+   :trim:
+</pre></div>
+</div>
+<p>To add a hard-return, an HTML break tag, you can use <em>br</em>, wrapped in a pair of bars (i.e., <code class="docutils literal notranslate"><span class="pre">|br|</span></code>).  At the bottom of the document, you would enter the following code:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>.. |br| raw:: html
+
+   &lt;br/&gt;
+</pre></div>
+</div>
+</div>
+<div class="section" id="links">
+<h2>Links<a class="headerlink" href="#links" title="Permalink to this headline">¶</a></h2>
+<p>For better navigation and richer information, all of the pages in the Library have links to other pages or other web sites.  These are accomplished, of course, with links.  The table below shows how to create links using Restructured Text mark-up:</p>
+<table border="1" class="colwidths-given doc-options docutils">
+<colgroup>
+<col width="25%" />
+<col width="40%" />
+<col width="35%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Type</th>
+<th class="head">Example</th>
+<th class="head">Result</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>External</td>
+<td>`Label &lt;http://domain.com/&gt;`_</td>
+<td><a class="reference external" href="http://domain.com/">Label</a></td>
+</tr>
+<tr class="row-odd"><td>Internal</td>
+<td>:doc:`Page &lt;./library/page&gt;`</td>
+<td><a class="reference internal" href="index.html"><span class="doc">Page</span></a></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="new-pages">
+<h2>New Pages<a class="headerlink" href="#new-pages" title="Permalink to this headline">¶</a></h2>
+<p>When new pages are added to Library, they must be included in the table of contents (i.e., <code class="docutils literal notranslate"><span class="pre">toctree</span></code>) of a pages—typically an index.rst file—so that it may be included in the PDF versions of the documentation.  Below is how you would include three pages under the one on which these formatting codes are entered:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>.. toctree::
+  :maxdepth: 2
+
+   some-document
+   another-document
+</pre></div>
+</div>
+<p>These will link two documents to the one which contains this text.  It will also put links to them on the page, wherever this is entered. The link will include the heading from each page.  Notice that the document file name did not include the file extention (i.e., <code class="docutils literal notranslate"><span class="pre">.rst</span></code>).</p>
+</div>
+<div class="section" id="meta-tags">
+<h2>Meta Tags<a class="headerlink" href="#meta-tags" title="Permalink to this headline">¶</a></h2>
+<p>Meta tags are used to provide extra information to web browsers and search engines.  For instance the &lt;title&gt; tag in the heading of an HTML page provides the title that you will see at the top of the browser, perhaps in the tabs. The &lt;description&gt; tag can be used by the search engine to display a descpription you’ll see in the search results. The &lt;keywords&gt; tag helps to improve the ranking in searches.</p>
+<p>There are many meta tags that may be included in an HTML page. Below is how you would add them to a page formatted with Restructured Text:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>.. meta::
+   :title: Sphinx &amp; Restructured Text
+   :description: Instructions on using Restructured Text mark-up.
+   :language: en-US
+   :keywords: sphinx, restructured text, restructuredtext
+   :copyright: Codership Oy, 2014 - 2019. All Rights Reserved.
+</pre></div>
+</div>
+<p>This block of code should be entered at the very top of the document.  Below is the results of the above; it’s the tags that can be see when looking at the page source in the web browser.</p>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">meta</span> <span class="na">content</span><span class="o">=</span><span class="s">&quot;Sphinx &amp;amp; Restructured Text&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;title&quot;</span> <span class="p">/&gt;</span>
+<span class="p">&lt;</span><span class="nt">meta</span> <span class="na">content</span><span class="o">=</span><span class="s">&quot;Instructions on using Restructured Text mark-up.&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;description&quot;</span> <span class="p">/&gt;</span>
+<span class="p">&lt;</span><span class="nt">meta</span> <span class="na">content</span><span class="o">=</span><span class="s">&quot;en-US&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;language&quot;</span> <span class="p">/&gt;</span>
+<span class="p">&lt;</span><span class="nt">meta</span> <span class="na">content</span><span class="o">=</span><span class="s">&quot;sphinx, restructured text, restructuredtext&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;keywords&quot;</span> <span class="p">/&gt;</span>
+<span class="p">&lt;</span><span class="nt">meta</span> <span class="na">content</span><span class="o">=</span><span class="s">&quot;Codership Oy, 2014 - 2019. All Rights Reserved.&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;copyright&quot;</span> <span class="p">/&gt;</span>
+...
+<span class="p">&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="css-classes-ids">
+<h2>CSS Classes &amp; IDs<a class="headerlink" href="#css-classes-ids" title="Permalink to this headline">¶</a></h2>
+<p>Adding a CSS class or a CSS identification to an HTML tag is tricky with restructuredtext.  One way is to use <code class="docutils literal notranslate"><span class="pre">rst-class</span></code> like so:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>.. _`some-link-point`:
+.. rst-class:: my-class
+.. rubric:: Some Sub-Heading
+
+   A paragraph with some sort text, talking about something or other.
+</pre></div>
+</div>
+<p>Below are the results of the above formatting codes:</p>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span><span class="p">&lt;</span><span class="nt">p</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;my-class rubric&quot;</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;something-unique&quot;</span><span class="p">&gt;</span>Some Sub-Heading<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+
+<span class="p">&lt;</span><span class="nt">p</span><span class="p">&gt;</span>A paragraph with some sort text, talking about something or other.<span class="p">&lt;/</span><span class="nt">p</span><span class="p">&gt;</span>
+</pre></div>
+</div>
+<p class="tutorial-article">We use Cascading Style Sheets (CSS) to set the fonts, margins, and other such text and page formats. However, you may want to add style for just one page.  To do this, you can use the <code class="docutils literal notranslate"><span class="pre">raw</span></code> directive like so:</p>
+</div>
+<div class="section" id="raw-html">
+<h2>Raw HTML<a class="headerlink" href="#raw-html" title="Permalink to this headline">¶</a></h2>
+<p>Sometimes the easiest approach to achieving something in HTML is to add a raw HTML tag.  This will require you to define or declare it, usually near the top of the file, and then invoking it as needed. Here’s how you would declare it:</p>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span>.. role:: raw-html(raw)
+   :format: html
+</pre></div>
+</div>
+<p>Below is how you would then use it to put &lt;small&gt; tags around some text:</p>
+<div class="highlight-html notranslate"><div class="highlight"><pre><span></span>:raw-html:`<span class="p">&lt;</span><span class="nt">small</span><span class="p">&gt;</span>a minor point<span class="p">&lt;/</span><span class="nt">small</span><span class="p">&gt;</span>`
+</pre></div>
+</div>
+<p>abbreviations:  <abbr title="Some Text">s.t.</abbr></p>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/logo.png" alt="Logo"/>
+            </a></p>
+<h1 class="logo"><a href="../index.html">Galera Cluster</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../documentation/index.html">The Codership Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../kb/index.html">The Codership Knowledge Base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../training/index.html">Codership Training</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../whats-new.html">What’s New</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Codership Writers &amp; Editors</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="docs-state.html">State of the Codership Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="faqs-pending.html">New Questions for the FAQ</a></li>
+<li class="toctree-l2"><a class="reference internal" href="github-info.html">The Codership GitHub</a></li>
+<li class="toctree-l2"><a class="reference internal" href="kb-plans.html">Development of the Codership Knowledge Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mission-goals.html">The Codership Library Mission &amp; Goals</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Sphinx &amp; reStructuredText</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#text-formatting">Text Formatting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#lists">Lists</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#special-characters">Special Characters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#links">Links</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#new-pages">New Pages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#meta-tags">Meta Tags</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#css-classes-ids">CSS Classes &amp; IDs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#raw-html">Raw HTML</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="style-guide.html">The Codership Style Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial-articles.html">Tutorial Articles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="training-videos.html">Codership Training Videos</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">Codership Writers &amp; Editors</a><ul>
+      <li>Previous: <a href="mission-goals.html" title="previous chapter">The Codership Library Mission &amp; Goals</a></li>
+      <li>Next: <a href="style-guide.html" title="next chapter">The Codership Style Guide</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+	<div class="navbar">
+	<nav id="site-navigation" class="navigation main-navigation" role="navigation">
+	<div class="nav-bar-container">
+
+	<div id="menu-nav-bar" class="nav-menu">
+		<ul class="nav-link">
+			<li> </li>
+
+		</ul>
+
+	</div>
+	</nav>
+
+	<footer id="colophon" class="site-footer" role="contentinfo">
+	<div class="top">	<div class="powered-by"><p>Powered by Galera:</p>
+	<p><a href="https://mariadb.com/kb/en/galera/"><img class="alignleft size-full wp-image-237" alt="MariaDB" src="https://galeracluster.com/wp-content/uploads/2013/10/logo-mariadb.png" width="166" height="49" /></a></p>
+		</div></div>
+	<div class="footer-menu">
+	<div class="menu-main-menu-container">
+	<ul id="menu-main-menu-1" class="nav-menu">
+	<li class="link-home menu-item menu-item-type-post_type menu-item-object-page menu-item-359"><a href="https://galeracluster.com/">Home</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-35"><a href="https://galeracluster.com/products/">Products</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="https://galeracluster.com/downloads/">Downloads</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-12 current_page_item current-menu-ancestor current-menu-parent current_page_parent current_page_ancestor menu-item-has-children menu-item-33"><a href="https://galeracluster.com/support/">Support</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="https://galeracluster.com/community/">Community</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-31"><a href="https://galeracluster.com/company/">Company</a></li>
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-297"><a href="https://galeracluster.com/category/blog/">Blog</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-38"><a href="https://galeracluster.com/contact-us/">Contact us</a></li>
+	</ul></div>			</div><!-- .footer-menu -->
+
+
+	<div class="footer-bar">
+	<p class="copyright">2014 Codership Ltd.</p>
+	</div>
+	<div class="footnote">
+	<h2>Your data is invaluable. We're here to secure it. All of it.</h2>
+	</div>
+	</footer><!-- #colophon -->
+
+
+
+
+  </body>
+</html>

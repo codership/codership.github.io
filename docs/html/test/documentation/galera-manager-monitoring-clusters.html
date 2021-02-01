@@ -1,0 +1,442 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><meta content="Monitoring a Cluster with Galera Manager" name="title" />
+<meta content="en-US" name="language" />
+<meta content="galera cluster, gmd, galera manager, gui" name="keywords" />
+<meta content="Codership Oy, 2014 - 2020. All Rights Reserved." name="copyright" />
+
+    <title>Monitoring a Cluster with Galera Manager &#8212; Galera Cluster Documentation</title>
+    <link rel="stylesheet" href="../_static/reset-style.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Upgrading Galera Manager (gmd)" href="gmd-upgrading.html" />
+    <link rel="prev" title="Loading Initial Data" href="galera-manager-initializing-data.html" />
+
+
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<link rel="stylesheet" href="/library/_static/basic-style.css">
+<link rel="stylesheet" href="/library/_static/header.css">
+<link rel="stylesheet" href="/library/_static/footer.css">
+<link rel="stylesheet" href="/library/_static/codership.css">
+<link rel="stylesheet" media="screen and (max-width: 500px)" href="/library/_static/mobile.css"/>
+<link rel="stylesheet" media="screen and (min-width:501px) and (max-width:1024px)" href="/library/_static/tablet.css"/>
+<link rel="stylesheet" media="screen and (prefers-color-scheme: dark)" href="/library/_static/dark.css"/>
+
+
+<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Feed" href="https://galeracluster.com/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Comments Feed" href="https://galeracluster.com/comments/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Support Comments Feed" href="https://galeracluster.com/support/feed/" />
+
+<script type='text/javascript' src='https://galeracluster.com/wp-includes/js/comment-reply.min.js?ver=3.8.3'></script>
+
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://galeracluster.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://galeracluster.com/wp-includes/wlwmanifest.xml" />
+<link rel='prev' title='Downloads' href='https://galeracluster.com/downloads/' />
+<link rel='next' title='Community' href='https://galeracluster.com/community/' />
+<meta name="generator" content="WordPress 3.8.3" />
+
+<link rel='shortlink' href='https://galeracluster.com/?p=12' />
+
+<style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>
+<style type="text/css" id="twentythirteen-header-css">
+			.site-title,
+			.site-description {
+				position: absolute;
+				clip: rect(1px 1px 1px 1px); /* IE7 */
+				clip: rect(1px, 1px, 1px, 1px);
+			}
+				.site-header .home-link {
+				min-height: 0;
+			}
+</style>
+
+<script type="text/javascript">
+
+		  var _gaq = _gaq || [];
+		  _gaq.push(['_setAccount', 'UA-35163478-6']);
+		  _gaq.push(['_trackPageview']);
+
+		  (function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'https://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		  })();
+
+</script>
+
+  </head><body>
+	<div id="fb-root"></div>
+	<script>(function(d, s, id) {
+		  var js, fjs = d.getElementsByTagName(s)[0];
+		  if (d.getElementById(id)) return;
+		  js = d.createElement(s); js.id = id;
+		  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+		  fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));
+	</script>
+
+	<div id="page" class="hfeed site">
+
+	<header id="masthead" class="site-header" role="banner">
+
+	<div class="top">
+	<a class="home-link" href="https://galeracluster.com/" title="Galera Cluster for MySQL" rel="home">
+	<h1 class="site-title">Galera Cluster for MySQL</h1>
+	<h2 class="site-description">The world&#039;s most advanced open source database cluster</h2>
+	</a>
+	</div>
+
+
+	<div id="navbar" class="navbar">
+	<nav id="site-navigation" class="navigation main-navigation" role="navigation">
+	<div class="menu-main-menu-container">
+
+	<ul id="menu-main-menu" class="nav-menu">
+	<li id="menu-item-359" class="link-home menu-item menu-item-type-post_type menu-item-object-page menu-item-359"><a href="https://galeracluster.com/">Home</a></li>
+	<li id="menu-item-35" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-35"><a href="https://galeracluster.com/products/">Products</a></li>
+	<li id="menu-item-34" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="https://galeracluster.com/downloads/">Downloads</a></li>
+	<li id="menu-item-33" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-12 current_page_item current-menu-ancestor current-menu-parent current_page_parent current_page_ancestor menu-item-has-children menu-item-33"><a href="https://galeracluster.com/support/">Support</a></li>
+	<li id="menu-item-32" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="https://galeracluster.com/community/">Community</a></li>
+	<li id="menu-item-31" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-31"><a href="https://galeracluster.com/company/">Company</a></li>
+	<li id="menu-item-297" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-297"><a href="https://galeracluster.com/category/blog/">Blog</a></li>
+	<li id="menu-item-38" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-38"><a href="https://galeracluster.com/contact-us/">Contact us</a></li>
+	</ul>
+	</div>
+
+
+	</nav><!-- #site-navigation -->
+
+	</div><!-- #navbar -->
+	</header><!-- #masthead -->
+
+
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="left-margin docutils container">
+<div class="left-margin-top docutils container">
+<a class="reference internal" href="../index.html"><span class="doc">The Library</span></a></div>
+<div class="left-margin-content docutils container">
+<ul class="here simple">
+<li><a class="reference internal" href="index.html"><span class="doc">Documentation</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../kb/index.html"><span class="doc">Knowledge Base</span></a></li>
+<li><a class="reference internal" href="../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="sub-links simple">
+<li><a class="reference internal" href="../training/tutorials/index.html"><span class="doc">Tutorial Articles</span></a></li>
+<li><a class="reference internal" href="../training/videos/index.html"><span class="doc">Training Videos</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a></li>
+</ul>
+<p>Galera Manager Documents</p>
+<ul class="simple">
+<li><a class="reference internal" href="galera-manager.html"><span class="doc">Getting Started</span></a></li>
+<li><a class="reference internal" href="gmd-install.html"><span class="doc">Installing</span></a></li>
+<li><a class="reference internal" href="galera-manager-ports.html"><span class="doc">AWS Ports</span></a></li>
+<li><a class="reference internal" href="gmd.html"><span class="doc">gmd Daemon</span></a></li>
+<li><a class="reference internal" href="galera-manager-adding-clusters.html"><span class="doc">Deploying Clusters</span></a></li>
+<li><a class="reference internal" href="galera-manager-adding-nodes.html"><span class="doc">Adding Nodes</span></a></li>
+<li><a class="reference internal" href="galera-manager-adding-users.html"><span class="doc">Adding Users</span></a></li>
+<li><a class="reference internal" href="galera-manager-initializing-data.html"><span class="doc">Loading Data</span></a></li>
+</ul>
+<ul class="here simple">
+<li><a class="reference internal" href="#"><span class="doc">Monitoring a Cluster</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="gmd-upgrading.html"><span class="doc">Upgrading</span></a></li>
+</ul>
+</div>
+</div>
+<div class="top-links docutils container">
+<ul class="simple">
+<li><a class="reference external" href="https://galeracluster.com">Home</a></li>
+</ul>
+<ul class="here simple">
+<li><a class="reference internal" href="index.html"><span class="doc">Docs</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../kb/index.html"><span class="doc">KB</span></a></li>
+</ul>
+<ul class="nav-wider simple">
+<li><a class="reference internal" href="../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a></li>
+</ul>
+</div>
+<div class="library-document section" id="monitoring-a-cluster-with-galera-manager">
+<span id="galera-manager-monitoring-clusters"></span><h1>Monitoring a Cluster with Galera Manager<a class="headerlink" href="#monitoring-a-cluster-with-galera-manager" title="Permalink to this headline">¶</a></h1>
+<p>There are perhaps two aspects of Galera Manager that are its best features and make it worthwhile for database administrators to use:  First is the ability to add nodes easily with a graphical interface, and without having to configure each node manually.  Second is the ability to monitor a cluster with a set of charts that can track many database and cluster metrics.</p>
+<p>If you happened upon this page of the documentation first, without having installed Galera Manager, please read the <a class="reference internal" href="gmd-install.html"><span class="doc">Installing Galera Manager</span></a> page and install it. For those who have installed Galera Manager, but have not yet created a cluster with nodes using Galera Manager, read the <a class="reference internal" href="galera-manager-adding-nodes.html"><span class="doc">Adding Nodes with Galera Manager</span></a> page.</p>
+<p class="section-heading rubric">Default Charts &amp; Metrics</p>
+<p>After first having created a cluster and added nodes, you’ll see a dashboard containing charts for tracking some metrics. Below in Figure 1 is a screenshot of how a cluster with three nodes would look at the start. However, these charts and monitored metrics are just a few that are loaded by default. You can add and remove any charts, monitor any database or cluster metrics you want.</p>
+<div class="figure" id="id1">
+<a class="document-screenshot reference internal image-reference" href="../_images/galera-manager-monitor-data-loading.png"><img alt="Monitoring Data Loading" class="document-screenshot" src="../_images/galera-manager-monitor-data-loading.png" style="width: 800px;" /></a>
+<p class="caption"><span class="caption-text">Monitoring Data Loading (Figure 1)</span></p>
+</div>
+<p>As a starting point,six charts are configured for new installations.  You may remove any or all of these charts.  Before you do, you might want to consider what these initial ones track:</p>
+<ul class="simple">
+<li><strong>load_node_1</strong> records the CPU load average. It’s a standard metric commonly displayed by most load monitors in Linux. Essentially, it tells you how loaded the system is with tasks, tasks competing for CPU usage.</li>
+<li><strong>node_memory_MemAvailble_bytes</strong> stores how much memory is available for each node.</li>
+<li><strong>mysql_global_status_wsrep_replicated</strong> indicates the number of write-sets replicated.</li>
+<li><strong>mysql_global_status_wsrep_received</strong> is the number of write-sets received. Together with the number replicated, this would equal the total transaction rate on the node.</li>
+<li><strong>mysql_global_status_wsrep_flow_control_sent</strong> provides the number of flow control events emitted by the node.</li>
+<li><strong>mysql_global_status_wsrep_flow_control_paused</strong> records how much time replication on the node was paused in nano-seconds per second. A value of 1,000,000,000 would mean it was completely paused. This metric and the previous one are very important to troubleshoot replication perfromance concerns.</li>
+</ul>
+<p class="sub-heading rubric">Metric Names &amp; Associations</p>
+<p>There is a pattern to the names of metrics.  Ones containing the word, <em>node</em> (e.g., <code class="docutils literal notranslate"><span class="pre">load_node_1</span></code>), typically come from the Prometheus database system that tracks host status—they’re not tracking node status since that’s basically <code class="docutils literal notranslate"><span class="pre">mysqld</span></code> activity; in this context, it’s a misnomer.</p>
+<p>As for metrics with <em>mysql_global_status_</em> as the prefix, the stem is the name of the MySQL or MariaDB global status variable’s name. For example, <em>mysql_global_status_wsrep_replicated</em> is from the MySQL global status variable, <code class="docutils literal notranslate"><span class="pre">wsrep_replicated</span></code>.</p>
+<p>If for some reason you want to verify a global status variable’s value, you can check in a node’s database. You would go to the <em>Configuration</em> tab for one of the nodes to get the IP address and password for the database system.  Then you would enter something like the following from the command-line of a computer on which the <code class="docutils literal notranslate"><span class="pre">mysql</span></code> client is installed:</p>
+<div class="literal-block-wrapper docutils container" id="id2">
+<div class="code-block-caption"><span class="caption-text">Checking a MySQL Global Status Variable (Example 1)</span><a class="headerlink" href="#id2" title="Permalink to this code">¶</a></div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">mysql -p -u root -h 34.216.245.12 /</span>
+<span class="go">   -e &quot;SHOW GLOBAL STATUS LIKE &#39;wsrep_replicated&#39;&quot;</span>
+
+<span class="go">+------------------+-------+</span>
+<span class="go">| Variable_name    | Value |</span>
+<span class="go">+------------------+-------+</span>
+<span class="go">| wsrep_replicated | 7     |</span>
+<span class="go">+------------------+-------+</span>
+</pre></div>
+</div>
+</div>
+<p>These results should agree with that of the chart in Galera Manager tracking this status variable.  There’s no need, though, for you to do this, to enter <code class="docutils literal notranslate"><span class="pre">SHOW</span> <span class="pre">GLOBAL</span> <span class="pre">STATUS</span></code> for every variable you want to monitor:  you now have Galera Manager to do that for you.  If there’s a status variables you regularly check, you need only to add a chart in Galera Manager to monitor it.</p>
+<p class="section-heading rubric">Adding Metrics to Monitor</p>
+<p>There are over one-thousand metrics that may be tracked. Some of them measure host operation: CPU usage, free memory, etc. Others come from the node’s database engine, the <code class="docutils literal notranslate"><span class="pre">mysqld</span></code> process: the number of transactions committed, the amount of dirty pages in the buffer pool and so on.</p>
+<p>To add a chart to the monitor in a cluster, click on the cluster in the left margin. Then in the <em>Monitor</em> tab, click on the vertical ellipsis at its top right—not the vertical ellipsis above it, not the one at the top right of the panel.  See the screenshot in Figure 2 below:</p>
+<div class="figure" id="id3">
+<a class="document-screenshot reference internal image-reference" href="../_images/galera-manager-monitor-add-chart.png"><img alt="Adding a Chart" class="document-screenshot" src="../_images/galera-manager-monitor-add-chart.png" style="width: 600px;" /></a>
+<p class="caption"><span class="caption-text">Adding a Chart (Figure 2)</span></p>
+</div>
+<p>Click on <em>Add Chart</em> and a box will appear like the one in Figure 3 below.  There you will find all of the metrics you may track.  Most are global status variables from MySQL.  There are several at the bottom of the list that come from an external system called Prometheus that stores data on the status of the nodes.  The data is loaded into Prometheus on each node from the <code class="docutils literal notranslate"><span class="pre">mysqld_exporter</span></code> daemon running on each host.</p>
+<p class="sub-heading rubric">Choosing a Metric</p>
+<p>In the screenshot below, you can see the dialog box for choosing metrics to chart.  Notice that metrics with the icon of a stack of disks are from MySQL or MariaDB.  Metrics using Prometheus are represented by the icon of a stack of servers.</p>
+<div class="figure" id="id4">
+<a class="document-screenshot reference internal image-reference" href="../_images/galera-manager-cluster-add-chart.png"><img alt="Adding a Chart to Monitor" class="document-screenshot" src="../_images/galera-manager-cluster-add-chart.png" style="width: 600px;" /></a>
+<p class="caption"><span class="caption-text">Adding a Chart - Looking for a Metric (Figure 3)</span></p>
+</div>
+<p>You can either scroll through the long list of metrics, or you can enter a variable name in the search line to find it. If you don’t remember the precise name of the variable, you may enter part of it (e.g., <code class="docutils literal notranslate"><span class="pre">buffer</span></code>). This will present entries that match what was entered. You can then click on the one you want.</p>
+<p class="sub-heading rubric">Cumulative or Differential</p>
+<p>Some metrics show the total number of events since the process started (e.g., the number of flow control events sent). As a result, it’s value keeps increasing. This sort of metric is called, <em>Cumulative</em>. If you choose such a metric, it will be shown on a chart in values per time interval (i.e., per second) over the sampling interval. Other metrics are said to be <em>Differential</em> in that they are already in units per second.</p>
+<p>Galera Manager is unaware of which metric is cumulative and which is differential. Therefore, you have to mark a chart as such by clicking the appropriate button. It’s located in the box for adding a chart as shown in Figure 3 above, but hidden by the list of metrics in that screenshot. Below is the same dialog box, without the list of metrics, and cropped:</p>
+<div class="figure" id="id5">
+<a class="document-screenshot reference internal image-reference" href="../_images/galera-manager-cluster-add-chart-cumulative-diff.png"><img alt="Adding a Chart to Monitor" class="document-screenshot" src="../_images/galera-manager-cluster-add-chart-cumulative-diff.png" style="width: 300px;" /></a>
+<p class="caption"><span class="caption-text">Adding a Chart - Cumulative or Differential (Figure 4)</span></p>
+</div>
+<p>After you’ve chosen a metric and indicated whether it’s cumulative or differential, click on <em>Add</em> at the bottom right corner. You will be taken back to the monitor page and you’ll see a chart for the metric you added. You can reposition a chart by clicking on it and holding down the mouse button, then dragging it where you want.</p>
+<p class="section-heading rubric">Changing a Monitor’s Perspective</p>
+<p>By default, the last fifteen minutes of the metric is shown in each chart, with the data refreshed every five seconds.  This is meant to show activities that have just happened and happened recently. However, to determine a trend or a pattern, you may want to change the range of time and the refresh rate. You’ll notice in the upper right corner of the main panel, above the charts, some selectors (see Figure 5 below). These may be used to change the perspective of a chart.</p>
+<div class="figure" id="id6">
+<a class="document-screenshot reference internal image-reference" href="../_images/galera-manager-monitor-period-refresh-size.png"><img alt="Changing a Monitor's Perspective" class="document-screenshot" src="../_images/galera-manager-monitor-period-refresh-size.png" style="width: 500px;" /></a>
+<p class="caption"><span class="caption-text">Changing Perspectives (Figure 5)</span></p>
+</div>
+<p>Clicking on the first icon of a calendar with a clock will allow you to change the amount of time displayed in the charts.  You may choose a block of time in minutes (e.g., thirty minutes), or a block in hours (e.g., three hours), or for a period of days (e.g., seven days). You can see the list of choices in the cropped screenshot in Figure 6 below:</p>
+<div class="figure" id="id7">
+<a class="document-screenshot reference internal image-reference" href="../_images/galera-manager-monitor-period.png"><img alt="Changing a Monitor's Perspective" class="document-screenshot" src="../_images/galera-manager-monitor-period.png" style="width: 300px;" /></a>
+<p class="caption"><span class="caption-text">Changing Time Period Displayed (Figure 6)</span></p>
+</div>
+<p>You may also change the refresh rate to every second, or a less frequent amount of time (e.g., every minute).  You can see a list of choices available in the screenshot shown in Figure 7 below:</p>
+<div class="figure" id="id8">
+<a class="document-screenshot reference internal image-reference" href="../_images/galera-manager-monitor-refresh.png"><img alt="Changing a Monitor's Perspective" class="document-screenshot" src="../_images/galera-manager-monitor-refresh.png" style="width: 300px;" /></a>
+<p class="caption"><span class="caption-text">Changing Refresh Rate of Data (Figure 7)</span></p>
+</div>
+<p>Finally, you can choose the relative size of the charts displayed: small, medium, or large.  This will affect the arrangement of charts across and down.  You might like to keep a separate computer running Galera Manager, continuously. In which case, switching the web browser to full-screen with the charts set to large format would allow you to fill the screen and view the charts from a distance so as to get your attention quickly if a problem arises.</p>
+<p class="section-heading rubric">Preserving Chart Configuration</p>
+<p>You may decide to make use of the default charts provided with Galera Manager, but if you decide to make changes, you may want to download a copy of the dashboard configuration.  You can spend plenty of a time deciding on which metrics to monitor, and how to configure the charts. It would be frustrating to lose your charts configuration.</p>
+<p>To preserve the chart configuration, click on the cluster in the left margin. Then in the <em>Monitor</em> tab, click on the vertical ellipsis at the top right within that panel. You’ll see this pull-down menu, the same one you used to add charts:</p>
+<div class="figure" id="id9">
+<a class="document-screenshot reference internal image-reference" href="../_images/galera-manager-download-dashboard-config.png"><img alt="Downloading Charts Configuration" class="document-screenshot" src="../_images/galera-manager-download-dashboard-config.png" style="width: 300px;" /></a>
+<p class="caption"><span class="caption-text">Downloading Dashboard Configuration (Figure 8)</span></p>
+</div>
+<p>Click on <em>Download Dashboard Configuration</em> and Galera Manager will generate a dashboard configuration file and download it, saving it wherever you have set your web browser to download files.  The file will be a json file and named, <code class="docutils literal notranslate"><span class="pre">cluster-*name*.json</span></code>, where <em>name</em> is the name of your cluster (e.g., <code class="docutils literal notranslate"><span class="pre">cluster-testeroo.json</span></code>).  Below is an excerpt from an example file:</p>
+<div class="literal-block-wrapper docutils container" id="id10">
+<div class="code-block-caption"><span class="caption-text">Excerpt from an Exported Galera Manager Configuration (Example 2)</span><a class="headerlink" href="#id10" title="Permalink to this code">¶</a></div>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">{&quot;name&quot;:&quot;cluster-testeroo&quot;,&quot;config&quot;:</span>
+<span class="go">  {&quot;charts&quot;:</span>
+<span class="go">    [{&quot;id&quot;:&quot;301186ce-7b7f-41bb-a457-60696aeabba8&quot;,</span>
+<span class="go">      &quot;name&quot;:&quot;mysql_global_status_wsrep_received&quot;,</span>
+<span class="go">      &quot;metric&quot;:&quot;mysql_global_status_wsrep_received&quot;,</span>
+<span class="go">      &quot;position&quot;:3,</span>
+<span class="go">      &quot;resolution&quot;:&quot;5s&quot;,</span>
+<span class="go">      &quot;aggregation&quot;:&quot;differential&quot;},</span>
+<span class="go">   ...</span>
+<span class="go">   ...],</span>
+<span class="go">&quot;tileSize&quot;:&quot;md&quot;,&quot;refreshInterval&quot;:5000,&quot;period&quot;:&quot;15m&quot;}}</span>
+</pre></div>
+</div>
+</div>
+<p>This file excerpt has been reformatted with hard-returns and spaces to make it easier to view and follow—plus, most of it has been removed and replaced with ellipsis for brevity. But you can get a sense of how the information is stored—especially if you’re familiar with json file structures.</p>
+<p>This is a nice feature, being able to download the configuration file.  However, at this point, the ability to upload a json configuration file is not yet available: Galera Manager is still in its early days.  The configuration settings for a dashboard are stored in Prometheus and there’s no easy way to load it. In a future release, though, you should be able to do this from Galera Manager.</p>
+<p class="section-heading rubric">Resolving Problems &amp; Making Improvements</p>
+<p>Galera Manager is an excellent tool for detecting issues early or potential ones with a Galera Cluster—hopefully, before they can become a problem. It can also assist in determining when and how performance can be improved before there is a slowing of database traffic or a loss of service.</p>
+<p>Should you have problems with Galera Manager, you can check its log files. See the <a class="reference internal" href="gmd.html#gmd-logs"><span class="std std-ref">gmd Logs</span></a> section of the <a class="reference internal" href="gmd.html"><span class="doc">Galera Manager Daemon (gmd)</span></a> documentation page for information on those logs.</p>
+<p>When you encounter a problem with a Galera Cluster, besides reading Codership’s <a class="reference internal" href="index.html"><span class="doc">Documentation</span></a>, you can look through Codership’s <a class="reference internal" href="../kb/index.html"><span class="doc">Knowledge Base</span></a>.  When you can’t find a solution on your own, or at least not quickly enough, you can contact <a class="reference external" href="https://galeracluster.com/support/">Codership Support &amp; Consulting</a>.</p>
+<div class="bottom-links docutils container">
+<p>Galera Manager Documents</p>
+<ul class="simple">
+<li><a class="reference internal" href="galera-manager.html"><span class="doc">Getting Started</span></a></li>
+<li><a class="reference internal" href="gmd-install.html"><span class="doc">Installing</span></a></li>
+<li><a class="reference internal" href="galera-manager-ports.html"><span class="doc">AWS Ports</span></a></li>
+<li><a class="reference internal" href="gmd.html"><span class="doc">gmd Daemon</span></a></li>
+<li><a class="reference internal" href="galera-manager-adding-clusters.html"><span class="doc">Deploying Clusters</span></a></li>
+<li><a class="reference internal" href="galera-manager-adding-nodes.html"><span class="doc">Adding Nodes</span></a></li>
+<li><a class="reference internal" href="galera-manager-adding-users.html"><span class="doc">Adding Users</span></a></li>
+<li><a class="reference internal" href="galera-manager-initializing-data.html"><span class="doc">Loading Data</span></a></li>
+<li><a class="reference internal" href="#"><span class="doc">Monitoring a Cluster</span></a></li>
+<li><a class="reference internal" href="gmd-upgrading.html"><span class="doc">Upgrading</span></a></li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/logo.png" alt="Logo"/>
+            </a></p>
+<h1 class="logo"><a href="../index.html">Galera Cluster</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">The Codership Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="overview.html">Overview of Galera Cluster</a></li>
+<li class="toctree-l2"><a class="reference internal" href="technical-description.html">Technical Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html">Installing Galera Cluster</a></li>
+<li class="toctree-l2"><a class="reference internal" href="administration.html">Galera Cluster Administration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deployment.html">Deployment</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="monitor.html">Cluster Monitoring</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="monitoring-cluster.html">Using Status Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="log.html">Database Server Logs</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="galera-manager.html">The Galera Manager</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notification-cmd.html">Notification Command</a></li>
+<li class="toctree-l3"><a class="reference internal" href="notification-cmd-example.html">Notification Script Example</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="security.html">Security</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference.html">Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../kb/index.html">The Codership Knowledge Base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../training/index.html">Codership Training</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../whats-new.html">What’s New</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../editors/index.html">Codership Writers &amp; Editors</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">The Codership Documentation</a><ul>
+  <li><a href="monitor.html">Cluster Monitoring</a><ul>
+  <li><a href="galera-manager.html">The Galera Manager</a><ul>
+      <li>Previous: <a href="galera-manager-initializing-data.html" title="previous chapter">Loading Initial Data</a></li>
+      <li>Next: <a href="gmd-upgrading.html" title="next chapter">Upgrading Galera Manager (<code class="docutils literal notranslate"><span class="pre">gmd</span></code>)</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+	<div class="navbar">
+	<nav id="site-navigation" class="navigation main-navigation" role="navigation">
+	<div class="nav-bar-container">
+
+	<div id="menu-nav-bar" class="nav-menu">
+		<ul class="nav-link">
+			<li> </li>
+
+		</ul>
+
+	</div>
+	</nav>
+
+	<footer id="colophon" class="site-footer" role="contentinfo">
+	<div class="top">	<div class="powered-by"><p>Powered by Galera:</p>
+	<p><a href="https://mariadb.com/kb/en/galera/"><img class="alignleft size-full wp-image-237" alt="MariaDB" src="https://galeracluster.com/wp-content/uploads/2013/10/logo-mariadb.png" width="166" height="49" /></a></p>
+		</div></div>
+	<div class="footer-menu">
+	<div class="menu-main-menu-container">
+	<ul id="menu-main-menu-1" class="nav-menu">
+	<li class="link-home menu-item menu-item-type-post_type menu-item-object-page menu-item-359"><a href="https://galeracluster.com/">Home</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-35"><a href="https://galeracluster.com/products/">Products</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="https://galeracluster.com/downloads/">Downloads</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-12 current_page_item current-menu-ancestor current-menu-parent current_page_parent current_page_ancestor menu-item-has-children menu-item-33"><a href="https://galeracluster.com/support/">Support</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="https://galeracluster.com/community/">Community</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-31"><a href="https://galeracluster.com/company/">Company</a></li>
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-297"><a href="https://galeracluster.com/category/blog/">Blog</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-38"><a href="https://galeracluster.com/contact-us/">Contact us</a></li>
+	</ul></div>			</div><!-- .footer-menu -->
+
+
+	<div class="footer-bar">
+	<p class="copyright">2014 Codership Ltd.</p>
+	</div>
+	<div class="footnote">
+	<h2>Your data is invaluable. We're here to secure it. All of it.</h2>
+	</div>
+	</footer><!-- #colophon -->
+
+
+
+
+  </body>
+</html>

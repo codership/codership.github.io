@@ -1,0 +1,482 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><meta content="Install MySQL Galera Cluster" name="title" />
+<meta content="en-US" name="language" />
+<meta content="galera cluster, installation, install, mysql, binaries, apt, yum" name="keywords" />
+<meta content="Codership Oy, 2014 - 2020. All Rights Reserved." name="copyright" />
+
+    <title>Galera Cluster for MySQL—Binary Installation &#8212; Galera Cluster Documentation</title>
+    <link rel="stylesheet" href="../_static/reset-style.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Galera Cluster for MySQL - Source Installation" href="install-mysql-src.html" />
+    <link rel="prev" title="Installing Galera Cluster" href="install.html" />
+
+
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<link rel="stylesheet" href="/library/_static/basic-style.css">
+<link rel="stylesheet" href="/library/_static/header.css">
+<link rel="stylesheet" href="/library/_static/footer.css">
+<link rel="stylesheet" href="/library/_static/codership.css">
+<link rel="stylesheet" media="screen and (max-width: 500px)" href="/library/_static/mobile.css"/>
+<link rel="stylesheet" media="screen and (min-width:501px) and (max-width:1024px)" href="/library/_static/tablet.css"/>
+<link rel="stylesheet" media="screen and (prefers-color-scheme: dark)" href="/library/_static/dark.css"/>
+
+
+<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Feed" href="https://galeracluster.com/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Comments Feed" href="https://galeracluster.com/comments/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Support Comments Feed" href="https://galeracluster.com/support/feed/" />
+
+<script type='text/javascript' src='https://galeracluster.com/wp-includes/js/comment-reply.min.js?ver=3.8.3'></script>
+
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://galeracluster.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://galeracluster.com/wp-includes/wlwmanifest.xml" />
+<link rel='prev' title='Downloads' href='https://galeracluster.com/downloads/' />
+<link rel='next' title='Community' href='https://galeracluster.com/community/' />
+<meta name="generator" content="WordPress 3.8.3" />
+
+<link rel='shortlink' href='https://galeracluster.com/?p=12' />
+
+<style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>
+<style type="text/css" id="twentythirteen-header-css">
+			.site-title,
+			.site-description {
+				position: absolute;
+				clip: rect(1px 1px 1px 1px); /* IE7 */
+				clip: rect(1px, 1px, 1px, 1px);
+			}
+				.site-header .home-link {
+				min-height: 0;
+			}
+</style>
+
+<script type="text/javascript">
+
+		  var _gaq = _gaq || [];
+		  _gaq.push(['_setAccount', 'UA-35163478-6']);
+		  _gaq.push(['_trackPageview']);
+
+		  (function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'https://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		  })();
+
+</script>
+
+  </head><body>
+	<div id="fb-root"></div>
+	<script>(function(d, s, id) {
+		  var js, fjs = d.getElementsByTagName(s)[0];
+		  if (d.getElementById(id)) return;
+		  js = d.createElement(s); js.id = id;
+		  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+		  fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));
+	</script>
+
+	<div id="page" class="hfeed site">
+
+	<header id="masthead" class="site-header" role="banner">
+
+	<div class="top">
+	<a class="home-link" href="https://galeracluster.com/" title="Galera Cluster for MySQL" rel="home">
+	<h1 class="site-title">Galera Cluster for MySQL</h1>
+	<h2 class="site-description">The world&#039;s most advanced open source database cluster</h2>
+	</a>
+	</div>
+
+
+	<div id="navbar" class="navbar">
+	<nav id="site-navigation" class="navigation main-navigation" role="navigation">
+	<div class="menu-main-menu-container">
+
+	<ul id="menu-main-menu" class="nav-menu">
+	<li id="menu-item-359" class="link-home menu-item menu-item-type-post_type menu-item-object-page menu-item-359"><a href="https://galeracluster.com/">Home</a></li>
+	<li id="menu-item-35" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-35"><a href="https://galeracluster.com/products/">Products</a></li>
+	<li id="menu-item-34" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="https://galeracluster.com/downloads/">Downloads</a></li>
+	<li id="menu-item-33" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-12 current_page_item current-menu-ancestor current-menu-parent current_page_parent current_page_ancestor menu-item-has-children menu-item-33"><a href="https://galeracluster.com/support/">Support</a></li>
+	<li id="menu-item-32" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="https://galeracluster.com/community/">Community</a></li>
+	<li id="menu-item-31" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-31"><a href="https://galeracluster.com/company/">Company</a></li>
+	<li id="menu-item-297" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-297"><a href="https://galeracluster.com/category/blog/">Blog</a></li>
+	<li id="menu-item-38" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-38"><a href="https://galeracluster.com/contact-us/">Contact us</a></li>
+	</ul>
+	</div>
+
+
+	</nav><!-- #site-navigation -->
+
+	</div><!-- #navbar -->
+	</header><!-- #masthead -->
+
+
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="left-margin docutils container">
+<div class="left-margin-top docutils container">
+<a class="reference internal" href="../index.html"><span class="doc">The Library</span></a></div>
+<div class="left-margin-content docutils container">
+<ul class="here simple">
+<li><a class="reference internal" href="index.html"><span class="doc">Documentation</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../kb/index.html"><span class="doc">Knowledge Base</span></a></li>
+<li><a class="reference internal" href="../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="sub-links simple">
+<li><a class="reference internal" href="../training/tutorials/index.html"><span class="doc">Tutorial Articles</span></a></li>
+<li><a class="reference internal" href="../training/videos/index.html"><span class="doc">Training Videos</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a></li>
+</ul>
+<p>Related Documents</p>
+<ul class="simple">
+<li><a class="reference internal" href="install.html"><span class="doc">Install Galera</span></a></li>
+<li><a class="reference internal" href="install-mysql-src.html"><span class="doc">Galera MySQL Source</span></a></li>
+<li><a class="reference internal" href="#centos-mysql-shared-compt"><span class="std std-ref">MySQL Shared Compatibility Libraries</span></a></li>
+<li><a class="reference internal" href="install-mariadb.html"><span class="doc">Galera MariaDB Binaries</span></a></li>
+</ul>
+<p>Related Articles</p>
+<ul class="simple">
+<li><a class="reference internal" href="../training/tutorials/migration.html"><span class="doc">Migrating to Galera Cluster</span></a></li>
+</ul>
+<p>Other Resources</p>
+<ul class="simple">
+<li><a class="reference internal" href="../training/videos/galera-aws-installing.html"><span class="doc">Galera AWS (video)</span></a></li>
+<li><a class="reference internal" href="../training/videos/galera-mysql-installing.html"><span class="doc">Galera MySQL (video)</span></a></li>
+</ul>
+</div>
+</div>
+<div class="top-links docutils container">
+<ul class="simple">
+<li><a class="reference external" href="https://galeracluster.com">Home</a></li>
+</ul>
+<ul class="here simple">
+<li><a class="reference internal" href="index.html"><span class="doc">Docs</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../kb/index.html"><span class="doc">KB</span></a></li>
+</ul>
+<ul class="nav-wider simple">
+<li><a class="reference internal" href="../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a></li>
+</ul>
+</div>
+<div class="library-document section" id="galera-cluster-for-mysql-binary-installation">
+<span id="install-mysql-binary"></span><h1>Galera Cluster for MySQL—Binary Installation<a class="headerlink" href="#galera-cluster-for-mysql-binary-installation" title="Permalink to this headline">¶</a></h1>
+<p>Galera Cluster for MySQL may be installed on Linux servers using binary packages. These files can be downloaded directly from the Codership repository, or by way of a package manager: <code class="docutils literal notranslate"><span class="pre">apt-get</span></code>, <code class="docutils literal notranslate"><span class="pre">yum</span></code> or <code class="docutils literal notranslate"><span class="pre">zypper</span></code>.</p>
+<p class="section-heading rubric" id="mysql-repo">Enabling the Codership Repository</p>
+<p>To install Galera Cluster for MySQL with a package manager, you first will have to enable the Codership repository on the server.  There are a few ways to do this, depending on which Linux distribution and package manager you use. The sections below provide details on how to use each of the three main supported package managers to install Galera Cluster for MySQL.</p>
+<p class="sub-heading rubric" id="mysql-deb">Enabling the <code class="docutils literal notranslate"><span class="pre">apt</span></code> Repository</p>
+<p>For Debian and Debian-based Linux distributions, the procedure for adding a repository requires that you first install the <em>Software Properties</em>.  The package names vary depending on the distribution.  For Debian, at the command-line, execute the following command:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">apt-get install python-software-properties</span>
+</pre></div>
+</div>
+<p>For Ubuntu or a distribution derived from Ubuntu, you would execute instead the following:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">apt-get install software-properties-common</span>
+</pre></div>
+</div>
+<p>If your server uses a different Debian-based distribution, and neither of these commands work on your system, try consulting your distribution’s package listings for the appropriate package name.</p>
+<p>Once you have the <em>Software Properties</em> installed, you can then enable the Codership repository for your system. Start by adding the GnuPG key for the repository. This is done by executing the following from the command-line:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">apt-key adv --keyserver keyserver.ubuntu.com --recv BC19DDBA</span>
+</pre></div>
+</div>
+<p>Next, add the Codership repository to your sources list.  Using a simple text editor, create file called, <cite>galera.list</cite> in the <code class="docutils literal notranslate"><span class="pre">/etc/apt/sources.list.d/</span></code> directory. Add these lines to that file, with the necessary adjustments for the version used:</p>
+<div class="highlight-linux-config notranslate"><div class="highlight"><pre><span></span><span class="c1"># Codership Repository (Galera Cluster for MySQL)</span>
+deb https://releases.galeracluster.com/mysql-wsrep-VERSION/DIST RELEASE main
+deb https://releases.galeracluster.com/galera-3/DIST RELEASE main
+</pre></div>
+</div>
+<p>In the example above, you would change the repository addresses.  The <code class="docutils literal notranslate"><span class="pre">VERSION</span></code> should be set to MySQL-wsrep version you want to install. For example, it might be something like, <code class="docutils literal notranslate"><span class="pre">5.6</span></code>.  The <code class="docutils literal notranslate"><span class="pre">DIST</span></code> should be replaced with the name of the Linux distribution on the server.  This could be <code class="docutils literal notranslate"><span class="pre">ubuntu</span></code>.  Last, replace <code class="docutils literal notranslate"><span class="pre">RELEASE</span></code> with the distribution release (e.g., <code class="docutils literal notranslate"><span class="pre">wheezy</span></code>).</p>
+<p>If you don’t know which release you have installed on your server, you can generally find this using the following command:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">lsb_release -a</span>
+</pre></div>
+</div>
+<p>Version 4 of Galera was recently released.  If you’d like to install it, the configuration lines in <cite>galera.list</cite> should read similar to the following:</p>
+<div class="highlight-linux-config notranslate"><div class="highlight"><pre><span></span><span class="c1"># Codership Repository (Galera Cluster for MySQL)</span>
+deb https://galeracluster.com/wsrep_8.0.19-26.3-rc/galera-4/ubuntu bionic main
+deb https://galeracluster.com/wsrep_8.0.19-26.3-rc/mysql-wsrep-8.0/ubuntu bionic main
+</pre></div>
+</div>
+<p>Again, you may have to adust the version and release numbers, depending on which you want to install. Please note that this will require at least version 18.04 of Ubuntu.</p>
+<p>To be assured the proper version is installed and updated, set which repository you prefer to the Codership repository. To do this, using a text editor, create a file called, <cite>galera.pref</cite> in the <code class="docutils literal notranslate"><span class="pre">/etc/apt/preferences.d/</span></code> directory.  The contents should look like the following:</p>
+<div class="highlight-linux-config notranslate"><div class="highlight"><pre><span></span><span class="c1"># Prefer Codership repository</span>
+Package: *
+Pin: origin releases.galeracluster.com
+Pin-Priority: <span class="mi">1001</span>
+</pre></div>
+</div>
+<p>This is needed to make sure the patched versions are preferred. This might be important, for instance, if a third-party program requires <code class="docutils literal notranslate"><span class="pre">libmysqlclient20</span></code> and the OS-version for the library is newer.</p>
+<p>Finally, you should update the local cache of the repository. Do this by entering the following from the command-line:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">apt-get update</span>
+</pre></div>
+</div>
+<p>Once you’ve done all of these tasks, the packages in the Codership repository will be available for installation. For information on installing them using <code class="docutils literal notranslate"><span class="pre">apt-get</span></code>, skip ahead on this page to the section entitled, <a class="reference internal" href="#mysql-install"><span class="std std-ref">Installing Galera Cluster for MySQL</span></a>.</p>
+<p class="sub-heading rubric" id="mysql-yum-repo">Enabling the <code class="docutils literal notranslate"><span class="pre">yum</span></code> Repository</p>
+<p>For rpm-based distributions of Linux (e.g., CentOS, Red Hat and Fedora), you will need to enable the Codership repository. Using a simple text editor, create a file called, <code class="docutils literal notranslate"><span class="pre">galera.repo</span></code> in the <code class="docutils literal notranslate"><span class="pre">/etc/yum.repos.d/</span></code> directory. The contents of that file should look something like the following:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="k">[galera]</span>
+<span class="na">name</span> <span class="o">=</span> <span class="s">Galera</span>
+<span class="na">baseurl</span> <span class="o">=</span> <span class="s">https://releases.galeracluster.com/galera-3/DIST/RELEASE/ARCH</span>
+<span class="na">gpgkey</span> <span class="o">=</span> <span class="s">https://releases.galeracluster.com/GPG-KEY-galeracluster.com</span>
+<span class="na">gpgcheck</span> <span class="o">=</span> <span class="s">1</span>
+
+<span class="k">[mysql-wsrep]</span>
+<span class="na">name</span> <span class="o">=</span> <span class="s">MySQL-wsrep</span>
+<span class="na">baseurl</span> <span class="o">=</span>  <span class="s">https://releases.galeracluster.com/mysql-wsrep-VERSION/DIST/RELEASE/ARCH</span>
+<span class="na">gpgkey</span> <span class="o">=</span> <span class="s">https://releases.galeracluster.com/GPG-KEY-galeracluster.com</span>
+<span class="na">gpgcheck</span> <span class="o">=</span> <span class="s">1</span>
+</pre></div>
+</div>
+<p>In this sample repository configuration file, you would change the repository addresses for the <code class="docutils literal notranslate"><span class="pre">baseurl</span></code>.  The <code class="docutils literal notranslate"><span class="pre">VERSION</span></code> should be set to the whichever MySQL-wsrep version you want (e.g., it might be <code class="docutils literal notranslate"><span class="pre">5.6</span></code>).  The <code class="docutils literal notranslate"><span class="pre">DIST</span></code> should be changed to the name of the Linux distribution you’re using on your sever (e.g., <code class="docutils literal notranslate"><span class="pre">centos</span></code> or <code class="docutils literal notranslate"><span class="pre">fedora</span></code>). The <code class="docutils literal notranslate"><span class="pre">RELEASE</span></code> should be replaced with the distribution’s release number.  It might be <code class="docutils literal notranslate"><span class="pre">6</span></code> for CentOS, but  <code class="docutils literal notranslate"><span class="pre">20</span></code> or <code class="docutils literal notranslate"><span class="pre">21</span></code> for Fedora. Last, the <code class="docutils literal notranslate"><span class="pre">ARCH</span></code> indicates the architecture of your hardware.  This could be changed to <code class="docutils literal notranslate"><span class="pre">x86_64</span></code> for 64-bit systems.</p>
+<p>After you’ve created, modified, and saved this repository file, you’ll be able to install the packages from the Codership repository using <code class="docutils literal notranslate"><span class="pre">yum</span></code>. For an explanation on installing, skip ahead on this page to the section entitled, <a class="reference internal" href="#mysql-install"><span class="std std-ref">Installing Galera Cluster for MySQL</span></a>.</p>
+<p class="sub-heading rubric" id="mysql-zypper-repo">Enabling the <code class="docutils literal notranslate"><span class="pre">zypper</span></code> Repository</p>
+<p>For servers with Linux distributions that use <code class="docutils literal notranslate"><span class="pre">zypper</span></code> for package management (e.g.,  openSUSE and SUSE Linux Enterprise Server), you can enable the Codership repository by importing the GPG key and then creating a <code class="docutils literal notranslate"><span class="pre">galera.repo</span></code> file in the local directory.</p>
+<p>To import the GPG key, execute the following from the command-line on your server:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">rpm --import &quot;https://releases.galeracluster.com/GPG-KEY-galeracluster.com&quot;</span>
+</pre></div>
+</div>
+<p>Next, you’ll need to use a simple text editor to create a repository file called, <code class="docutils literal notranslate"><span class="pre">galera.repo</span></code> in the local directory.  The contents should look something like the following:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="k">[galera]</span>
+<span class="na">name</span> <span class="o">=</span> <span class="s">Galera</span>
+<span class="na">baseurl</span> <span class="o">=</span> <span class="s">https://releases.galeracluster.com/galera-3/DIST/RELEASE/ARCH</span>
+
+<span class="k">[MySQL-wsrep]</span>
+<span class="na">name</span> <span class="o">=</span> <span class="s">MySQL-wsrep</span>
+<span class="na">baseurl</span> <span class="o">=</span> <span class="s">https://releases.galeracluster.com/mysql-wsrep-VERSION/DIST/RELEASE/ARCH</span>
+</pre></div>
+</div>
+<p>You’ll have to adjust these <code class="docutils literal notranslate"><span class="pre">baseurl</span></code> repository addresses.  Replace where you see <code class="docutils literal notranslate"><span class="pre">VERSION</span></code> above with the version of MySQL-wsrep you want to install (e.g., it might be <code class="docutils literal notranslate"><span class="pre">5.6</span></code>). Next, substitute <code class="docutils literal notranslate"><span class="pre">DIST</span></code> in both addresses with the Linux distribution name (e.g., <code class="docutils literal notranslate"><span class="pre">opensuse</span></code> or <code class="docutils literal notranslate"><span class="pre">sles</span></code>).  Where it says <code class="docutils literal notranslate"><span class="pre">RELEASE</span></code>, enter instead the distribution release number. Last, change <code class="docutils literal notranslate"><span class="pre">ARCH</span></code> to the architecture of the server’s hardware.  For example, you would enter <code class="docutils literal notranslate"><span class="pre">x86_64</span></code> for 64-bit systems.  When you’re finished these modifications, save the file.</p>
+<p>You’ll now need to add the Codership repository to <code class="docutils literal notranslate"><span class="pre">zypper</span></code> by executing the following two lines from the command-line:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">zypper addrepo galera.repo</span>
+<span class="go">zypper refresh</span>
+</pre></div>
+</div>
+<p>Once that’s all done, you’ll be able to install the packages from the Codership repository using <code class="docutils literal notranslate"><span class="pre">zypper</span></code>. This is covered in the next section.</p>
+<p class="section-heading rubric" id="mysql-install">Installing Galera Cluster for MySQL</p>
+<p>There are two packages involved in the installation of Galera Cluster for MySQL: the MySQL database server, but one that has been built to include the <a class="reference internal" href="glossary.html#term-wsrep-api"><span class="xref std std-term">wsrep API</span></a>; and the <a class="reference internal" href="glossary.html#term-galera-replication-plugin"><span class="xref std std-term">Galera Replication Plugin</span></a>. The <code class="docutils literal notranslate"><span class="pre">yum</span></code> and <code class="docutils literal notranslate"><span class="pre">zypper</span></code> repositories include Galera Arbitrator with the Galera Replication Plugin, but for Debian-based distributions using <code class="docutils literal notranslate"><span class="pre">apt-get</span></code> you’ll need to include add it to your installation instruction.</p>
+<p>So, for Debian-based distributions using the <code class="docutils literal notranslate"><span class="pre">apt-get</span></code> package manager, execute the following from the command-line:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">apt-get install galera-3 galera-arbitrator-3 mysql-wsrep-5.6</span>
+</pre></div>
+</div>
+<p>If you want to install version 4 of Galera Cluster, you would instead execute the following from the command-line:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">apt-get install galera-4 galera-arbitrator-4 mysql-wsrep-8.0</span>
+</pre></div>
+</div>
+<p>On servers using the <code class="docutils literal notranslate"><span class="pre">yum</span></code> package manager (i.e., Red Hat, Fedora and CentOS distributions), you would instead execute this command:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">yum install galera-3 mysql-wsrep-5.6</span>
+</pre></div>
+</div>
+<p>Please note that on CentOS 6 and 7, this command may generate a transaction check error. For more information on that error and how to resolve it, see the section below on <a class="reference internal" href="#centos-mysql-shared-compt"><span class="std std-ref">MySQL Shared Compatibility Libraries</span></a>.</p>
+<p>If you want to install version 4 of Galera Cluster using <code class="docutils literal notranslate"><span class="pre">yum</span></code>, you would instead execute the following from the command-line:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">yum install galera-4 mysql-wsrep-8.0</span>
+</pre></div>
+</div>
+<p>Please note that on CentOS 8 and RedHat 8, you need to disable MySQL and
+MariaDB modules before installing Galera Cluster from a repository under
+<a class="reference external" href="https://releases.galeracluster.com/">https://releases.galeracluster.com/</a>. In order to do this, execute the
+following from the command-line:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">dnf module disable mysql mariadb</span>
+</pre></div>
+</div>
+<p>If you’re using the <code class="docutils literal notranslate"><span class="pre">zypper</span></code> utility, which would be used with openSUSE and SUSE Linux Enterprise Server, you would execute the following from the command-line:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">zypper install galera-3 mysql-wsrep-5.6</span>
+</pre></div>
+</div>
+<p>Once you’ve executed the line appropriate to your distribution and package manager, Galera Cluster for MySQL should be installed on your server.  You will then have to repeat this process for each node in your cluster, including enabling the repository files mentioned earlier.</p>
+<p>Incidentally, when deciding which packages from the Codership repository to install, the package manager may elect to install a newer major verion of Galera Cluster, newer than the one you intended to install. Before confirming the installation of packages, make sure that the package manager is planning to install the Galera Cluster version you want.</p>
+<p>If you installed Galera Cluster for MySQL over an existing stand-alone instance of MySQL, there are some additional steps that you’ll need to take to update your system to the new database server.  For more information, see <a class="reference internal" href="../training/tutorials/migration.html"><span class="doc">Migrating to Galera Cluster</span></a>.</p>
+<p class="section-heading rubric" id="centos-mysql-shared-compt">MySQL Shared Compatibility Libraries</p>
+<p>When installing Galera Cluster for MySQL on CentOS, versions 6 and 7, you may encounter a transaction check-error that blocks the installation. The error message may look something like this:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Transaction Check Error:
+file /usr/share/mysql/czech/errmsg.sys from install
+mysql-wsrep-server-5.6-5.6.23-25.10.e16.x86_64 conflicts
+with file from package mysql-libs-5.1.73-.3.e16_5.x86_64
+</pre></div>
+</div>
+<p>This relates to a dependency problem between the version of the MySQL shared compatibility libraries that CentOS uses, and the one that Galera Cluster requires.  To resolve this, you’ll have to upgrade, which can be done with the Codership repository using <code class="docutils literal notranslate"><span class="pre">yum</span></code>.</p>
+<p>There are two versions available for this package.  Which version you’ll need will depend on which version of the MySQL wsrep database server you want to install.</p>
+<p>For CentOS 6, you would enter something like the following from the command-line:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">yum upgrade -y mysql-wsrep-libs-compat-VERSION</span>
+</pre></div>
+</div>
+<p>You would, of course, replace <code class="docutils literal notranslate"><span class="pre">VERSION</span></code> here with <code class="docutils literal notranslate"><span class="pre">5.5</span></code> or <code class="docutils literal notranslate"><span class="pre">5.6</span></code>, depending on the version of MySQL you want to use.  For CentOS 7, to install MySQL version 5.6, you would execute the following from the command-line:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">yum upgrade mysql-wsrep-shared-5.6</span>
+</pre></div>
+</div>
+<p>For CentOS 7, to install MySQL version 5.5, you will also need to disable the 5.6 upgrade. To do this, enter the following from the command-line:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">yum upgrade -y mysql-wsrep-shared-5.5 -x mysql-wsrep-shared-5.6</span>
+</pre></div>
+</div>
+<p>When <code class="docutils literal notranslate"><span class="pre">yum</span></code> finishes the upgrade, you can then install the MySQL wsrep database server and the Galera Replication Plugin as described above.</p>
+<div class="bottom-links docutils container">
+<p>Related Documents</p>
+<ul class="simple">
+<li><a class="reference internal" href="install.html"><span class="doc">Install Galera</span></a></li>
+<li><a class="reference internal" href="install-mysql-src.html"><span class="doc">Galera MySQL Source</span></a></li>
+<li><a class="reference internal" href="#centos-mysql-shared-compt"><span class="std std-ref">MySQL Shared Compatibility Libraries</span></a></li>
+<li><a class="reference internal" href="install-mariadb.html"><span class="doc">Galera MariaDB Binaries</span></a></li>
+</ul>
+<p>Related Articles</p>
+<ul class="simple">
+<li><a class="reference internal" href="../training/tutorials/migration.html"><span class="doc">Migrating to Galera Cluster</span></a></li>
+</ul>
+<p>Other Resources</p>
+<ul class="simple">
+<li><a class="reference internal" href="../training/videos/galera-aws-installing.html"><span class="doc">Galera AWS (video)</span></a></li>
+<li><a class="reference internal" href="../training/videos/galera-mysql-installing.html"><span class="doc">Galera MySQL (video)</span></a></li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/logo.png" alt="Logo"/>
+            </a></p>
+<h1 class="logo"><a href="../index.html">Galera Cluster</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">The Codership Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="overview.html">Overview of Galera Cluster</a></li>
+<li class="toctree-l2"><a class="reference internal" href="technical-description.html">Technical Description</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="install.html">Installing Galera Cluster</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Galera Cluster for MySQL—Binary Installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="install-mysql-src.html">Galera Cluster for MySQL - Source Installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="install-mariadb.html">MariaDB Galera Cluster - Binary Installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="install-mariadb-src.html">MariaDB Galera Cluster - Source Installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="install-xtradb.html">Percona XtraDB Cluster - Binary Installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="install-xtradb-src.html">Percona XtraDB Cluster - Source Installation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="administration.html">Galera Cluster Administration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deployment.html">Deployment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="monitor.html">Cluster Monitoring</a></li>
+<li class="toctree-l2"><a class="reference internal" href="security.html">Security</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference.html">Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../kb/index.html">The Codership Knowledge Base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../training/index.html">Codership Training</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../whats-new.html">What’s New</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../editors/index.html">Codership Writers &amp; Editors</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">The Codership Documentation</a><ul>
+  <li><a href="install.html">Installing Galera Cluster</a><ul>
+      <li>Previous: <a href="install.html" title="previous chapter">Installing Galera Cluster</a></li>
+      <li>Next: <a href="install-mysql-src.html" title="next chapter">Galera Cluster for MySQL - Source Installation</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+	<div class="navbar">
+	<nav id="site-navigation" class="navigation main-navigation" role="navigation">
+	<div class="nav-bar-container">
+
+	<div id="menu-nav-bar" class="nav-menu">
+		<ul class="nav-link">
+			<li> </li>
+
+		</ul>
+
+	</div>
+	</nav>
+
+	<footer id="colophon" class="site-footer" role="contentinfo">
+	<div class="top">	<div class="powered-by"><p>Powered by Galera:</p>
+	<p><a href="https://mariadb.com/kb/en/galera/"><img class="alignleft size-full wp-image-237" alt="MariaDB" src="https://galeracluster.com/wp-content/uploads/2013/10/logo-mariadb.png" width="166" height="49" /></a></p>
+		</div></div>
+	<div class="footer-menu">
+	<div class="menu-main-menu-container">
+	<ul id="menu-main-menu-1" class="nav-menu">
+	<li class="link-home menu-item menu-item-type-post_type menu-item-object-page menu-item-359"><a href="https://galeracluster.com/">Home</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-35"><a href="https://galeracluster.com/products/">Products</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="https://galeracluster.com/downloads/">Downloads</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-12 current_page_item current-menu-ancestor current-menu-parent current_page_parent current_page_ancestor menu-item-has-children menu-item-33"><a href="https://galeracluster.com/support/">Support</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="https://galeracluster.com/community/">Community</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-31"><a href="https://galeracluster.com/company/">Company</a></li>
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-297"><a href="https://galeracluster.com/category/blog/">Blog</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-38"><a href="https://galeracluster.com/contact-us/">Contact us</a></li>
+	</ul></div>			</div><!-- .footer-menu -->
+
+
+	<div class="footer-bar">
+	<p class="copyright">2014 Codership Ltd.</p>
+	</div>
+	<div class="footnote">
+	<h2>Your data is invaluable. We're here to secure it. All of it.</h2>
+	</div>
+	</footer><!-- #colophon -->
+
+
+
+
+  </body>
+</html>

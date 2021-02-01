@@ -1,0 +1,392 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><meta content="Troubleshooting Unknown Command Errors" name="title" />
+<meta content="en-US" name="language" />
+<meta content="Codership Oy, 2014 - 2020. All Rights Reserved." name="copyright" />
+
+    <title>Unknown Command Errors &#8212; Galera Cluster Documentation</title>
+    <link rel="stylesheet" href="../_static/reset-style.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Group Commit" href="group-commit.html" />
+    <link rel="prev" title="Multi-Master Conflicts" href="multi-master-conflicts.html" />
+
+
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<link rel="stylesheet" href="/library/_static/basic-style.css">
+<link rel="stylesheet" href="/library/_static/header.css">
+<link rel="stylesheet" href="/library/_static/footer.css">
+<link rel="stylesheet" href="/library/_static/codership.css">
+<link rel="stylesheet" media="screen and (max-width: 500px)" href="/library/_static/mobile.css"/>
+<link rel="stylesheet" media="screen and (min-width:501px) and (max-width:1024px)" href="/library/_static/tablet.css"/>
+<link rel="stylesheet" media="screen and (prefers-color-scheme: dark)" href="/library/_static/dark.css"/>
+
+
+<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Feed" href="https://galeracluster.com/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Comments Feed" href="https://galeracluster.com/comments/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Support Comments Feed" href="https://galeracluster.com/support/feed/" />
+
+<script type='text/javascript' src='https://galeracluster.com/wp-includes/js/comment-reply.min.js?ver=3.8.3'></script>
+
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://galeracluster.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://galeracluster.com/wp-includes/wlwmanifest.xml" />
+<link rel='prev' title='Downloads' href='https://galeracluster.com/downloads/' />
+<link rel='next' title='Community' href='https://galeracluster.com/community/' />
+<meta name="generator" content="WordPress 3.8.3" />
+
+<link rel='shortlink' href='https://galeracluster.com/?p=12' />
+
+<style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>
+<style type="text/css" id="twentythirteen-header-css">
+			.site-title,
+			.site-description {
+				position: absolute;
+				clip: rect(1px 1px 1px 1px); /* IE7 */
+				clip: rect(1px, 1px, 1px, 1px);
+			}
+				.site-header .home-link {
+				min-height: 0;
+			}
+</style>
+
+<script type="text/javascript">
+
+		  var _gaq = _gaq || [];
+		  _gaq.push(['_setAccount', 'UA-35163478-6']);
+		  _gaq.push(['_trackPageview']);
+
+		  (function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'https://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		  })();
+
+</script>
+
+  </head><body>
+	<div id="fb-root"></div>
+	<script>(function(d, s, id) {
+		  var js, fjs = d.getElementsByTagName(s)[0];
+		  if (d.getElementById(id)) return;
+		  js = d.createElement(s); js.id = id;
+		  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+		  fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));
+	</script>
+
+	<div id="page" class="hfeed site">
+
+	<header id="masthead" class="site-header" role="banner">
+
+	<div class="top">
+	<a class="home-link" href="https://galeracluster.com/" title="Galera Cluster for MySQL" rel="home">
+	<h1 class="site-title">Galera Cluster for MySQL</h1>
+	<h2 class="site-description">The world&#039;s most advanced open source database cluster</h2>
+	</a>
+	</div>
+
+
+	<div id="navbar" class="navbar">
+	<nav id="site-navigation" class="navigation main-navigation" role="navigation">
+	<div class="menu-main-menu-container">
+
+	<ul id="menu-main-menu" class="nav-menu">
+	<li id="menu-item-359" class="link-home menu-item menu-item-type-post_type menu-item-object-page menu-item-359"><a href="https://galeracluster.com/">Home</a></li>
+	<li id="menu-item-35" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-35"><a href="https://galeracluster.com/products/">Products</a></li>
+	<li id="menu-item-34" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="https://galeracluster.com/downloads/">Downloads</a></li>
+	<li id="menu-item-33" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-12 current_page_item current-menu-ancestor current-menu-parent current_page_parent current_page_ancestor menu-item-has-children menu-item-33"><a href="https://galeracluster.com/support/">Support</a></li>
+	<li id="menu-item-32" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="https://galeracluster.com/community/">Community</a></li>
+	<li id="menu-item-31" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-31"><a href="https://galeracluster.com/company/">Company</a></li>
+	<li id="menu-item-297" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-297"><a href="https://galeracluster.com/category/blog/">Blog</a></li>
+	<li id="menu-item-38" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-38"><a href="https://galeracluster.com/contact-us/">Contact us</a></li>
+	</ul>
+	</div>
+
+
+	</nav><!-- #site-navigation -->
+
+	</div><!-- #navbar -->
+	</header><!-- #masthead -->
+
+
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="left-margin docutils container">
+<div class="left-margin-top docutils container">
+<a class="reference internal" href="../index.html"><span class="doc">The Library</span></a></div>
+<div class="left-margin-content docutils container">
+<ul class="simple">
+<li><a class="reference internal" href="../documentation/index.html"><span class="doc">Documentation</span></a></li>
+</ul>
+<ul class="here simple">
+<li><a class="reference internal" href="index.html"><span class="doc">Knowledge Base</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="sub-links simple">
+<li><a class="reference internal" href="../training/tutorials/index.html"><span class="doc">Tutorial Articles</span></a></li>
+<li><a class="reference internal" href="../training/videos/index.html"><span class="doc">Training Videos</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a></li>
+</ul>
+<p>Related Documents</p>
+<ul class="simple">
+<li><a class="reference internal" href="../documentation/mysql-wsrep-options.html#wsrep-cluster-address"><span class="std std-ref">wsrep_cluster_address</span></a></li>
+<li><a class="reference internal" href="../documentation/galera-status-variables.html#wsrep-cluster-status"><span class="std std-ref">wsrep_cluster_status</span></a></li>
+<li><a class="reference internal" href="../documentation/galera-status-variables.html#wsrep-last-committed"><span class="std std-ref">wsrep_last_committed</span></a></li>
+<li><a class="reference internal" href="../documentation/mysql-wsrep-options.html#wsrep-on"><span class="std std-ref">wsrep_on</span></a></li>
+<li><a class="reference internal" href="../documentation/mysql-wsrep-options.html#wsrep-provider"><span class="std std-ref">wsrep_provider</span></a></li>
+</ul>
+</div>
+</div>
+<div class="top-links docutils container">
+<ul class="simple">
+<li><a class="reference external" href="https://galeracluster.com">Home</a></li>
+<li><a class="reference internal" href="../documentation/index.html"><span class="doc">Docs</span></a></li>
+</ul>
+<ul class="here simple">
+<li><a class="reference internal" href="index.html"><span class="doc">KB</span></a></li>
+</ul>
+<ul class="nav-wider simple">
+<li><a class="reference internal" href="../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a></li>
+</ul>
+</div>
+<div class="library-article section" id="unknown-command-errors">
+<span id="kb-trouble-error-unknown-command"></span><h1>Unknown Command Errors<a class="headerlink" href="#unknown-command-errors" title="Permalink to this headline">¶</a></h1>
+<p class="article-stats">Length: 971 words; Published: April 1, 2014; Updated: November 1, 2019; Category: Splits &amp; Topology; Type: Troubleshooting</p>
+<p>A frustrating situation is when you enter a valid SQL statement through the <code class="docutils literal notranslate"><span class="pre">mysql</span></code> client on a node, and instead of receiving the results you’d expect, you receive <code class="docutils literal notranslate"><span class="pre">Unknown</span> <span class="pre">command</span></code> errors—in fact,  you receive it for all queries on the node. This is because the node has lost confidence in the cluster and is thereby unwilling to execute any transactions.</p>
+<p class="section-heading rubric">Scenario</p>
+<p>Although it’s not common, when trying to execute a query using the <code class="docutils literal notranslate"><span class="pre">mysql</span></code> client or any other client, you may get an <code class="docutils literal notranslate"><span class="pre">`Unknown</span> <span class="pre">command</span></code> error message. This may happen regardless of the query entered, each returns the same error message:</p>
+<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="n">store</span><span class="p">.</span><span class="n">toys</span><span class="p">;</span>
+
+<span class="n">ERROR</span><span class="p">:</span> <span class="n">Unknown</span> <span class="n">command</span> <span class="s1">&#39;\\&#39;</span>
+</pre></div>
+</div>
+<p>Generally, nodes will return <code class="docutils literal notranslate"><span class="pre">Unknown</span> <span class="pre">command</span></code> error messages if the cluster is experiencing a temporary split—that is to say, a portion of the nodes lose connectivity to the <a class="reference internal" href="../documentation/glossary.html#term-primary-component"><span class="xref std std-term">Primary Component</span></a>. You can confirm this by executing a <code class="docutils literal notranslate"><span class="pre">SHOW</span> <span class="pre">STATUS</span></code> statement on a node that’s having this problem:</p>
+<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="k">SHOW</span> <span class="n">STATUS</span> <span class="k">LIKE</span> <span class="s1">&#39;wsrep_local_state_comment&#39;</span><span class="p">;</span>
+
+<span class="o">+---------------------------+-------------+</span>
+<span class="o">|</span> <span class="n">Variable_name</span>             <span class="o">|</span> <span class="n">Value</span>       <span class="o">|</span>
+<span class="o">+---------------------------+-------------+</span>
+<span class="o">|</span> <span class="n">wsrep_local_state_comment</span> <span class="o">|</span> <span class="n">Initialized</span> <span class="o">|</span>
+<span class="o">+---------------------------+-------------+</span>
+</pre></div>
+</div>
+<p>A value of <code class="docutils literal notranslate"><span class="pre">Inialized</span></code> is a weak result; <code class="docutils literal notranslate"><span class="pre">Synced</span></code> is preferred.  This node is not associated with the Primary Component.  The node realizes it’s part of a cluster, but considers itself out-of-sync with the global state of the cluster.</p>
+<p>This problem occurs when you have explicitly set the wsrep Provider (i.e., the <a class="reference internal" href="../documentation/mysql-wsrep-options.html#wsrep-provider"><span class="std std-ref">wsrep_provider</span></a>), but the wsrep Provider rejects service.  This will happen when the node is unable to connect to the <a class="reference internal" href="../documentation/glossary.html#term-primary-component"><span class="xref std std-term">Primary Component</span></a>.  It will occur if the <a class="reference internal" href="../documentation/mysql-wsrep-options.html#wsrep-cluster-address"><span class="std std-ref">wsrep_cluster_address</span></a> parameter is unset.  It can also happen due to networking problems.</p>
+<p>You can’t resolve the problem by restarting the node. Nodes that were part of non-operational component, that are not part of the Primary Component, will drop any previous client connections.  Any new client connections to the nodes will receive <code class="docutils literal notranslate"><span class="pre">Unknown</span> <span class="pre">command</span></code> errors.  There isn’t a more appropriate error message because MySQL and MariaDB don’t have an error code for the node lacking Primary status. So it defaults to an <code class="docutils literal notranslate"><span class="pre">Unknown</span> <span class="pre">command</span></code> message.</p>
+<p>The node will not process any SQL statements, writes or reads, except for <code class="docutils literal notranslate"><span class="pre">SET</span></code> and <code class="docutils literal notranslate"><span class="pre">SHOW</span></code> statements.  These two types of SQL statements are what’s needed to resolve the problem so that the node can resynchronize with the cluster.</p>
+<p class="section-heading rubric">Work-Around</p>
+<p>Given the above scenario, the only resolution is for nodes that are in a non-operational component, to regain network connectivity with the Primary Component. Then they can process a state transfer and be resynchronized with the cluster. Only then can they can resume normal operation and process SQL statements from clients.</p>
+<p>There is one work-around for this situation:  You can set the <a class="reference internal" href="../documentation/mysql-wsrep-options.html#wsrep-on"><span class="std std-ref">wsrep_on</span></a> variable to <code class="docutils literal notranslate"><span class="pre">OFF</span></code>. This will have it bypass the wsrep Provider check. You can do this on the fly from the mysql client, but it would be better to do so by editing the configuration file on the problem node:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>wsrep_on=OFF
+read_only=ON
+</pre></div>
+</div>
+<p>This tells <code class="docutils literal notranslate"><span class="pre">mysqld</span></code> to ignore the <a class="reference internal" href="../documentation/mysql-wsrep-options.html#wsrep-provider"><span class="std std-ref">wsrep_provider</span></a> setting and behave as a standard stand-alone database server.  It will disable replication, though.  Since it’s not synchronizing with the other nodes, it’s the same effect.  The difference is that clients will have access to the local database to execute <code class="docutils literal notranslate"><span class="pre">SELECT</span></code> statements.</p>
+<p>The problem with this work-around is that the node will not only execute reads, it will process writes from clients connected to it. This can lead to data inconsistency with the other nodes whenever you’re able to reconnect it to the cluster.  That’s why the second line here is included: setting the <code class="docutils literal notranslate"><span class="pre">read_only</span></code> parameter to ON will prevent any users other than super users from being able to change data.</p>
+<p class="section-heading rubric">Solution</p>
+<p>If you know or suspect that a cluster doesn’t have a <a class="reference internal" href="../documentation/glossary.html#term-primary-component"><span class="xref std std-term">Primary Component</span></a>, you need to bootstrap a new one.  There are a couple of queries you’ll need to run on each node in the cluster.</p>
+<p>First you will need to confirm which nodes, if any, are not part of the Primary Component.  You can do this by checking the <a class="reference internal" href="../documentation/galera-status-variables.html#wsrep-cluster-status"><span class="std std-ref">wsrep_cluster_status</span></a> status variable.  Execute the following <code class="docutils literal notranslate"><span class="pre">SHOW</span> <span class="pre">STATUS</span></code> statement on each node:</p>
+<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="k">SHOW</span> <span class="n">STATUS</span> <span class="k">LIKE</span> <span class="s1">&#39;wsrep_cluster_status&#39;</span><span class="p">;</span>
+
+<span class="o">+----------------------+-------------+</span>
+<span class="o">|</span> <span class="n">Variable_name</span>        <span class="o">|</span> <span class="n">Value</span>       <span class="o">|</span>
+<span class="o">+----------------------+-------------+</span>
+<span class="o">|</span> <span class="n">wsrep_cluster_status</span> <span class="o">|</span> <span class="n">Non_primary</span> <span class="o">|</span>
+<span class="o">+----------------------+-------------+</span>
+</pre></div>
+</div>
+<p>If this query returns a value of <code class="docutils literal notranslate"><span class="pre">Primary</span></code>, the node is part of the Primary Component.  If it returns any other value, it indicates the node is part of a non-operational component. In the example here, the results clearly show that it’s not part of the Primary Component.</p>
+<p>Given the scenario described above, none of the nodes will probably show <code class="docutils literal notranslate"><span class="pre">Primary</span></code> for the results of this SQL statement. If any nodes do, you still have a viable cluster. It’s just a matter of determining what’s preventing the other nodes from not connecting:  network problems, security obstructions from SELinux or the firewall, etc.</p>
+<p>Assuming none of the nodes are part of the Primary Component, you will need restart the cluster. To prepare for this, find the sequence number of the last committed transaction on each node.  You can do this by getting the value of the <a class="reference internal" href="../documentation/galera-status-variables.html#wsrep-last-committed"><span class="std std-ref">wsrep_last_committed</span></a> status variable. Execute the <code class="docutils literal notranslate"><span class="pre">SHOW</span> <span class="pre">STATUS</span></code> statement on each node like this:</p>
+<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="k">SHOW</span> <span class="n">STATUS</span> <span class="k">LIKE</span> <span class="s1">&#39;wsrep_last_committed&#39;</span><span class="p">;</span>
+
+<span class="o">+----------------------+--------+</span>
+<span class="o">|</span> <span class="n">Variable_name</span>        <span class="o">|</span> <span class="n">Value</span>  <span class="o">|</span>
+<span class="o">+----------------------+--------+</span>
+<span class="o">|</span> <span class="n">wsrep_last_committed</span> <span class="o">|</span> <span class="mi">409745</span> <span class="o">|</span>
+<span class="o">+----------------------+--------+</span>
+</pre></div>
+</div>
+<p>You’re trying to determine which node has the highest sequence number.  You can assume that that node is the most up-to-date one.  It will be the node you’ll use to bootstrap a new cluster, to be the seed node with which all of the other nodes will synchronize.</p>
+<p>On that most advanced node, execute the following <code class="docutils literal notranslate"><span class="pre">SET</span></code> statement:</p>
+<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="kt">SET</span> <span class="n">GLOBAL</span> <span class="n">wsrep_provider_options</span><span class="o">=</span><span class="s1">&#39;pc.bootstrap=YES&#39;</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>This node will now operate as the starting point in a new Primary Component.  Nodes that are part of non-operational components and have network connectivity will attempt to initiate a state transfer to bring their own databases up-to-date with this node.  At that point, the cluster will begin accepting SQL requests again.</p>
+<div class="bottom-links docutils container">
+<p>Related Documents</p>
+<ul class="simple">
+<li><a class="reference internal" href="../documentation/mysql-wsrep-options.html#wsrep-cluster-address"><span class="std std-ref">wsrep_cluster_address</span></a></li>
+<li><a class="reference internal" href="../documentation/galera-status-variables.html#wsrep-cluster-status"><span class="std std-ref">wsrep_cluster_status</span></a></li>
+<li><a class="reference internal" href="../documentation/galera-status-variables.html#wsrep-last-committed"><span class="std std-ref">wsrep_last_committed</span></a></li>
+<li><a class="reference internal" href="../documentation/mysql-wsrep-options.html#wsrep-on"><span class="std std-ref">wsrep_on</span></a></li>
+<li><a class="reference internal" href="../documentation/mysql-wsrep-options.html#wsrep-provider"><span class="std std-ref">wsrep_provider</span></a></li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/logo.png" alt="Logo"/>
+            </a></p>
+<h1 class="logo"><a href="../index.html">Galera Cluster</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../documentation/index.html">The Codership Documentation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">The Codership Knowledge Base</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="index.html#troubleshooting-articles">Troubleshooting Articles</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#best-practices-articles">Best Practices Articles</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="node-crash-during-sst.html">Node Crashes during SST</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sst-fails-sql-syntax-error.html">SST Fails with SQL Syntax Errors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="requested-state-transfer-failed.html">Requested State Transfer Failed</a></li>
+<li class="toctree-l3"><a class="reference internal" href="stall-on-alter-table.html">Cluster Stalls on <code class="docutils literal notranslate"><span class="pre">ALTER</span> <span class="pre">TABLE</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="user-changes.html">User Changes not Replicating</a></li>
+<li class="toctree-l3"><a class="reference internal" href="auto-increment-multiples.html">AUTO_INCREMENT Increasing by Multiples</a></li>
+<li class="toctree-l3"><a class="reference internal" href="deadlock-found.html">Deadlock Found during a Transaction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="resolve-commit-failure.html">Commit Failed for Reason 3</a></li>
+<li class="toctree-l3"><a class="reference internal" href="multi-master-conflicts.html">Multi-Master Conflicts</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Unknown Command Errors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="group-commit.html">Group Commit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="large-transactions.html">Handling Large Transactions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="parallel-slave-threads.html">Setting Parallel Slave Threads</a></li>
+<li class="toctree-l3"><a class="reference internal" href="detecting-slow-node.html">Detecting a Slow Node</a></li>
+<li class="toctree-l3"><a class="reference internal" href="wan-latency.html">WAN Latency</a></li>
+<li class="toctree-l3"><a class="reference internal" href="wan-replication.html">WAN Replication</a></li>
+<li class="toctree-l3"><a class="reference internal" href="customizing-gcache-size.html">Customizing the Write-Set Cache Size</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gcache-during-state-transfers.html">Write-Set Caching during State Transfers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="single-master-setup.html">Single Master Setup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="multi-master-setup.html">Multi-Master Setup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="two-node-clusters.html">Two-Node Clusters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="setting-selinux-policy.html">Setting an SELinux Policy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sync-transaction-before-another.html">Synchronizing a Transaction Before Executing Another</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../training/index.html">Codership Training</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../whats-new.html">What’s New</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../editors/index.html">Codership Writers &amp; Editors</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">The Codership Knowledge Base</a><ul>
+      <li>Previous: <a href="multi-master-conflicts.html" title="previous chapter">Multi-Master Conflicts</a></li>
+      <li>Next: <a href="group-commit.html" title="next chapter">Group Commit</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+	<div class="navbar">
+	<nav id="site-navigation" class="navigation main-navigation" role="navigation">
+	<div class="nav-bar-container">
+
+	<div id="menu-nav-bar" class="nav-menu">
+		<ul class="nav-link">
+			<li> </li>
+
+		</ul>
+
+	</div>
+	</nav>
+
+	<footer id="colophon" class="site-footer" role="contentinfo">
+	<div class="top">	<div class="powered-by"><p>Powered by Galera:</p>
+	<p><a href="https://mariadb.com/kb/en/galera/"><img class="alignleft size-full wp-image-237" alt="MariaDB" src="https://galeracluster.com/wp-content/uploads/2013/10/logo-mariadb.png" width="166" height="49" /></a></p>
+		</div></div>
+	<div class="footer-menu">
+	<div class="menu-main-menu-container">
+	<ul id="menu-main-menu-1" class="nav-menu">
+	<li class="link-home menu-item menu-item-type-post_type menu-item-object-page menu-item-359"><a href="https://galeracluster.com/">Home</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-35"><a href="https://galeracluster.com/products/">Products</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="https://galeracluster.com/downloads/">Downloads</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-12 current_page_item current-menu-ancestor current-menu-parent current_page_parent current_page_ancestor menu-item-has-children menu-item-33"><a href="https://galeracluster.com/support/">Support</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="https://galeracluster.com/community/">Community</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-31"><a href="https://galeracluster.com/company/">Company</a></li>
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-297"><a href="https://galeracluster.com/category/blog/">Blog</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-38"><a href="https://galeracluster.com/contact-us/">Contact us</a></li>
+	</ul></div>			</div><!-- .footer-menu -->
+
+
+	<div class="footer-bar">
+	<p class="copyright">2014 Codership Ltd.</p>
+	</div>
+	<div class="footnote">
+	<h2>Your data is invaluable. We're here to secure it. All of it.</h2>
+	</div>
+	</footer><!-- #colophon -->
+
+
+
+
+  </body>
+</html>

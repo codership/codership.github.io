@@ -1,0 +1,391 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><meta content="Configuring SSL with Galera Cluster" name="title" />
+<meta content="en-US" name="language" />
+<meta content="galera cluster, configure, ssl certificate, security, ports" name="keywords" />
+<meta content="Codership Oy, 2014 - 2020. All Rights Reserved." name="copyright" />
+
+    <title>SSL Configuration &#8212; Galera Cluster Documentation</title>
+    <link rel="stylesheet" href="../_static/reset-style.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="SSL for State Snapshot Transfers" href="ssl-sst.html" />
+    <link rel="prev" title="SSL Certificates" href="ssl-cert.html" />
+
+
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<link rel="stylesheet" href="/library/_static/basic-style.css">
+<link rel="stylesheet" href="/library/_static/header.css">
+<link rel="stylesheet" href="/library/_static/footer.css">
+<link rel="stylesheet" href="/library/_static/codership.css">
+<link rel="stylesheet" media="screen and (max-width: 500px)" href="/library/_static/mobile.css"/>
+<link rel="stylesheet" media="screen and (min-width:501px) and (max-width:1024px)" href="/library/_static/tablet.css"/>
+<link rel="stylesheet" media="screen and (prefers-color-scheme: dark)" href="/library/_static/dark.css"/>
+
+
+<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Feed" href="https://galeracluster.com/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Comments Feed" href="https://galeracluster.com/comments/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Support Comments Feed" href="https://galeracluster.com/support/feed/" />
+
+<script type='text/javascript' src='https://galeracluster.com/wp-includes/js/comment-reply.min.js?ver=3.8.3'></script>
+
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://galeracluster.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://galeracluster.com/wp-includes/wlwmanifest.xml" />
+<link rel='prev' title='Downloads' href='https://galeracluster.com/downloads/' />
+<link rel='next' title='Community' href='https://galeracluster.com/community/' />
+<meta name="generator" content="WordPress 3.8.3" />
+
+<link rel='shortlink' href='https://galeracluster.com/?p=12' />
+
+<style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>
+<style type="text/css" id="twentythirteen-header-css">
+			.site-title,
+			.site-description {
+				position: absolute;
+				clip: rect(1px 1px 1px 1px); /* IE7 */
+				clip: rect(1px, 1px, 1px, 1px);
+			}
+				.site-header .home-link {
+				min-height: 0;
+			}
+</style>
+
+<script type="text/javascript">
+
+		  var _gaq = _gaq || [];
+		  _gaq.push(['_setAccount', 'UA-35163478-6']);
+		  _gaq.push(['_trackPageview']);
+
+		  (function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'https://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		  })();
+
+</script>
+
+  </head><body>
+	<div id="fb-root"></div>
+	<script>(function(d, s, id) {
+		  var js, fjs = d.getElementsByTagName(s)[0];
+		  if (d.getElementById(id)) return;
+		  js = d.createElement(s); js.id = id;
+		  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+		  fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));
+	</script>
+
+	<div id="page" class="hfeed site">
+
+	<header id="masthead" class="site-header" role="banner">
+
+	<div class="top">
+	<a class="home-link" href="https://galeracluster.com/" title="Galera Cluster for MySQL" rel="home">
+	<h1 class="site-title">Galera Cluster for MySQL</h1>
+	<h2 class="site-description">The world&#039;s most advanced open source database cluster</h2>
+	</a>
+	</div>
+
+
+	<div id="navbar" class="navbar">
+	<nav id="site-navigation" class="navigation main-navigation" role="navigation">
+	<div class="menu-main-menu-container">
+
+	<ul id="menu-main-menu" class="nav-menu">
+	<li id="menu-item-359" class="link-home menu-item menu-item-type-post_type menu-item-object-page menu-item-359"><a href="https://galeracluster.com/">Home</a></li>
+	<li id="menu-item-35" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-35"><a href="https://galeracluster.com/products/">Products</a></li>
+	<li id="menu-item-34" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="https://galeracluster.com/downloads/">Downloads</a></li>
+	<li id="menu-item-33" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-12 current_page_item current-menu-ancestor current-menu-parent current_page_parent current_page_ancestor menu-item-has-children menu-item-33"><a href="https://galeracluster.com/support/">Support</a></li>
+	<li id="menu-item-32" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="https://galeracluster.com/community/">Community</a></li>
+	<li id="menu-item-31" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-31"><a href="https://galeracluster.com/company/">Company</a></li>
+	<li id="menu-item-297" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-297"><a href="https://galeracluster.com/category/blog/">Blog</a></li>
+	<li id="menu-item-38" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-38"><a href="https://galeracluster.com/contact-us/">Contact us</a></li>
+	</ul>
+	</div>
+
+
+	</nav><!-- #site-navigation -->
+
+	</div><!-- #navbar -->
+	</header><!-- #masthead -->
+
+
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="left-margin docutils container">
+<div class="left-margin-top docutils container">
+<a class="reference internal" href="../index.html"><span class="doc">The Library</span></a></div>
+<div class="left-margin-content docutils container">
+<ul class="here simple">
+<li><a class="reference internal" href="index.html"><span class="doc">Documentation</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../kb/index.html"><span class="doc">Knowledge Base</span></a></li>
+<li><a class="reference internal" href="../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="sub-links simple">
+<li><a class="reference internal" href="../training/tutorials/index.html"><span class="doc">Tutorial Articles</span></a></li>
+<li><a class="reference internal" href="../training/videos/index.html"><span class="doc">Training Videos</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a></li>
+</ul>
+<p>Related Documents</p>
+<ul class="simple">
+<li><a class="reference internal" href="ssl-cert.html"><span class="doc">SSL Certificates</span></a></li>
+<li><a class="reference internal" href="ssl-sst.html"><span class="doc">SSL for State Snapshot Transfers</span></a></li>
+<li><a class="reference internal" href="galera-parameters.html"><span class="doc">Galera Parameters</span></a></li>
+<li><a class="reference internal" href="galera-parameters.html#socket-ssl-key"><span class="std std-ref">socket.ssl_key</span></a></li>
+<li><a class="reference internal" href="galera-parameters.html#socket-ssl-cert"><span class="std std-ref">socket.ssl_cert</span></a></li>
+<li><a class="reference internal" href="galera-parameters.html#socket-ssl-ca"><span class="std std-ref">socket.ssl_ca</span></a></li>
+<li><a class="reference internal" href="mysql-wsrep-options.html#wsrep-provider-options"><span class="std std-ref">wsrep_provider_options</span></a></li>
+<li><a class="reference internal" href="galera-parameters.html#socket-checksum"><span class="std std-ref">socket.checksum</span></a></li>
+<li><a class="reference internal" href="galera-parameters.html#socket-ssl-cipher"><span class="std std-ref">socket.ssl_cipher</span></a></li>
+</ul>
+</div>
+</div>
+<div class="top-links docutils container">
+<ul class="simple">
+<li><a class="reference external" href="https://galeracluster.com">Home</a></li>
+</ul>
+<ul class="here simple">
+<li><a class="reference internal" href="index.html"><span class="doc">Docs</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../kb/index.html"><span class="doc">KB</span></a></li>
+</ul>
+<ul class="nav-wider simple">
+<li><a class="reference internal" href="../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a></li>
+</ul>
+</div>
+<div class="library-document section" id="ssl-configuration">
+<span id="ssl-config"></span><h1>SSL Configuration<a class="headerlink" href="#ssl-configuration" title="Permalink to this headline">¶</a></h1>
+<p>When you finish generating the SSL certificates for your cluster, you need to enable it for each node.  If you have not yet generated the SSL certificates, see <a class="reference internal" href="ssl-cert.html"><span class="doc">SSL Certificates</span></a> for a guide on how to do so.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">For Galera Cluster, SSL configurations are not dynamic.  Since they must be set on every node in the cluster, if you are enabling this feature with a running cluster you need to restart the entire cluster.</p>
+</div>
+<p class="section-heading rubric" id="enable-ssl">Enabling SSL</p>
+<p>There are three vectors that you can secure through <abbr title="Secure Socket Layer">SSL</abbr>: traffic between the database server and client, replication traffic within Galera Cluster, and the <a class="reference internal" href="glossary.html#term-state-snapshot-transfer"><span class="xref std std-term">State Snapshot Transfer</span></a>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The configurations shown here cover the first two.  The procedure for securing state snapshot transfers through SSL varies depending on the SST method you use.  For more information, see <a class="reference internal" href="ssl-sst.html"><span class="doc">SSL for State Snapshot Transfers</span></a>.</p>
+</div>
+<p class="sub-heading rubric" id="securing-database">Securing the Database</p>
+<p>For securing database server and client connections, you can use the internal MySQL <abbr title="Secure Socket Layer">SSL</abbr> support.  In the event that you use logical transfer methods for state snapshot transfer, such as <code class="docutils literal notranslate"><span class="pre">mysqldump</span></code>, this is the only step you need to take in securing your state snapshot transfers.</p>
+<p>In the configuration file, (<code class="docutils literal notranslate"><span class="pre">my.cnf</span></code>), add the follow parameters to each unit:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="c1"># MySQL Server</span>
+<span class="k">[mysqld]</span>
+<span class="na">ssl-ca</span> <span class="o">=</span> <span class="s">/path/to/ca-cert.pem</span>
+<span class="na">ssl-key</span> <span class="o">=</span> <span class="s">/path/to/server-key.pem</span>
+<span class="na">ssl-cert</span> <span class="o">=</span> <span class="s">/path/to/server-cert.pem</span>
+
+<span class="c1"># MySQL Client Configuration</span>
+<span class="k">[mysql]</span>
+<span class="na">ssl-ca</span> <span class="o">=</span> <span class="s">/path/to/ca-cert.pem</span>
+<span class="na">ssl-key</span> <span class="o">=</span> <span class="s">/path/to/client-key.pem</span>
+<span class="na">ssl-cert</span> <span class="o">=</span> <span class="s">/path/to/client-cert.pem</span>
+</pre></div>
+</div>
+<p>These parameters tell the database server and client which files to use in encrypting and decrypting their interactions through <abbr title="Secure Socket Layer">SSL</abbr>.  The node will begin to use them once it restarts.</p>
+<p class="sub-heading rubric" id="securing-replication-traffic">Securing Replication Traffic</p>
+<p>In order to enable SSL on the internal node processes, you need to define the paths to the key, certificate and certificate authority files that you want the node to use in encrypting replication traffic.</p>
+<ul class="simple">
+<li><a class="reference internal" href="galera-parameters.html#socket-ssl-key"><span class="std std-ref">socket.ssl_key</span></a> The key file.</li>
+<li><a class="reference internal" href="galera-parameters.html#socket-ssl-cert"><span class="std std-ref">socket.ssl_cert</span></a> The certificate file.</li>
+<li><a class="reference internal" href="galera-parameters.html#socket-ssl-ca"><span class="std std-ref">socket.ssl_ca</span></a> The certificate authority file.</li>
+</ul>
+<p>You can configure these options through the <a class="reference internal" href="mysql-wsrep-options.html#wsrep-provider-options"><span class="std std-ref">wsrep_provider_options</span></a> parameter in the configuration file, (that is, <code class="docutils literal notranslate"><span class="pre">my.cnf</span></code>).</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;socket.ssl_key=/path/to/server-key.pem;socket.ssl_cert=/path/to/server-cert.pem;socket.ssl_ca=/path/to/cacert.pem&quot;</span>
+</pre></div>
+</div>
+<p>This tells Galera Cluster which files to use in encrypting and decrypting replication traffic through SSL.  The node will begin to use them once it restarts.</p>
+<p class="section-heading rubric" id="configuring-ssl">Configuring SSL</p>
+<p>In the event that you want or need to further configure how the node uses <abbr title="Secure Sockets Layer">SSL</abbr>, Galera Cluster provides some additional parameters, including defining the cyclic redundancy check and setting the cryptographic cipher algorithm you want to use.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">For a complete list of available configurations available for <abbr title="Secure Sockets Layer">SSL</abbr>, see the options with the <code class="docutils literal notranslate"><span class="pre">socket.</span></code> prefix at <a class="reference internal" href="galera-parameters.html"><span class="doc">Galera Parameters</span></a>.</p>
+</div>
+<p class="sub-heading rubric" id="configuring-socket-checksum">Configuring the Socket Checksum</p>
+<p>Using the <a class="reference internal" href="galera-parameters.html#socket-checksum"><span class="std std-ref">socket.checksum</span></a> parameter, you can define whether or which cyclic redundancy check the node uses in detecting errors.  There are three available settings for this parameter, which are defined by an integer:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">0</span></code> Disables the checksum.</li>
+<li><code class="docutils literal notranslate"><span class="pre">1</span></code> Enables the CRC-32 checksum.</li>
+<li><code class="docutils literal notranslate"><span class="pre">2</span></code> Enables the CRC-32C checksum.</li>
+</ul>
+<p>The default configuration for this parameter is <code class="docutils literal notranslate"><span class="pre">1</span></code> or <code class="docutils literal notranslate"><span class="pre">2</span></code> depending upon your version.  CRC-32C is optimized for and potentially hardware accelerated on Intel CPU’s.</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span> <span class="o">=</span> <span class="s">&quot;socket.checksum=2&quot;</span>
+</pre></div>
+</div>
+<p class="sub-heading rubric" id="configuring-cipher">Configuring the Encryption Cipher</p>
+<p>Using the <a class="reference internal" href="galera-parameters.html#socket-ssl-cipher"><span class="std std-ref">socket.ssl_cipher</span></a> parameter, one can override the default <abbr title="Secure Sockets Layer">SSL</abbr> cipher the node uses to encrypt replication traffic.  Galera Cluster uses whatever ciphers are available to the <abbr title="Secure Sockets Layer">SSL</abbr> implementation installed on the nodes. For instance, if you install OpenSSL on your node, Galera Cluster can use any cipher supported by OpenSSL, as well as use filters to ensure that “weak” algorithms are not accepted on connection handshake.</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span> <span class="o">=</span> <span class="s">&quot;socket.ssl_cipher=ALL:!EXP:!NULL:!ADH:!LOW:!SSLv2:!SSLv3:!MD5:!RC4:!RSA&quot;</span>
+</pre></div>
+</div>
+<div class="bottom-links docutils container">
+<p>Related Documents</p>
+<ul class="simple">
+<li><a class="reference internal" href="ssl-cert.html"><span class="doc">SSL Certificates</span></a></li>
+<li><a class="reference internal" href="ssl-sst.html"><span class="doc">SSL for State Snapshot Transfers</span></a></li>
+<li><a class="reference internal" href="galera-parameters.html"><span class="doc">Galera Parameters</span></a></li>
+<li><a class="reference internal" href="galera-parameters.html#socket-ssl-key"><span class="std std-ref">socket.ssl_key</span></a></li>
+<li><a class="reference internal" href="galera-parameters.html#socket-ssl-cert"><span class="std std-ref">socket.ssl_cert</span></a></li>
+<li><a class="reference internal" href="galera-parameters.html#socket-ssl-ca"><span class="std std-ref">socket.ssl_ca</span></a></li>
+<li><a class="reference internal" href="mysql-wsrep-options.html#wsrep-provider-options"><span class="std std-ref">wsrep_provider_options</span></a></li>
+<li><a class="reference internal" href="galera-parameters.html#socket-checksum"><span class="std std-ref">socket.checksum</span></a></li>
+<li><a class="reference internal" href="galera-parameters.html#socket-ssl-cipher"><span class="std std-ref">socket.ssl_cipher</span></a></li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/logo.png" alt="Logo"/>
+            </a></p>
+<h1 class="logo"><a href="../index.html">Galera Cluster</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">The Codership Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="overview.html">Overview of Galera Cluster</a></li>
+<li class="toctree-l2"><a class="reference internal" href="technical-description.html">Technical Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html">Installing Galera Cluster</a></li>
+<li class="toctree-l2"><a class="reference internal" href="administration.html">Galera Cluster Administration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deployment.html">Deployment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="monitor.html">Cluster Monitoring</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="security.html">Security</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="firewall-settings.html">Firewall Settings</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="ssl.html">SSL Settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="selinux.html">SELinux Configuration</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="reference.html">Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../kb/index.html">The Codership Knowledge Base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../training/index.html">Codership Training</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../whats-new.html">What’s New</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../editors/index.html">Codership Writers &amp; Editors</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">The Codership Documentation</a><ul>
+  <li><a href="security.html">Security</a><ul>
+  <li><a href="ssl.html">SSL Settings</a><ul>
+      <li>Previous: <a href="ssl-cert.html" title="previous chapter">SSL Certificates</a></li>
+      <li>Next: <a href="ssl-sst.html" title="next chapter">SSL for State Snapshot Transfers</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+	<div class="navbar">
+	<nav id="site-navigation" class="navigation main-navigation" role="navigation">
+	<div class="nav-bar-container">
+
+	<div id="menu-nav-bar" class="nav-menu">
+		<ul class="nav-link">
+			<li> </li>
+
+		</ul>
+
+	</div>
+	</nav>
+
+	<footer id="colophon" class="site-footer" role="contentinfo">
+	<div class="top">	<div class="powered-by"><p>Powered by Galera:</p>
+	<p><a href="https://mariadb.com/kb/en/galera/"><img class="alignleft size-full wp-image-237" alt="MariaDB" src="https://galeracluster.com/wp-content/uploads/2013/10/logo-mariadb.png" width="166" height="49" /></a></p>
+		</div></div>
+	<div class="footer-menu">
+	<div class="menu-main-menu-container">
+	<ul id="menu-main-menu-1" class="nav-menu">
+	<li class="link-home menu-item menu-item-type-post_type menu-item-object-page menu-item-359"><a href="https://galeracluster.com/">Home</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-35"><a href="https://galeracluster.com/products/">Products</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="https://galeracluster.com/downloads/">Downloads</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-12 current_page_item current-menu-ancestor current-menu-parent current_page_parent current_page_ancestor menu-item-has-children menu-item-33"><a href="https://galeracluster.com/support/">Support</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="https://galeracluster.com/community/">Community</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-31"><a href="https://galeracluster.com/company/">Company</a></li>
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-297"><a href="https://galeracluster.com/category/blog/">Blog</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-38"><a href="https://galeracluster.com/contact-us/">Contact us</a></li>
+	</ul></div>			</div><!-- .footer-menu -->
+
+
+	<div class="footer-bar">
+	<p class="copyright">2014 Codership Ltd.</p>
+	</div>
+	<div class="footnote">
+	<h2>Your data is invaluable. We're here to secure it. All of it.</h2>
+	</div>
+	</footer><!-- #colophon -->
+
+
+
+
+  </body>
+</html>

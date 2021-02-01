@@ -1,0 +1,415 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><meta content="Using Docker with Galera Cluster" name="title" />
+<meta content="en-US" name="language" />
+<meta content="galera cluster, containers, docker, container image, firewall" name="keywords" />
+<meta content="Codership Oy, 2014 - 2020. All Rights Reserved." name="copyright" />
+
+    <title>Using Docker &#8212; Galera Cluster Documentation</title>
+    <link rel="stylesheet" href="../_static/reset-style.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Using Jails" href="jails.html" />
+    <link rel="prev" title="Container Deployments" href="containers.html" />
+
+
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<link rel="stylesheet" href="/library/_static/basic-style.css">
+<link rel="stylesheet" href="/library/_static/header.css">
+<link rel="stylesheet" href="/library/_static/footer.css">
+<link rel="stylesheet" href="/library/_static/codership.css">
+<link rel="stylesheet" media="screen and (max-width: 500px)" href="/library/_static/mobile.css"/>
+<link rel="stylesheet" media="screen and (min-width:501px) and (max-width:1024px)" href="/library/_static/tablet.css"/>
+<link rel="stylesheet" media="screen and (prefers-color-scheme: dark)" href="/library/_static/dark.css"/>
+
+
+<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Feed" href="https://galeracluster.com/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Comments Feed" href="https://galeracluster.com/comments/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Support Comments Feed" href="https://galeracluster.com/support/feed/" />
+
+<script type='text/javascript' src='https://galeracluster.com/wp-includes/js/comment-reply.min.js?ver=3.8.3'></script>
+
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://galeracluster.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://galeracluster.com/wp-includes/wlwmanifest.xml" />
+<link rel='prev' title='Downloads' href='https://galeracluster.com/downloads/' />
+<link rel='next' title='Community' href='https://galeracluster.com/community/' />
+<meta name="generator" content="WordPress 3.8.3" />
+
+<link rel='shortlink' href='https://galeracluster.com/?p=12' />
+
+<style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>
+<style type="text/css" id="twentythirteen-header-css">
+			.site-title,
+			.site-description {
+				position: absolute;
+				clip: rect(1px 1px 1px 1px); /* IE7 */
+				clip: rect(1px, 1px, 1px, 1px);
+			}
+				.site-header .home-link {
+				min-height: 0;
+			}
+</style>
+
+<script type="text/javascript">
+
+		  var _gaq = _gaq || [];
+		  _gaq.push(['_setAccount', 'UA-35163478-6']);
+		  _gaq.push(['_trackPageview']);
+
+		  (function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'https://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		  })();
+
+</script>
+
+  </head><body>
+	<div id="fb-root"></div>
+	<script>(function(d, s, id) {
+		  var js, fjs = d.getElementsByTagName(s)[0];
+		  if (d.getElementById(id)) return;
+		  js = d.createElement(s); js.id = id;
+		  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+		  fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));
+	</script>
+
+	<div id="page" class="hfeed site">
+
+	<header id="masthead" class="site-header" role="banner">
+
+	<div class="top">
+	<a class="home-link" href="https://galeracluster.com/" title="Galera Cluster for MySQL" rel="home">
+	<h1 class="site-title">Galera Cluster for MySQL</h1>
+	<h2 class="site-description">The world&#039;s most advanced open source database cluster</h2>
+	</a>
+	</div>
+
+
+	<div id="navbar" class="navbar">
+	<nav id="site-navigation" class="navigation main-navigation" role="navigation">
+	<div class="menu-main-menu-container">
+
+	<ul id="menu-main-menu" class="nav-menu">
+	<li id="menu-item-359" class="link-home menu-item menu-item-type-post_type menu-item-object-page menu-item-359"><a href="https://galeracluster.com/">Home</a></li>
+	<li id="menu-item-35" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-35"><a href="https://galeracluster.com/products/">Products</a></li>
+	<li id="menu-item-34" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="https://galeracluster.com/downloads/">Downloads</a></li>
+	<li id="menu-item-33" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-12 current_page_item current-menu-ancestor current-menu-parent current_page_parent current_page_ancestor menu-item-has-children menu-item-33"><a href="https://galeracluster.com/support/">Support</a></li>
+	<li id="menu-item-32" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="https://galeracluster.com/community/">Community</a></li>
+	<li id="menu-item-31" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-31"><a href="https://galeracluster.com/company/">Company</a></li>
+	<li id="menu-item-297" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-297"><a href="https://galeracluster.com/category/blog/">Blog</a></li>
+	<li id="menu-item-38" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-38"><a href="https://galeracluster.com/contact-us/">Contact us</a></li>
+	</ul>
+	</div>
+
+
+	</nav><!-- #site-navigation -->
+
+	</div><!-- #navbar -->
+	</header><!-- #masthead -->
+
+
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="left-margin docutils container">
+<div class="left-margin-top docutils container">
+<a class="reference internal" href="../index.html"><span class="doc">The Library</span></a></div>
+<div class="left-margin-content docutils container">
+<ul class="here simple">
+<li><a class="reference internal" href="index.html"><span class="doc">Documentation</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../kb/index.html"><span class="doc">Knowledge Base</span></a></li>
+<li><a class="reference internal" href="../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="sub-links simple">
+<li><a class="reference internal" href="../training/tutorials/index.html"><span class="doc">Tutorial Articles</span></a></li>
+<li><a class="reference internal" href="../training/videos/index.html"><span class="doc">Training Videos</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a></li>
+</ul>
+<p>Related Documents</p>
+<ul class="simple">
+<li><a class="reference internal" href="firewall-settings.html"><span class="doc">Firewall Settings</span></a></li>
+<li><a class="reference internal" href="mysql-wsrep-options.html#wsrep-node-address"><span class="std std-ref">wsrep_node_address</span></a></li>
+<li><a class="reference internal" href="mysql-wsrep-options.html#wsrep-node-name"><span class="std std-ref">wsrep_node_name</span></a></li>
+</ul>
+<p>Related Articles</p>
+<ul class="simple">
+<li><a class="reference internal" href="../training/tutorials/starting-cluster.html"><span class="doc">Starting a Cluster</span></a></li>
+</ul>
+</div>
+</div>
+<div class="top-links docutils container">
+<ul class="simple">
+<li><a class="reference external" href="https://galeracluster.com">Home</a></li>
+</ul>
+<ul class="here simple">
+<li><a class="reference internal" href="index.html"><span class="doc">Docs</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../kb/index.html"><span class="doc">KB</span></a></li>
+</ul>
+<ul class="nav-wider simple">
+<li><a class="reference internal" href="../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a></li>
+</ul>
+</div>
+<div class="library-document section" id="using-docker">
+<span id="docker"></span><h1>Using Docker<a class="headerlink" href="#using-docker" title="Permalink to this headline">¶</a></h1>
+<p>Docker provides an open source platform for automatically deploying applications within software containers.</p>
+<p>Galera Cluster can run from within a such a container, within Docker.  You may find containers useful in portable deployment across numerous machines, testing applications that depend on Galera Cluster, or scripting the installation and configuration process.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">This guide assumes that you are only running one container node per server.  For more information on running multiple nodes per server, see <em>Getting Started Galera with Docker, `Part I &lt;https://galeracluster.com/2015/05/getting-started-galera-with-docker-part-1/&gt;`_ and `Part II &lt;https://galeracluster.com/2015/05/getting-started-galera-with-docker-part-2-2/&gt;`_.</em></p>
+</div>
+<p class="section-heading rubric" id="configure-container">Configuring a Container</p>
+<p>Images are the containers that Docker has available to run.  There are a number of base images available through <a class="reference external" href="https://registry.hub.docker.com">Docker Hub</a>.  You can pull these to your system through the <code class="docutils literal notranslate"><span class="pre">docker</span></code> command-line tool.  You can also build new images.</p>
+<p>When Docker builds a new image, it sources a <code class="docutils literal notranslate"><span class="pre">Dockerfile</span></code> to determine the steps that it needs to take in order to generate the image you want to use. This means you can script the installation and configuration process.  Basically, such a script would need to load the needed configuration files, run updates, and install packages when the image is built—all through a single command.  Below is an example of how you might write such a script:</p>
+<div class="highlight-Dockerfile notranslate"><div class="highlight"><pre><span></span><span class="c"># Galera Cluster Dockerfile</span>
+<span class="k">FROM</span><span class="s"> ubuntu:14.04</span>
+<span class="k">MAINTAINER</span><span class="s"> your name &lt;your.user@example.org&gt;</span>
+
+<span class="k">ENV</span> DEBIAN_FRONTEND noninteractive
+
+<span class="k">RUN</span> apt-get update
+<span class="k">RUN</span> apt-get install -y  software-properties-common
+<span class="k">RUN</span> apt-key adv --keyserver keyserver.ubuntu.com --recv BC19DDBA
+<span class="k">RUN</span> add-apt-repository <span class="s1">&#39;deb https://releases.galeracluster.com/galera-3/ubuntu trusty main&#39;</span>
+<span class="k">RUN</span> add-apt-repository <span class="s1">&#39;deb https://releases.galeracluster.com/mysql-wsrep-5.6/ubuntu trusty main&#39;</span>
+
+
+<span class="k">RUN</span> apt-get update
+<span class="k">RUN</span> apt-get install -y galera-3 galera-arbitrator-3 mysql-wsrep-5.6 rsync
+
+<span class="k">COPY</span> my.cnf /etc/mysql/my.cnf
+<span class="k">ENTRYPOINT</span> <span class="p">[</span><span class="s2">&quot;mysqld&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>This example follows the installation process for running Galera Cluster from within a Docker container running on Ubuntu.  When you run the build command, Docker pulls down the Ubuntu 14.04 image from Docker Hub, if it’s needed. It then runs each command in the <code class="docutils literal notranslate"><span class="pre">Dockerfile</span></code> to initialize the image for your use.</p>
+<p class="sub-heading rubric" id="docker-my-cnf">Configuration File</p>
+<p>Before you build the container, you need to create the configuration file for the node.  The <code class="docutils literal notranslate"><span class="pre">COPY</span></code> command in the <code class="docutils literal notranslate"><span class="pre">Dockerfile</span></code> example above copies <code class="docutils literal notranslate"><span class="pre">my.cnf</span></code>, the MySQL configuration file, from the build directory into the container.</p>
+<p>For the most part, the configuration file for a node running within Docker is the same as when the node is running on a standard Linux server.  However, there are some parameters that may not be included in the MySQL configuration file and instead use the default values from the underlying database system—or they may have been set manually, on-the-fly using the <code class="docutils literal notranslate"><span class="pre">SET</span></code> statement.  For these parameters, since Docker can’t access the host system, you may need to set them, manually.</p>
+<ul class="simple">
+<li><a class="reference internal" href="mysql-wsrep-options.html#wsrep-node-address"><span class="std std-ref">wsrep_node_address</span></a>: A node will determine the default address from the IP address on the first network interface.  Containers cannot see the network interfaces on the host system.  Therefore, you will need to set this parameter to ensure the cluster is given the correct IP address for the node.</li>
+<li><a class="reference internal" href="mysql-wsrep-options.html#wsrep-node-name"><span class="std std-ref">wsrep_node_name</span></a>:  A node will determine the default host name from the system hostname.  Containers have their own hostnames distinct from the host system.</li>
+</ul>
+<p>Changes to the <code class="docutils literal notranslate"><span class="pre">my.cnf</span></code> file will not propagate into an existing container.  Therefore, whenever you make changes to the configuration file, run the build again to create a new image with the updated configuration file.  Docker caches each step of the build and only runs those steps that have changed when rebuilding.  For example, using the <code class="docutils literal notranslate"><span class="pre">Dockerfile</span></code> example above, if you rebuild an image after changing <code class="docutils literal notranslate"><span class="pre">my.cnf</span></code>, Docker will run only  the last two steps.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If you need Docker to rerun the entire build, use the <code class="docutils literal notranslate"><span class="pre">--force-rm=true</span></code> option.</p>
+</div>
+<p class="section-heading rubric" id="building-the-container">Building a Container Image</p>
+<p>Building an image simplifies everyting—the node installation, the configuration and the deployment process—by reducing it to a single command.  It will create a server instance where Galera Cluster is already installed, configured and ready to start.</p>
+<p>You can build a container node using the <code class="docutils literal notranslate"><span class="pre">docker</span></code> command-line tool like so:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">#</span> docker build -t ubuntu:galera-node1 ./
+</pre></div>
+</div>
+<p>When this command runs, Docker looks in the current working directory, (i.e., <code class="docutils literal notranslate"><span class="pre">./</span></code>), for the <code class="docutils literal notranslate"><span class="pre">Dockerfile</span></code>.  It then follows each command in the <code class="docutils literal notranslate"><span class="pre">Dockerfile</span></code> to build the image.  When the build is complete, you can view the addition among the available images by executing the following:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">#</span> docker images
+
+<span class="go">REPOSITORY  TAG           IMAGE ID      CREATED        SIZE</span>
+<span class="go">ubuntu      galera-node-1 53b97c3d7740  2 minutes ago  362.7 MB</span>
+<span class="go">ubuntu      14.04         ded7cd95e059  5 weeks ago    185.5 MB</span>
+</pre></div>
+</div>
+<p>You can see in the results here that there is a working node image available for use as a container.  You would launch it executing <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">run</span></code> at the command-line.  You would repeat the build process on each server to create a node container image for Galera Cluster.</p>
+<p>You would then update the container tag to help differentiate between each node by executing something like this:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">[root@node2]#</span> docker build -t ubuntu:galera-node2 ./
+<span class="gp">[root@node3]#</span> docker build -t ubuntu:galera-node3 ./
+</pre></div>
+</div>
+<p class="section-heading rubric" id="deploy-container">Deploying a Container</p>
+<p>When you finish building an image, you’re ready to launch the node container.  For each node, start the container using the Docker command-line tool with the <code class="docutils literal notranslate"><span class="pre">run</span></code> argument like so:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">#</span> docker run -i -d --name Node1 --host node1 <span class="se">\</span>
+      -p <span class="m">3306</span>:3306 -p <span class="m">4567</span>:4567 -p <span class="m">4568</span>:4568 -p <span class="m">4444</span>:4444 <span class="se">\</span>
+      -v /var/container_data/mysql:/var/lib/mysql <span class="se">\</span>
+      ubuntu:galera-node1
+</pre></div>
+</div>
+<p>In this example, Docker launches a pre-built Ubuntu container tagged as <code class="docutils literal notranslate"><span class="pre">galera-node1</span></code>, which was built using the example <code class="docutils literal notranslate"><span class="pre">Dockerfile</span></code> from above.  The <code class="docutils literal notranslate"><span class="pre">ENTRYPOINT</span></code> parameter is set to <code class="docutils literal notranslate"><span class="pre">/bin/mysqld</span></code> so that the container launches the database server when starting.  You would modify the <code class="docutils literal notranslate"><span class="pre">--name</span></code> option in the example here for each node container you start.</p>
+<p>You’ll notice in the example here there are several <code class="docutils literal notranslate"><span class="pre">-p</span></code> options included. Those are described in the next section on Firewall Settings.  The <code class="docutils literal notranslate"><span class="pre">-v</span></code> option is described in the section after it on Persistent Data.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The above command starts a container node meant to be attached to an existing cluster.  If you’re starting the first node in a cluster, append the argument <code class="docutils literal notranslate"><span class="pre">--wsrep-new-cluster</span></code> to the end of the command.  For more information, see <a class="reference internal" href="../training/tutorials/starting-cluster.html"><span class="doc">Starting a Cluster</span></a>.</p>
+</div>
+<p class="sub-heading rubric" id="docker-firewall">Firewall Settings</p>
+<p>When you launch the Docker container (i.e., <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">run</span></code> as shown above), the series of <code class="docutils literal notranslate"><span class="pre">-p</span></code> options connect the ports on the host system to those in the container.  When the container is launched this way, nodes in the container have the same level of access to the network as the node would if it were running on the host system.</p>
+<p>Use these settings, though, when you run only one container on the server.  If you are running multiple containers on the server, you’ll need a load balancer to handle and direct incoming connections to individual nodes.</p>
+<p>For more information on configuring the firewall for Galera Cluster, see <a class="reference internal" href="firewall-settings.html"><span class="doc">Firewall Settings</span></a>.</p>
+<p class="sub-heading rubric" id="docker-data">Persistent Data</p>
+<p>Docker containers are not meant to carry persistent data.  When you close a container, the data it carries is lost.  To avoid this problem, you can link volumes in the container to directories on the host file system. This is done with the <code class="docutils literal notranslate"><span class="pre">-v</span></code> option when you launch the container.</p>
+<p>In the launch example above (i.e., the <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">run</span></code> lines), the <code class="docutils literal notranslate"><span class="pre">-v</span></code> argument connects the <code class="docutils literal notranslate"><span class="pre">/var/container_data/mysql/</span></code> directory to <code class="docutils literal notranslate"><span class="pre">/var/lib/mysql/</span></code> in the container.  This replaces the local datadir inside the container with a symbolic link to a directory on the host system. This ensures that you won’t lose data when the container restarts.</p>
+<p class="sub-heading rubric">Database Client</p>
+<p>Once you have a container node running, you can execute additional commands on the container using the <code class="docutils literal notranslate"><span class="pre">docker</span> <span class="pre">exec</span></code> command with the container name given with the <code class="docutils literal notranslate"><span class="pre">--name</span></code> parameter.</p>
+<p>Using the example above, if you want access to the database client, you would run the following command:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">#</span> docker <span class="nb">exec</span> -ti Node1 /bin/mysql -u root -p
+</pre></div>
+</div>
+<p>Notice here that <code class="docutils literal notranslate"><span class="pre">Node1</span></code> is the name given with the <code class="docutils literal notranslate"><span class="pre">--name</span></code> parameter in the example earlier.</p>
+<div class="bottom-links docutils container">
+<p>Related Documents</p>
+<ul class="simple">
+<li><a class="reference internal" href="firewall-settings.html"><span class="doc">Firewall Settings</span></a></li>
+<li><a class="reference internal" href="mysql-wsrep-options.html#wsrep-node-address"><span class="std std-ref">wsrep_node_address</span></a></li>
+<li><a class="reference internal" href="mysql-wsrep-options.html#wsrep-node-name"><span class="std std-ref">wsrep_node_name</span></a></li>
+</ul>
+<p>Related Articles</p>
+<ul class="simple">
+<li><a class="reference internal" href="../training/tutorials/starting-cluster.html"><span class="doc">Starting a Cluster</span></a></li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/logo.png" alt="Logo"/>
+            </a></p>
+<h1 class="logo"><a href="../index.html">Galera Cluster</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">The Codership Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="overview.html">Overview of Galera Cluster</a></li>
+<li class="toctree-l2"><a class="reference internal" href="technical-description.html">Technical Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html">Installing Galera Cluster</a></li>
+<li class="toctree-l2"><a class="reference internal" href="administration.html">Galera Cluster Administration</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="deployment.html">Deployment</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="deployment-variants.html">Cluster Deployment Variants</a></li>
+<li class="toctree-l3"><a class="reference internal" href="load-balancing.html">Load Balancing</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="containers.html">Container Deployments</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="monitor.html">Cluster Monitoring</a></li>
+<li class="toctree-l2"><a class="reference internal" href="security.html">Security</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference.html">Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../kb/index.html">The Codership Knowledge Base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../training/index.html">Codership Training</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../whats-new.html">What’s New</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../editors/index.html">Codership Writers &amp; Editors</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">The Codership Documentation</a><ul>
+  <li><a href="deployment.html">Deployment</a><ul>
+  <li><a href="containers.html">Container Deployments</a><ul>
+      <li>Previous: <a href="containers.html" title="previous chapter">Container Deployments</a></li>
+      <li>Next: <a href="jails.html" title="next chapter">Using Jails</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+	<div class="navbar">
+	<nav id="site-navigation" class="navigation main-navigation" role="navigation">
+	<div class="nav-bar-container">
+
+	<div id="menu-nav-bar" class="nav-menu">
+		<ul class="nav-link">
+			<li> </li>
+
+		</ul>
+
+	</div>
+	</nav>
+
+	<footer id="colophon" class="site-footer" role="contentinfo">
+	<div class="top">	<div class="powered-by"><p>Powered by Galera:</p>
+	<p><a href="https://mariadb.com/kb/en/galera/"><img class="alignleft size-full wp-image-237" alt="MariaDB" src="https://galeracluster.com/wp-content/uploads/2013/10/logo-mariadb.png" width="166" height="49" /></a></p>
+		</div></div>
+	<div class="footer-menu">
+	<div class="menu-main-menu-container">
+	<ul id="menu-main-menu-1" class="nav-menu">
+	<li class="link-home menu-item menu-item-type-post_type menu-item-object-page menu-item-359"><a href="https://galeracluster.com/">Home</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-35"><a href="https://galeracluster.com/products/">Products</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="https://galeracluster.com/downloads/">Downloads</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-12 current_page_item current-menu-ancestor current-menu-parent current_page_parent current_page_ancestor menu-item-has-children menu-item-33"><a href="https://galeracluster.com/support/">Support</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="https://galeracluster.com/community/">Community</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-31"><a href="https://galeracluster.com/company/">Company</a></li>
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-297"><a href="https://galeracluster.com/category/blog/">Blog</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-38"><a href="https://galeracluster.com/contact-us/">Contact us</a></li>
+	</ul></div>			</div><!-- .footer-menu -->
+
+
+	<div class="footer-bar">
+	<p class="copyright">2014 Codership Ltd.</p>
+	</div>
+	<div class="footnote">
+	<h2>Your data is invaluable. We're here to secure it. All of it.</h2>
+	</div>
+	</footer><!-- #colophon -->
+
+
+
+
+  </body>
+</html>

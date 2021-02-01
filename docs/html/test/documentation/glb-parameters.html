@@ -1,0 +1,1117 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><meta content="Galera Load Balancer (glbd) Parameters" name="title" />
+<meta content="en-US" name="language" />
+<meta content="galera cluster, load balancing, galera load balancer, glbd, parameters, options" name="keywords" />
+<meta content="Codership Oy, 2014 - 2020. All Rights Reserved." name="copyright" />
+
+    <title>Galera Load Balancer Parameters &#8212; Galera Cluster Documentation</title>
+    <link rel="stylesheet" href="../_static/reset-style.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Versioning Information" href="versioning-information.html" />
+    <link rel="prev" title="XtraBackup Parameters" href="xtrabackup-options.html" />
+
+
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<link rel="stylesheet" href="/library/_static/basic-style.css">
+<link rel="stylesheet" href="/library/_static/header.css">
+<link rel="stylesheet" href="/library/_static/footer.css">
+<link rel="stylesheet" href="/library/_static/codership.css">
+<link rel="stylesheet" media="screen and (max-width: 500px)" href="/library/_static/mobile.css"/>
+<link rel="stylesheet" media="screen and (min-width:501px) and (max-width:1024px)" href="/library/_static/tablet.css"/>
+<link rel="stylesheet" media="screen and (prefers-color-scheme: dark)" href="/library/_static/dark.css"/>
+
+
+<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Feed" href="https://galeracluster.com/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Comments Feed" href="https://galeracluster.com/comments/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Support Comments Feed" href="https://galeracluster.com/support/feed/" />
+
+<script type='text/javascript' src='https://galeracluster.com/wp-includes/js/comment-reply.min.js?ver=3.8.3'></script>
+
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://galeracluster.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://galeracluster.com/wp-includes/wlwmanifest.xml" />
+<link rel='prev' title='Downloads' href='https://galeracluster.com/downloads/' />
+<link rel='next' title='Community' href='https://galeracluster.com/community/' />
+<meta name="generator" content="WordPress 3.8.3" />
+
+<link rel='shortlink' href='https://galeracluster.com/?p=12' />
+
+<style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>
+<style type="text/css" id="twentythirteen-header-css">
+			.site-title,
+			.site-description {
+				position: absolute;
+				clip: rect(1px 1px 1px 1px); /* IE7 */
+				clip: rect(1px, 1px, 1px, 1px);
+			}
+				.site-header .home-link {
+				min-height: 0;
+			}
+</style>
+
+<script type="text/javascript">
+
+		  var _gaq = _gaq || [];
+		  _gaq.push(['_setAccount', 'UA-35163478-6']);
+		  _gaq.push(['_trackPageview']);
+
+		  (function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'https://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		  })();
+
+</script>
+
+  </head><body>
+	<div id="fb-root"></div>
+	<script>(function(d, s, id) {
+		  var js, fjs = d.getElementsByTagName(s)[0];
+		  if (d.getElementById(id)) return;
+		  js = d.createElement(s); js.id = id;
+		  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+		  fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));
+	</script>
+
+	<div id="page" class="hfeed site">
+
+	<header id="masthead" class="site-header" role="banner">
+
+	<div class="top">
+	<a class="home-link" href="https://galeracluster.com/" title="Galera Cluster for MySQL" rel="home">
+	<h1 class="site-title">Galera Cluster for MySQL</h1>
+	<h2 class="site-description">The world&#039;s most advanced open source database cluster</h2>
+	</a>
+	</div>
+
+
+	<div id="navbar" class="navbar">
+	<nav id="site-navigation" class="navigation main-navigation" role="navigation">
+	<div class="menu-main-menu-container">
+
+	<ul id="menu-main-menu" class="nav-menu">
+	<li id="menu-item-359" class="link-home menu-item menu-item-type-post_type menu-item-object-page menu-item-359"><a href="https://galeracluster.com/">Home</a></li>
+	<li id="menu-item-35" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-35"><a href="https://galeracluster.com/products/">Products</a></li>
+	<li id="menu-item-34" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="https://galeracluster.com/downloads/">Downloads</a></li>
+	<li id="menu-item-33" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-12 current_page_item current-menu-ancestor current-menu-parent current_page_parent current_page_ancestor menu-item-has-children menu-item-33"><a href="https://galeracluster.com/support/">Support</a></li>
+	<li id="menu-item-32" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="https://galeracluster.com/community/">Community</a></li>
+	<li id="menu-item-31" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-31"><a href="https://galeracluster.com/company/">Company</a></li>
+	<li id="menu-item-297" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-297"><a href="https://galeracluster.com/category/blog/">Blog</a></li>
+	<li id="menu-item-38" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-38"><a href="https://galeracluster.com/contact-us/">Contact us</a></li>
+	</ul>
+	</div>
+
+
+	</nav><!-- #site-navigation -->
+
+	</div><!-- #navbar -->
+	</header><!-- #masthead -->
+
+
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="left-margin docutils container">
+<div class="left-margin-top docutils container">
+<a class="reference internal" href="../index.html"><span class="doc">The Library</span></a></div>
+<div class="left-margin-content docutils container">
+<ul class="here simple">
+<li><a class="reference internal" href="index.html"><span class="doc">Documentation</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../kb/index.html"><span class="doc">Knowledge Base</span></a></li>
+<li><a class="reference internal" href="../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="sub-links simple">
+<li><a class="reference internal" href="../training/tutorials/index.html"><span class="doc">Tutorial Articles</span></a></li>
+<li><a class="reference internal" href="../training/videos/index.html"><span class="doc">Training Videos</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a></li>
+</ul>
+<p>Related Documents</p>
+<ul class="simple">
+<li><a class="reference internal" href="#glb-config-options"><span class="std std-ref">Configuration Options</span></a></li>
+<li><a class="reference internal" href="glb.html#glb-dest-select"><span class="std std-ref">Destination Policies</span></a></li>
+<li><a class="reference internal" href="#glb-listen-addr"><span class="std std-ref">LISTEN_ADDR</span></a></li>
+<li><a class="reference internal" href="#glb-other-options"><span class="std std-ref">OTHER_OPTIONS</span></a></li>
+<li><a class="reference internal" href="#glb-watchdog"><span class="std std-ref">–watchdog</span></a></li>
+</ul>
+</div>
+</div>
+<div class="top-links docutils container">
+<ul class="simple">
+<li><a class="reference external" href="https://galeracluster.com">Home</a></li>
+</ul>
+<ul class="here simple">
+<li><a class="reference internal" href="index.html"><span class="doc">Docs</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../kb/index.html"><span class="doc">KB</span></a></li>
+</ul>
+<ul class="nav-wider simple">
+<li><a class="reference internal" href="../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a></li>
+</ul>
+</div>
+<div class="library-document section" id="galera-load-balancer-parameters">
+<span id="glb-parameters"></span><h1>Galera Load Balancer Parameters<a class="headerlink" href="#galera-load-balancer-parameters" title="Permalink to this headline">¶</a></h1>
+<p>Galera Load Balancer provides simple TCP connection balancing developed with scalability and performance in mind.  It draws on Pen for inspiration, but its functionality is limited to only balancing TCP connections.</p>
+<p>It can be run either through the <code class="docutils literal notranslate"><span class="pre">service</span></code> command or the command-line interface of <code class="docutils literal notranslate"><span class="pre">glbd</span></code>.  Configuration for Galera Load Balancer depends on which you use to run it.</p>
+<p class="section-heading rubric" id="glb-config-parameters">Configuration Parameters</p>
+<p>When Galera Load Balancer starts as a system service, it reads the <code class="docutils literal notranslate"><span class="pre">glbd.cfg</span></code> configuration file for default parameters you want to use.  Only the <a class="reference internal" href="#glb-listen-addr"><span class="std std-ref">LISTEN_ADDR</span></a> parameter is mandatory.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Parameter</th>
+<th class="head">Default Configuration</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><a class="reference internal" href="#glb-control-addr"><span class="std std-ref">CONTROL_ADDR</span></a></td>
+<td><code class="docutils literal notranslate"><span class="pre">127.0.0.1:8011</span></code></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#glb-control-fifo"><span class="std std-ref">CONTROL_FIFO</span></a></td>
+<td><code class="docutils literal notranslate"><span class="pre">/var/run/glbd.fifo</span></code></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#glb-default-targets"><span class="std std-ref">DEFAULT_TARGETS</span></a></td>
+<td><code class="docutils literal notranslate"><span class="pre">127.0.0.1:80</span> <span class="pre">10.0.1:80</span> <span class="pre">10.0.0.2:80</span></code></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#glb-listen-addr"><span class="std std-ref">LISTEN_ADDR</span></a></td>
+<td><code class="docutils literal notranslate"><span class="pre">8010</span></code></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#glb-max-conn-par"><span class="std std-ref">MAX_CONN</span></a></td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#glb-other-options"><span class="std std-ref">OTHER_OPTIONS</span></a></td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#glb-threads-par"><span class="std std-ref">THREADS</span></a></td>
+<td><code class="docutils literal notranslate"><span class="pre">2</span></code></td>
+</tr>
+</tbody>
+</table>
+<p class="section-heading rubric" id="glb-control-addr"><code class="docutils literal notranslate"><span class="pre">CONTROL_ADDR</span></code></p>
+<p>Defines the IP address and port for controlling connections.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><strong>Command-line Argument</strong></td>
+<td><a class="reference internal" href="#glb-control"><span class="std std-ref">–control</span></a></td>
+</tr>
+<tr class="row-even"><td><strong>Default Configuration</strong></td>
+<td><code class="docutils literal notranslate"><span class="pre">127.0.0.1:8011</span></code></td>
+</tr>
+<tr class="row-odd"><td><strong>Mandatory Parameter</strong></td>
+<td>No</td>
+</tr>
+</tbody>
+</table>
+<p>This is an optional parameter.  Use it to define the server used in controlling client connections.  When using this parameter you must define the port.  In the event that you do not define this parameter, Galera Load Balancer does not open the relevant socket.</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">CONTROL_ADDR</span><span class="o">=</span><span class="s">&quot;127.0.0.1:8011&quot;</span>
+</pre></div>
+</div>
+<p class="section-heading rubric" id="glb-control-fifo"><code class="docutils literal notranslate"><span class="pre">CONTROL_FIFO</span></code></p>
+<p>Defines the path to the FIFO control file.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><strong>Command-line Argument</strong></td>
+<td><a class="reference internal" href="#glb-fifo"><span class="std std-ref">–fifo</span></a></td>
+</tr>
+<tr class="row-even"><td><strong>Default Configuration</strong></td>
+<td><code class="docutils literal notranslate"><span class="pre">/var/run/glbd.fifo</span></code></td>
+</tr>
+<tr class="row-odd"><td><strong>Mandatory Parameter</strong></td>
+<td>No</td>
+</tr>
+</tbody>
+</table>
+<p>This is an optional parameter.  It defines the path to the FIFO control file as is always opened.  In the event that there is already a file at this path, Galera Load Balancer fails to start.</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">CONTROL_FIFO</span><span class="o">=</span><span class="s">&quot;/var/run/glbd.fifo&quot;</span>
+</pre></div>
+</div>
+<p class="section-heading rubric" id="glb-default-targets"><code class="docutils literal notranslate"><span class="pre">DEFAULT_TARGETS</span></code></p>
+<p>Defines the IP addresses and ports of the destination servers.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><strong>Default Configuration</strong></td>
+<td><code class="docutils literal notranslate"><span class="pre">127.0.0.1:80</span> <span class="pre">10.0.0.1:80</span> <span class="pre">10.0.0.2:80:2</span></code></td>
+</tr>
+<tr class="row-even"><td><strong>Mandatory Parameter</strong></td>
+<td>No</td>
+</tr>
+</tbody>
+</table>
+<p>This parameter defines that IP addresses that Galera Load Balancer uses as destination servers.  Specifically, in this case the Galera Cluster nodes that it routes application traffic onto.</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">DEFAULT_TARGETS</span><span class="o">=</span><span class="s">&quot;192.168.1.1 192.168.1.2 192.168.1.3&quot;</span>
+</pre></div>
+</div>
+<p class="section-heading rubric" id="glb-listen-addr"><code class="docutils literal notranslate"><span class="pre">LISTEN_ADDR</span></code></p>
+<p>Defines the IP address and port used for client connections.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><strong>Default Configuration</strong></td>
+<td><code class="docutils literal notranslate"><span class="pre">8010</span></code></td>
+</tr>
+<tr class="row-even"><td><strong>Mandatory Parameter</strong></td>
+<td>Yes</td>
+</tr>
+</tbody>
+</table>
+<p>This parameter defines the IP address and port that Galera Load Balancer listens on for incoming client connections.  The IP address is optional, the port mandatory.  In the event that you define a port without an IP address, Galera Load Balancer listens on that port for all available network interfaces.</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">LISTEN_ADDR</span><span class="o">=</span><span class="s">&quot;8010&quot;</span>
+</pre></div>
+</div>
+<p class="section-heading rubric" id="glb-max-conn-par"><code class="docutils literal notranslate"><span class="pre">MAX_CONN</span></code></p>
+<p>Defines the maximum allowed client connections.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><strong>Default Configuration</strong></td>
+<td><a class="reference internal" href="#glb-max-conn-arg"><span class="std std-ref">–max_conn</span></a></td>
+</tr>
+<tr class="row-even"><td><strong>Mandatory Parameter</strong></td>
+<td>No</td>
+</tr>
+</tbody>
+</table>
+<p>This parameter defines the maximum number of client connections that you want to allow to Galera Load Balancer.  It modifies the system open files limit to accommodate at least this many connections, provided sufficient privileges.  It is recommend that you define this parameter if you expect the number of client connections to exceed five hundred.</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">MAX_CONN</span><span class="o">=</span><span class="s">&quot;135&quot;</span>
+</pre></div>
+</div>
+<p>This option defines the maximum number of client connections that you want allow to Galera Load Balancer. Bear in mind, that it can be operating system dependent.</p>
+<p class="section-heading rubric" id="glb-other-options"><code class="docutils literal notranslate"><span class="pre">OTHER_OPTIONS</span></code></p>
+<p>Defines additional options that you want to pass to Galera Load Balancer.  There is no default configuration and this is not a mandatory parameter.</p>
+<p>This parameter defines various additional options that you would like to pass to Galera Load Balancer, such as a destination selection policy or Watchdog configurations.  Use the same syntax as you would for the command-line arguments.  For more information on the available options, see <a class="reference internal" href="#glb-config-options"><span class="std std-ref">Configuration Options</span></a>.</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">OTHER_OPTIONS</span><span class="o">=</span><span class="s">&quot;--random --watchdog exec:&#39;mysql -utest -ptestpass&#39; --discover&quot;</span>
+</pre></div>
+</div>
+<p class="section-heading rubric" id="glb-threads-par"><code class="docutils literal notranslate"><span class="pre">THREADS</span></code></p>
+<p>Defines the number of threads you want to use.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><strong>Default Configuration</strong></td>
+<td><a class="reference internal" href="#glb-threads-arg"><span class="std std-ref">–threads</span></a></td>
+</tr>
+<tr class="row-even"><td><strong>Mandatory Parameter</strong></td>
+<td>No</td>
+</tr>
+</tbody>
+</table>
+<p>This parameter allows you to define the number of threads (that is, connection pools), which you want to allow Galera Load Balancer to use.  It is advisable that you have at least a few per CPU core.</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">THREADS</span><span class="o">=</span><span class="s">&quot;6&quot;</span>
+</pre></div>
+</div>
+<p class="section-heading rubric" id="glb-config-options">Configuration Options</p>
+<p>When Galera Load Balancer starts as a daemon process, through the <code class="docutils literal notranslate"><span class="pre">/sbin/glbd</span></code> command, it allows you to pass a number of command-line arguments to configure how it operates.  It uses the following syntax:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>/usr/local/sbin/glbd [OPTIONS] LISTEN_ADDRESS [DESTINATION_LIST]
+</pre></div>
+</div>
+<p>In the event that you would like to set any of these options when you run Galera Load Balancer as a service, you can define them through the <a class="reference internal" href="#glb-other-options"><span class="std std-ref">OTHER_OPTIONS</span></a> parameter.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+<col width="25%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Long Argument</th>
+<th class="head">Short</th>
+<th class="head">Type</th>
+<th class="head">Parameter</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><a class="reference internal" href="#glb-control"><span class="std std-ref">–control</span></a></td>
+<td><code class="docutils literal notranslate"><span class="pre">-c</span></code></td>
+<td>IP address</td>
+<td><a class="reference internal" href="#glb-control-addr"><span class="std std-ref">CONTROL_ADDR</span></a></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#glb-daemon"><span class="std std-ref">–daemon</span></a></td>
+<td><code class="docutils literal notranslate"><span class="pre">-d</span></code></td>
+<td>Boolean</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#glb-defer-accept"><span class="std std-ref">–defer-accept</span></a></td>
+<td><code class="docutils literal notranslate"><span class="pre">-a</span></code></td>
+<td>Boolean</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#glb-discover"><span class="std std-ref">–discover</span></a></td>
+<td><code class="docutils literal notranslate"><span class="pre">-D</span></code></td>
+<td>Boolean</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#glb-extra"><span class="std std-ref">–extra</span></a></td>
+<td><code class="docutils literal notranslate"><span class="pre">-x</span></code></td>
+<td>Decimal</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#glb-fifo"><span class="std std-ref">–fifo</span></a></td>
+<td><code class="docutils literal notranslate"><span class="pre">-f</span></code></td>
+<td>File Path</td>
+<td><a class="reference internal" href="#glb-control-fifo"><span class="std std-ref">CONTROL_FIFO</span></a></td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#glb-interval"><span class="std std-ref">–interval</span></a></td>
+<td><code class="docutils literal notranslate"><span class="pre">-i</span></code></td>
+<td>Decimal</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#glb-keepalive"><span class="std std-ref">–keepalive</span></a></td>
+<td><code class="docutils literal notranslate"><span class="pre">-K</span></code></td>
+<td>Boolean</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#glb-latency"><span class="std std-ref">–latency</span></a></td>
+<td><code class="docutils literal notranslate"><span class="pre">-L</span></code></td>
+<td>Integer</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#glb-linger"><span class="std std-ref">–linger</span></a></td>
+<td><code class="docutils literal notranslate"><span class="pre">-l</span></code></td>
+<td>Boolean</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#glb-max-conn-arg"><span class="std std-ref">–max_conn</span></a></td>
+<td><code class="docutils literal notranslate"><span class="pre">-m</span></code></td>
+<td>Integer</td>
+<td><a class="reference internal" href="#glb-max-conn-par"><span class="std std-ref">MAX_CONN</span></a></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#glb-nodelay"><span class="std std-ref">–nodelay</span></a></td>
+<td><code class="docutils literal notranslate"><span class="pre">-n</span></code></td>
+<td>Boolean</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#glb-random"><span class="std std-ref">–random</span></a></td>
+<td><code class="docutils literal notranslate"><span class="pre">-r</span></code></td>
+<td>Boolean</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#glb-round"><span class="std std-ref">–round</span></a></td>
+<td><code class="docutils literal notranslate"><span class="pre">-b</span></code></td>
+<td>Boolean</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#glb-single"><span class="std std-ref">–single</span></a></td>
+<td><code class="docutils literal notranslate"><span class="pre">-S</span></code></td>
+<td>Boolean</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#glb-source"><span class="std std-ref">–source</span></a></td>
+<td><code class="docutils literal notranslate"><span class="pre">-s</span></code></td>
+<td>Boolean</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#glb-threads-arg"><span class="std std-ref">–threads</span></a></td>
+<td><code class="docutils literal notranslate"><span class="pre">-t</span></code></td>
+<td>Integer</td>
+<td><a class="reference internal" href="#glb-threads-par"><span class="std std-ref">THREADS</span></a></td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#glb-top"><span class="std std-ref">–top</span></a></td>
+<td><code class="docutils literal notranslate"><span class="pre">-T</span></code></td>
+<td>Boolean</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#glb-verbose"><span class="std std-ref">–verbose</span></a></td>
+<td><code class="docutils literal notranslate"><span class="pre">-v</span></code></td>
+<td>Boolean</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#glb-watchdog"><span class="std std-ref">–watchdog</span></a></td>
+<td><code class="docutils literal notranslate"><span class="pre">-w</span></code></td>
+<td>String</td>
+<td>&#160;</td>
+</tr>
+</tbody>
+</table>
+<p class="section-heading rubric" id="glb-control"><code class="docutils literal notranslate"><span class="pre">--control</span></code></p>
+<p>Defines the IP address and port for control connections.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><strong>Short Argument</strong></td>
+<td><code class="docutils literal notranslate"><span class="pre">-c</span></code></td>
+</tr>
+<tr class="row-even"><td><strong>Syntax</strong></td>
+<td><code class="docutils literal notranslate"><span class="pre">--control</span> <span class="pre">[IP|Hostname:]port</span></code></td>
+</tr>
+<tr class="row-odd"><td><strong>Type</strong></td>
+<td>IP Address</td>
+</tr>
+<tr class="row-even"><td><strong>Configuration Parameter</strong></td>
+<td><a class="reference internal" href="#glb-control-addr"><span class="std std-ref">CONTROL_ADDR</span></a></td>
+</tr>
+</tbody>
+</table>
+<p>For more information on defining the controlling connections, see the <a class="reference internal" href="#glb-control-addr"><span class="std std-ref">CONTROL_ADDR</span></a> parameter.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">#</span> glbd --control <span class="m">192</span>.168.1.1:80 <span class="m">3306</span> <span class="se">\</span>
+      <span class="m">192</span>.168.1.1 <span class="m">192</span>.168.1.2 <span class="m">192</span>.168.1.3
+</pre></div>
+</div>
+<p class="section-heading rubric" id="glb-daemon"><code class="docutils literal notranslate"><span class="pre">--daemon</span></code></p>
+<p>Defines whether you want Galera Load Balancer to run as a daemon process.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><strong>Short Argument</strong></td>
+<td><code class="docutils literal notranslate"><span class="pre">-d</span></code></td>
+</tr>
+<tr class="row-even"><td><strong>Syntax</strong></td>
+<td><code class="docutils literal notranslate"><span class="pre">--daemon</span></code></td>
+</tr>
+<tr class="row-odd"><td><strong>Type</strong></td>
+<td>Boolean</td>
+</tr>
+</tbody>
+</table>
+<p>This option defines whether you want to start <code class="docutils literal notranslate"><span class="pre">glbd</span></code> as a daemon process.  That is, if you want it to run in the background, instead of claiming the current terminal session.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">#</span> glbd --daemon <span class="m">3306</span> <span class="se">\</span>
+      <span class="m">192</span>.168.1.1 <span class="m">192</span>.168.1.2 <span class="m">192</span>.168.1.3
+</pre></div>
+</div>
+<p class="section-heading rubric" id="glb-defer-accept"><code class="docutils literal notranslate"><span class="pre">--defer-accept</span></code></p>
+<p>Enables TCP deferred acceptance on the listening socket.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><strong>Short Argument</strong></td>
+<td><code class="docutils literal notranslate"><span class="pre">-a</span></code></td>
+</tr>
+<tr class="row-even"><td><strong>Syntax</strong></td>
+<td><code class="docutils literal notranslate"><span class="pre">--defer-accept</span></code></td>
+</tr>
+<tr class="row-odd"><td><strong>Type</strong></td>
+<td>Boolean</td>
+</tr>
+</tbody>
+</table>
+<p>Enabling <code class="docutils literal notranslate"><span class="pre">TCP_DEFER_ACCEPT</span></code> allows Galera Load Balancer to awaken only when data arrives on the listening socket.  It is disabled by default.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">#</span> glbd --defer-accept <span class="m">3306</span> <span class="se">\</span>
+      <span class="m">192</span>.168.1.1 <span class="m">192</span>.168.1.2 <span class="m">192</span>.168.1.3
+</pre></div>
+</div>
+<p class="section-heading rubric" id="glb-discover"><code class="docutils literal notranslate"><span class="pre">--discover</span></code></p>
+<p>Defines whether you want to use watchdog results to discover and set new destinations.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><strong>Short Argument</strong></td>
+<td><code class="docutils literal notranslate"><span class="pre">-D</span></code></td>
+</tr>
+<tr class="row-even"><td><strong>Syntax</strong></td>
+<td><code class="docutils literal notranslate"><span class="pre">--discover</span></code></td>
+</tr>
+<tr class="row-odd"><td><strong>Type</strong></td>
+<td>Boolean</td>
+</tr>
+</tbody>
+</table>
+<p>When you define the <a class="reference internal" href="#glb-watchdog"><span class="std std-ref">–watchdog</span></a> option, this option defines whether Galera Load Balancer uses the return value in discovering and setting new addresses for destination servers.  For instance, after querying for the <a class="reference internal" href="mysql-wsrep-options.html#wsrep-cluster-address"><span class="std std-ref">wsrep_cluster_address</span></a> parameter.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">#</span> glbd --discover -w exec:<span class="s2">&quot;mysql.sh -utest -ptestpass&quot;</span> <span class="m">3306</span> <span class="se">\</span>
+      <span class="m">192</span>.168.1.1 <span class="m">192</span>.168.1.2 <span class="m">192</span>.168.1.3
+</pre></div>
+</div>
+<p class="section-heading rubric" id="glb-extra"><code class="docutils literal notranslate"><span class="pre">--extra</span></code></p>
+<p>Defines whether you want to perform an extra destination poll on connection attempts.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><strong>Short Argument</strong></td>
+<td><code class="docutils literal notranslate"><span class="pre">-x</span></code></td>
+</tr>
+<tr class="row-even"><td><strong>Syntax</strong></td>
+<td><code class="docutils literal notranslate"><span class="pre">--extra</span> <span class="pre">D.DDD</span></code></td>
+</tr>
+<tr class="row-odd"><td><strong>Type</strong></td>
+<td>Decimal</td>
+</tr>
+</tbody>
+</table>
+<p>This option defines whether and when you want Galera Load Balancer to perform an additional destination poll on connection attempts.  The given value indicates how many seconds after the previous poll that you want it to run the extra poll.  By default, the extra polling feature is disabled.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">#</span> glbd --extra <span class="m">1</span>.35 <span class="m">3306</span> <span class="se">\</span>
+      <span class="m">192</span>.168.1.1 <span class="m">192</span>.168.1.2 <span class="m">192</span>.168.1.3
+</pre></div>
+</div>
+<p class="section-heading rubric" id="glb-fifo"><code class="docutils literal notranslate"><span class="pre">--fifo</span></code></p>
+<p>Defines the path to the FIFO control file.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><strong>Short Argument</strong></td>
+<td><code class="docutils literal notranslate"><span class="pre">-f</span></code></td>
+</tr>
+<tr class="row-even"><td><strong>Syntax</strong></td>
+<td><code class="docutils literal notranslate"><span class="pre">--fifo</span> <span class="pre">/path/to/glbd.fifo</span></code></td>
+</tr>
+<tr class="row-odd"><td><strong>Type</strong></td>
+<td>File Path</td>
+</tr>
+<tr class="row-even"><td><strong>Configuration Parameter</strong></td>
+<td><a class="reference internal" href="#glb-control-fifo"><span class="std std-ref">CONTROL_FIFO</span></a></td>
+</tr>
+</tbody>
+</table>
+<p>For more information on using FIFO control files, see the <a class="reference internal" href="#glb-control-fifo"><span class="std std-ref">CONTROL_FIFO</span></a> parameter.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">#</span> glbd --fifo /var/run/glbd.fifo <span class="m">3306</span> <span class="se">\</span>
+      <span class="m">192</span>.168.1.1 <span class="m">192</span>.168.1.2 <span class="m">192</span>.168.1.3
+</pre></div>
+</div>
+<p class="section-heading rubric" id="glb-interval"><code class="docutils literal notranslate"><span class="pre">--interval</span></code></p>
+<p>Defines how often to probe destinations for liveliness.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><strong>Short Argument</strong></td>
+<td><code class="docutils literal notranslate"><span class="pre">-i</span></code></td>
+</tr>
+<tr class="row-even"><td><strong>Syntax</strong></td>
+<td><code class="docutils literal notranslate"><span class="pre">--interval</span> <span class="pre">D.DDD</span></code></td>
+</tr>
+<tr class="row-odd"><td><strong>Type</strong></td>
+<td>Decimal</td>
+</tr>
+</tbody>
+</table>
+<p>This option defines how often Galera Load Balancer checks destination servers for liveliness.  It uses values given in seconds.  By default, it checks every second.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">#</span> glbd --interval <span class="m">2</span>.013 <span class="m">3306</span> <span class="se">\</span>
+      <span class="m">192</span>.168.1.1 <span class="m">192</span>.168.1.2 <span class="m">192</span>.168.1.3
+</pre></div>
+</div>
+<p class="section-heading rubric" id="glb-keepalive"><code class="docutils literal notranslate"><span class="pre">--keepalive</span></code></p>
+<p>Defines whether you want to disable the <code class="docutils literal notranslate"><span class="pre">SO_KEEPALIVE</span></code> socket option on server-side sockets.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><strong>Short Argument</strong></td>
+<td><code class="docutils literal notranslate"><span class="pre">-K</span></code></td>
+</tr>
+<tr class="row-even"><td><strong>Syntax</strong></td>
+<td><code class="docutils literal notranslate"><span class="pre">--keepalive</span></code></td>
+</tr>
+<tr class="row-odd"><td><strong>Type</strong></td>
+<td>Boolean</td>
+</tr>
+</tbody>
+</table>
+<p>Linux systems feature the socket option <code class="docutils literal notranslate"><span class="pre">SO_KEEPALIVE</span></code>, which causes the server to send packets to a remote system in order to main the client connection with the destination server.  This option allows you to disable <code class="docutils literal notranslate"><span class="pre">SO_KEEPALIVE</span></code> on server-side sockets.  It allows <code class="docutils literal notranslate"><span class="pre">SO_KEEPALIVE</span></code> by default.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">#</span> glbd --keepalive <span class="m">3306</span> <span class="se">\</span>
+      <span class="m">192</span>.168.1.1 <span class="m">192</span>.168.1.2 <span class="m">192</span>.168.1.3
+</pre></div>
+</div>
+<p class="section-heading rubric" id="glb-latency"><code class="docutils literal notranslate"><span class="pre">--latency</span></code></p>
+<p>Defines the number of samples to take in calculating latency for watchdog.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><strong>Short Argument</strong></td>
+<td><code class="docutils literal notranslate"><span class="pre">-L</span></code></td>
+</tr>
+<tr class="row-even"><td><strong>Syntax</strong></td>
+<td><code class="docutils literal notranslate"><span class="pre">--latency</span> <span class="pre">N</span></code></td>
+</tr>
+<tr class="row-odd"><td><strong>Type</strong></td>
+<td>Integer</td>
+</tr>
+</tbody>
+</table>
+<p>When the Watchdog module tests a destination server to calculate latency, it sends a number of packets through to measure its responsiveness.  This option configures how many packets it sends in sampling latency.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">#</span> glbd --latency <span class="m">25</span> <span class="m">3306</span> <span class="se">\</span>
+      <span class="m">192</span>.168.1.1 <span class="m">192</span>.168.1.2 <span class="m">192</span>.168.1.3
+</pre></div>
+</div>
+<p class="section-heading rubric" id="glb-linger"><code class="docutils literal notranslate"><span class="pre">--linger</span></code></p>
+<p>Defines whether Galera Load Balancer disables sockets lingering after they are closed.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><strong>Short Argument</strong></td>
+<td><code class="docutils literal notranslate"><span class="pre">-l</span></code></td>
+</tr>
+<tr class="row-even"><td><strong>Syntax</strong></td>
+<td><code class="docutils literal notranslate"><span class="pre">--linger</span></code></td>
+</tr>
+<tr class="row-odd"><td><strong>Type</strong></td>
+<td>Boolean</td>
+</tr>
+</tbody>
+</table>
+<p>When Galera Load Balancer sends the <code class="docutils literal notranslate"><span class="pre">close()</span></code> command, occasionally sockets linger in a <code class="docutils literal notranslate"><span class="pre">TIME_WAIT</span></code> state.  This options defines whether or not you want Galera Load Balancer to disable lingering sockets.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">#</span> glbd --linger <span class="m">3306</span> <span class="se">\</span>
+      <span class="m">192</span>.168.1.1 <span class="m">192</span>.168.1.2 <span class="m">192</span>.168.1.3
+</pre></div>
+</div>
+<p class="section-heading rubric" id="glb-max-conn-arg"><code class="docutils literal notranslate"><span class="pre">--max_conn</span></code></p>
+<p>Defines the maximum allowed client connections.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><strong>Short Argument</strong></td>
+<td><code class="docutils literal notranslate"><span class="pre">-m</span></code></td>
+</tr>
+<tr class="row-even"><td><strong>Syntax</strong></td>
+<td><code class="docutils literal notranslate"><span class="pre">--max_conn</span> <span class="pre">N</span></code></td>
+</tr>
+<tr class="row-odd"><td><strong>Type</strong></td>
+<td>Integer</td>
+</tr>
+</tbody>
+</table>
+<p>For more information on defining the maximum client connections, see the <a class="reference internal" href="#glb-max-conn-par"><span class="std std-ref">MAX_CONN</span></a> parameter.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">#</span> glbd --max_conn <span class="m">125</span> <span class="m">3306</span> <span class="se">\</span>
+      <span class="m">192</span>.168.1.1 <span class="m">192</span>.168.1.2 <span class="m">192</span>.168.1.3
+</pre></div>
+</div>
+<p class="section-heading rubric" id="glb-nodelay"><code class="docutils literal notranslate"><span class="pre">--nodelay</span></code></p>
+<p>Defines whether it disables the TCP no-delay socket option.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><strong>Short Argument</strong></td>
+<td><code class="docutils literal notranslate"><span class="pre">-n</span></code></td>
+</tr>
+<tr class="row-even"><td><strong>Syntax</strong></td>
+<td><code class="docutils literal notranslate"><span class="pre">--nodelay</span></code></td>
+</tr>
+<tr class="row-odd"><td><strong>Type</strong></td>
+<td>Boolean</td>
+</tr>
+</tbody>
+</table>
+<p>Under normal operation, TCP connections automatically concatenate small packets into larger frames through the Nagle algorithm.  In the event that you want Galera Load Balancer to disable this feature, this option causes it to open TCP connections with the <code class="docutils literal notranslate"><span class="pre">TCP_NODELAY</span></code> feature.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">#</span> glbd --nodelay <span class="m">3306</span> <span class="se">\</span>
+      <span class="m">192</span>.168.1.1 <span class="m">192</span>.168.1.2 <span class="m">192</span>.168.1.3
+</pre></div>
+</div>
+<p class="section-heading rubric" id="glb-random"><code class="docutils literal notranslate"><span class="pre">--random</span></code></p>
+<p>Defines the destination selection policy as Random.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><strong>Short Argument</strong></td>
+<td><code class="docutils literal notranslate"><span class="pre">-r</span></code></td>
+</tr>
+<tr class="row-even"><td><strong>Syntax</strong></td>
+<td><code class="docutils literal notranslate"><span class="pre">--random</span></code></td>
+</tr>
+<tr class="row-odd"><td><strong>Type</strong></td>
+<td>Boolean</td>
+</tr>
+</tbody>
+</table>
+<p>The destination selection policy determines how Galera Load Balancer determines which servers to route traffic to.  When you set the policy to Random, it randomly chooses a destination from the pool of available servers.  You can enable this feature by default through the <a class="reference internal" href="#glb-other-options"><span class="std std-ref">OTHER_OPTIONS</span></a> parameter.</p>
+<p>For more information on other policies, see <a class="reference internal" href="glb.html#glb-dest-select"><span class="std std-ref">Destination Selection Policies</span></a>.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">#</span> glbd --random <span class="m">3306</span> <span class="se">\</span>
+      <span class="m">192</span>.168.1.1 <span class="m">192</span>.168.1.2 <span class="m">192</span>.168.1.3
+</pre></div>
+</div>
+<p class="section-heading rubric" id="glb-round"><code class="docutils literal notranslate"><span class="pre">--round</span></code></p>
+<p>Defines the destination selection policy as Round Robin.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><strong>Short Argument</strong></td>
+<td><code class="docutils literal notranslate"><span class="pre">-b</span></code></td>
+</tr>
+<tr class="row-even"><td><strong>Syntax</strong></td>
+<td><code class="docutils literal notranslate"><span class="pre">--round</span></code></td>
+</tr>
+<tr class="row-odd"><td><strong>Type</strong></td>
+<td>Boolean</td>
+</tr>
+</tbody>
+</table>
+<p>The destination selection policy determines how Galera Load Balancer determines which servers to route traffic to.  When you set the policy to Round Robin, it directs new connections to the next server in a circular order list.  You can enable this feature by default through the <a class="reference internal" href="#glb-other-options"><span class="std std-ref">OTHER_OPTIONS</span></a> parameter.</p>
+<p>For more information on other policies, see <a class="reference internal" href="glb.html#glb-dest-select"><span class="std std-ref">Destination Selection Policies</span></a>.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">#</span> glbd --round <span class="m">3306</span> <span class="se">\</span>
+      <span class="m">192</span>.168.1.1 <span class="m">192</span>.168.1.2 <span class="m">192</span>.168.1.3
+</pre></div>
+</div>
+<p class="section-heading rubric" id="glb-single"><code class="docutils literal notranslate"><span class="pre">--single</span></code></p>
+<p>Defines the destination selection policy as Single.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><strong>Short Argument</strong></td>
+<td><code class="docutils literal notranslate"><span class="pre">-S</span></code></td>
+</tr>
+<tr class="row-even"><td><strong>Syntax</strong></td>
+<td><code class="docutils literal notranslate"><span class="pre">--single</span></code></td>
+</tr>
+<tr class="row-odd"><td><strong>Type</strong></td>
+<td>Boolean</td>
+</tr>
+</tbody>
+</table>
+<p>The destination selection policy determines how Galera Load Balancer determines which servers to route traffic to.</p>
+<p>When you set the policy to Single, all connections route to the server with the highest weight value.  You can enable this by default through the <a class="reference internal" href="#glb-other-options"><span class="std std-ref">OTHER_OPTIONS</span></a> parameter.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">#</span> glbd --single <span class="m">3306</span> <span class="se">\</span>
+      <span class="m">192</span>.168.1.1 <span class="m">192</span>.168.1.2 <span class="m">192</span>.168.1.3
+</pre></div>
+</div>
+<p class="section-heading rubric" id="glb-source"><code class="docutils literal notranslate"><span class="pre">--source</span></code></p>
+<p>Defines the destination selection policy as Source Tracking.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><strong>Short Argument</strong></td>
+<td><code class="docutils literal notranslate"><span class="pre">-s</span></code></td>
+</tr>
+<tr class="row-even"><td><strong>Syntax</strong></td>
+<td><code class="docutils literal notranslate"><span class="pre">--source</span></code></td>
+</tr>
+<tr class="row-odd"><td><strong>Type</strong></td>
+<td>Boolean</td>
+</tr>
+</tbody>
+</table>
+<p>The destination selection policy determines how Galera Load Balancer determines which servers to route traffic to.  When you set the policy to Source Tracking, connections that originate from one address are routed to the same destination.  That is, you can ensure that certain IP addresses always route to the same destination server.  You can enable this by default through the <a class="reference internal" href="#glb-other-options"><span class="std std-ref">OTHER_OPTIONS</span></a> parameter.</p>
+<p>Bear in mind, there are some limitations to this selection policy.  When the destination list changes, the destination choice for new connections changes as well, while established connections remain in place.  Additionally, when a destination is marked as unavailable, all connections that would route to it fail over to another, randomly chosen destination.  When the original target becomes available again, routing to it for new connections resumes.  In other words, Source Tracking works best with short-lived connections.</p>
+<p>For more information on other policies, see <a class="reference internal" href="glb.html#glb-dest-select"><span class="std std-ref">Destination Selection Policies</span></a>.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">#</span> glbd --source <span class="m">3306</span> <span class="se">\</span>
+      <span class="m">192</span>.168.1.1 <span class="m">192</span>.168.1.2 <span class="m">192</span>.168.1.3
+</pre></div>
+</div>
+<p class="section-heading rubric" id="glb-threads-arg"><code class="docutils literal notranslate"><span class="pre">--threads</span></code></p>
+<p>Defines the number of threads that you want to use.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><strong>Short Argument</strong></td>
+<td><code class="docutils literal notranslate"><span class="pre">-t</span></code></td>
+</tr>
+<tr class="row-even"><td><strong>Syntax</strong></td>
+<td><code class="docutils literal notranslate"><span class="pre">--threads</span> <span class="pre">N</span></code></td>
+</tr>
+<tr class="row-odd"><td><strong>Type</strong></td>
+<td>Integer</td>
+</tr>
+</tbody>
+</table>
+<p>For more information on threading in Galera Load Balancer, see <a class="reference internal" href="#glb-threads-par"><span class="std std-ref">THREADS</span></a>.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">#</span> glbd --threads <span class="m">6</span> <span class="m">3306</span> <span class="se">\</span>
+      <span class="m">192</span>.168.1.1 <span class="m">192</span>.168.1.2 <span class="m">192</span>.168.1.3
+</pre></div>
+</div>
+<p class="section-heading rubric" id="glb-top"><code class="docutils literal notranslate"><span class="pre">--top</span></code></p>
+<p>Enables balancing to top weights only.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><strong>Short Argument</strong></td>
+<td><code class="docutils literal notranslate"><span class="pre">-T</span></code></td>
+</tr>
+<tr class="row-even"><td><strong>Syntax</strong></td>
+<td><code class="docutils literal notranslate"><span class="pre">--top</span></code></td>
+</tr>
+<tr class="row-odd"><td><strong>Type</strong></td>
+<td>Boolean</td>
+</tr>
+</tbody>
+</table>
+<p>This option restricts all balancing policies to a subset of destination servers with the top weight.  For instance, if you have servers with weights <code class="docutils literal notranslate"><span class="pre">1</span></code>, <code class="docutils literal notranslate"><span class="pre">2</span></code> and <code class="docutils literal notranslate"><span class="pre">3</span></code>, balancing occurs only on servers with weight <code class="docutils literal notranslate"><span class="pre">3</span></code>, while they remain available.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">#</span> glbd --top <span class="m">3306</span> <span class="se">\</span>
+      <span class="m">192</span>.168.1.1 <span class="m">192</span>.168.1.2 <span class="m">192</span>.168.1.3
+</pre></div>
+</div>
+<p class="section-heading rubric" id="glb-verbose"><code class="docutils literal notranslate"><span class="pre">--verbose</span></code></p>
+<p>Defines whether you want Galera Load Balancer to run as verbose.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><strong>Short Argument</strong></td>
+<td><code class="docutils literal notranslate"><span class="pre">-v</span></code></td>
+</tr>
+<tr class="row-even"><td><strong>Syntax</strong></td>
+<td><code class="docutils literal notranslate"><span class="pre">--verbose</span></code></td>
+</tr>
+<tr class="row-odd"><td><strong>Type</strong></td>
+<td>Boolean</td>
+</tr>
+</tbody>
+</table>
+<p>This option enables verbose output for Galera Load Balancer, which you may find useful for debugging purposes.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">#</span> glbd --verbose <span class="m">3306</span> <span class="se">\</span>
+      <span class="m">192</span>.168.1.1 <span class="m">192</span>.168.1.2 <span class="m">192</span>.168.1.3
+</pre></div>
+</div>
+<p class="section-heading rubric" id="glb-watchdog"><code class="docutils literal notranslate"><span class="pre">--watchdog</span></code></p>
+<p>Defines specifications for watchdog operations.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><strong>Short Argument</strong></td>
+<td><code class="docutils literal notranslate"><span class="pre">-w</span></code></td>
+</tr>
+<tr class="row-even"><td><strong>Syntax</strong></td>
+<td><code class="docutils literal notranslate"><span class="pre">--watchdog</span> <span class="pre">SPEC_STR</span></code></td>
+</tr>
+<tr class="row-odd"><td><strong>Type</strong></td>
+<td>String</td>
+</tr>
+</tbody>
+</table>
+<p>Under normal operation, Galera Load Balancer checks destination availability by attempting to establish a TCP connection to the server.  For most use cases, this is insufficient.  If you want to establish a connection with web server, you need to know if it is able to serve web pages.  If you want to establish a connection with a database server, you need to know if it is able to execute queries.  TCP connections don’t provide that kind of information.</p>
+<p>The Watchdog module implements asynchronous monitoring of destination servers through back-ends designed to service availability.  This option allows you to enable it by defining the back-end ID string, optionally followed by a colon and the configuration options.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">#</span> glbd -w exec:<span class="s2">&quot;mysql.sh -utest -ptestpass&quot;</span> <span class="m">3306</span> <span class="se">\</span>
+      <span class="m">192</span>.168.1.1 <span class="m">192</span>.168.1.2 <span class="m">192</span>.168.1.3
+</pre></div>
+</div>
+<p>This initializes the <code class="docutils literal notranslate"><span class="pre">exec</span></code> back-end to execute external programs.  It runs the <code class="docutils literal notranslate"><span class="pre">mysql.sh</span></code> script on each destination server in order to determine it’s availability.  You can find the <code class="docutils literal notranslate"><span class="pre">mysql.sh</span></code> in the Galera Load Balancer build directory, under <code class="docutils literal notranslate"><span class="pre">files/</span></code>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The Watchdog module remains a work in progress.  Neither its functionality nor terminology is final.</p>
+</div>
+<div class="bottom-links docutils container">
+<p>Related Documents</p>
+<ul class="simple">
+<li><a class="reference internal" href="#glb-config-options"><span class="std std-ref">Configuration Options</span></a></li>
+<li><a class="reference internal" href="glb.html#glb-dest-select"><span class="std std-ref">Destination Policies</span></a></li>
+<li><a class="reference internal" href="#glb-listen-addr"><span class="std std-ref">LISTEN_ADDR</span></a></li>
+<li><a class="reference internal" href="#glb-other-options"><span class="std std-ref">OTHER_OPTIONS</span></a></li>
+<li><a class="reference internal" href="#glb-watchdog"><span class="std std-ref">–watchdog</span></a></li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/logo.png" alt="Logo"/>
+            </a></p>
+<h1 class="logo"><a href="../index.html">Galera Cluster</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">The Codership Documentation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="overview.html">Overview of Galera Cluster</a></li>
+<li class="toctree-l2"><a class="reference internal" href="technical-description.html">Technical Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html">Installing Galera Cluster</a></li>
+<li class="toctree-l2"><a class="reference internal" href="administration.html">Galera Cluster Administration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="deployment.html">Deployment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="monitor.html">Cluster Monitoring</a></li>
+<li class="toctree-l2"><a class="reference internal" href="security.html">Security</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="reference.html">Reference</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="mysql-wsrep-options.html">MySQL wsrep Options</a></li>
+<li class="toctree-l3"><a class="reference internal" href="wsrep-functions.html">Galera Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="galera-parameters.html">Galera Parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="galera-status-variables.html">Galera Status Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="system-tables.html">Galera System Tables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="xtrabackup-options.html">XtraBackup Parameters</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Galera Load Balancer Parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="versioning-information.html">Versioning Information</a></li>
+<li class="toctree-l3"><a class="reference internal" href="legal-notice.html">Legal Notice</a></li>
+<li class="toctree-l3"><a class="reference internal" href="glossary.html">Glossary</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../kb/index.html">The Codership Knowledge Base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../training/index.html">Codership Training</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../whats-new.html">What’s New</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../editors/index.html">Codership Writers &amp; Editors</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">The Codership Documentation</a><ul>
+  <li><a href="reference.html">Reference</a><ul>
+      <li>Previous: <a href="xtrabackup-options.html" title="previous chapter">XtraBackup Parameters</a></li>
+      <li>Next: <a href="versioning-information.html" title="next chapter">Versioning Information</a></li>
+  </ul></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+	<div class="navbar">
+	<nav id="site-navigation" class="navigation main-navigation" role="navigation">
+	<div class="nav-bar-container">
+
+	<div id="menu-nav-bar" class="nav-menu">
+		<ul class="nav-link">
+			<li> </li>
+
+		</ul>
+
+	</div>
+	</nav>
+
+	<footer id="colophon" class="site-footer" role="contentinfo">
+	<div class="top">	<div class="powered-by"><p>Powered by Galera:</p>
+	<p><a href="https://mariadb.com/kb/en/galera/"><img class="alignleft size-full wp-image-237" alt="MariaDB" src="https://galeracluster.com/wp-content/uploads/2013/10/logo-mariadb.png" width="166" height="49" /></a></p>
+		</div></div>
+	<div class="footer-menu">
+	<div class="menu-main-menu-container">
+	<ul id="menu-main-menu-1" class="nav-menu">
+	<li class="link-home menu-item menu-item-type-post_type menu-item-object-page menu-item-359"><a href="https://galeracluster.com/">Home</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-35"><a href="https://galeracluster.com/products/">Products</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="https://galeracluster.com/downloads/">Downloads</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-12 current_page_item current-menu-ancestor current-menu-parent current_page_parent current_page_ancestor menu-item-has-children menu-item-33"><a href="https://galeracluster.com/support/">Support</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="https://galeracluster.com/community/">Community</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-31"><a href="https://galeracluster.com/company/">Company</a></li>
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-297"><a href="https://galeracluster.com/category/blog/">Blog</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-38"><a href="https://galeracluster.com/contact-us/">Contact us</a></li>
+	</ul></div>			</div><!-- .footer-menu -->
+
+
+	<div class="footer-bar">
+	<p class="copyright">2014 Codership Ltd.</p>
+	</div>
+	<div class="footnote">
+	<h2>Your data is invaluable. We're here to secure it. All of it.</h2>
+	</div>
+	</footer><!-- #colophon -->
+
+
+
+
+  </body>
+</html>
