@@ -156,7 +156,6 @@
 <ul class="simple">
 <li><a class="reference internal" href="galera-manager.html"><span class="doc">Getting Started</span></a></li>
 <li><a class="reference internal" href="gmd-install.html"><span class="doc">Installing</span></a></li>
-<li><a class="reference internal" href="galera-manager-ports.html"><span class="doc">AWS Ports</span></a></li>
 <li><a class="reference internal" href="gmd.html"><span class="doc">gmd Daemon</span></a></li>
 <li><a class="reference internal" href="galera-manager-adding-clusters.html"><span class="doc">Deploying Clusters</span></a></li>
 <li><a class="reference internal" href="galera-manager-adding-nodes.html"><span class="doc">Adding Nodes</span></a></li>
@@ -198,13 +197,13 @@
 <a class="document-screenshot reference internal image-reference" href="../_images/galera-manager-margin-menu.png"><img alt="Galera Manager Menu" class="document-screenshot" src="../_images/galera-manager-margin-menu.png" style="width: 300px;" /></a>
 <p class="caption"><span class="caption-text">Galera Manager Menu (Figure 1)</span></p>
 </div>
-<p>As you can see, there are three choices: <em>Management</em>, which brings you back to the primary screen for managing and monitoring Galera Clusters; <em>Users</em>, which is where you’ll add and remove users for Galera Manager; and <em>Logout</em>, which is to log out of Galera Manaager.  If you click on <em>Users</em>, you’ll see a box similar to the screenshot in Figure 2 below:</p>
+<p>As you can see, there are three choices: <em>Management</em>, which brings you back to the primary screen for managing and monitoring Galera Clusters; <em>Users</em>, which is where you’ll add and remove users for Galera Manager; and <em>Logout</em>, which is to log out of Galera Manager.  If you click on <em>Users</em>, you’ll see a box similar to the screenshot in Figure 2 below:</p>
 <div class="figure" id="id2">
 <a class="document-screenshot reference internal image-reference" href="../_images/galera-manager-new-user.png"><img alt="Adding a User to Galera Manager" class="document-screenshot" src="../_images/galera-manager-new-user.png" style="width: 500px;" /></a>
 <p class="caption"><span class="caption-text">Dialog Box for Adding Users (Figure 2)</span></p>
 </div>
-<p>In the example in the screenshot above, a user name of <em>bob</em> was entered, along with a password. The other choice is to set the user’s privileges: <em>None</em>, <em>Observer</em>, <em>Manager</em>, and <em>Administrator</em>.  At this time, the only fully implemented user type is Administrator.  However, in soon to be released updates to Galera Manager the other user types will take on meaning.</p>
-<p>The setting of <em>None</em> will create a user who may log in, but has no access, can see nothing. A user designated as an <em>Observer</em> will be allowed to log in and monitor clusters and nodes, but not make any changes. A <em>Manager</em> will have all of the privileges of an <em>Observer</em>, but will also be allowed to add and delete clusters and nodes, as well as add and remove metrics to monitor.  The <em>Administrator</em> can do everything now, including adding and removing users.</p>
+<p>In the example in the screenshot above, a user name of <em>bob</em> was entered, along with a password. The other choice is to set the user’s privileges: <em>None</em>, <em>Observer</em>, <em>Manager</em>, and <em>Administrator</em>.</p>
+<p>The setting of <em>None</em> will create a user who may log in, but has no access, can see nothing. In the future it can be used to temporary block the user, but currently the users can only be created and deleted. A user designated as an <em>Observer</em> will be allowed to log in and monitor clusters and nodes, but not make any changes. A <em>Manager</em> will have all of the privileges of an <em>Observer</em>, but will also be allowed to add and delete clusters and nodes, as well as add and remove metrics to monitor.  The <em>Administrator</em> can do everything, including adding and removing users.</p>
 <p class="section-heading rubric" id="galera-manager-changing-users">Changing Users</p>
 <p>After you’ve added some users, you’ll see them on the user page. To return to this page, click on the menu icon and then <em>Users</em>. You’ll see a screen like the one in Figure 3 below:</p>
 <div class="figure" id="id3">
@@ -216,14 +215,12 @@
 <a class="document-screenshot reference internal image-reference" href="../_images/galera-manager-user-info.png"><img alt="Galera Manager User Information" class="document-screenshot" src="../_images/galera-manager-user-info.png" style="width: 300px;" /></a>
 <p class="caption"><span class="caption-text">Galera Manager User Information (Figure 4)</span></p>
 </div>
-<p>Although it would be convenient to be able to change a user’s name, password, or role here, it’s not yet possible to do so in Galera Manager. In future releases, though, you will be able to change a user’s password.  At this time, if you want to change a user’s password or their name, you’ll have to delete that user and then add them back with the new name or password.</p>
-<p>Just click the vertical ellipsis at the top right of the panel for the user. Your only choice there will be to delete the user, so click it. To put the user back, click on the text below the list of users where it says, <em>Create New User</em> to add them again with new choices or values.</p>
+<p>Click the vertical ellipsis at the top right of the panel for the user. Your only choice there will be to delete the user, so click it. To put the user back, click on the text below the list of users where it says, <em>Create New User</em> to add them again with new choices or values.</p>
 <div class="bottom-links docutils container">
 <p>Galera Manager Documents</p>
 <ul class="simple">
 <li><a class="reference internal" href="galera-manager.html"><span class="doc">Getting Started</span></a></li>
 <li><a class="reference internal" href="gmd-install.html"><span class="doc">Installing</span></a></li>
-<li><a class="reference internal" href="galera-manager-ports.html"><span class="doc">AWS Ports</span></a></li>
 <li><a class="reference internal" href="gmd.html"><span class="doc">gmd Daemon</span></a></li>
 <li><a class="reference internal" href="galera-manager-adding-clusters.html"><span class="doc">Deploying Clusters</span></a></li>
 <li><a class="reference internal" href="galera-manager-adding-nodes.html"><span class="doc">Adding Nodes</span></a></li>
