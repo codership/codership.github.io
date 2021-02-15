@@ -202,15 +202,15 @@
 <ul class="simple">
 <li><strong>load_node_1</strong> records the CPU load average. It’s a standard metric commonly displayed by most load monitors in Linux. Essentially, it tells you how loaded the system is with tasks, tasks competing for CPU usage.</li>
 <li><strong>node_memory_MemAvailble_bytes</strong> stores how much memory is available for each node.</li>
-<li><strong>mysql_global_status_wsrep_replicated</strong> indicates the number of write-sets replicated.</li>
+<li><strong>mysql_global_status_wsrep_replicated</strong> indicates the number of write-sets replicated from that node.</li>
 <li><strong>mysql_global_status_wsrep_received</strong> is the number of write-sets received. Together with the number replicated, this would equal the total transaction rate on the node.</li>
 <li><strong>mysql_global_status_wsrep_flow_control_sent</strong> provides the number of flow control events emitted by the node.</li>
-<li><strong>mysql_global_status_wsrep_flow_control_paused</strong> records how much time replication on the node was paused in nano-seconds per second. A value of 1,000,000,000 would mean it was completely paused. This metric and the previous one are very important to troubleshoot replication perfromance concerns.</li>
+<li><strong>mysql_global_status_wsrep_flow_control_paused</strong> records how much time replication on the node was paused in nano-seconds per second. A value of 1,000,000,000 would mean it was completely paused. This metric and the previous one are very important to troubleshoot replication performance concerns.</li>
 </ul>
 <p class="sub-heading rubric">Metric Names &amp; Associations</p>
-<p>There is a pattern to the names of metrics.  Ones containing the word, <em>node</em> (e.g., <code class="docutils literal notranslate"><span class="pre">load_node_1</span></code>), typically come from the Prometheus database system that tracks host status—they’re not tracking node status since that’s basically <code class="docutils literal notranslate"><span class="pre">mysqld</span></code> activity; in this context, it’s a misnomer.</p>
+<p>The metrics come from the InfuxDB database and have a pattern to the names of metrics.  Ones containing the word, <em>node</em> (e.g., <code class="docutils literal notranslate"><span class="pre">load_node_1</span></code>), track the host metrics; in this context, it’s a misnomer.</p>
 <p>As for metrics with <em>mysql_global_status_</em> as the prefix, the stem is the name of the MySQL or MariaDB global status variable’s name. For example, <em>mysql_global_status_wsrep_replicated</em> is from the MySQL global status variable, <code class="docutils literal notranslate"><span class="pre">wsrep_replicated</span></code>.</p>
-<p>If for some reason you want to verify a global status variable’s value, you can check in a node’s database. You would go to the <em>Configuration</em> tab for one of the nodes to get the IP address and password for the database system.  Then you would enter something like the following from the command-line of a computer on which the <code class="docutils literal notranslate"><span class="pre">mysql</span></code> client is installed:</p>
+<p>If for some reason you want to access MySQL database directly you would go to the <em>Configuration</em> tab for one of the nodes to get the IP address and password for the database system.  Then you would enter something like the following from the command-line of a computer on which the <code class="docutils literal notranslate"><span class="pre">mysql</span></code> client is installed:</p>
 <div class="literal-block-wrapper docutils container" id="id2">
 <div class="code-block-caption"><span class="caption-text">Checking a MySQL Global Status Variable (Example 1)</span><a class="headerlink" href="#id2" title="Permalink to this code">¶</a></div>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">mysql -p -u root -h 34.216.245.12 /</span>
@@ -232,9 +232,9 @@
 <a class="document-screenshot reference internal image-reference" href="../_images/galera-manager-monitor-add-chart.png"><img alt="Adding a Chart" class="document-screenshot" src="../_images/galera-manager-monitor-add-chart.png" style="width: 600px;" /></a>
 <p class="caption"><span class="caption-text">Adding a Chart (Figure 2)</span></p>
 </div>
-<p>Click on <em>Add Chart</em> and a box will appear like the one in Figure 3 below.  There you will find all of the metrics you may track.  Most are global status variables from MySQL.  There are several at the bottom of the list that come from an external system called Prometheus that stores data on the status of the nodes.  The data is loaded into Prometheus on each node from the <code class="docutils literal notranslate"><span class="pre">mysqld_exporter</span></code> daemon running on each host.</p>
+<p>Click on <em>Add Chart</em> and a box will appear like the one in Figure 3 below.  There you will find all of the metrics you may track.  Most are global status variables from MySQL, others are different host performance metrics—there are several at the bottom of the list. The data come from the <code class="docutils literal notranslate"><span class="pre">mysqld_exporter</span></code> daemon running on each host and gets aggregated locally on Galera Manager host for quick access.</p>
 <p class="sub-heading rubric">Choosing a Metric</p>
-<p>In the screenshot below, you can see the dialog box for choosing metrics to chart.  Notice that metrics with the icon of a stack of disks are from MySQL or MariaDB.  Metrics using Prometheus are represented by the icon of a stack of servers.</p>
+<p>In the screenshot below, you can see the dialog box for choosing metrics to chart.  Notice that metrics with the icon of a stack of disks are from the database engine (MySQL or MariaDB).  Metrics tracking host performance are represented by the icon of a stack of servers.</p>
 <div class="figure" id="id4">
 <a class="document-screenshot reference internal image-reference" href="../_images/galera-manager-cluster-add-chart.png"><img alt="Adding a Chart to Monitor" class="document-screenshot" src="../_images/galera-manager-cluster-add-chart.png" style="width: 600px;" /></a>
 <p class="caption"><span class="caption-text">Adding a Chart - Looking for a Metric (Figure 3)</span></p>
@@ -290,7 +290,7 @@
 </div>
 </div>
 <p>This file excerpt has been reformatted with hard-returns and spaces to make it easier to view and follow—plus, most of it has been removed and replaced with ellipsis for brevity. But you can get a sense of how the information is stored—especially if you’re familiar with json file structures.</p>
-<p>This is a nice feature, being able to download the configuration file.  However, at this point, the ability to upload a json configuration file is not yet available: Galera Manager is still in its early days.  The configuration settings for a dashboard are stored in Prometheus and there’s no easy way to load it. In a future release, though, you should be able to do this from Galera Manager.</p>
+<p>This is a nice feature, being able to download the configuration file.  However, at this point, the ability to upload a json configuration file is not yet available: Galera Manager is still in its early days.  In a future release, though, you should be able to do this from Galera Manager.</p>
 <p class="section-heading rubric">Resolving Problems &amp; Making Improvements</p>
 <p>Galera Manager is an excellent tool for detecting issues early or potential ones with a Galera Cluster—hopefully, before they can become a problem. It can also assist in determining when and how performance can be improved before there is a slowing of database traffic or a loss of service.</p>
 <p>Should you have problems with Galera Manager, you can check its log files. See the <a class="reference internal" href="gmd.html#gmd-logs"><span class="std std-ref">gmd Logs</span></a> section of the <a class="reference internal" href="gmd.html"><span class="doc">Galera Manager Daemon (gmd)</span></a> documentation page for information on those logs.</p>
