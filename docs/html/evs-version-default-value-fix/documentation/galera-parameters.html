@@ -1461,7 +1461,7 @@ on the master are committed.</p>
 </colgroup>
 <tbody valign="top">
 <tr class="row-odd"><td>Default Value</td>
-<td><code class="docutils literal notranslate"><span class="pre">0</span></code> (up to Galera Cluster version 3.8) | <code class="docutils literal notranslate"><span class="pre">1</span></code> (as of Galera Cluster version 4.0)</td>
+<td><code class="docutils literal notranslate"><span class="pre">0</span></code> (up to Galera Cluster version 3.9) | <code class="docutils literal notranslate"><span class="pre">1</span></code> (as of Galera Cluster version 4.0)</td>
 </tr>
 <tr class="row-even"><td>Dynamic</td>
 <td>No</td>
@@ -1471,7 +1471,7 @@ on the master are committed.</p>
 </tr>
 </tbody>
 </table>
-<p>This parameter determines which version of the EVS Protocol the node uses.  In order to ensure backwards compatibility, the parameter defaults to <code class="docutils literal notranslate"><span class="pre">0</span></code> on Galera Cluster versions prior to 3.8.  Certain EVS Protocol features, such as Auto Eviction, require you to upgrade to more recent versions. As of Galera Cluster version 4.0, the parameter defaults to <code class="docutils literal notranslate"><span class="pre">1</span></code>.</p>
+<p>This parameter determines which version of the EVS Protocol the node uses.  In order to ensure backwards compatibility, the parameter defaults to <code class="docutils literal notranslate"><span class="pre">0</span></code> on Galera Cluster versions prior to 3.9.  Certain EVS Protocol features, such as Auto Eviction, require you to upgrade to more recent versions. As of Galera Cluster version 4.0, the parameter defaults to <code class="docutils literal notranslate"><span class="pre">1</span></code>.</p>
 <p>The excerpt below is an example of how this Galera parameter might look in the configuration file:</p>
 <div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;evs.version=1&quot;</span>
 </pre></div>
