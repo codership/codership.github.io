@@ -181,7 +181,7 @@
 <div class="library-document section" id="quorum-components">
 <span id="id1"></span><h1>Quorum Components<a class="headerlink" href="#quorum-components" title="Permalink to this headline">¶</a></h1>
 <p>In addition to single node failures, the cluster may split into several components due to network failure.  A component is a set of nodes that are connected to each other, but not to the nodes that form other components.  In these situations, only one component can continue to modify the database state to avoid history divergence.  This component is called the <a class="reference internal" href="glossary.html#term-primary-component"><span class="xref std std-term">Primary Component</span></a>.</p>
-<p>Under normal operations, your Primary Component is the cluster.  When cluster partitioning occurs, Galera Cluster invokes a special quorum algorithm to select one component as the Primary Component.  This guarantees that there is never more than one Primary Component in the cluster.</p>
+<p>Under normal operations, your Primary Component is the cluster.  When cluster partitioning occurs, Galera Cluster invokes a special <a class="reference internal" href="glossary.html#term-quorum"><span class="xref std std-term">Quorum</span></a> algorithm to select one component as the Primary Component.  This guarantees that there is never more than one Primary Component in the cluster.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">In addition to the individual node, quorum calculations also take into account a separate process called <code class="docutils literal notranslate"><span class="pre">garbd</span></code>.  For more information on its configuration and use, see <a class="reference internal" href="arbitrator.html"><span class="doc">Galera Arbitrator</span></a>.</p>
@@ -209,7 +209,7 @@
 <p>Cluster failures that result in database nodes operating autonomous of each other are called split-brain conditions.  When this occurs, data can become irreparably corrupted, such as would occur when two database nodes independently update the same row on the same table.  As is the case with any quorum-based system, Galera Cluster is subject to split-brain conditions when the quorum algorithm fails to select a <a class="reference internal" href="glossary.html#term-primary-component"><span class="xref std std-term">Primary Component</span></a>.</p>
 <p>For example, this can occur if you have a cluster without a backup switch in the event that the main switch fails.  Or, when a single node fails in a two node cluster.</p>
 <p>By design, Galera Cluster avoids split-brain condition.  In the event that a failure results in splitting the cluster into two partitions of equal size, (unless you explicitly configure it otherwise), neither partition becomes a Primary Component.</p>
-<p>To minimize the risk of this happening in clusters that do have an even number of nodes, partition the cluster in a way that one component always forms the Primary cluster section.</p>
+<p>To minimize the risk of this happening in clusters that do have an even number of nodes, partition the cluster in a way that one component always forms the <a class="reference internal" href="glossary.html#term-primary-cluster"><span class="xref std std-term">Primary Cluster</span></a> section.</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>4 node cluster -&gt; 3 (Primary) + 1 (Non-primary)
 6 node cluster -&gt; 4 (Primary) + 2 (Non-primary)
 6 node cluster -&gt; 5 (Primary) + 1 (Non-primary)

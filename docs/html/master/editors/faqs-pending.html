@@ -171,7 +171,7 @@
 <p class="section-heading rubric" id="faq-general-pending">General Questions</p>
 <p class="rubric-2 rubric" id="faq-pending-1">In simple terms, what is Galera?</p>
 <p class="list-stats">Level: Intermediate; Interested: DBAs; Category: General</p>
-<p class="list-abstract">A plugin that allows synchronous multi-master replication for InnoDB tables. It works differently from the standard MySQL replication, which provides Master and Slave structure. The Galera Cluster replication is able to manage true parallel read and write to any cluster node, managing conflicts using a Global Transaction ID mechanism.</p>
+<p class="list-abstract">A plugin that allows synchronous multi-master replication for InnoDB tables. It works differently from the standard MySQL replication, which provides Master and Slave structure. The Galera <a class="reference internal" href="../documentation/glossary.html#term-cluster-replication"><span class="xref std std-term">Cluster Replication</span></a> is able to manage true parallel read and write to any cluster node, managing conflicts using a Global Transaction ID mechanism.</p>
 <p class="rubric-2 rubric" id="faq-pending-2">Is Galera Cluster difficult to install, configure, use, and maintain?</p>
 <p class="list-stats">Level: Intermediate; Interested: DBAs; Category: General</p>
 <p class="list-abstract">Some answer.</p>
@@ -203,7 +203,7 @@
 <p class="list-abstract">Some answer.</p>
 <p class="rubric-2 rubric" id="faq-pending-9">Why three nodes?</p>
 <p class="list-stats">Level: Intermediate; Interested: DBAs; Category: General</p>
-<p class="list-abstract">To prevent a peculiar condition called split-brain. Galera Cluster uses a “quorum” mechanism every time suspects a problem on a node and so decide whether or not to exclude it from the cluster. In a 2-node cluster there would not be the majority to make these kinds of decisions. Moreover if a node is excluded, on his return on the cluster, another node may not be available to transfer data because it is busy with an another data alignment. Whereas two of the members are involved in this operation, the presence of the third continues to serve client requests.</p>
+<p class="list-abstract">To prevent a peculiar condition called split-brain. Galera Cluster uses a “<a class="reference internal" href="../documentation/glossary.html#term-quorum"><span class="xref std std-term">Quorum</span></a>” mechanism every time suspects a problem on a node and so decide whether or not to exclude it from the cluster. In a 2-node cluster there would not be the majority to make these kinds of decisions. Moreover if a node is excluded, on his return on the cluster, another node may not be available to transfer data because it is busy with an another data alignment. Whereas two of the members are involved in this operation, the presence of the third continues to serve client requests.</p>
 <p class="rubric-2 rubric" id="faq-pending-10">What is SST and IST?</p>
 <p class="list-stats">Level: Intermediate; Interested: DBAs; Category: General</p>
 <p class="list-abstract">There are two different way to get data replica. The State Snapshot Transfer is used to replicate the entire database, e.g. when you add a node to the cluster for the first time. The Incremental State Transfer is used to align smaller portions of the database and uses an internal caching mechanism. After the first State Snapshot Transfer, Galera Cluster prefers to use Incremental State Transfer because it is faster.</p>

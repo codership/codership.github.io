@@ -433,7 +433,7 @@
 <td>1.0</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#gcache-page-size"><span class="std std-ref">gcache.page_size</span></a></td>
-<td><code class="docutils literal notranslate"><span class="pre">128Mb</span></code></td>
+<td><code class="docutils literal notranslate"><span class="pre">128M</span></code></td>
 <td><blockquote class="first last">
 <div>No</div></blockquote>
 </td>
@@ -449,7 +449,7 @@
 <td>3.19</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#gcache-size"><span class="std std-ref">gcache.size</span></a></td>
-<td><code class="docutils literal notranslate"><span class="pre">128Mb</span></code></td>
+<td><code class="docutils literal notranslate"><span class="pre">128M</span></code></td>
 <td><blockquote class="first last">
 <div>No</div></blockquote>
 </td>
@@ -1461,7 +1461,7 @@ on the master are committed.</p>
 </colgroup>
 <tbody valign="top">
 <tr class="row-odd"><td>Default Value</td>
-<td><code class="docutils literal notranslate"><span class="pre">0</span></code></td>
+<td><code class="docutils literal notranslate"><span class="pre">0</span></code> (up to Galera Cluster version 3.9) | <code class="docutils literal notranslate"><span class="pre">1</span></code> (as of Galera Cluster version 4.0)</td>
 </tr>
 <tr class="row-even"><td>Dynamic</td>
 <td>No</td>
@@ -1471,7 +1471,7 @@ on the master are committed.</p>
 </tr>
 </tbody>
 </table>
-<p>This parameter determines which version of the EVS Protocol the node uses.  In order to ensure backwards compatibility, the parameter defaults to <code class="docutils literal notranslate"><span class="pre">0</span></code>.  Certain EVS Protocol features, such as Auto Eviction, require you to upgrade to more recent versions.</p>
+<p>This parameter determines which version of the EVS Protocol the node uses.  In order to ensure backwards compatibility, the parameter defaults to <code class="docutils literal notranslate"><span class="pre">0</span></code> on Galera Cluster versions prior to 3.9.  Certain EVS Protocol features, such as Auto Eviction, require you to upgrade to more recent versions. As of Galera Cluster version 4.0, the parameter defaults to <code class="docutils literal notranslate"><span class="pre">1</span></code>.</p>
 <p>The excerpt below is an example of how this Galera parameter might look in the configuration file:</p>
 <div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;evs.version=1&quot;</span>
 </pre></div>
@@ -1570,7 +1570,7 @@ on the master are committed.</p>
 </tbody>
 </table>
 <p>The excerpt below is an example of how this Galera parameter might look in the configuration file:</p>
-<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;gcache.page_size=128Mb&quot;</span>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;gcache.page_size=128M&quot;</span>
 </pre></div>
 </div>
 <p class="section-heading rubric" id="gcache-recover"><code class="docutils literal notranslate"><span class="pre">gcache.recover</span></code></p>
@@ -1618,7 +1618,7 @@ on the master are committed.</p>
 <p>When nodes receive state transfers they cannot process incoming write-sets until they finish updating their state.  Under certain methods, the node that sends the state transfer is similarly blocked.  To prevent the database from falling further behind, GCache saves the incoming write-sets on memory-mapped files to disk.</p>
 <p>This parameter defines the amount of disk space you want to allocate for the present ring buffer storage.  The node allocates this space when it starts the database server.</p>
 <p>The excerpt below is an example of how this Galera parameter might look in the configuration file:</p>
-<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;gcache.size=128Mb&quot;</span>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;gcache.size=128M&quot;</span>
 </pre></div>
 </div>
 <p>For more information on customizing the write-set cache, see the <a class="reference internal" href="../kb/index.html"><span class="doc">Best Practice Articles</span></a>.</p>
@@ -1857,7 +1857,7 @@ at <a class="reference internal" href="#gcs-recv-q-soft-limit"><span class="std 
 </tr>
 </tbody>
 </table>
-<p>If you choose to use value <code class="docutils literal notranslate"><span class="pre">YES</span></code>, it is theoretically possible that the donor node cannot keep up with the rest of the cluster due to the extra load from the SST. If the node lags behind, it may send flow control messages stalling the whole cluster. However, you can monitor this using the <a class="reference internal" href="galera-status-variables.html#wsrep-flow-control-paused"><span class="std std-ref">wsrep_flow_control_paused</span></a> status variable.</p>
+<p>If you choose to use value <code class="docutils literal notranslate"><span class="pre">YES</span></code>, it is theoretically possible that the <a class="reference internal" href="glossary.html#term-donor-node"><span class="xref std std-term">Donor Node</span></a> cannot keep up with the rest of the cluster due to the extra load from the SST. If the node lags behind, it may send flow control messages stalling the whole cluster. However, you can monitor this using the <a class="reference internal" href="galera-status-variables.html#wsrep-flow-control-paused"><span class="std std-ref">wsrep_flow_control_paused</span></a> status variable.</p>
 <p>The excerpt below is an example of how this Galera parameter might look in the configuration file:</p>
 <div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;gcs.sync_donor=NO&quot;</span>
 </pre></div>
@@ -2171,7 +2171,7 @@ at <a class="reference internal" href="#gcs-recv-q-soft-limit"><span class="std 
 </pre></div>
 </div>
 <p class="section-heading rubric" id="pc-ignore-sb"><code class="docutils literal notranslate"><span class="pre">pc.ignore_sb</span></code></p>
-<p id="index-56">Should we allow nodes to process updates even in the case of split brain? This is a dangerous setting in multi-master setup, but should simplify things in master-slave cluster (especially if only 2 nodes are used).</p>
+<p id="index-56">Should we allow nodes to process updates even in the case of <a class="reference internal" href="glossary.html#term-split-brain"><span class="xref std std-term">Split Brain</span></a>? This is a dangerous setting in multi-master setup, but should simplify things in master-slave cluster (especially if only 2 nodes are used).</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
 <col width="50%" />
@@ -2194,7 +2194,7 @@ at <a class="reference internal" href="#gcs-recv-q-soft-limit"><span class="std 
 </pre></div>
 </div>
 <p class="section-heading rubric" id="pc-ignore-quorum"><code class="docutils literal notranslate"><span class="pre">pc.ignore_quorum</span></code></p>
-<p id="index-57">Completely ignore quorum calculations. For example if the master splits from several slaves it still remains operational. Use with extreme caution even in master-slave setups, as slaves will not automatically reconnect to master in this case.</p>
+<p id="index-57">Completely ignore <a class="reference internal" href="glossary.html#term-quorum"><span class="xref std std-term">Quorum</span></a> calculations. For example if the master splits from several slaves it still remains operational. Use with extreme caution even in master-slave setups, as slaves will not automatically reconnect to master in this case.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
 <col width="50%" />

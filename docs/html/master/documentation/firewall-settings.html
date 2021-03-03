@@ -176,7 +176,7 @@
 <p>Galera Cluster requires a number of ports to maintain network connectivity between the nodes.  Depending on your deployment, you may not require all of these ports, but a cluster might require all of them on each node.  Below is a list of these ports and their purpose:</p>
 <ul class="simple">
 <li><code class="docutils literal notranslate"><span class="pre">3306</span></code> is the default port for MySQL client connections and <a class="reference internal" href="glossary.html#term-state-snapshot-transfer"><span class="xref std std-term">State Snapshot Transfer</span></a> using <code class="docutils literal notranslate"><span class="pre">mysqldump</span></code> for backups.</li>
-<li><code class="docutils literal notranslate"><span class="pre">4567</span></code> is reserved for Galera Cluster replication traffic. Multicast replication uses both TCP and UDP transport on this port.</li>
+<li><code class="docutils literal notranslate"><span class="pre">4567</span></code> is reserved for Galera <a class="reference internal" href="glossary.html#term-cluster-replication"><span class="xref std std-term">Cluster Replication</span></a> traffic. Multicast replication uses both TCP and UDP transport on this port.</li>
 <li><code class="docutils literal notranslate"><span class="pre">4568</span></code> is the port for <a class="reference internal" href="glossary.html#term-incremental-state-transfer"><span class="xref std std-term">Incremental State Transfer</span></a>.</li>
 <li><code class="docutils literal notranslate"><span class="pre">4444</span></code> is used for all other <a class="reference internal" href="glossary.html#term-state-snapshot-transfer"><span class="xref std std-term">State Snapshot Transfer</span></a>.</li>
 </ul>

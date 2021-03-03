@@ -246,7 +246,7 @@ Hello, again, cluster dear.</td>
 </div></blockquote>
 <p>The results returned  from the <code class="docutils literal notranslate"><span class="pre">SELECT</span></code> statement indicates that the data entered on <code class="docutils literal notranslate"><span class="pre">node1</span></code> was replicated on <code class="docutils literal notranslate"><span class="pre">node2</span></code>.</p>
 <p class="section-heading rubric" id="split-brain-testing">Split-Brain Testing</p>
-<p>There are a few steps to test Galera Cluster for split-brain situations on a two-node cluster.  First, disconnect the network connection between the two nodes. At this point, the quorum will be lost and the nodes won’t serve requests.</p>
+<p>There are a few steps to test Galera Cluster for split-brain situations on a two-node cluster.  First, disconnect the network connection between the two nodes. At this point, the <a class="reference internal" href="../../documentation/glossary.html#term-quorum"><span class="xref std std-term">Quorum</span></a> will be lost and the nodes won’t serve requests.</p>
 <p>Now, reconnect the network connection.  The quorum will remain lost and the nodes still won’t serve requests.</p>
 <p>To reset the quorum, on one of the database clients, execute the following SQL statement:</p>
 <blockquote>

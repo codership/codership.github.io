@@ -287,7 +287,7 @@
 </tbody>
 </table>
 <p class="section-heading rubric" id="xtra-compressor"><code class="docutils literal notranslate"><span class="pre">compressor</span></code></p>
-<p>Defines the compression utility the donor node uses to compress the state transfer.</p>
+<p>Defines the compression utility the <a class="reference internal" href="glossary.html#term-donor-node"><span class="xref std std-term">Donor Node</span></a> uses to compress the state transfer.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
 <col width="33%" />
@@ -313,7 +313,7 @@
 </tr>
 </tbody>
 </table>
-<p>This parameter defines whether the donor node performs compression on the state transfer stream.  It also defines what compression utility it uses to perform the operation.  You can use any compression utility which works on a stream, such as <code class="docutils literal notranslate"><span class="pre">gzip</span></code> or <code class="docutils literal notranslate"><span class="pre">pigz</span></code>.  Given that the joiner node must decompress the state transfer before attempting to read it, you must match this parameter with the <a class="reference internal" href="#xtra-decompressor"><span class="std std-ref">decompressor</span></a> parameter, using the appropriate flags for each.</p>
+<p>This parameter defines whether the donor node performs compression on the state transfer stream.  It also defines what compression utility it uses to perform the operation.  You can use any compression utility which works on a stream, such as <code class="docutils literal notranslate"><span class="pre">gzip</span></code> or <code class="docutils literal notranslate"><span class="pre">pigz</span></code>.  Given that the <a class="reference internal" href="glossary.html#term-joiner-node"><span class="xref std std-term">Joiner Node</span></a> must decompress the state transfer before attempting to read it, you must match this parameter with the <a class="reference internal" href="#xtra-decompressor"><span class="std std-ref">decompressor</span></a> parameter, using the appropriate flags for each.</p>
 <div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">compression</span><span class="o">=</span><span class="s">&quot;gzip&quot;</span>
 </pre></div>
 </div>

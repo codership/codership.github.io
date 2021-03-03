@@ -174,7 +174,7 @@
 In this article, we will describe the entire process of getting a restarted node back to speed with the rest of the cluster and explain the logic behind the various log messages.</p>
 <p class="section-heading rubric">Basic Principles</p>
 <p>State transfers in Galera are governed by the following basic principles:
-The cluster will pick a donor node using an algorithm that favors IST and attempts to avoid any transfers over a wide-area network. A specific donor can be explicitly chosen using the wsrep_sst_donor variable.
+The cluster will pick a <a class="reference internal" href="../../documentation/glossary.html#term-donor-node"><span class="xref std std-term">Donor Node</span></a> using an algorithm that favors IST and attempts to avoid any transfers over a wide-area network. A specific donor can be explicitly chosen using the wsrep_sst_donor variable.
 The joiner will declare if IST, SST or both are possible:</p>
 <p>If the <code class="docutils literal notranslate"><span class="pre">mysqld</span></code> process was shut down and is now being restarted, SST or IST are both possible;
 If a node is starting from an unknown state (such as empty database or a missing grastate.dat file), only SST can be performed;

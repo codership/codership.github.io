@@ -182,7 +182,7 @@
 <ul>
 <li><p class="first">These transfers are available on live servers.  In fact, only a fully initialized server can receive a Logical State Snapshot.</p>
 </li>
-<li><p class="first">These transfers do not require the receptor node to have the same configuration as the donor node.  This allows you to upgrade storage engine options.</p>
+<li><p class="first">These transfers do not require the receptor node to have the same configuration as the <a class="reference internal" href="glossary.html#term-donor-node"><span class="xref std std-term">Donor Node</span></a>.  This allows you to upgrade storage engine options.</p>
 <p>For example, when using this transfer method you can migrate from the Antelope to the Barracuda file format, use compression resize, or move iblog* files from one partition into another.</p>
 </li>
 </ul>
@@ -201,7 +201,7 @@
 <p class="last">This transfer method is sensitive to the version of <code class="docutils literal notranslate"><span class="pre">mysqldump</span></code> each node uses.  It is not uncommon for a given cluster to have installed several versions.  A State Snapshot Transfer can fail if the version one node uses is older and incompatible with the newer server.</p>
 </div>
 <p>On occasion, <code class="docutils literal notranslate"><span class="pre">mysqldump</span></code> is the only option available.  For instance, if you upgrade from a cluster using MySQL 5.1 with the built-in InnoDB support to MySQL 5.5, which uses the InnoDB plugin.</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">mysqldump</span></code> script only runs on the sending node.  The output from the script gets piped to the MySQL client that connects to the joiner node.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">mysqldump</span></code> script only runs on the sending node.  The output from the script gets piped to the MySQL client that connects to the <a class="reference internal" href="glossary.html#term-joiner-node"><span class="xref std std-term">Joiner Node</span></a>.</p>
 <p>Because <code class="docutils literal notranslate"><span class="pre">mysqldump</span></code> interfaces through the database client, configuring it requires several steps beyond setting the <a class="reference internal" href="mysql-wsrep-options.html#wsrep-sst-method"><span class="std std-ref">wsrep_sst_method</span></a> parameter.  For more information on its configuration, see:</p>
 <p>For more information on <code class="docutils literal notranslate"><span class="pre">mysqldump</span></code>, see <a class="reference external" href="https://dev.mysql.com/doc/refman/5.6/en/mysqldump.html">mysqldump Documentation</a>.</p>
 <div class="bottom-links docutils container">
