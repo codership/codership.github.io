@@ -239,12 +239,11 @@ safe_to_bootstrap: 0
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p>After a shutdown, you can boostrap from the node which is marked as safe in the grastate.dat file.</p>
-<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span>
+<div class="last highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="p">...</span>
+<span class="n">safe_to_bootstrap</span><span class="p">:</span> <span class="mi">1</span>
+<span class="p">...</span>
 </pre></div>
 </div>
-<p class="last">…
-safe_to_bootstrap: 1
-…</p>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">pc.recovery</span></code> option (enabled by default) saves the cluster state into a file named <code class="docutils literal notranslate"><span class="pre">gvwstate.dat</span></code> on each member node. As the name of this option suggests (pc – primary component), it saves only a cluster being in the PRIMARY state. An example content of a <code class="docutils literal notranslate"><span class="pre">gvwstate.dat</span></code> file may look like this:</p>
 <div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="n">cat</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">mysql</span><span class="o">/</span><span class="n">gvwstate</span><span class="p">.</span><span class="n">dat</span>
