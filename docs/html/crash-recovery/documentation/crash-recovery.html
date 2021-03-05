@@ -208,7 +208,7 @@
 <p class="last">Even though you bootstrap from the most advanced node, the other nodes have a lower sequence number. They will still have to join through the full SST, as the Galera Cache is not retained on restart.
 For this reason, it is recommended to stop writes to the cluster before its full shutdown, so that all nodes can stop at the same position. See also <a class="reference internal" href="galera-parameters.html#pc-recovery"><span class="std std-ref">pc.recovery</span></a>.</p>
 </div>
-<p class="section-heading rubric" id="one-node-disappears-from-the-cluster">One Node Disappears from the CLuster</p>
+<p class="section-heading rubric" id="one-node-disappears-from-the-cluster">One Node Disappears from the Cluster</p>
 <p>This is the case when one node becomes unavailable due to, for example, power outage, hardware failure, kernel panic, mysqld crash or <code class="docutils literal notranslate"><span class="pre">kill</span> <span class="pre">-9</span></code> on mysqld pid.</p>
 <p>The two remaining nodes notice the connection to node 1 is down and start trying to re-connect to it. After several timeouts, node 1 is removed from the cluster. The quorum is saved (two out of three nodes are up), so no service disruption happens. After it is restarted, node 1 joins automatically, as described in <a class="reference internal" href="#node-a-is-gracefully-stopped"><span class="std std-ref">Node 1 Is Gracefully Stopped</span></a>.</p>
 <p class="section-heading rubric" id="two-nodes-disappear-from-the-cluster">Two Nodes Disappear from the Cluster</p>
