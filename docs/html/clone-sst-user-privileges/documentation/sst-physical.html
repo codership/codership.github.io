@@ -229,14 +229,20 @@ node on DDL execution, if that happens during the transfer.</p>
 </pre></div>
 </div>
 <p>Grant privileges on Donor:</p>
-<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">CREATE USER &#39;sst&#39;@&#39;%&#39; IDENTIFIED BY &#39;secret&#39;;</span>
-<span class="na">GRANT BACKUP_ADMIN, CLONE_ADMIN ON . TO &#39;sst&#39;@&#39;localhost&#39;;</span>
-<span class="na">GRANT SYSTEM_VARIABLES_ADMIN ON . TO &#39;sst&#39;@&#39;localhost&#39;;</span>
+<p>On Donor, you will need a user/password pair with sufficient administrative privileges, like:</p>
+<ol class="arabic simple">
+<li>The user can to connect through localhost.</li>
+<li>The user has BACKUP_ADMIN, CLONE_ADMIN, SYSTEM_VARIABLES_ADMIN on all of the database.</li>
+</ol>
+<p>See below for an example on how to create a MySQL user for CLONE SST:. In the example, the user is called <code class="docutils literal notranslate"><span class="pre">sst</span></code> and is given the password <code class="docutils literal notranslate"><span class="pre">secret</span></code>. Also, the user is granted the required privileges.</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">CREATE USER &#39;sst&#39;@&#39;localhost&#39; IDENTIFIED BY &#39;secret&#39;;</span>
+<span class="na">GRANT BACKUP_ADMIN, CLONE_ADMIN, SYSTEM_VARIABLES_ADMIN ON . TO &#39;sst&#39;@&#39;localhost&#39;;</span>
 </pre></div>
 </div>
+<p>In the basic configuration below, you would then use this user and password.</p>
 <p>Basic configuration for <code class="docutils literal notranslate"><span class="pre">clone</span></code> SST on Donor:</p>
 <div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="k">[mysqld]</span>
-<span class="na">wsrep_sst_auth</span><span class="o">=</span><span class="s">some_user:some_password</span>
+<span class="na">wsrep_sst_auth</span><span class="o">=</span><span class="s">wsrep_sst_auth=&lt;user&gt;:&lt;password&gt;</span>
 </pre></div>
 </div>
 <p>Optionally <cite>plugin_dir</cite> variable must be configured, if MySQL plugins
