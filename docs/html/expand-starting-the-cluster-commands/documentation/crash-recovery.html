@@ -1,0 +1,386 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><meta content="Crash Recovery" name="title" />
+<meta content="en-US" name="language" />
+<meta content="galera cluster, streaming replication" name="keywords" />
+<meta content="Codership Oy, 2014 - 2021. All Rights Reserved." name="copyright" />
+
+    <title>Crash Recovery &#8212; Galera Cluster Documentation</title>
+    <link rel="stylesheet" href="../_static/reset-style.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+
+
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<link rel="stylesheet" href="/library/_static/basic-style.css">
+<link rel="stylesheet" href="/library/_static/header.css">
+<link rel="stylesheet" href="/library/_static/footer.css">
+<link rel="stylesheet" href="/library/_static/codership.css">
+<link rel="stylesheet" media="screen and (max-width: 500px)" href="/library/_static/mobile.css"/>
+<link rel="stylesheet" media="screen and (min-width:501px) and (max-width:1024px)" href="/library/_static/tablet.css"/>
+<link rel="stylesheet" media="screen and (prefers-color-scheme: dark)" href="/library/_static/dark.css"/>
+
+
+<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Feed" href="https://galeracluster.com/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Comments Feed" href="https://galeracluster.com/comments/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Support Comments Feed" href="https://galeracluster.com/support/feed/" />
+
+<!-- <script type='text/javascript' src='https://galeracluster.com/wp-includes/js/comment-reply.min.js?ver=3.8.3'></script> -->
+
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://galeracluster.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://galeracluster.com/wp-includes/wlwmanifest.xml" />
+<link rel='prev' title='Downloads' href='https://galeracluster.com/downloads/' />
+<link rel='next' title='Community' href='https://galeracluster.com/community/' />
+<link rel='shortlink' href='https://galeracluster.com/?p=12' />
+
+<style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>
+<style type="text/css" id="twentythirteen-header-css">
+			.site-title,
+			.site-description {
+				position: absolute;
+				clip: rect(1px 1px 1px 1px); /* IE7 */
+				clip: rect(1px, 1px, 1px, 1px);
+			}
+				.site-header .home-link {
+				min-height: 0;
+			}
+</style>
+
+<script type="text/javascript">
+
+		  var _gaq = _gaq || [];
+		  _gaq.push(['_setAccount', 'UA-35163478-6']);
+		  _gaq.push(['_trackPageview']);
+
+		  (function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'https://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		  })();
+
+</script>
+
+  </head><body>
+	<div id="fb-root"></div>
+	<script>(function(d, s, id) {
+		  var js, fjs = d.getElementsByTagName(s)[0];
+		  if (d.getElementById(id)) return;
+		  js = d.createElement(s); js.id = id;
+		  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+		  fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));
+	</script>
+
+	<div id="page" class="hfeed site">
+
+	<header id="masthead" class="site-header" role="banner">
+
+	<div class="top">
+	<a class="home-link" href="https://galeracluster.com/" title="Galera Cluster for MySQL" rel="home">
+	<h1 class="site-title">Galera Cluster for MySQL</h1>
+	<h2 class="site-description">The world&#039;s most advanced open source database cluster</h2>
+	</a>
+	</div>
+
+
+	<div id="navbar" class="navbar">
+	<nav id="site-navigation" class="navigation main-navigation" role="navigation">
+	<div class="menu-main-menu-container">
+
+	<ul id="menu-main-menu" class="nav-menu">
+	<li id="menu-item-359" class="link-home menu-item menu-item-type-post_type menu-item-object-page menu-item-359"><a href="https://galeracluster.com/">Home</a></li>
+	<li id="menu-item-35" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-35"><a href="https://galeracluster.com/products/">Products</a></li>
+	<li id="menu-item-34" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="https://galeracluster.com/downloads/">Downloads</a></li>
+	<li id="menu-item-33" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-12 current_page_item current-menu-ancestor current-menu-parent current_page_parent current_page_ancestor menu-item-has-children menu-item-33"><a href="https://galeracluster.com/support/">Support</a></li>
+	<li id="menu-item-32" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="https://galeracluster.com/community/">Community</a></li>
+	<li id="menu-item-31" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-31"><a href="https://galeracluster.com/company/">Company</a></li>
+	<li id="menu-item-297" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-297"><a href="https://galeracluster.com/category/blog/">Blog</a></li>
+	<li id="menu-item-38" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-38"><a href="https://galeracluster.com/contact-us/">Contact us</a></li>
+	</ul>
+	</div>
+
+
+	</nav><!-- #site-navigation -->
+
+	</div><!-- #navbar -->
+	</header><!-- #masthead -->
+
+
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="left-margin docutils container">
+<div class="left-margin-top docutils container">
+<a class="reference internal" href="../index.html"><span class="doc">The Library</span></a></div>
+<div class="left-margin-content docutils container">
+<ul class="here simple">
+<li><a class="reference internal" href="index.html"><span class="doc">Documentation</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../kb/index.html"><span class="doc">Knowledge Base</span></a></li>
+<li><a class="reference internal" href="../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="sub-links simple">
+<li><a class="reference internal" href="../training/tutorials/index.html"><span class="doc">Tutorial Articles</span></a></li>
+<li><a class="reference internal" href="../training/videos/index.html"><span class="doc">Training Videos</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a></li>
+<li><a class="reference internal" href="../search.html"><span class="std std-ref">Search Page</span></a></li>
+</ul>
+<p>Related Documents</p>
+<ul class="simple">
+<li><a class="reference internal" href="pc-recovery.html#pc-recovery"><span class="std std-ref">Recovering Primary Component</span></a></li>
+</ul>
+</div>
+</div>
+<div class="top-links docutils container">
+<ul class="simple">
+<li><a class="reference external" href="https://galeracluster.com">Home</a></li>
+</ul>
+<ul class="here simple">
+<li><a class="reference internal" href="index.html"><span class="doc">Docs</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../kb/index.html"><span class="doc">KB</span></a></li>
+</ul>
+<ul class="nav-wider simple">
+<li><a class="reference internal" href="../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a></li>
+</ul>
+</div>
+<div class="library-document section" id="crash-recovery">
+<span id="id1"></span><h1>Crash Recovery<a class="headerlink" href="#crash-recovery" title="Permalink to this headline">¶</a></h1>
+<p>A Galera Cluster works as one logical entity, controlling the status and consistency of its nodes as well as the status of the whole cluster. This allows maintaining the data integrity more efficiently than with asynchronous replication, without losing safe writes on multiple nodes at the same time.</p>
+<p>Nevertheless, scenarios may occur where the database service can stop with no node being able to serve requests. These scenarios are described in the sections that follow.</p>
+<p class="section-heading rubric" id="node-a-is-gracefully-stopped">Node 1 Is Gracefully Stopped</p>
+<p>In a three-node cluster (nodes 1, 2 and 3), node 1 is gracefully stopped, for the purpose of maintenance, configuration change and so on.</p>
+<p>In this case, the other nodes receive a “good bye” message from the stopped node and the cluster size is reduced; some properties like <a class="reference internal" href="glossary.html#term-quorum"><span class="xref std std-term">Quorum</span></a> calculation or auto increment are automatically changed. As soon as node 1 is started again, it joins the cluster based on its <code class="docutils literal notranslate"><span class="pre">wsrep_cluster_address</span></code> variable in <code class="docutils literal notranslate"><span class="pre">my.cnf</span></code>.</p>
+<p>If the writeset cache (<code class="docutils literal notranslate"><span class="pre">gcache.size</span></code>) on nodes 2 and/or 3 still has all the transactions executed while node 1 was down, joining is possible through <a class="reference internal" href="glossary.html#term-ist"><span class="xref std std-term">IST</span></a>. If IST is impossible due to missing transactions in donor’s gcache, the fallback decision is made by the donor, and <a class="reference internal" href="glossary.html#term-sst"><span class="xref std std-term">SST</span></a> is started automatically.</p>
+<p class="section-heading rubric" id="two-nodes-are-gracefully-stopped">Two Nodes Are Gracefully Stopped</p>
+<p>As in <a class="reference internal" href="#node-a-is-gracefully-stopped"><span class="std std-ref">Node 1 Is Gracefully Stopped</span></a>, the cluster size is reduced to 1, even the single remaining node 3 forms the primary component and can serve client requests. To get the nodes back into the cluster, you just have to start them.</p>
+<p>However, when a new node joins the cluster, node 3 will be switched to the “Donor/Desynced” state, as it has to provide the state transfer at least to the first joining node. It is still possible to read/write to it during that process, but it may be much slower, which depends on how large amount of data should be sent during the state transfer. Also, some load balancers may consider the donor node as not operational and remove it from the pool. So, it is best to avoid the situation when only one node is up.</p>
+<p>If you restart node 1 and then node 2, ensure that node 2 does not use node 1 as the state transfer donor: node 1 may not have all the needed writesets in its gcache. Specify node 3 node as the donor in your configuration file and start the <code class="docutils literal notranslate"><span class="pre">mysql</span></code> service:</p>
+<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span>$ systemctl start mysql
+</pre></div>
+</div>
+<p class="section-heading rubric" id="all-three-nodes-are-gracefully-stopped">All Three Nodes Are Gracefully Stopped</p>
+<p>The cluster is completely stopped and the problem is how to initialize it again. It is important that a node writes its last executed position to the <code class="docutils literal notranslate"><span class="pre">grastate.dat</span></code> file.</p>
+<p>By comparing the seqno number in this file, you can see which is the most advanced node (most likely the last stopped). The cluster must be bootstrapped using this node, otherwise nodes that had a more advanced position will have to perform the full SST to join the cluster initialized from the less advanced one. As a result, some transactions will be lost). To bootstrap the first node, invoke the startup script like this:</p>
+<p>For MySQL:</p>
+<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span>$ mysqld_bootstrap --wsrep-new-cluster
+</pre></div>
+</div>
+<p>For PXC:</p>
+<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span>$ systemctl start mysql@bootstrap.service
+</pre></div>
+</div>
+<p>For MariaDB:</p>
+<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span>$ galera_new_cluster
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Even though you bootstrap from the most advanced node, the other nodes have a lower sequence number. They will still have to join through the full SST, as the Galera Cache is not retained on restart.
+For this reason, it is recommended to stop writes to the cluster before its full shutdown, so that all nodes can stop at the same position. See also <a class="reference internal" href="galera-parameters.html#pc-recovery"><span class="std std-ref">pc.recovery</span></a>.</p>
+</div>
+<p class="section-heading rubric" id="one-node-disappears-from-the-cluster">One Node Disappears from the Cluster</p>
+<p>This is the case when one node becomes unavailable due to, for example, power outage, hardware failure, kernel panic, mysqld crash or <code class="docutils literal notranslate"><span class="pre">kill</span> <span class="pre">-9</span></code> on mysqld pid.</p>
+<p>The two remaining nodes notice the connection to node 1 is down and start trying to re-connect to it. After several timeouts, node 1 is removed from the cluster. The quorum is saved (two out of three nodes are up), so no service disruption happens. After it is restarted, node 1 joins automatically, as described in <a class="reference internal" href="#node-a-is-gracefully-stopped"><span class="std std-ref">Node 1 Is Gracefully Stopped</span></a>.</p>
+<p class="section-heading rubric" id="two-nodes-disappear-from-the-cluster">Two Nodes Disappear from the Cluster</p>
+<p>Two nodes are not available and the remaining node (node 3) is not able to form the quorum alone. The cluster has to switch to a non-primary mode, where MySQL refuses to serve any SQL queries. In this state, the “mysqld” process on node 3 is still running and can be connected to, but any statement related to data fails with an error.</p>
+<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="n">mysql</span><span class="o">&gt;</span> <span class="k">select</span> <span class="o">*</span> <span class="k">from</span> <span class="n">test</span><span class="p">.</span><span class="n">sbtest1</span><span class="p">;</span>
+<span class="n">ERROR</span> <span class="mi">1047</span> <span class="p">(</span><span class="mi">08</span><span class="n">S01</span><span class="p">):</span> <span class="n">WSREP</span> <span class="n">has</span> <span class="k">not</span> <span class="n">yet</span> <span class="n">prepared</span> <span class="n">node</span> <span class="k">for</span> <span class="n">application</span> <span class="k">use</span>
+</pre></div>
+</div>
+<p>Reads are possible until node 3 decides that it cannot access node 1 and node 2. New writes are forbidden.</p>
+<p>As soon as the other nodes become available, the cluster is formed again automatically. If node 2 and node 3 were just network-severed from node 1, but they can still reach each other, they will keep functioning as they still form the quorum.</p>
+<p>If node 1 and node 2 crashed, you need to enable the primary component on node 3 manually, before you can bring up node 1 and node 2. The command to do this is:</p>
+<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="n">mysql</span><span class="o">&gt;</span> <span class="kt">SET</span> <span class="n">GLOBAL</span> <span class="n">wsrep_provider_options</span><span class="o">=</span><span class="s1">&#39;pc.bootstrap=true&#39;</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>This approach only works, if the other nodes are down before doing that! Otherwise, you end up with two clusters having different data.</p>
+<p class="section-heading rubric" id="all-nodes-go-down-without-a-proper-shutdown-procedure">All Nodes Go Down Without a Proper Shutdown Procedure</p>
+<p>This scenario is possible in the case of a datacenter power failure or when hitting a MySQL or Galera bug. Also, it may happen as a result of data consistency being compromised where the cluster detects that each node has different data. The <code class="docutils literal notranslate"><span class="pre">grastate.dat</span></code> file is not updated and does not contain a valid sequence number (seqno). It may look like this:.</p>
+<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span>$ cat /var/lib/mysql/grastate.dat
+# GALERA saved state
+version: 2.1
+uuid: 220dcdcb-1629-11e4-add3-aec059ad3734
+seqno: -1
+safe_to_bootstrap: 0
+</pre></div>
+</div>
+<p>In this case, you cannot be sure that all nodes are consistent with each other. We cannot use <code class="docutils literal notranslate"><span class="pre">safe_to_bootstrap</span></code> variable to determine the node that has the last transaction committed as it is set to 0 for each node. An attempt to bootstrap from such a node will fail unless you start <code class="docutils literal notranslate"><span class="pre">mysqld</span></code> with the <code class="docutils literal notranslate"><span class="pre">--wsrep-recover</span></code> parameter:</p>
+<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span>$ mysqld --wsrep-recover
+</pre></div>
+</div>
+<p>Search the output for the line that reports the recovered position after the node UUID (1122 in this case):</p>
+<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="p">...</span>
+<span class="p">...</span> <span class="p">[</span><span class="n">Note</span><span class="p">]</span> <span class="n">WSREP</span><span class="p">:</span> <span class="n">Recovered</span> <span class="n">position</span><span class="p">:</span> <span class="mi">220</span><span class="n">dcdcb</span><span class="o">-</span><span class="mi">1629</span><span class="o">-</span><span class="mi">11</span><span class="n">e4</span><span class="o">-</span><span class="n">add3</span><span class="o">-</span><span class="n">aec059ad3734</span><span class="p">:</span><span class="mi">1122</span>
+<span class="p">...</span>
+</pre></div>
+</div>
+<p>The node where the recovered position is marked by the greatest number is the best bootstrap candidate. In its <code class="docutils literal notranslate"><span class="pre">grastate.dat</span></code> file, set the <code class="docutils literal notranslate"><span class="pre">safe_to_bootstrap</span></code> variable to 1. Then, bootstrap from this node.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>After a shutdown, you can boostrap from the node which is marked as safe in the grastate.dat file.</p>
+<div class="last highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="p">...</span>
+<span class="n">safe_to_bootstrap</span><span class="p">:</span> <span class="mi">1</span>
+<span class="p">...</span>
+</pre></div>
+</div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">pc.recovery</span></code> option (enabled by default) saves the cluster state into a file named <code class="docutils literal notranslate"><span class="pre">gvwstate.dat</span></code> on each member node. As the name of this option suggests (pc – primary component), it saves only a cluster being in the PRIMARY state. An example content of a <code class="docutils literal notranslate"><span class="pre">gvwstate.dat</span></code> file may look like this:</p>
+<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="n">cat</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">mysql</span><span class="o">/</span><span class="n">gvwstate</span><span class="p">.</span><span class="n">dat</span>
+<span class="n">my_uuid</span><span class="p">:</span> <span class="mi">76</span><span class="n">de8ad9</span><span class="o">-</span><span class="mi">2</span><span class="n">aac</span><span class="o">-</span><span class="mi">11</span><span class="n">e4</span><span class="o">-</span><span class="mi">8089</span><span class="o">-</span><span class="n">d27fd06893b9</span>
+<span class="c1">#vwbeg</span>
+<span class="n">view_id</span><span class="p">:</span> <span class="mi">3</span> <span class="mi">6</span><span class="n">c821ecc</span><span class="o">-</span><span class="mi">2</span><span class="n">aac</span><span class="o">-</span><span class="mi">11</span><span class="n">e4</span><span class="o">-</span><span class="mi">85</span><span class="n">a5</span><span class="o">-</span><span class="mi">56</span><span class="n">fe513c651f</span> <span class="mi">3</span>
+<span class="n">bootstrap</span><span class="p">:</span> <span class="mi">0</span>
+<span class="n">member</span><span class="p">:</span> <span class="mi">6</span><span class="n">c821ecc</span><span class="o">-</span><span class="mi">2</span><span class="n">aac</span><span class="o">-</span><span class="mi">11</span><span class="n">e4</span><span class="o">-</span><span class="mi">85</span><span class="n">a5</span><span class="o">-</span><span class="mi">56</span><span class="n">fe513c651f</span> <span class="mi">0</span>
+<span class="n">member</span><span class="p">:</span> <span class="mi">6</span><span class="n">d80ec1b</span><span class="o">-</span><span class="mi">2</span><span class="n">aac</span><span class="o">-</span><span class="mi">11</span><span class="n">e4</span><span class="o">-</span><span class="mi">8</span><span class="n">d1e</span><span class="o">-</span><span class="n">b2b2f6caf018</span> <span class="mi">0</span>
+<span class="n">member</span><span class="p">:</span> <span class="mi">76</span><span class="n">de8ad9</span><span class="o">-</span><span class="mi">2</span><span class="n">aac</span><span class="o">-</span><span class="mi">11</span><span class="n">e4</span><span class="o">-</span><span class="mi">8089</span><span class="o">-</span><span class="n">d27fd06893b9</span> <span class="mi">0</span>
+<span class="c1">#vwend</span>
+</pre></div>
+</div>
+<p>We can see a three node cluster with all members being up. Thanks to this feature, the nodes will try to restore the primary component once all the members start to see each other. This makes the cluster automatically recover from being powered down without any manual intervention!</p>
+<p class="section-heading rubric" id="the-cluster-loses-its-primary-state-due-to-split-brain">The Cluster Loses its Primary State Due to Split Brain</p>
+<p>Let’s assume that we have a cluster that consists of an even number of nodes: six, for example. Three of them are in one location while the other three are in another location and they lose network connectivity. It is best practice to avoid such topology: if you cannot have an odd number of real nodes, you can use an additional arbitrator (garbd) node or set a higher <code class="docutils literal notranslate"><span class="pre">pc.weight</span></code> to some nodes. But when the <a class="reference internal" href="glossary.html#term-split-brain"><span class="xref std std-term">Split Brain</span></a> happens any way, none of the separated groups can maintain the quorum: all nodes must stop serving requests and both parts of the cluster will be continuously trying to re-connect.</p>
+<p>If you want to restore the service even before the network link is restored, you can make one of the groups primary again using the same command as described in <a class="reference internal" href="#two-nodes-disappear-from-the-cluster"><span class="std std-ref">Two Nodes Disappear from the Cluster</span></a>.</p>
+<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="kt">SET</span> <span class="n">GLOBAL</span> <span class="n">wsrep_provider_options</span><span class="o">=</span><span class="s1">&#39;pc.bootstrap=true&#39;</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>After this, you are able to work on the manually restored part of the cluster, and the other half should be able to automatically re-join using IST, as soon as the network link is restored.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">If you set the bootstrap option on both the separated parts, you will end up with two living cluster instances, with data likely diverging away from each other. Restoring a network link in this case will not make them re-join until the nodes are restarted and members specified in configuration file are connected again.
+Then, as the Galera replication model truly cares about data consistency: once the inconsistency is detected, nodes that cannot execute row change statement due to a data difference – an emergency shutdown will be performed and the only way to bring the nodes back to the cluster is through the full SST.</p>
+</div>
+<p>This article is based on the blog post Galera replication - how to recover a PXC cluster by Przemysław Malkowski: <a class="reference external" href="https://www.percona.com/blog/2014/09/01/galera-replication-how-to-recover-a-pxc-cluster/">Galera replication – how to recover a PXC cluster</a></p>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/logo.png" alt="Logo"/>
+            </a></p>
+<h1 class="logo"><a href="../index.html">Galera Cluster</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="index.html">The Codership Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../kb/index.html">The Codership Knowledge Base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../training/index.html">Codership Training</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../whats-new.html">What’s New</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../editors/index.html">Codership Writers &amp; Editors</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+	<div class="navbar">
+	<nav id="site-navigation" class="navigation main-navigation" role="navigation">
+	<div class="nav-bar-container">
+
+	<div id="menu-nav-bar" class="nav-menu">
+		<ul class="nav-link">
+			<li> </li>
+
+		</ul>
+
+	</div>
+	</nav>
+
+	<footer id="colophon" class="site-footer" role="contentinfo">
+	<div class="top">	<div class="powered-by"><p>Powered by Galera:</p>
+	<p><a href="https://mariadb.com/kb/en/galera/"><img class="alignleft size-full wp-image-237" alt="MariaDB" src="https://galeracluster.com/wp-content/uploads/2013/10/logo-mariadb.png" width="166" height="49" /></a></p>
+		</div></div>
+	<div class="footer-menu">
+	<div class="menu-main-menu-container">
+	<ul id="menu-main-menu-1" class="nav-menu">
+	<li class="link-home menu-item menu-item-type-post_type menu-item-object-page menu-item-359"><a href="https://galeracluster.com/">Home</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-35"><a href="https://galeracluster.com/products/">Products</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="https://galeracluster.com/downloads/">Downloads</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-12 current_page_item current-menu-ancestor current-menu-parent current_page_parent current_page_ancestor menu-item-has-children menu-item-33"><a href="https://galeracluster.com/support/">Support</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="https://galeracluster.com/community/">Community</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-31"><a href="https://galeracluster.com/company/">Company</a></li>
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-297"><a href="https://galeracluster.com/category/blog/">Blog</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-38"><a href="https://galeracluster.com/contact-us/">Contact us</a></li>
+	</ul></div>			</div><!-- .footer-menu -->
+
+
+	<div class="footer-bar">
+	<p class="copyright">2021 Codership Ltd.</p>
+	</div>
+	<div class="footnote">
+	<h2>Your data is invaluable. We're here to secure it. All of it.</h2>
+	</div>
+	</footer><!-- #colophon -->
+
+
+
+
+  </body>
+</html>
