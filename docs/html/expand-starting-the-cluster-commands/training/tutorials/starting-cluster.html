@@ -217,22 +217,18 @@
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">systemctl start mysql@bootstrap.service</span>
 </pre></div>
 </div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Use the <code class="docutils literal notranslate"><span class="pre">--wsrep-new-cluster</span></code> argument only when initializing the Primary Component.  Don’t use it to connect a new node to an existing cluster.</p>
+</div>
 <p>For operating systems that use <code class="docutils literal notranslate"><span class="pre">systemd</span></code>, you would instead enter the following from the command-line:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">/usr/bin/mysqld_bootstrap</span>
 </pre></div>
 </div>
 <p>Both of these start the <code class="docutils literal notranslate"><span class="pre">mysqld</span></code> daemon on the node.</p>
-<p>In MariaDB, use the command below to start MariaDB, Galera, and to establish the Primary Component:</p>
+<p>In MariaDB/Percona XtraDB, use the command below to start MariaDB/Percona XtraDB, Galera, and to establish the Primary Component:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">galera_new_cluster</span>
 </pre></div>
-</div>
-<p>In Percona XtraDB, the command would be:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">galera_new_cluster_sh</span>
-</pre></div>
-</div>
-<div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">Use the <code class="docutils literal notranslate"><span class="pre">--wsrep-new-cluster</span></code> argument only when initializing the Primary Component.  Don’t use it to connect a new node to an existing cluster.</p>
 </div>
 <p>Once the first node starts the database server, verify that the cluster has started, albeit a one-node cluster, by checking <a class="reference internal" href="../../documentation/galera-status-variables.html#wsrep-cluster-size"><span class="std std-ref">wsrep_cluster_size</span></a>.  With the database client, execute the following SQL statement:</p>
 <div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="k">SHOW</span> <span class="n">STATUS</span> <span class="k">LIKE</span> <span class="s1">&#39;wsrep_cluster_size&#39;</span><span class="p">;</span>
