@@ -177,10 +177,10 @@
 <div class="library-article section" id="starting-the-cluster">
 <span id="starting-cluster"></span><h1>Starting the Cluster<a class="headerlink" href="#starting-the-cluster" title="Permalink to this headline">¶</a></h1>
 <p class="article-stats">Length:  1,097 words; Published: October 20, 2014; Topic: General; Level: Beginner</p>
-<p>After you finish installing MySQL (or MariaDB or Percona XtraDB to Galera Cluster) and Galera and have added the necessary settings for the configuration file needed for Galera Cluster, the next steps are to start the nodes that will form the cluster.  To do this, you will need to start the <code class="docutils literal notranslate"><span class="pre">mysqld</span></code> daemon on one node, using the <code class="docutils literal notranslate"><span class="pre">--wsrep-new-cluster</span></code> option.  This initializes the new <a class="reference internal" href="../../documentation/glossary.html#term-primary-component"><span class="xref std std-term">Primary Component</span></a> for the cluster.  Each node you start after that will connect to the component and begin replication.</p>
+<p>After you finish installing MySQL (or MariaDB or Percona XtraDB Cluster to Galera Cluster) and Galera and have added the necessary settings for the configuration file needed for Galera Cluster, the next steps are to start the nodes that will form the cluster.  To do this, you will need to start the <code class="docutils literal notranslate"><span class="pre">mysqld</span></code> daemon on one node, using the <code class="docutils literal notranslate"><span class="pre">--wsrep-new-cluster</span></code> option.  This initializes the new <a class="reference internal" href="../../documentation/glossary.html#term-primary-component"><span class="xref std std-term">Primary Component</span></a> for the cluster.  Each node you start after that will connect to the component and begin replication.</p>
 <p>Before you attempt to initialize the cluster, there are a few things you should verify are in place on each node and related services:</p>
 <ul>
-<li><p class="first">At least three servers with the same version of MySQL, MariaDB, or Percona XtraDB installed on each;</p>
+<li><p class="first">At least three servers with the same version of MySQL, MariaDB, or Percona XtraDB Cluster installed on each;</p>
 </li>
 <li><p class="first">If you’re using firewalls, make sure the ports 4444, 4567, and 4568 for TCP traffic, and 4567 for UPD traffic are open between the hosts;</p>
 </li>
@@ -195,7 +195,7 @@
 <p>Once you have at least three hosts ready, you can initialize the cluster.</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
-<p class="last">When migrating from an existing, stand-alone instance of MySQL, MariaDB or Percona XtraDB to Galera Cluster, there will be some additional steps that you must take.  For more information on what you need to do, see <a class="reference internal" href="migration.html"><span class="doc">Migration</span></a>.</p>
+<p class="last">When migrating from an existing, stand-alone instance of MySQL, MariaDB or Percona XtraDB Cluster to Galera Cluster, there will be some additional steps that you must take.  For more information on what you need to do, see <a class="reference internal" href="migration.html"><span class="doc">Migration</span></a>.</p>
 </div>
 <p class="section-heading rubric" id="starting-first-cluster-node">Starting the First Node</p>
 <p>By default, a node don’t start as part of the <a class="reference internal" href="../../documentation/glossary.html#term-primary-component"><span class="xref std std-term">Primary Component</span></a>.  Instead, it assumes that the Primary Component is already running and it is merely joining an existing cluster.  For each node it encounters in the cluster, it checks whether or not it’s a part of the Primary Component.  When it finds the Primary Component, it requests a state transfer to bring its database into sync with the cluster.  If it can’t find the Primary Component, it will remains in a non-operational state.</p>
@@ -204,7 +204,7 @@
 <p class="first admonition-title">Note</p>
 <p class="last">When you start a new cluster, any node can serve as the first node, since all the databases are empty.  When you migrate from MySQL to Galera Cluster, use the original master node as the first node.  When restarting the cluster, use the most advanced node.  For more information, see <a class="reference internal" href="migration.html"><span class="doc">Migration</span></a> and <a class="reference internal" href="../../documentation/quorum-reset.html"><span class="doc">Quorum Reset</span></a>.</p>
 </div>
-<p>To start the first node–which should have MySQL, MariaDB or Percona XtraDB, and Galera installed–you’ll have to launch the database server on it with the <code class="docutils literal notranslate"><span class="pre">--wsrep-new-cluster</span></code> option.  There are different ways to do this, depending on the operating system. For systems that use <code class="docutils literal notranslate"><span class="pre">init</span></code>, execute the following from the command-line:</p>
+<p>To start the first node–which should have MySQL, MariaDB or Percona XtraDB Cluster, and Galera installed–you’ll have to launch the database server on it with the <code class="docutils literal notranslate"><span class="pre">--wsrep-new-cluster</span></code> option.  There are different ways to do this, depending on the operating system. For systems that use <code class="docutils literal notranslate"><span class="pre">init</span></code>, execute the following from the command-line:</p>
 <p>On Galera:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">mysqld_bootstrap --wsrep-new-cluster</span>
 </pre></div>
@@ -213,7 +213,7 @@
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">mysqld --wsrep-new-cluster</span>
 </pre></div>
 </div>
-<p>On Percona XtraDB</p>
+<p>On Percona XtraDB Cluster</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">systemctl start mysql@bootstrap.service</span>
 </pre></div>
 </div>
@@ -226,7 +226,7 @@
 </pre></div>
 </div>
 <p>Both of these start the <code class="docutils literal notranslate"><span class="pre">mysqld</span></code> daemon on the node.</p>
-<p>In MariaDB/Percona XtraDB, use the command below to start MariaDB/Percona XtraDB, Galera, and to establish the Primary Component:</p>
+<p>In MariaDB, use the command below to start MariaDB, Galera, and to establish the Primary Component:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">galera_new_cluster</span>
 </pre></div>
 </div>
