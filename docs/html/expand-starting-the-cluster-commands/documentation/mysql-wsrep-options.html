@@ -2572,7 +2572,7 @@
 </tbody>
 </table>
 <p>In <a class="reference internal" href="glossary.html#term-streaming-replication"><span class="xref std std-term">Streaming Replication</span></a>, the node breaks transactions down into fragments, then replicates and certifies them while the transaction is in progress.  Once certified, a fragment can no longer be aborted due to conflicting transactions.  This parameter determines the number of replication units to include in a fragment.  To define what these units represent, use <a class="reference internal" href="#wsrep-trx-fragment-unit"><span class="std std-ref">wsrep_trx_fragment_unit</span></a>. A value of <code class="docutils literal notranslate"><span class="pre">0</span></code> indicates that streaming replication will not be used.</p>
-<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="k">SHOW</span> <span class="n">VARIABLE</span> <span class="k">LIKE</span> <span class="s1">&#39;wsrep_trx_fragment_size&#39;</span><span class="p">;</span>
+<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="k">SHOW</span> <span class="n">VARIABLES</span> <span class="k">LIKE</span> <span class="s1">&#39;wsrep_trx_fragment_size&#39;</span><span class="p">;</span>
 
 <span class="o">+-------------------------+-------+</span>
 <span class="o">|</span> <span class="n">Variable_name</span>           <span class="o">|</span> <span class="n">Value</span> <span class="o">|</span>
@@ -2623,7 +2623,7 @@
 <li><strong>rows</strong>: Refers to the number of rows updated in the fragment.</li>
 <li><strong>statements</strong>: Refers to the number of SQL statements in the fragment.</li>
 </ul>
-<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="k">SHOW</span> <span class="n">VARIABLE</span> <span class="k">LIKE</span> <span class="s1">&#39;wsrep_trx_fragment_unit&#39;</span><span class="p">;</span>
+<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="k">SHOW</span> <span class="n">VARIABLES</span> <span class="k">LIKE</span> <span class="s1">&#39;wsrep_trx_fragment_unit&#39;</span><span class="p">;</span>
 
 <span class="o">+-------------------------+--------+</span>
 <span class="o">|</span> <span class="n">Variable_name</span>           <span class="o">|</span> <span class="n">Value</span>  <span class="o">|</span>
