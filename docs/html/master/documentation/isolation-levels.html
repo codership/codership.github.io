@@ -41,14 +41,12 @@
 <link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Comments Feed" href="https://galeracluster.com/comments/feed/" />
 <link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Support Comments Feed" href="https://galeracluster.com/support/feed/" />
 
-<script type='text/javascript' src='https://galeracluster.com/wp-includes/js/comment-reply.min.js?ver=3.8.3'></script>
+<!-- <script type='text/javascript' src='https://galeracluster.com/wp-includes/js/comment-reply.min.js?ver=3.8.3'></script> -->
 
 <link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://galeracluster.com/xmlrpc.php?rsd" />
 <link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://galeracluster.com/wp-includes/wlwmanifest.xml" />
 <link rel='prev' title='Downloads' href='https://galeracluster.com/downloads/' />
 <link rel='next' title='Community' href='https://galeracluster.com/community/' />
-<meta name="generator" content="WordPress 3.8.3" />
-
 <link rel='shortlink' href='https://galeracluster.com/?p=12' />
 
 <style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>
@@ -206,7 +204,7 @@ isolation level is honored only between transactions issued on the same node and
 <p>However, at this isolation level <code class="docutils literal notranslate"><span class="pre">SELECT</span></code> queries use their own snapshots of committed data, that is data committed before the <code class="docutils literal notranslate"><span class="pre">SELECT</span></code> query executed.  As a result, <code class="docutils literal notranslate"><span class="pre">SELECT</span></code> queries, when run multiple times within the same transaction, can return different result sets.  This is called a non-repeatable read.</p>
 <p class="sub-heading rubric" id="repeatable-read">REPEATABLE-READ</p>
 <p>Here non-repeatable reads are not possible.  Snapshots taken for the <code class="docutils literal notranslate"><span class="pre">SELECT</span></code> query are taken the first time the <code class="docutils literal notranslate"><span class="pre">SELECT</span></code> query runs during the transaction.</p>
-<p>The snapshot remains in use throughout the entire transaction for the <code class="docutils literal notranslate"><span class="pre">SELECT</span></code> query.  It always returns the same result set.  This level does not take into account changes to data made by other transactions, regardless of whether or not they have been committed.  IN this way, reads remain repeatable.</p>
+<p>The snapshot remains in use throughout the entire transaction for the <code class="docutils literal notranslate"><span class="pre">SELECT</span></code> query.  It always returns the same result set.  This level does not take into account changes to data made by other transactions, regardless of whether or not they have been committed.  In this way, reads remain repeatable.</p>
 <p class="sub-heading rubric" id="serializable">SERIALIZABLE</p>
 <p>Here all records accessed within a transaction are locked.  The resource locks in a way that also prevents you from appending records to the table the transaction operates upon.</p>
 <p><code class="docutils literal notranslate"><span class="pre">SERIALIZABLE</span></code> prevents a phenomenon known as a phantom read.  Phantom reads occur when, within a transaction, two identical queries execute, and the rows the second query returns differ from the first.</p>

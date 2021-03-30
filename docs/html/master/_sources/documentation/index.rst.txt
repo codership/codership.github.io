@@ -95,6 +95,7 @@ This is the Codership Documentation. It documents the latest version of Galera C
    ":doc:`system-tables`", ":doc:`auto-eviction`"
    ":doc:`schema-upgrades`", ":doc:`using-sr`"
    ":doc:`upgrading`", ":doc:`backup-cluster`"
+   ":doc:`crash-recovery`", ""
 
 
 .. container:: banner
@@ -134,6 +135,7 @@ This is the Codership Documentation. It documents the latest version of Galera C
    ":doc:`wsrep-functions`", ":doc:`xtrabackup-options`"
    ":doc:`galera-parameters`", ":doc:`system-tables`"
    ":doc:`galera-status-variables`", ":doc:`versioning-information`"
+   ":doc:`mariadb-options`", ""
 
 
 .. container:: banner

@@ -36,14 +36,12 @@
 <link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Comments Feed" href="https://galeracluster.com/comments/feed/" />
 <link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Support Comments Feed" href="https://galeracluster.com/support/feed/" />
 
-<script type='text/javascript' src='https://galeracluster.com/wp-includes/js/comment-reply.min.js?ver=3.8.3'></script>
+<!-- <script type='text/javascript' src='https://galeracluster.com/wp-includes/js/comment-reply.min.js?ver=3.8.3'></script> -->
 
 <link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://galeracluster.com/xmlrpc.php?rsd" />
 <link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://galeracluster.com/wp-includes/wlwmanifest.xml" />
 <link rel='prev' title='Downloads' href='https://galeracluster.com/downloads/' />
 <link rel='next' title='Community' href='https://galeracluster.com/community/' />
-<meta name="generator" content="WordPress 3.8.3" />
-
 <link rel='shortlink' href='https://galeracluster.com/?p=12' />
 
 <style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>
@@ -257,7 +255,7 @@
     Debug log
 
       <ul>
-        <li><a href="documentation/mysql-wsrep-options.html#index-1">Logs</a>
+        <li><a href="documentation/mariadb-options.html#index-1">Logs</a>, <a href="documentation/mysql-wsrep-options.html#index-1">[1]</a>
 </li>
       </ul></li>
       <li>
@@ -308,7 +306,7 @@
       </ul></li>
       <li><a href="documentation/glossary.html#term-donor-node"><strong>Donor Node</strong></a>
 </li>
-      <li><a href="documentation/mysql-wsrep-options.html#index-0">Drupal</a>
+      <li><a href="documentation/mariadb-options.html#index-0">Drupal</a>, <a href="documentation/mysql-wsrep-options.html#index-0">[1]</a>
 </li>
   </ul></td>
 </tr></table>
@@ -810,7 +808,7 @@
     Logs
 
       <ul>
-        <li><a href="documentation/mysql-wsrep-options.html#index-1">Debug log</a>
+        <li><a href="documentation/mariadb-options.html#index-1">Debug log</a>, <a href="documentation/mysql-wsrep-options.html#index-1">[1]</a>
 </li>
         <li><a href="documentation/arbitrator.html#index-2">Galera Arbitrator</a>
 </li>
@@ -933,6 +931,8 @@
 </li>
         <li><a href="documentation/ssl.html#index-3">socket.ssl_key</a>
 </li>
+        <li><a href="documentation/mariadb-options.html#index-4">wsrep-osu-mode</a>
+</li>
         <li><a href="documentation/mysql-wsrep-options.html#index-27">wsrep_OSU_method</a>, <a href="documentation/schema-upgrades.html#index-2">[1]</a>
 </li>
         <li><a href="documentation/mysql-wsrep-options.html#index-2">wsrep_auto_increment_control</a>
@@ -1007,6 +1007,10 @@
 </li>
         <li><a href="documentation/mysql-wsrep-options.html#index-21">wsrep_mode</a>
 </li>
+        <li><a href="documentation/mariadb-options.html#index-2">wsrep_mode=REPLICATE_ARIA</a>
+</li>
+        <li><a href="documentation/mariadb-options.html#index-3">wsrep_mode=REPLICATE_MYISAM</a>
+</li>
         <li><a href="documentation/mysql-wsrep-options.html#index-22">wsrep_node_address</a>
 </li>
         <li><a href="documentation/mysql-wsrep-options.html#index-23">wsrep_node_incoming_address</a>
@@ -1044,6 +1048,8 @@
         <li><a href="documentation/mysql-wsrep-options.html#index-41">wsrep_sst_receive_address</a>
 </li>
         <li><a href="documentation/mysql-wsrep-options.html#index-42">wsrep_start_position</a>
+</li>
+        <li><a href="documentation/mariadb-options.html#index-5">wsrep_strict_ddl</a>
 </li>
         <li><a href="documentation/mysql-wsrep-options.html#index-43">wsrep_sync_wait</a>
 </li>
@@ -1773,6 +1779,13 @@
 </li>
       </ul></li>
       <li>
+    wsrep-osu-mode
+
+      <ul>
+        <li><a href="documentation/mariadb-options.html#index-4">Parameters</a>
+</li>
+      </ul></li>
+      <li>
     wsrep_apply_oooe
 
       <ul>
@@ -2022,8 +2035,6 @@
         <li><a href="documentation/galera-status-variables.html#index-19">Status Variables</a>
 </li>
       </ul></li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li>
     wsrep_flow_control_active
 
@@ -2031,6 +2042,8 @@
         <li><a href="documentation/galera-status-variables.html#index-20">Status Variables</a>
 </li>
       </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li>
     wsrep_flow_control_paused
 
@@ -2288,6 +2301,20 @@
 </li>
       </ul></li>
       <li>
+    wsrep_mode=REPLICATE_ARIA
+
+      <ul>
+        <li><a href="documentation/mariadb-options.html#index-2">Parameters</a>
+</li>
+      </ul></li>
+      <li>
+    wsrep_mode=REPLICATE_MYISAM
+
+      <ul>
+        <li><a href="documentation/mariadb-options.html#index-3">Parameters</a>
+</li>
+      </ul></li>
+      <li>
     wsrep_node_address
 
       <ul>
@@ -2527,6 +2554,13 @@
 
       <ul>
         <li><a href="documentation/mysql-wsrep-options.html#index-42">Parameters</a>
+</li>
+      </ul></li>
+      <li>
+    wsrep_strict_ddl
+
+      <ul>
+        <li><a href="documentation/mariadb-options.html#index-5">Parameters</a>
 </li>
       </ul></li>
       <li>

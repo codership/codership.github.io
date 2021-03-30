@@ -41,14 +41,12 @@
 <link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Comments Feed" href="https://galeracluster.com/comments/feed/" />
 <link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Support Comments Feed" href="https://galeracluster.com/support/feed/" />
 
-<script type='text/javascript' src='https://galeracluster.com/wp-includes/js/comment-reply.min.js?ver=3.8.3'></script>
+<!-- <script type='text/javascript' src='https://galeracluster.com/wp-includes/js/comment-reply.min.js?ver=3.8.3'></script> -->
 
 <link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://galeracluster.com/xmlrpc.php?rsd" />
 <link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://galeracluster.com/wp-includes/wlwmanifest.xml" />
 <link rel='prev' title='Downloads' href='https://galeracluster.com/downloads/' />
 <link rel='next' title='Community' href='https://galeracluster.com/community/' />
-<meta name="generator" content="WordPress 3.8.3" />
-
 <link rel='shortlink' href='https://galeracluster.com/?p=12' />
 
 <style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>
@@ -250,7 +248,11 @@
 </div>
 </li>
 </ol>
-<p>This creates a key and certificate file for the database client.  They are in the current working directory as <code class="docutils literal notranslate"><span class="pre">client-key.pem</span></code> and <code class="docutils literal notranslate"><span class="pre">client-cert.pem</span></code>.  Each node requires both to secure client activity and state snapshot transfers.</p>
+<p>This creates a key and certificate file for the database client.  They are in the current working directory as <code class="docutils literal notranslate"><span class="pre">client-key.pem</span></code> and <code class="docutils literal notranslate"><span class="pre">client-cert.pem</span></code>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Each node requires both to secure client activity and state snapshot transfers.</p>
+</div>
 <p class="section-heading rubric" id="verify-cert">Verifying the Certificates</p>
 <p>When you finish creating the key and certificate files, use <code class="docutils literal notranslate"><span class="pre">openssl</span></code> to verify that they were generated correctly:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">openssl verify -CAfile ca-cert.pem \</span>
@@ -261,6 +263,7 @@
 </pre></div>
 </div>
 <p>In the event that this verification fails, repeat the above process to generate replacement certificates.</p>
+<p>The Common Name value used for the server and client certificates/keys must each differ from the Common Name value used for the CA certificate. Otherwise, the certificate and key files will not work for servers compiled using OpenSSL.</p>
 <p>Once the certificates pass verification, you can send them out to each node.  Use a secure method, such as <code class="docutils literal notranslate"><span class="pre">scp</span></code> or <code class="docutils literal notranslate"><span class="pre">sftp</span></code>.  The node requires the following files:</p>
 <ul class="simple">
 <li>Certificate Authority: <code class="docutils literal notranslate"><span class="pre">ca-cert.pem</span></code>.</li>

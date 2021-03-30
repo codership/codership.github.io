@@ -41,14 +41,12 @@
 <link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Comments Feed" href="https://galeracluster.com/comments/feed/" />
 <link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Support Comments Feed" href="https://galeracluster.com/support/feed/" />
 
-<script type='text/javascript' src='https://galeracluster.com/wp-includes/js/comment-reply.min.js?ver=3.8.3'></script>
+<!-- <script type='text/javascript' src='https://galeracluster.com/wp-includes/js/comment-reply.min.js?ver=3.8.3'></script> -->
 
 <link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://galeracluster.com/xmlrpc.php?rsd" />
 <link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://galeracluster.com/wp-includes/wlwmanifest.xml" />
 <link rel='prev' title='Downloads' href='https://galeracluster.com/downloads/' />
 <link rel='next' title='Community' href='https://galeracluster.com/community/' />
-<meta name="generator" content="WordPress 3.8.3" />
-
 <link rel='shortlink' href='https://galeracluster.com/?p=12' />
 
 <style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>
@@ -382,112 +380,119 @@
 <td>1.0</td>
 <td>&#160;</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#wsrep-reject-queries"><span class="std std-ref">wsrep_reject_queries</span></a></td>
+<tr class="row-odd"><td><a class="reference internal" href="#wsrep-recover"><span class="std std-ref">wsrep_recover</span></a></td>
+<td><code class="docutils literal notranslate"><span class="pre">OFF</span></code></td>
+<td>Yes</td>
+<td>No</td>
+<td>1.0</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#wsrep-reject-queries"><span class="std std-ref">wsrep_reject_queries</span></a></td>
 <td><code class="docutils literal notranslate"><span class="pre">NONE</span></code></td>
 <td>Yes</td>
 <td>Yes</td>
 <td>???</td>
 <td>&#160;</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#wsrep-restart-slave"><span class="std std-ref">wsrep_restart_slave</span></a></td>
+<tr class="row-odd"><td><a class="reference internal" href="#wsrep-restart-slave"><span class="std std-ref">wsrep_restart_slave</span></a></td>
 <td><code class="docutils literal notranslate"><span class="pre">OFF</span></code></td>
 <td>Yes</td>
 <td>Yes</td>
 <td>1.0</td>
 <td>&#160;</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#wsrep-retry-autocommit"><span class="std std-ref">wsrep_retry_autocommit</span></a></td>
+<tr class="row-even"><td><a class="reference internal" href="#wsrep-retry-autocommit"><span class="std std-ref">wsrep_retry_autocommit</span></a></td>
 <td><code class="docutils literal notranslate"><span class="pre">1</span></code></td>
 <td>Yes</td>
 <td>&#160;</td>
 <td>1.0</td>
 <td>&#160;</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#wsrep-slave-fk-checks"><span class="std std-ref">wsrep_slave_FK_checks</span></a></td>
+<tr class="row-odd"><td><a class="reference internal" href="#wsrep-slave-fk-checks"><span class="std std-ref">wsrep_slave_FK_checks</span></a></td>
 <td><code class="docutils literal notranslate"><span class="pre">ON</span></code></td>
 <td>Yes</td>
 <td>Yes</td>
 <td>1.0</td>
 <td>&#160;</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#wsrep-slave-threads"><span class="std std-ref">wsrep_slave_threads</span></a></td>
+<tr class="row-even"><td><a class="reference internal" href="#wsrep-slave-threads"><span class="std std-ref">wsrep_slave_threads</span></a></td>
 <td><code class="docutils literal notranslate"><span class="pre">1</span></code></td>
 <td>Yes</td>
 <td>&#160;</td>
 <td>1.0</td>
 <td>&#160;</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#wsrep-slave-uk-checks"><span class="std std-ref">wsrep_slave_UK_checks</span></a></td>
+<tr class="row-odd"><td><a class="reference internal" href="#wsrep-slave-uk-checks"><span class="std std-ref">wsrep_slave_UK_checks</span></a></td>
 <td><code class="docutils literal notranslate"><span class="pre">OFF</span></code></td>
 <td>Yes</td>
 <td>Yes</td>
 <td>1.0</td>
 <td>&#160;</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#wsrep-sst-auth"><span class="std std-ref">wsrep_sst_auth</span></a></td>
+<tr class="row-even"><td><a class="reference internal" href="#wsrep-sst-auth"><span class="std std-ref">wsrep_sst_auth</span></a></td>
 <td>&#160;</td>
 <td>Yes</td>
 <td>&#160;</td>
 <td>1.0</td>
 <td>&#160;</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#wsrep-sst-donor"><span class="std std-ref">wsrep_sst_donor</span></a></td>
+<tr class="row-odd"><td><a class="reference internal" href="#wsrep-sst-donor"><span class="std std-ref">wsrep_sst_donor</span></a></td>
 <td>&#160;</td>
 <td>Yes</td>
 <td>&#160;</td>
 <td>1.0</td>
 <td>&#160;</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#wsrep-sst-donor-rejects-queries"><span class="std std-ref">wsrep_sst_donor_rejects_queries</span></a></td>
+<tr class="row-even"><td><a class="reference internal" href="#wsrep-sst-donor-rejects-queries"><span class="std std-ref">wsrep_sst_donor_rejects_queries</span></a></td>
 <td><code class="docutils literal notranslate"><span class="pre">OFF</span></code></td>
 <td>Yes</td>
 <td>&#160;</td>
 <td>1.0</td>
 <td>&#160;</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#wsrep-sst-method"><span class="std std-ref">wsrep_sst_method</span></a></td>
+<tr class="row-odd"><td><a class="reference internal" href="#wsrep-sst-method"><span class="std std-ref">wsrep_sst_method</span></a></td>
 <td><code class="docutils literal notranslate"><span class="pre">mysqldump</span></code></td>
 <td>Yes</td>
 <td>&#160;</td>
 <td>1.0</td>
 <td>&#160;</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#wsrep-sst-receive-address"><span class="std std-ref">wsrep_sst_receive_address</span></a></td>
+<tr class="row-even"><td><a class="reference internal" href="#wsrep-sst-receive-address"><span class="std std-ref">wsrep_sst_receive_address</span></a></td>
 <td><em>node IP address</em></td>
 <td>Yes</td>
 <td>&#160;</td>
 <td>1.0</td>
 <td>&#160;</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#wsrep-start-position"><span class="std std-ref">wsrep_start_position</span></a></td>
+<tr class="row-odd"><td><a class="reference internal" href="#wsrep-start-position"><span class="std std-ref">wsrep_start_position</span></a></td>
 <td><em>see reference entry</em></td>
 <td>Yes</td>
 <td>&#160;</td>
 <td>1.0</td>
 <td>&#160;</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#wsrep-sync-wait"><span class="std std-ref">wsrep_sync_wait</span></a></td>
+<tr class="row-even"><td><a class="reference internal" href="#wsrep-sync-wait"><span class="std std-ref">wsrep_sync_wait</span></a></td>
 <td><code class="docutils literal notranslate"><span class="pre">0</span></code></td>
 <td>Yes</td>
 <td>Yes</td>
 <td>3.6</td>
 <td>&#160;</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#wsrep-trx-fragment-size"><span class="std std-ref">wsrep_trx_fragment_size</span></a></td>
+<tr class="row-odd"><td><a class="reference internal" href="#wsrep-trx-fragment-size"><span class="std std-ref">wsrep_trx_fragment_size</span></a></td>
 <td><code class="docutils literal notranslate"><span class="pre">0</span></code></td>
 <td>Yes</td>
 <td>Yes</td>
 <td>4.0</td>
 <td>&#160;</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#wsrep-trx-fragment-unit"><span class="std std-ref">wsrep_trx_fragment_unit</span></a></td>
+<tr class="row-even"><td><a class="reference internal" href="#wsrep-trx-fragment-unit"><span class="std std-ref">wsrep_trx_fragment_unit</span></a></td>
 <td><code class="docutils literal notranslate"><span class="pre">bytes</span></code></td>
 <td>Yes</td>
 <td>Yes</td>
 <td>4.0</td>
 <td>&#160;</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#wsrep-ws-persistency"><span class="std std-ref">wsrep_ws_persistency</span></a></td>
+<tr class="row-odd"><td><a class="reference internal" href="#wsrep-ws-persistency"><span class="std std-ref">wsrep_ws_persistency</span></a></td>
 <td>&#160;</td>
 <td>Yes</td>
 <td>&#160;</td>
@@ -1836,6 +1841,47 @@
 <span class="o">+------------------------+-----------------------------------------------+</span>
 </pre></div>
 </div>
+<p class="section-heading rubric" id="wsrep-recover"><code class="docutils literal notranslate"><span class="pre">wsrep_recover</span></code></p>
+<p>If <code class="docutils literal notranslate"><span class="pre">ON</span></code>, when the server starts, the server will recover the sequence number of the most recent write set applied by Galera, and it will be output to <code class="docutils literal notranslate"><span class="pre">stderr</span></code>, which is usually redirected to the error log. At that point, the server will exit. This sequence number can be provided to the <code class="docutils literal notranslate"><span class="pre">wsrep_start_position</span></code> system variable.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Command-line Format</td>
+<td><code class="docutils literal notranslate"><span class="pre">--wsrep-recover</span></code></td>
+</tr>
+<tr class="row-even"><td>System Variable</td>
+<td><code class="docutils literal notranslate"><span class="pre">wsrep_recover</span></code></td>
+</tr>
+<tr class="row-odd"><td>Variable Scope</td>
+<td>Global</td>
+</tr>
+<tr class="row-even"><td>Dynamic Variable</td>
+<td>No</td>
+</tr>
+<tr class="row-odd"><td>Permitted Values</td>
+<td>0 | 1</td>
+</tr>
+<tr class="row-even"><td>Default Value</td>
+<td>OFF</td>
+</tr>
+<tr class="row-odd"><td>Initial Version</td>
+<td>Version 1.0</td>
+</tr>
+</tbody>
+</table>
+<p>See also <a class="reference internal" href="../training/tutorials/restarting-cluster.html"><span class="doc">Restarting the Cluster</span></a>.</p>
+<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="k">SHOW</span> <span class="n">VARIABLES</span> <span class="k">LIKE</span> <span class="s1">&#39;wsrep_recover&#39;</span><span class="p">;</span>
+
+<span class="o">+------------------------+-----------------------------------------------+</span>
+<span class="o">|</span> <span class="n">Variable_name</span>          <span class="o">|</span> <span class="n">Value</span>                                         <span class="o">|</span>
+<span class="o">+------------------------+-----------------------------------------------+</span>
+<span class="o">|</span> <span class="n">wsrep_recover</span>          <span class="o">|</span> <span class="n">OFF</span>                                           <span class="o">|</span>
+<span class="o">+------------------------+-----------------------------------------------+</span>
+</pre></div>
+</div>
 <p class="section-heading rubric" id="wsrep-reject-queries"><code class="docutils literal notranslate"><span class="pre">wsrep_reject_queries</span></code></p>
 <p>Defines whether the node rejects client queries while participating in the cluster.</p>
 <table border="1" class="doc-options docutils">
@@ -2526,7 +2572,7 @@
 </tbody>
 </table>
 <p>In <a class="reference internal" href="glossary.html#term-streaming-replication"><span class="xref std std-term">Streaming Replication</span></a>, the node breaks transactions down into fragments, then replicates and certifies them while the transaction is in progress.  Once certified, a fragment can no longer be aborted due to conflicting transactions.  This parameter determines the number of replication units to include in a fragment.  To define what these units represent, use <a class="reference internal" href="#wsrep-trx-fragment-unit"><span class="std std-ref">wsrep_trx_fragment_unit</span></a>. A value of <code class="docutils literal notranslate"><span class="pre">0</span></code> indicates that streaming replication will not be used.</p>
-<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="k">SHOW</span> <span class="n">VARIABLE</span> <span class="k">LIKE</span> <span class="s1">&#39;wsrep_trx_fragment_size&#39;</span><span class="p">;</span>
+<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="k">SHOW</span> <span class="n">VARIABLES</span> <span class="k">LIKE</span> <span class="s1">&#39;wsrep_trx_fragment_size&#39;</span><span class="p">;</span>
 
 <span class="o">+-------------------------+-------+</span>
 <span class="o">|</span> <span class="n">Variable_name</span>           <span class="o">|</span> <span class="n">Value</span> <span class="o">|</span>
@@ -2577,7 +2623,7 @@
 <li><strong>rows</strong>: Refers to the number of rows updated in the fragment.</li>
 <li><strong>statements</strong>: Refers to the number of SQL statements in the fragment.</li>
 </ul>
-<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="k">SHOW</span> <span class="n">VARIABLE</span> <span class="k">LIKE</span> <span class="s1">&#39;wsrep_trx_fragment_unit&#39;</span><span class="p">;</span>
+<div class="highlight-mysql notranslate"><div class="highlight"><pre><span></span><span class="k">SHOW</span> <span class="n">VARIABLES</span> <span class="k">LIKE</span> <span class="s1">&#39;wsrep_trx_fragment_unit&#39;</span><span class="p">;</span>
 
 <span class="o">+-------------------------+--------+</span>
 <span class="o">|</span> <span class="n">Variable_name</span>           <span class="o">|</span> <span class="n">Value</span>  <span class="o">|</span>
