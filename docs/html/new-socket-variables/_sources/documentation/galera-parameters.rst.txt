@@ -2133,7 +2133,7 @@ The excerpt below is an example of how this Galera parameter might look in the c
 .. rubric:: ``socket.reload``
 
 .. index::
-   pair: wsrep Provider Options; socket.reload
+   pair: wsrep Provider Options; socket.ssl_reload
 
 Reinitialize SSL context.
 
