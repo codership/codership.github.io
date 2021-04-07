@@ -2019,7 +2019,7 @@ Enable connection engine to accept both SSL and TCP connections.
    "Dynamic", "No"
    "Initial Version", "4.8"
 
-By enabling this parameter, Galera should be possible to communicate with both SSL and TCP connections.
+By enabling this parameter, it should be possible for Galera to communicate with both SSL and TCP connections.
 If SSL is enabled it will try to establish/accept SSL connection first and than fallback to TCP connection if
 necessary.
 
