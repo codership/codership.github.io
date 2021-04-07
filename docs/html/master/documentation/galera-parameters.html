@@ -802,7 +802,15 @@
 <td>&#160;</td>
 <td>2.0</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#socket-ssl-cipher"><span class="std std-ref">socket.ssl_cipher</span></a></td>
+<tr class="row-even"><td><a class="reference internal" href="#socket-dynamic"><span class="std std-ref">socket.dynamic</span></a></td>
+<td>FALSE</td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&#160;</td>
+<td>4.8</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#socket-ssl-cipher"><span class="std std-ref">socket.ssl_cipher</span></a></td>
 <td><code class="docutils literal notranslate"><span class="pre">AES128-SHA</span></code> (vs. 1); <br /> system default (vs. 3.24)</td>
 <td><blockquote class="first last">
 <div>No</div></blockquote>
@@ -810,7 +818,7 @@
 <td>&#160;</td>
 <td>1.0</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#socket-ssl-compression"><span class="std std-ref">socket.ssl_compression</span></a></td>
+<tr class="row-even"><td><a class="reference internal" href="#socket-ssl-compression"><span class="std std-ref">socket.ssl_compression</span></a></td>
 <td><code class="docutils literal notranslate"><span class="pre">YES</span></code></td>
 <td><blockquote class="first last">
 <div>No</div></blockquote>
@@ -818,7 +826,7 @@
 <td>&#160;</td>
 <td>1.0</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="#socket-ssl-key"><span class="std std-ref">socket.ssl_key</span></a></td>
+<tr class="row-odd"><td><a class="reference internal" href="#socket-ssl-key"><span class="std std-ref">socket.ssl_key</span></a></td>
 <td>&#160;</td>
 <td><blockquote class="first last">
 <div>No</div></blockquote>
@@ -826,13 +834,21 @@
 <td>&#160;</td>
 <td>1.0</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="#socket-ssl-password-file"><span class="std std-ref">socket.ssl_password_file</span></a></td>
+<tr class="row-even"><td><a class="reference internal" href="#socket-ssl-password-file"><span class="std std-ref">socket.ssl_password_file</span></a></td>
 <td>&#160;</td>
 <td><blockquote class="first last">
 <div>No</div></blockquote>
 </td>
 <td>&#160;</td>
 <td>1.0</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#socket-ssl-reload"><span class="std std-ref">socket.ssl_reload</span></a></td>
+<td>&#160;</td>
+<td><blockquote class="first last">
+<div>No</div></blockquote>
+</td>
+<td>&#160;</td>
+<td>4.8</td>
 </tr>
 </tbody>
 </table>
@@ -2646,8 +2662,34 @@ at <a class="reference internal" href="#gcs-recv-q-soft-limit"><span class="std 
 <div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;socket.checksum=2&quot;</span>
 </pre></div>
 </div>
+<p class="section-heading rubric" id="socket-dynamic"><code class="docutils literal notranslate"><span class="pre">socket.dynamic</span></code></p>
+<p id="index-76">Enable connection engine to accept both SSL and TCP connections.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Default Value</td>
+<td>false</td>
+</tr>
+<tr class="row-even"><td>Dynamic</td>
+<td>No</td>
+</tr>
+<tr class="row-odd"><td>Initial Version</td>
+<td>4.8</td>
+</tr>
+</tbody>
+</table>
+<p>By enabling this parameter, it should be possible for Galera to communicate with both SSL and TCP connections.
+If SSL is enabled it will try to establish/accept SSL connection first and than fallback to TCP connection if
+necessary.</p>
+<p>The excerpt below is an example of how this Galera parameter might look in the configuration file:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;socket.dynamic=true&quot;</span>
+</pre></div>
+</div>
 <p class="section-heading rubric" id="socket-ssl-cipher"><code class="docutils literal notranslate"><span class="pre">socket.ssl_cipher</span></code></p>
-<p id="index-76">Symmetric cipher to use. By default SSL library implementation default cipher is used.</p>
+<p id="index-77">Symmetric cipher to use. By default SSL library implementation default cipher is used.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
 <col width="50%" />
@@ -2670,7 +2712,7 @@ at <a class="reference internal" href="#gcs-recv-q-soft-limit"><span class="std 
 </pre></div>
 </div>
 <p class="section-heading rubric" id="socket-ssl-compression"><code class="docutils literal notranslate"><span class="pre">socket.ssl_compression</span></code></p>
-<p id="index-77">Whether to enable compression on SSL connections.</p>
+<p id="index-78">Whether to enable compression on SSL connections.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
 <col width="50%" />
@@ -2693,7 +2735,7 @@ at <a class="reference internal" href="#gcs-recv-q-soft-limit"><span class="std 
 </pre></div>
 </div>
 <p class="section-heading rubric" id="socket-ssl-key"><code class="docutils literal notranslate"><span class="pre">socket.ssl_key</span></code></p>
-<p id="index-78">Defines the path to the <abbr title="Secure Socket Layer">SSL</abbr> certificate key.</p>
+<p id="index-79">Defines the path to the <abbr title="Secure Socket Layer">SSL</abbr> certificate key.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
 <col width="50%" />
@@ -2718,7 +2760,7 @@ at <a class="reference internal" href="#gcs-recv-q-soft-limit"><span class="std 
 </div>
 <p>For more information on generating <abbr title="Secure Socket Layer">SSL</abbr> certificate files for your cluster, see <a class="reference internal" href="ssl-cert.html"><span class="doc">SSL Certificates</span></a>.</p>
 <p class="section-heading rubric" id="socket-ssl-password-file"><code class="docutils literal notranslate"><span class="pre">socket.ssl_password_file</span></code></p>
-<p id="index-79">Defines a password file for use in <abbr title="Secure Socket Layer">SSL</abbr> connections.</p>
+<p id="index-80">Defines a password file for use in <abbr title="Secure Socket Layer">SSL</abbr> connections.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
 <col width="50%" />
@@ -2741,9 +2783,35 @@ at <a class="reference internal" href="#gcs-recv-q-soft-limit"><span class="std 
 <div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;socket.ssl_password_file=/path/to/password-file&quot;</span>
 </pre></div>
 </div>
+<p class="section-heading rubric" id="socket-ssl-reload"><code class="docutils literal notranslate"><span class="pre">socket.reload</span></code></p>
+<p id="index-81">Reinitialize SSL context.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Default Value</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td>Dynamic</td>
+<td>Yes</td>
+</tr>
+<tr class="row-odd"><td>Initial Version</td>
+<td>4.8</td>
+</tr>
+</tbody>
+</table>
+<p>Parameter used to dynamically reinitialize the Galera SSL context.  This is most useful if you need to
+replace a certificate that is about to expire without restarting the server. You need to change the
+certificate and key files at the relevant paths defined by SSL variables.</p>
+<p>The excerpt below is an example of how this Galera parameter can be triggered from running database:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">SET GLOBAL wsrep_provider_options</span> <span class="o">=</span> <span class="s">&#39;socket.ssl_reload=1&#39;;</span>
+</pre></div>
+</div>
 <div class="section" id="setting-galera-parameters-in-mysql">
 <span id="id2"></span><h2>Setting Galera Parameters in MySQL<a class="headerlink" href="#setting-galera-parameters-in-mysql" title="Permalink to this headline">¶</a></h2>
-<span class="target" id="index-80"></span><p id="index-81">You can set <em>Galera Cluster</em> parameters in the <code class="docutils literal notranslate"><span class="pre">my.cnf</span></code> configuration file as follows:</p>
+<span class="target" id="index-82"></span><p id="index-83">You can set <em>Galera Cluster</em> parameters in the <code class="docutils literal notranslate"><span class="pre">my.cnf</span></code> configuration file as follows:</p>
 <div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">wsrep_provider_options</span><span class="o">=</span><span class="s">&quot;gcs.fc_limit=256;gcs.fc_factor=0.9&quot;</span>
 </pre></div>
 </div>
