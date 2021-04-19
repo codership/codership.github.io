@@ -11,7 +11,7 @@
 <meta content="galera cluster, audit log" name="keywords" />
 <meta content="Codership Oy, 2014 - 2021. All Rights Reserved." name="copyright" />
 
-    <title>Galera Arbitrator &#8212; Galera Cluster Documentation</title>
+    <title>Audit Log Plugin &#8212; Galera Cluster Documentation</title>
     <link rel="stylesheet" href="../_static/reset-style.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
@@ -173,8 +173,8 @@
 <li><a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a></li>
 </ul>
 </div>
-<div class="library-document section" id="galera-arbitrator">
-<span id="auditlogplugin"></span><h1>Galera Arbitrator<a class="headerlink" href="#galera-arbitrator" title="Permalink to this headline">¶</a></h1>
+<div class="library-document section" id="audit-log-plugin">
+<span id="auditlogplugin"></span><h1>Audit Log Plugin<a class="headerlink" href="#audit-log-plugin" title="Permalink to this headline">¶</a></h1>
 <span class="target" id="index-0"></span><p id="index-1">Galera Audit Log Plugin monitors and logs connection and query activity performed on a specific server. Information on the activity is stored in the XML log file, where each event will have a <code class="docutils literal notranslate"><span class="pre">NAME</span></code> field, a unique <code class="docutils literal notranslate"><span class="pre">RECORD_ID</span></code> field and a <code class="docutils literal notranslate"><span class="pre">TIMESTAMP</span></code> field. This implementation is alternative to the MySQL Enterprise Audit Log Plugin.</p>
 <p>Audit Log plugin logs events, as follows:</p>
 <ul>
@@ -867,13 +867,99 @@
 </table>
 <p class="section-heading rubric" id="audit-log-syslog-ident"><code class="docutils literal notranslate"><span class="pre">audit_log_syslog_ident</span></code></p>
 <p>This variable is used to specify the <code class="docutils literal notranslate"><span class="pre">ident</span></code> value for syslog. This variable has the same meaning as the corresponding parameter described in the <a class="reference external" href="https://linux.die.net/man/3/syslog">syslog(3) manual</a>.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Command-line Format</td>
+<td><code class="docutils literal notranslate"><span class="pre">--audit_log_syslog_ident</span></code></td>
+</tr>
+<tr class="row-even"><td>Variable Scope</td>
+<td>Global</td>
+</tr>
+<tr class="row-odd"><td>Dynamic Variable</td>
+<td>No</td>
+</tr>
+<tr class="row-even"><td>Variable Type</td>
+<td>String</td>
+</tr>
+<tr class="row-odd"><td>Default Value</td>
+<td><code class="docutils literal notranslate"><span class="pre">percona-audit</span></code></td>
+</tr>
+</tbody>
+</table>
 <p class="section-heading rubric" id="audit-log-syslog-facility"><code class="docutils literal notranslate"><span class="pre">audit_log_syslog_facility</span></code></p>
 <p>This variable is used to specify the <code class="docutils literal notranslate"><span class="pre">facility</span></code> value for syslog. This variable has the same meaning as the corresponding parameter described in the <a class="reference external" href="https://linux.die.net/man/3/syslog">syslog(3) manual</a>.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Command-line Format</td>
+<td><code class="docutils literal notranslate"><span class="pre">--audit_log_syslog_facility</span></code></td>
+</tr>
+<tr class="row-even"><td>Variable Scope</td>
+<td>Global</td>
+</tr>
+<tr class="row-odd"><td>Dynamic Variable</td>
+<td>No</td>
+</tr>
+<tr class="row-even"><td>Variable Type</td>
+<td>String</td>
+</tr>
+<tr class="row-odd"><td>Default Value</td>
+<td><code class="docutils literal notranslate"><span class="pre">LOG_USER</span></code></td>
+</tr>
+</tbody>
+</table>
 <p class="section-heading rubric" id="audit-log-syslog-priority"><code class="docutils literal notranslate"><span class="pre">audit_log_syslog_priority</span></code></p>
 <p>This variable is used to specify the <code class="docutils literal notranslate"><span class="pre">priority</span></code> value for syslog. This variable has the same meaning as the corresponding parameter described in the <a class="reference external" href="https://linux.die.net/man/3/syslog">syslog(3) manual</a>.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Command-line Format</td>
+<td><code class="docutils literal notranslate"><span class="pre">--audit_log_syslog_priority</span></code></td>
+</tr>
+<tr class="row-even"><td>Variable Scope</td>
+<td>Global</td>
+</tr>
+<tr class="row-odd"><td>Dynamic Variable</td>
+<td>No</td>
+</tr>
+<tr class="row-even"><td>Variable Type</td>
+<td>String</td>
+</tr>
+<tr class="row-odd"><td>Default Value</td>
+<td><code class="docutils literal notranslate"><span class="pre">LOG_INFO</span></code></td>
+</tr>
+</tbody>
+</table>
 <p class="section-heading rubric" id="audit-log-plugin-status-variables">Status Variables</p>
 <p class="section-heading rubric" id="audit-log-buffer-size-overflow"><code class="docutils literal notranslate"><span class="pre">Audit_log_buffer_size_overflow</span></code></p>
 <p id="index-20">The number of times an audit log entry was either dropped or written directly to the file, due to its size being bigger than the <code class="docutils literal notranslate"><span class="pre">audit_log_buffer_size</span></code> variable.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Command-line Format</td>
+<td><code class="docutils literal notranslate"><span class="pre">--Audit_log_buffer_size_overflow</span></code></td>
+</tr>
+<tr class="row-even"><td>Variable Scope</td>
+<td>Global</td>
+</tr>
+<tr class="row-odd"><td>Variable Type</td>
+<td>Numeric</td>
+</tr>
+</tbody>
+</table>
 <div class="bottom-links docutils container">
 <p>Related Documents</p>
 <ul class="simple">
