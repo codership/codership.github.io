@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><meta content="Audit Log Plugin" name="title" />
-<meta content="Galera Audit Log Plugin monitors and logs connection and query activity performed on a specific server." name="description" />
+<meta content="The Audit Log plugin monitors and logs connection and query activity performed on a specific server." name="description" />
 <meta content="en-US" name="language" />
 <meta content="galera cluster, audit log" name="keywords" />
 <meta content="Codership Oy, 2014 - 2021. All Rights Reserved." name="copyright" />
@@ -175,8 +175,8 @@
 </div>
 <div class="library-document section" id="audit-log-plugin">
 <span id="auditlogplugin"></span><h1>Audit Log Plugin<a class="headerlink" href="#audit-log-plugin" title="Permalink to this headline">¶</a></h1>
-<span class="target" id="index-0"></span><p id="index-1">Galera Audit Log Plugin monitors and logs connection and query activity performed on a specific server. Information on the activity is stored in the XML log file, where each event will have a <code class="docutils literal notranslate"><span class="pre">NAME</span></code> field, a unique <code class="docutils literal notranslate"><span class="pre">RECORD_ID</span></code> field and a <code class="docutils literal notranslate"><span class="pre">TIMESTAMP</span></code> field. This implementation is alternative to the MySQL Enterprise Audit Log Plugin.</p>
-<p>Audit Log plugin logs events, as follows:</p>
+<span class="target" id="index-0"></span><p id="index-1">The Audit Log plugin monitors and logs connection and query activity performed on a specific server. Information on the activity is stored in the XML log file, where each event will have a <code class="docutils literal notranslate"><span class="pre">NAME</span></code> field, a unique <code class="docutils literal notranslate"><span class="pre">RECORD_ID</span></code> field and a <code class="docutils literal notranslate"><span class="pre">TIMESTAMP</span></code> field. This implementation is alternative to the MySQL Enterprise Audit Log Plugin.</p>
+<p>The Audit Log plugin logs events, as follows:</p>
 <ul>
 <li><p class="first"><strong>Audit</strong>/<strong>NoAudit</strong> - An audit event indicates that audit logging has been started or finished. The <code class="docutils literal notranslate"><span class="pre">NAME</span></code> field value is <code class="docutils literal notranslate"><span class="pre">Audit</span></code> when the logging has been started and <code class="docutils literal notranslate"><span class="pre">NoAudit</span></code> when logging has been finished. The audit record also includes server version and command-line arguments.</p>
 <blockquote>
@@ -236,7 +236,7 @@
 </li>
 </ul>
 <p class="section-heading rubric" id="audit-log-plugin-installing">Installation</p>
-<p>Galera Audit Log plugin is delivered with Galera Cluster, but it is uninstalled by default. To deploy the plugin, run the command below:</p>
+<p>The Audit Log plugin is delivered with Galera Cluster, but it is uninstalled by default. To deploy the plugin, run the command below:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">INSTALL PLUGIN audit_log SONAME &#39;audit_log.so&#39;;</span>
 </pre></div>
 </div>
