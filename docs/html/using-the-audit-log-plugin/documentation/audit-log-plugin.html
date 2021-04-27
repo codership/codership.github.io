@@ -9,7 +9,7 @@
 <meta content="The Audit Log plugin monitors and logs connection and query activity performed on a specific server." name="description" />
 <meta content="en-US" name="language" />
 <meta content="galera cluster, audit log" name="keywords" />
-<meta content="Codership Oy, 2014 - 2021. All Rights Reserved." name="copyright" />
+<meta content="This software documentation is (C)2009-2018 Percona LLC and/or its affiliates and is distributed under the Creative Commons Attribution-ShareAlike 2.0 Generic license." name="copyright" />
 
     <title>Audit Log Plugin &#8212; Galera Cluster Documentation</title>
     <link rel="stylesheet" href="../_static/reset-style.css" type="text/css" />
@@ -175,7 +175,8 @@
 </div>
 <div class="library-document section" id="audit-log-plugin">
 <span id="auditlogplugin"></span><h1>Audit Log Plugin<a class="headerlink" href="#audit-log-plugin" title="Permalink to this headline">¶</a></h1>
-<span class="target" id="index-0"></span><p id="index-1">The Audit Log plugin monitors and logs connection and query activity performed on a specific server. Information on the activity is stored in the XML log file, where each event will have a <code class="docutils literal notranslate"><span class="pre">NAME</span></code> field, a unique <code class="docutils literal notranslate"><span class="pre">RECORD_ID</span></code> field and a <code class="docutils literal notranslate"><span class="pre">TIMESTAMP</span></code> field. This implementation is alternative to the MySQL Enterprise Audit Log Plugin.</p>
+<span class="target" id="index-0"></span><p id="index-1">This software documentation is (C)2009-2018 Percona LLC and/or its affiliates and is distributed under the <a class="reference external" href="http://creativecommons.org/licenses/by-sa/2.0/">Creative Commons Attribution-ShareAlike 2.0 Generic license</a>.</p>
+<p>The Audit Log plugin monitors and logs connection and query activity performed on a specific server. Information on the activity is stored in the XML log file, where each event will have a <code class="docutils literal notranslate"><span class="pre">NAME</span></code> field, a unique <code class="docutils literal notranslate"><span class="pre">RECORD_ID</span></code> field and a <code class="docutils literal notranslate"><span class="pre">TIMESTAMP</span></code> field. This implementation is alternative to the MySQL Enterprise Audit Log Plugin.</p>
 <p>The Audit Log plugin logs events, as follows:</p>
 <ul>
 <li><p class="first"><strong>Audit</strong>/<strong>NoAudit</strong> - An audit event indicates that audit logging has been started or finished. The <code class="docutils literal notranslate"><span class="pre">NAME</span></code> field value is <code class="docutils literal notranslate"><span class="pre">Audit</span></code> when the logging has been started and <code class="docutils literal notranslate"><span class="pre">NoAudit</span></code> when logging has been finished. The audit record also includes server version and command-line arguments.</p>
