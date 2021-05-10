@@ -1,0 +1,1076 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><meta content="Audit Log Plugin" name="title" />
+<meta content="The Audit Log plugin monitors and logs connection and query activity performed on a specific server." name="description" />
+<meta content="en-US" name="language" />
+<meta content="galera cluster, audit log" name="keywords" />
+<meta content="This software documentation is (C)2009-2018 Percona LLC and/or its affiliates and is distributed under the Creative Commons Attribution-ShareAlike 2.0 Generic license." name="copyright" />
+
+    <title>Audit Log Plugin &#8212; Galera Cluster Documentation</title>
+    <link rel="stylesheet" href="../_static/reset-style.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+
+
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<link rel="stylesheet" href="/library/_static/basic-style.css">
+<link rel="stylesheet" href="/library/_static/header.css">
+<link rel="stylesheet" href="/library/_static/footer.css">
+<link rel="stylesheet" href="/library/_static/codership.css">
+<link rel="stylesheet" media="screen and (max-width: 500px)" href="/library/_static/mobile.css"/>
+<link rel="stylesheet" media="screen and (min-width:501px) and (max-width:1024px)" href="/library/_static/tablet.css"/>
+<link rel="stylesheet" media="screen and (prefers-color-scheme: dark)" href="/library/_static/dark.css"/>
+
+
+<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Feed" href="https://galeracluster.com/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Comments Feed" href="https://galeracluster.com/comments/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Galera Cluster for MySQL &raquo; Support Comments Feed" href="https://galeracluster.com/support/feed/" />
+
+<!-- <script type='text/javascript' src='https://galeracluster.com/wp-includes/js/comment-reply.min.js?ver=3.8.3'></script> -->
+
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://galeracluster.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://galeracluster.com/wp-includes/wlwmanifest.xml" />
+<link rel='prev' title='Downloads' href='https://galeracluster.com/downloads/' />
+<link rel='next' title='Community' href='https://galeracluster.com/community/' />
+<link rel='shortlink' href='https://galeracluster.com/?p=12' />
+
+<style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>
+<style type="text/css" id="twentythirteen-header-css">
+			.site-title,
+			.site-description {
+				position: absolute;
+				clip: rect(1px 1px 1px 1px); /* IE7 */
+				clip: rect(1px, 1px, 1px, 1px);
+			}
+				.site-header .home-link {
+				min-height: 0;
+			}
+</style>
+
+<script type="text/javascript">
+
+		  var _gaq = _gaq || [];
+		  _gaq.push(['_setAccount', 'UA-35163478-6']);
+		  _gaq.push(['_trackPageview']);
+
+		  (function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'https://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		  })();
+
+</script>
+
+  </head><body>
+	<div id="fb-root"></div>
+	<script>(function(d, s, id) {
+		  var js, fjs = d.getElementsByTagName(s)[0];
+		  if (d.getElementById(id)) return;
+		  js = d.createElement(s); js.id = id;
+		  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+		  fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));
+	</script>
+
+	<div id="page" class="hfeed site">
+
+	<header id="masthead" class="site-header" role="banner">
+
+	<div class="top">
+	<a class="home-link" href="https://galeracluster.com/" title="Galera Cluster for MySQL" rel="home">
+	<h1 class="site-title">Galera Cluster for MySQL</h1>
+	<h2 class="site-description">The world&#039;s most advanced open source database cluster</h2>
+	</a>
+	</div>
+
+
+	<div id="navbar" class="navbar">
+	<nav id="site-navigation" class="navigation main-navigation" role="navigation">
+	<div class="menu-main-menu-container">
+
+	<ul id="menu-main-menu" class="nav-menu">
+	<li id="menu-item-359" class="link-home menu-item menu-item-type-post_type menu-item-object-page menu-item-359"><a href="https://galeracluster.com/">Home</a></li>
+	<li id="menu-item-35" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-35"><a href="https://galeracluster.com/products/">Products</a></li>
+	<li id="menu-item-34" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="https://galeracluster.com/downloads/">Downloads</a></li>
+	<li id="menu-item-33" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-12 current_page_item current-menu-ancestor current-menu-parent current_page_parent current_page_ancestor menu-item-has-children menu-item-33"><a href="https://galeracluster.com/support/">Support</a></li>
+	<li id="menu-item-32" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="https://galeracluster.com/community/">Community</a></li>
+	<li id="menu-item-31" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-31"><a href="https://galeracluster.com/company/">Company</a></li>
+	<li id="menu-item-297" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-297"><a href="https://galeracluster.com/category/blog/">Blog</a></li>
+	<li id="menu-item-38" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-38"><a href="https://galeracluster.com/contact-us/">Contact us</a></li>
+	</ul>
+	</div>
+
+
+	</nav><!-- #site-navigation -->
+
+	</div><!-- #navbar -->
+	</header><!-- #masthead -->
+
+
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="left-margin docutils container">
+<div class="left-margin-top docutils container">
+<a class="reference internal" href="../index.html"><span class="doc">The Library</span></a></div>
+<div class="left-margin-content docutils container">
+<ul class="here simple">
+<li><a class="reference internal" href="index.html"><span class="doc">Documentation</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../kb/index.html"><span class="doc">Knowledge Base</span></a></li>
+<li><a class="reference internal" href="../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="sub-links simple">
+<li><a class="reference internal" href="../training/tutorials/index.html"><span class="doc">Tutorial Articles</span></a></li>
+<li><a class="reference internal" href="../training/videos/index.html"><span class="doc">Training Videos</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a></li>
+<li><a class="reference internal" href="../search.html"><span class="std std-ref">Search Page</span></a></li>
+</ul>
+<p>Related Documents</p>
+<ul class="simple">
+<li><a class="reference internal" href="log.html"><span class="doc">Database Server Logs</span></a></li>
+<li><a class="reference internal" href="galera-parameters.html"><span class="doc">Galera Parameters</span></a></li>
+</ul>
+</div>
+</div>
+<div class="top-links docutils container">
+<ul class="simple">
+<li><a class="reference external" href="https://galeracluster.com">Home</a></li>
+</ul>
+<ul class="here simple">
+<li><a class="reference internal" href="index.html"><span class="doc">Docs</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../kb/index.html"><span class="doc">KB</span></a></li>
+</ul>
+<ul class="nav-wider simple">
+<li><a class="reference internal" href="../training/index.html"><span class="doc">Training</span></a></li>
+</ul>
+<ul class="simple">
+<li><a class="reference internal" href="../faq.html"><span class="doc">FAQ</span></a></li>
+</ul>
+</div>
+<div class="library-document section" id="audit-log-plugin">
+<span id="auditlogplugin"></span><h1>Audit Log Plugin<a class="headerlink" href="#audit-log-plugin" title="Permalink to this headline">¶</a></h1>
+<span class="target" id="index-0"></span><p id="index-1">This software documentation is (C)2009-2018 Percona LLC and/or its affiliates and is distributed under the <a class="reference external" href="http://creativecommons.org/licenses/by-sa/2.0/">Creative Commons Attribution-ShareAlike 2.0 Generic license</a>.</p>
+<p>The Audit Log plugin monitors and logs connection and query activity performed on a specific server. Information on the activity is stored in the XML log file, where each event will have a <code class="docutils literal notranslate"><span class="pre">NAME</span></code> field, a unique <code class="docutils literal notranslate"><span class="pre">RECORD_ID</span></code> field and a <code class="docutils literal notranslate"><span class="pre">TIMESTAMP</span></code> field. This implementation is alternative to the MySQL Enterprise Audit Log Plugin.</p>
+<p>The Audit Log plugin logs events, as follows:</p>
+<ul>
+<li><p class="first"><strong>Audit</strong>/<strong>NoAudit</strong> - An audit event indicates that audit logging has been started or finished. The <code class="docutils literal notranslate"><span class="pre">NAME</span></code> field value is <code class="docutils literal notranslate"><span class="pre">Audit</span></code> when the logging has been started and <code class="docutils literal notranslate"><span class="pre">NoAudit</span></code> when logging has been finished. The audit record also includes server version and command-line arguments.</p>
+<blockquote>
+<div><p>An example of an audit event:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">&lt;AUDIT_RECORD</span>
+<span class="go">&quot;NAME&quot;=&quot;Audit&quot;</span>
+<span class="go">&quot;RECORD&quot;=&quot;1_2014-04-29T09:29:40&quot;</span>
+<span class="go">&quot;TIMESTAMP&quot;=&quot;2014-04-29T09:29:40 UTC&quot;</span>
+<span class="go">&quot;MYSQL_VERSION&quot;=&quot;5.6.17-65.0-655.trusty&quot;</span>
+<span class="go">&quot;STARTUP_OPTIONS&quot;=&quot;--basedir=/usr --datadir=/var/lib/mysql --plugin-dir=/usr/lib/mysql/plugin --user=mysql --log-error=/var/log/mysql/error.log --pid-file=/var/run/mysqld/mysqld.pid --socket=/var/run/mysqld/mysqld.sock --port=3306&quot;</span>
+<span class="go">&quot;OS_VERSION&quot;=&quot;x86_64-debian-linux-gnu&quot;,</span>
+<span class="go">/&gt;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p class="first"><strong>Connect</strong>/<strong>Disconnect</strong> - A connect record indicates that a user has logged in or logged out. The <code class="docutils literal notranslate"><span class="pre">NAME</span></code> field value is <code class="docutils literal notranslate"><span class="pre">Connect</span></code> when the user has logged in or the login failed, or <code class="docutils literal notranslate"><span class="pre">Quit</span></code> when connection has been closed. Additional fields for this event are <code class="docutils literal notranslate"><span class="pre">CONNECTION_ID</span></code>, <code class="docutils literal notranslate"><span class="pre">STATUS</span></code>, <code class="docutils literal notranslate"><span class="pre">USER</span></code>, <code class="docutils literal notranslate"><span class="pre">PRIV_USER</span></code>, <code class="docutils literal notranslate"><span class="pre">OS_LOGIN</span></code>, <code class="docutils literal notranslate"><span class="pre">PROXY_USER</span></code>, <code class="docutils literal notranslate"><span class="pre">HOST</span></code>, and <code class="docutils literal notranslate"><span class="pre">IP</span></code>. <code class="docutils literal notranslate"><span class="pre">STATUS</span></code> is <code class="docutils literal notranslate"><span class="pre">0</span></code> for successful logins and non-zero for failed logins.</p>
+<blockquote>
+<div><p>An example of a disconnect event:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">&lt;AUDIT_RECORD</span>
+<span class="go">&quot;NAME&quot;=&quot;Quit&quot;</span>
+<span class="go">&quot;RECORD&quot;=&quot;24_2014-04-29T09:29:40&quot;</span>
+<span class="go">&quot;TIMESTAMP&quot;=&quot;2014-04-29T10:20:13 UTC&quot;</span>
+<span class="go">&quot;CONNECTION_ID&quot;=&quot;49&quot;</span>
+<span class="go">&quot;STATUS&quot;=&quot;0&quot;</span>
+<span class="go">&quot;USER&quot;=&quot;&quot;</span>
+<span class="go">&quot;PRIV_USER&quot;=&quot;&quot;</span>
+<span class="go">&quot;OS_LOGIN&quot;=&quot;&quot;</span>
+<span class="go">&quot;PROXY_USER&quot;=&quot;&quot;</span>
+<span class="go">&quot;HOST&quot;=&quot;&quot;</span>
+<span class="go">&quot;IP&quot;=&quot;&quot;</span>
+<span class="go">&quot;DB&quot;=&quot;&quot;</span>
+<span class="go">/&gt;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p class="first"><strong>Query</strong> - Additional fields for the query event are: <code class="docutils literal notranslate"><span class="pre">COMMAND_CLASS</span></code> (the values come from the <code class="docutils literal notranslate"><span class="pre">com_status_vars</span></code> array in the <code class="docutils literal notranslate"><span class="pre">sql/mysqld.cc</span></code> file in a MySQL source distribution. Examples are <code class="docutils literal notranslate"><span class="pre">select</span></code>, <code class="docutils literal notranslate"><span class="pre">alter_table</span></code>, <code class="docutils literal notranslate"><span class="pre">create_table</span></code> and so on), <code class="docutils literal notranslate"><span class="pre">CONNECTION_ID</span></code>, <code class="docutils literal notranslate"><span class="pre">STATUS</span></code> (indicates sn error when non-zero), <code class="docutils literal notranslate"><span class="pre">SQLTEXT</span></code> (text of the SQL statement), <code class="docutils literal notranslate"><span class="pre">USER</span></code>, <code class="docutils literal notranslate"><span class="pre">HOST</span></code>, <code class="docutils literal notranslate"><span class="pre">OS_USER</span></code>, <code class="docutils literal notranslate"><span class="pre">IP</span></code>. Possible values for the <code class="docutils literal notranslate"><span class="pre">NAME</span></code> name field for this event are <code class="docutils literal notranslate"><span class="pre">Query</span></code>, <code class="docutils literal notranslate"><span class="pre">Prepare</span></code>, <code class="docutils literal notranslate"><span class="pre">Execute</span></code>, <code class="docutils literal notranslate"><span class="pre">Change</span> <span class="pre">user</span></code> and so on.</p>
+<blockquote>
+<div><p>An example of a query event:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">&lt;AUDIT_RECORD</span>
+<span class="go">&quot;NAME&quot;=&quot;Query&quot;</span>
+<span class="go">&quot;RECORD&quot;=&quot;23_2014-04-29T09:29:40&quot;</span>
+<span class="go">&quot;TIMESTAMP&quot;=&quot;2014-04-29T10:20:10 UTC&quot;</span>
+<span class="go">&quot;COMMAND_CLASS&quot;=&quot;select&quot;</span>
+<span class="go">&quot;CONNECTION_ID&quot;=&quot;49&quot;</span>
+<span class="go">&quot;STATUS&quot;=&quot;0&quot;</span>
+<span class="go">&quot;SQLTEXT&quot;=&quot;SELECT * from mysql.user&quot;</span>
+<span class="go">&quot;USER&quot;=&quot;root[root] @ localhost []&quot;</span>
+<span class="go">&quot;HOST&quot;=&quot;localhost&quot;</span>
+<span class="go">&quot;OS_USER&quot;=&quot;&quot;</span>
+<span class="go">&quot;IP&quot;=&quot;&quot;</span>
+<span class="go">/&gt;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+<p class="section-heading rubric" id="audit-log-plugin-installing">Installation</p>
+<p>The Audit Log plugin is delivered with Galera Cluster, but it is uninstalled by default. To deploy the plugin, run the command below:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">INSTALL PLUGIN audit_log SONAME &#39;audit_log.so&#39;;</span>
+</pre></div>
+</div>
+<p>To check if the plugin is correctly loaded, run the command below:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">SHOW PLUGINS;</span>
+</pre></div>
+</div>
+<p>If audit log is listed in the output, the plugin is installed:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">+--------------------------------+----------+--------------------+--------------+---------+</span>
+<span class="go">| Name                           | Status   | Type               | Library      | License |</span>
+<span class="go">+--------------------------------+----------+--------------------+--------------+---------+</span>
+<span class="go">...</span>
+<span class="go">| audit_log                      | ACTIVE   | AUDIT              | audit_log.so | GPL     |</span>
+<span class="go">+--------------------------------+----------+--------------------+--------------+---------+</span>
+</pre></div>
+</div>
+<p class="section-heading rubric" id="audit-log-plugin-format">Log Format</p>
+<p>The audit log plugin supports four log formats: <code class="docutils literal notranslate"><span class="pre">OLD</span></code>, <code class="docutils literal notranslate"><span class="pre">NEW</span></code>, <code class="docutils literal notranslate"><span class="pre">JSON</span></code>, and <code class="docutils literal notranslate"><span class="pre">CSV</span></code>. The <code class="docutils literal notranslate"><span class="pre">OLD</span></code> and <code class="docutils literal notranslate"><span class="pre">NEW</span></code> formats are based on XML, where the former outputs log record properties as XML attributes and the latter as XML tags. Information logged is the same in all four formats. You can define the log format with the <code class="docutils literal notranslate"><span class="pre">audit_log_format</span></code> variable.</p>
+<p>An example of the <code class="docutils literal notranslate"><span class="pre">OLD</span></code> format:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">&lt;AUDIT_RECORD</span>
+<span class="go"> &quot;NAME&quot;=&quot;Query&quot;</span>
+<span class="go"> &quot;RECORD&quot;=&quot;2_2014-04-28T09:29:40&quot;</span>
+<span class="go"> &quot;TIMESTAMP&quot;=&quot;2014-04-28T09:29:40 UTC&quot;</span>
+<span class="go"> &quot;COMMAND_CLASS&quot;=&quot;install_plugin&quot;</span>
+<span class="go"> &quot;CONNECTION_ID&quot;=&quot;47&quot;</span>
+<span class="go"> &quot;STATUS&quot;=&quot;0&quot;</span>
+<span class="go"> &quot;SQLTEXT&quot;=&quot;INSTALL PLUGIN audit_log SONAME &#39;audit_log.so&#39;&quot;</span>
+<span class="go"> &quot;USER&quot;=&quot;root[root] @ localhost []&quot;</span>
+<span class="go"> &quot;HOST&quot;=&quot;localhost&quot;</span>
+<span class="go"> &quot;OS_USER&quot;=&quot;&quot;</span>
+<span class="go"> &quot;IP&quot;=&quot;&quot;</span>
+<span class="go">/&gt;</span>
+</pre></div>
+</div>
+<p>An example of the <code class="docutils literal notranslate"><span class="pre">NEW</span></code> format:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">&lt;AUDIT_RECORD&gt;</span>
+<span class="go"> &lt;NAME&gt;Quit&lt;/NAME&gt;</span>
+<span class="go"> &lt;RECORD&gt;10902_2014-04-28T11:02:54&lt;/RECORD&gt;</span>
+<span class="go"> &lt;TIMESTAMP&gt;2014-04-28T11:02:59 UTC&lt;/TIMESTAMP&gt;</span>
+<span class="go"> &lt;CONNECTION_ID&gt;36&lt;/CONNECTION_ID&gt;</span>
+<span class="go"> &lt;STATUS&gt;0&lt;/STATUS&gt;</span>
+<span class="go"> &lt;USER&gt;&lt;/USER&gt;</span>
+<span class="go"> &lt;PRIV_USER&gt;&lt;/PRIV_USER&gt;</span>
+<span class="go"> &lt;OS_LOGIN&gt;&lt;/OS_LOGIN&gt;</span>
+<span class="go"> &lt;PROXY_USER&gt;&lt;/PROXY_USER&gt;</span>
+<span class="go"> &lt;HOST&gt;&lt;/HOST&gt;</span>
+<span class="go"> &lt;IP&gt;&lt;/IP&gt;</span>
+<span class="go"> &lt;DB&gt;&lt;/DB&gt;</span>
+<span class="go">&lt;/AUDIT_RECORD&gt;</span>
+</pre></div>
+</div>
+<p>An example of the <code class="docutils literal notranslate"><span class="pre">JSON</span></code> format:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">{&quot;audit_record&quot;:{&quot;name&quot;:&quot;Query&quot;,&quot;record&quot;:&quot;4707_2014-08-27T10:43:52&quot;,&quot;timestamp&quot;:&quot;2014-08-27T10:44:19 UTC&quot;,&quot;command_class&quot;:&quot;show_databases&quot;,&quot;connection_id&quot;:&quot;37&quot;,&quot;status&quot;:0,&quot;sqltext&quot;:&quot;show databases&quot;,&quot;user&quot;:&quot;root[root] @ localhost []&quot;,&quot;host&quot;:&quot;localhost&quot;,&quot;os_user&quot;:&quot;&quot;,&quot;ip&quot;:&quot;&quot;}}</span>
+</pre></div>
+</div>
+<p>An example of the <code class="docutils literal notranslate"><span class="pre">CSV</span></code> format:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">&quot;Query&quot;,&quot;49284_2014-08-27T10:47:11&quot;,&quot;2014-08-27T10:47:23 UTC&quot;,&quot;show_databases&quot;,&quot;37&quot;,0,&quot;show databases&quot;,&quot;root[root] @ localhost []&quot;,&quot;localhost&quot;,&quot;&quot;,&quot;&quot;</span>
+</pre></div>
+</div>
+<p class="section-heading rubric" id="audit-log-plugin-streaming-to-syslog">Streaming the Audit Log to syslog</p>
+<p>To stream the audit log to syslog, set the <code class="docutils literal notranslate"><span class="pre">audit_log_handler</span></code> variable to <code class="docutils literal notranslate"><span class="pre">SYSLOG</span></code>. To control the syslog file handler, use the following variables: <code class="docutils literal notranslate"><span class="pre">audit_log_syslog_ident</span></code>, <code class="docutils literal notranslate"><span class="pre">audit_log_syslog_facility</span></code>, and <code class="docutils literal notranslate"><span class="pre">audit_log_syslog_priority</span></code>. These variables have the same meaning as corresponding parameters described in the <a class="reference external" href="https://linux.die.net/man/3/syslog">syslog(3) manual</a>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Variables: <code class="docutils literal notranslate"><span class="pre">audit_log_strategy</span></code>, <code class="docutils literal notranslate"><span class="pre">audit_log_buffer_size</span></code>, <code class="docutils literal notranslate"><span class="pre">audit_log_rotate_on_size</span></code>, <code class="docutils literal notranslate"><span class="pre">audit_log_rotations</span></code> only have effect with <code class="docutils literal notranslate"><span class="pre">FILE</span></code> handler.</p>
+</div>
+<p class="section-heading rubric" id="audit-log-plugin-filtering-by-user">Filtering by User</p>
+<p>For filtering by user, there are two global variables: <code class="docutils literal notranslate"><span class="pre">audit_log_include_accounts</span></code> and <code class="docutils literal notranslate"><span class="pre">audit_log_exclude_accounts</span></code>, to specify which user accounts should be included or excluded from audit logging.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Only one of these variables can contain a list of users to be either included or excluded, while the other must be <code class="docutils literal notranslate"><span class="pre">NULL</span></code>. If one of the variables is set to be not <code class="docutils literal notranslate"><span class="pre">NULL</span></code> (that is, it contains a list of users), the attempt to set another one will fail. An empty string defines an empty list.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Changes to <code class="docutils literal notranslate"><span class="pre">audit_log_include_accounts</span></code> and <code class="docutils literal notranslate"><span class="pre">audit_log_exclude_accounts</span></code> do not apply to the existing server connections.</p>
+</div>
+<p>The example below describes how to add users to be monitored:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">mysql&gt; SET GLOBAL audit_log_include_accounts = &#39;user1@localhost,root@localhost&#39;;</span>
+<span class="go">Query OK, 0 rows affected (0.00 sec)</span>
+</pre></div>
+</div>
+<p>If you try to add users to both the include and exclude lists, the server gives you the error below:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">mysql&gt; SET GLOBAL audit_log_exclude_accounts = &#39;user1@localhost,root@localhost&#39;;</span>
+<span class="go">ERROR 1231 (42000): Variable &#39;audit_log_exclude_accounts&#39; can&#39;t be set to the value of &#39;user1@localhost,root@localhost&#39;</span>
+</pre></div>
+</div>
+<p>To switch from filtering by the included user list to the excluded user list, or back, first set the currently active filtering variable to <code class="docutils literal notranslate"><span class="pre">NULL</span></code>:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">mysql&gt; SET GLOBAL audit_log_include_accounts = NULL;</span>
+<span class="go">Query OK, 0 rows affected (0.00 sec)</span>
+
+<span class="go">mysql&gt; SET GLOBAL audit_log_exclude_accounts = &#39;user1@localhost,root@localhost&#39;;</span>
+<span class="go">Query OK, 0 rows affected (0.00 sec)</span>
+
+<span class="go">mysql&gt; SET GLOBAL audit_log_exclude_accounts = &quot;&#39;user&#39;@&#39;host&#39;&quot;;</span>
+<span class="go">Query OK, 0 rows affected (0.00 sec)</span>
+
+<span class="go">mysql&gt; SET GLOBAL audit_log_exclude_accounts = &#39;&#39;&#39;user&#39;&#39;@&#39;&#39;host&#39;&#39;&#39;;</span>
+<span class="go">Query OK, 0 rows affected (0.00 sec)</span>
+
+<span class="go">mysql&gt; SET GLOBAL audit_log_exclude_accounts = &#39;\&#39;user\&#39;@\&#39;host\&#39;&#39;;</span>
+<span class="go">Query OK, 0 rows affected (0.00 sec)</span>
+</pre></div>
+</div>
+<p>To see the current users on the list, run:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">mysql&gt; SELECT @@audit_log_exclude_accounts;</span>
+<span class="go">+------------------------------+</span>
+<span class="go">| @@audit_log_exclude_accounts |</span>
+<span class="go">+------------------------------+</span>
+<span class="go">| &#39;user&#39;@&#39;host&#39;                |</span>
+<span class="go">+------------------------------+</span>
+<span class="go">1 row in set (0.00 sec)</span>
+</pre></div>
+</div>
+<p>The account names from the <code class="docutils literal notranslate"><span class="pre">mysql.user</span></code> table are logged in the audit log. For example, when you create a user:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">mysql&gt; CREATE USER &#39;user1&#39;@&#39;%&#39; IDENTIFIED BY &#39;111&#39;;</span>
+<span class="go">Query OK, 0 rows affected (0.00 sec)</span>
+</pre></div>
+</div>
+<p>This is what is logged when <code class="docutils literal notranslate"><span class="pre">user1</span></code> connects from <code class="docutils literal notranslate"><span class="pre">localhost</span></code>:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">&lt;AUDIT_RECORD</span>
+<span class="go">  NAME=&quot;Connect&quot;</span>
+<span class="go">  RECORD=&quot;4971917_2016-08-22T09:09:10&quot;</span>
+<span class="go">  TIMESTAMP=&quot;2016-08-22T09:12:21 UTC&quot;</span>
+<span class="go">  CONNECTION_ID=&quot;6&quot;</span>
+<span class="go">  STATUS=&quot;0&quot;</span>
+<span class="go">  USER=&quot;user1&quot; ;; this is a &#39;user&#39; part of account in 8.0</span>
+<span class="go">  PRIV_USER=&quot;user1&quot;</span>
+<span class="go">  OS_LOGIN=&quot;&quot;</span>
+<span class="go">  PROXY_USER=&quot;&quot;</span>
+<span class="go">  HOST=&quot;localhost&quot; ;; this is a &#39;host&#39; part of account in 8.0</span>
+<span class="go">  IP=&quot;&quot;</span>
+<span class="go">  DB=&quot;&quot;</span>
+<span class="go">/&gt;</span>
+</pre></div>
+</div>
+<p>To exclude <code class="docutils literal notranslate"><span class="pre">user1</span></code> from logging, set:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">SET GLOBAL audit_log_exclude_accounts = &#39;user1@%&#39;;</span>
+</pre></div>
+</div>
+<p>The value can be <code class="docutils literal notranslate"><span class="pre">NULL</span></code> or a comma separated list of accounts in format <code class="docutils literal notranslate"><span class="pre">user&#64;host</span></code> or <code class="docutils literal notranslate"><span class="pre">'user'&#64;'host'</span></code> (if the user or host contains a comma).</p>
+<p class="section-heading rubric" id="audit-log-plugin-filtering-by-sql-command-type">Filtering by SQL Command Type</p>
+<p>For filtering by SQL command type, there are two global variables: <code class="docutils literal notranslate"><span class="pre">audit_log_include_commands</span></code> and <code class="docutils literal notranslate"><span class="pre">audit_log_exclude_commands</span></code>, to specify the command types included or excluded from audit logging.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Only one of these variables can contain a list of command types to be either included or excluded, while the other must be <code class="docutils literal notranslate"><span class="pre">NULL</span></code>. If one of the variables is set to be not <code class="docutils literal notranslate"><span class="pre">NULL</span></code> (that is, it contains a list of command types), the attempt to set another one will fail. An empty string defines an empty list.</p>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">If both <code class="docutils literal notranslate"><span class="pre">audit_log_include_commands</span></code> and <code class="docutils literal notranslate"><span class="pre">audit_log_exclude_commands</span></code> are <code class="docutils literal notranslate"><span class="pre">NULL</span></code>, all commands are logged.</p>
+</div>
+<p>The available command types can be listed by running:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">mysql&gt; SELECT name FROM performance_schema.setup_instruments WHERE name LIKE &quot;statement/sql/%&quot; ORDER BY name;</span>
+<span class="go">+------------------------------------------+</span>
+<span class="go">| name                                     |</span>
+<span class="go">+------------------------------------------+</span>
+<span class="go">| statement/sql/alter_db                   |</span>
+<span class="go">| statement/sql/alter_db_upgrade           |</span>
+<span class="go">| statement/sql/alter_event                |</span>
+<span class="go">| statement/sql/alter_function             |</span>
+<span class="go">| statement/sql/alter_procedure            |</span>
+<span class="go">| statement/sql/alter_server               |</span>
+<span class="go">| statement/sql/alter_table                |</span>
+<span class="go">| statement/sql/alter_tablespace           |</span>
+<span class="go">| statement/sql/alter_user                 |</span>
+<span class="go">| statement/sql/analyze                    |</span>
+<span class="go">| statement/sql/assign_to_keycache         |</span>
+<span class="go">| statement/sql/begin                      |</span>
+<span class="go">| statement/sql/binlog                     |</span>
+<span class="go">| statement/sql/call_procedure             |</span>
+<span class="go">| statement/sql/change_db                  |</span>
+<span class="go">| statement/sql/change_master              |</span>
+<span class="go">...</span>
+<span class="go">| statement/sql/xa_rollback                |</span>
+<span class="go">| statement/sql/xa_start                   |</span>
+<span class="go">+------------------------------------------+</span>
+<span class="go">145 rows in set (0.00 sec)</span>
+</pre></div>
+</div>
+<p>To add commands to the include filter, run:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">mysql&gt; SET GLOBAL audit_log_include_commands= &#39;set_option,create_db&#39;;</span>
+</pre></div>
+</div>
+<p>If you now create a database:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">mysql&gt; CREATE DATABASE hello-world;</span>
+</pre></div>
+</div>
+<p>You will see it the audit log:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">&lt;AUDIT_RECORD</span>
+<span class="go">  NAME=&quot;Query&quot;</span>
+<span class="go">  RECORD=&quot;10724_2016-08-18T12:34:22&quot;</span>
+<span class="go">  TIMESTAMP=&quot;2016-08-18T15:10:47 UTC&quot;</span>
+<span class="go">  COMMAND_CLASS=&quot;create_db&quot;</span>
+<span class="go">  CONNECTION_ID=&quot;61&quot;</span>
+<span class="go">  STATUS=&quot;0&quot;</span>
+<span class="go">     SQLTEXT=&quot;create database hello-world&quot;</span>
+<span class="go">  USER=&quot;root[root] @ localhost []&quot;</span>
+<span class="go">  HOST=&quot;localhost&quot;</span>
+<span class="go">  OS_USER=&quot;&quot;</span>
+<span class="go">  IP=&quot;&quot;</span>
+<span class="go">  DB=&quot;&quot;</span>
+<span class="go">/&gt;</span>
+</pre></div>
+</div>
+<p>To switch command type filtering type from the included type list to the excluded type list or back, first reset the currently active list to <code class="docutils literal notranslate"><span class="pre">NULL</span></code>:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">mysql&gt; SET GLOBAL audit_log_include_commands = NULL;</span>
+<span class="go">Query OK, 0 rows affected (0.00 sec)</span>
+
+<span class="go">mysql&gt; SET GLOBAL audit_log_exclude_commands= &#39;set_option,create_db&#39;;</span>
+<span class="go">Query OK, 0 rows affected (0.00 sec)</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Invocation of stored procedures has command type <code class="docutils literal notranslate"><span class="pre">call_procedure</span></code>, and also all the statements executed within the procedure have the same type <code class="docutils literal notranslate"><span class="pre">call_procedure</span></code>.</p>
+</div>
+<p class="section-heading rubric" id="audit-log-plugin-filtering-by-database">Filtering by Database</p>
+<p>The filtering by SQL database is implemented by two global variables: <code class="docutils literal notranslate"><span class="pre">audit_log_include_databases</span></code> and <code class="docutils literal notranslate"><span class="pre">audit_log_exclude_databases</span></code> to specify the databases included or excluded from audit logging.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Only one of these variables can contain a list of databases to be either included or excluded, while the other must be <code class="docutils literal notranslate"><span class="pre">NULL</span></code>. If one of the variables is set to be not <code class="docutils literal notranslate"><span class="pre">NULL</span></code> (that is, it contains a list of databases), the attempt to set another one will fail. An empty string defines an empty list.</p>
+</div>
+<p>If a query accesses any of the databases listed in <code class="docutils literal notranslate"><span class="pre">audit_log_include_databases</span></code>, the query will be logged. If a query accesses only databases listed in <code class="docutils literal notranslate"><span class="pre">audit_log_exclude_databases</span></code>, the query will not be logged. <code class="docutils literal notranslate"><span class="pre">CREATE</span> <span class="pre">TABLE</span></code> statements are logged unconditionally.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Changes of <code class="docutils literal notranslate"><span class="pre">audit_log_include_databases</span></code> and <code class="docutils literal notranslate"><span class="pre">audit_log_exclude_databases</span></code> do not apply to existing server connections.</p>
+</div>
+<p>To add databases to be monitored, run:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">mysql&gt; SET GLOBAL audit_log_include_databases = &#39;test,mysql,db1&#39;;</span>
+<span class="go">Query OK, 0 rows affected (0.00 sec)</span>
+
+<span class="go">mysql&gt; SET GLOBAL audit_log_include_databases= &#39;db1,```db3&quot;`&#39;;</span>
+<span class="go">Query OK, 0 rows affected (0.00 sec)</span>
+</pre></div>
+</div>
+<p>If you try to add databases to both include and exclude lists, the server will give the error below:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">mysql&gt; SET GLOBAL audit_log_exclude_databases = &#39;test,mysql,db1&#39;;</span>
+<span class="go">ERROR 1231 (42000): Variable &#39;audit_log_exclude_databases can&#39;t be set to the value of &#39;test,mysql,db1&#39;</span>
+</pre></div>
+</div>
+<p>To switch from filtering by the included database list to the excluded database list, or back, first set the currently active filtering variable to <code class="docutils literal notranslate"><span class="pre">NULL</span></code>:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">mysql&gt; SET GLOBAL audit_log_include_databases = NULL;</span>
+<span class="go">Query OK, 0 rows affected (0.00 sec)</span>
+
+<span class="go">mysql&gt; SET GLOBAL audit_log_exclude_databases = &#39;test,mysql,db1&#39;;</span>
+<span class="go">Query OK, 0 rows affected (0.00 sec)</span>
+</pre></div>
+</div>
+<p class="section-heading rubric" id="audit-log-plugin-system-variables">System Variables</p>
+<p class="section-heading rubric" id="audit-log-strategy"><code class="docutils literal notranslate"><span class="pre">audit_log_strategy</span></code></p>
+<p id="index-2">This variable is used to specify the audit log strategy.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Command-line Format</td>
+<td><code class="docutils literal notranslate"><span class="pre">--audit_log_strategy</span></code></td>
+</tr>
+<tr class="row-even"><td>Variable Scope</td>
+<td>Global</td>
+</tr>
+<tr class="row-odd"><td>Dynamic Variable</td>
+<td>No</td>
+</tr>
+<tr class="row-even"><td>Variable Type</td>
+<td>String</td>
+</tr>
+<tr class="row-odd"><td>Permitted Values</td>
+<td><code class="docutils literal notranslate"><span class="pre">ASYNCHRONOUS</span></code>, <code class="docutils literal notranslate"><span class="pre">PERFORMANCE</span></code>, <code class="docutils literal notranslate"><span class="pre">SEMISYNCHRONOUS</span></code>, <code class="docutils literal notranslate"><span class="pre">SYNCHRONOUS</span></code></td>
+</tr>
+<tr class="row-even"><td>Default Value</td>
+<td><code class="docutils literal notranslate"><span class="pre">ASYNCHRONOUS</span></code></td>
+</tr>
+</tbody>
+</table>
+<p>The possible values are:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">ASYNCHRONOUS</span></code> - Log using the memory buffer, do not drop messages if the buffer is full</li>
+<li><code class="docutils literal notranslate"><span class="pre">PERFORMANCE</span></code> - Log using the memory buffer, drop messages if the buffer is full</li>
+<li><code class="docutils literal notranslate"><span class="pre">SEMISYNCHRONOUS</span></code> - Log directly to a file, do not flush and sync every event</li>
+<li><code class="docutils literal notranslate"><span class="pre">SYNCHRONOUS</span></code> - Log directly to file, flush and sync every event</li>
+</ul>
+<p>This variable only has effect when <code class="docutils literal notranslate"><span class="pre">audit_log_handler</span></code> is set to <code class="docutils literal notranslate"><span class="pre">FILE</span></code>.</p>
+<p class="section-heading rubric" id="audit-log-file"><code class="docutils literal notranslate"><span class="pre">audit_log_file</span></code></p>
+<p id="index-3">This variable is used to specify the filename where to store the audit log. It can contain the path relative to the datadir or absolute path.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Command-line Format</td>
+<td><code class="docutils literal notranslate"><span class="pre">--audit_log_file</span></code></td>
+</tr>
+<tr class="row-even"><td>Variable Scope</td>
+<td>Global</td>
+</tr>
+<tr class="row-odd"><td>Dynamic Variable</td>
+<td>No</td>
+</tr>
+<tr class="row-even"><td>Variable Type</td>
+<td>String</td>
+</tr>
+<tr class="row-odd"><td>Default Value</td>
+<td><code class="docutils literal notranslate"><span class="pre">audit.log</span></code></td>
+</tr>
+</tbody>
+</table>
+<p class="section-heading rubric" id="audit-log-flush"><code class="docutils literal notranslate"><span class="pre">audit_log_flush</span></code></p>
+<p id="index-4">When this variable is <code class="docutils literal notranslate"><span class="pre">ON</span></code>, the log file will be closed and reopened. This can be used for manual log rotation.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Command-line Format</td>
+<td><code class="docutils literal notranslate"><span class="pre">--audit_log_flush</span></code></td>
+</tr>
+<tr class="row-even"><td>Variable Scope</td>
+<td>Global</td>
+</tr>
+<tr class="row-odd"><td>Dynamic Variable</td>
+<td>Yes</td>
+</tr>
+<tr class="row-even"><td>Variable Type</td>
+<td>String</td>
+</tr>
+<tr class="row-odd"><td>Default Value</td>
+<td><code class="docutils literal notranslate"><span class="pre">OFF</span></code></td>
+</tr>
+</tbody>
+</table>
+<p class="section-heading rubric" id="audit-log-buffer-size"><code class="docutils literal notranslate"><span class="pre">audit_log_buffer_size</span></code></p>
+<p id="index-5">This variable is used to specify the memory buffer size used for logging. The variable is used, when the <code class="docutils literal notranslate"><span class="pre">audit_log_strategy</span></code> variable is set to <code class="docutils literal notranslate"><span class="pre">ASYNCHRONOUS</span></code> or <code class="docutils literal notranslate"><span class="pre">PERFORMANCE</span></code>. This variable only has effect when <code class="docutils literal notranslate"><span class="pre">audit_log_handler</span></code> is set to <code class="docutils literal notranslate"><span class="pre">FILE</span></code>.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Command-line Format</td>
+<td><code class="docutils literal notranslate"><span class="pre">--audit_log_buffer_size</span></code></td>
+</tr>
+<tr class="row-even"><td>Variable Scope</td>
+<td>Global</td>
+</tr>
+<tr class="row-odd"><td>Dynamic Variable</td>
+<td>Yes</td>
+</tr>
+<tr class="row-even"><td>Variable Type</td>
+<td>String</td>
+</tr>
+</tbody>
+</table>
+<p class="section-heading rubric" id="audit-log-exclude-accounts"><code class="docutils literal notranslate"><span class="pre">audit_log_exclude_accounts</span></code></p>
+<p id="index-6">This variable is used to specify the list of users for which filtering by user is applied. The value can be <code class="docutils literal notranslate"><span class="pre">NULL</span></code> or a comma separated list of accounts in format <code class="docutils literal notranslate"><span class="pre">user&#64;host</span></code> or <code class="docutils literal notranslate"><span class="pre">'user'&#64;'host'</span></code> (if the user or host name contains a comma). If this variable is set, <code class="docutils literal notranslate"><span class="pre">audit_log_include_accounts</span></code> must be unset, and vice versa.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Command-line Format</td>
+<td><code class="docutils literal notranslate"><span class="pre">--audit_log_exclude_accounts</span></code></td>
+</tr>
+<tr class="row-even"><td>Variable Scope</td>
+<td>Global</td>
+</tr>
+<tr class="row-odd"><td>Dynamic Variable</td>
+<td>Yes</td>
+</tr>
+<tr class="row-even"><td>Variable Type</td>
+<td>String</td>
+</tr>
+</tbody>
+</table>
+<p class="section-heading rubric" id="audit-log-exclude-commands"><code class="docutils literal notranslate"><span class="pre">audit_log_exclude_commands</span></code></p>
+<p id="index-7">This variable is used to specify the list of commands for which filtering by SQL command type is applied. The value can be <code class="docutils literal notranslate"><span class="pre">NULL</span></code> or a comma separated list of commands. If this variable is set, <code class="docutils literal notranslate"><span class="pre">audit_log_include_commands</span></code> must be unset, and vice versa.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Command-line Format</td>
+<td><code class="docutils literal notranslate"><span class="pre">--audit_log_exclude_commands</span></code></td>
+</tr>
+<tr class="row-even"><td>Variable Scope</td>
+<td>Global</td>
+</tr>
+<tr class="row-odd"><td>Dynamic Variable</td>
+<td>Yes</td>
+</tr>
+<tr class="row-even"><td>Variable Type</td>
+<td>String</td>
+</tr>
+</tbody>
+</table>
+<p class="section-heading rubric" id="audit-log-exclude-databases"><code class="docutils literal notranslate"><span class="pre">audit_log_exclude_databases</span></code></p>
+<p id="index-8">This variable is used to specify the list of databases for which filtering by database is applied. The value can be <code class="docutils literal notranslate"><span class="pre">NULL</span></code> or a comma separated list of databases. If this variable is set, <code class="docutils literal notranslate"><span class="pre">audit_log_include_databases</span></code> must be unset, and vice versa.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Command-line Format</td>
+<td><code class="docutils literal notranslate"><span class="pre">--audit_log_exclude_databases</span></code></td>
+</tr>
+<tr class="row-even"><td>Variable Scope</td>
+<td>Global</td>
+</tr>
+<tr class="row-odd"><td>Dynamic Variable</td>
+<td>Yes</td>
+</tr>
+<tr class="row-even"><td>Variable Type</td>
+<td>String</td>
+</tr>
+</tbody>
+</table>
+<p class="section-heading rubric" id="audit-log-format"><code class="docutils literal notranslate"><span class="pre">audit_log_format</span></code></p>
+<p id="index-9">This variable is used to specify the audit log format. The audit log plugin supports four log formats: <code class="docutils literal notranslate"><span class="pre">OLD</span></code>, <code class="docutils literal notranslate"><span class="pre">NEW</span></code>, <code class="docutils literal notranslate"><span class="pre">JSON</span></code>, and <code class="docutils literal notranslate"><span class="pre">CSV</span></code>. <code class="docutils literal notranslate"><span class="pre">OLD</span></code> and <code class="docutils literal notranslate"><span class="pre">NEW</span></code> formats are based on XML, where the former outputs log record properties as XML attributes and the latter as XML tags. Information logged is the same in all four formats.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Command-line Format</td>
+<td><code class="docutils literal notranslate"><span class="pre">--audit_log_format</span></code></td>
+</tr>
+<tr class="row-even"><td>Variable Scope</td>
+<td>Global</td>
+</tr>
+<tr class="row-odd"><td>Dynamic Variable</td>
+<td>No</td>
+</tr>
+<tr class="row-even"><td>Variable Type</td>
+<td>String</td>
+</tr>
+<tr class="row-odd"><td>Permitted Values</td>
+<td><code class="docutils literal notranslate"><span class="pre">OLD</span></code>, <code class="docutils literal notranslate"><span class="pre">NEW</span></code>, <code class="docutils literal notranslate"><span class="pre">JSON</span></code>, <code class="docutils literal notranslate"><span class="pre">CSV</span></code></td>
+</tr>
+<tr class="row-even"><td>Default Value</td>
+<td><code class="docutils literal notranslate"><span class="pre">OLD</span></code></td>
+</tr>
+</tbody>
+</table>
+<p class="section-heading rubric" id="audit-log-include-accounts"><code class="docutils literal notranslate"><span class="pre">audit_log_include_accounts</span></code></p>
+<p id="index-10">This variable is used to specify the list of users for which filtering by user is applied. The value can be <code class="docutils literal notranslate"><span class="pre">NULL</span></code> or a comma separated list of accounts in format <code class="docutils literal notranslate"><span class="pre">user&#64;host</span></code> or <code class="docutils literal notranslate"><span class="pre">'user'&#64;'host'</span></code> (if the user or host name contains a comma). If this variable is set, <code class="docutils literal notranslate"><span class="pre">audit_log_exclude_accounts</span></code> must be unset, and vice versa.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Command-line Format</td>
+<td><code class="docutils literal notranslate"><span class="pre">--audit_log_include_accounts</span></code></td>
+</tr>
+<tr class="row-even"><td>Variable Scope</td>
+<td>Global</td>
+</tr>
+<tr class="row-odd"><td>Dynamic Variable</td>
+<td>Yes</td>
+</tr>
+<tr class="row-even"><td>Variable Type</td>
+<td>String</td>
+</tr>
+</tbody>
+</table>
+<p class="section-heading rubric" id="audit-log-include-commands"><code class="docutils literal notranslate"><span class="pre">audit_log_include_commands</span></code></p>
+<p id="index-11">This variable is used to specify the list of commands for which filtering by SQL command type is applied. The value can be <code class="docutils literal notranslate"><span class="pre">NULL</span></code> or a comma separated list of commands. If this variable is set, <code class="docutils literal notranslate"><span class="pre">audit_log_exclude_commands</span></code> must be unset, and vice versa.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Command-line Format</td>
+<td><code class="docutils literal notranslate"><span class="pre">--audit_log_include_commands</span></code></td>
+</tr>
+<tr class="row-even"><td>Variable Scope</td>
+<td>Global</td>
+</tr>
+<tr class="row-odd"><td>Dynamic Variable</td>
+<td>Yes</td>
+</tr>
+<tr class="row-even"><td>Variable Type</td>
+<td>String</td>
+</tr>
+</tbody>
+</table>
+<p class="section-heading rubric" id="audit-log-include-databases"><code class="docutils literal notranslate"><span class="pre">audit_log_include_databases</span></code></p>
+<p id="index-12">This variable is used to specify the list of databases for which filtering by database is applied. The value can be <code class="docutils literal notranslate"><span class="pre">NULL</span></code> or a comma separated list of databases. If this variable is set, <code class="docutils literal notranslate"><span class="pre">audit_log_exclude_databases</span></code> must be unset, and vice versa.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Command-line Format</td>
+<td><code class="docutils literal notranslate"><span class="pre">--audit_log_include_databases</span></code></td>
+</tr>
+<tr class="row-even"><td>Variable Scope</td>
+<td>Global</td>
+</tr>
+<tr class="row-odd"><td>Dynamic Variable</td>
+<td>Yes</td>
+</tr>
+<tr class="row-even"><td>Variable Type</td>
+<td>String</td>
+</tr>
+</tbody>
+</table>
+<p class="section-heading rubric" id="audit-log-policy"><code class="docutils literal notranslate"><span class="pre">audit_log_policy</span></code></p>
+<p id="index-13">This variable is used to specify the events, which are logged.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Command-line Format</td>
+<td><code class="docutils literal notranslate"><span class="pre">--audit_log_policy</span></code></td>
+</tr>
+<tr class="row-even"><td>Variable Scope</td>
+<td>Global</td>
+</tr>
+<tr class="row-odd"><td>Dynamic Variable</td>
+<td>Yes</td>
+</tr>
+<tr class="row-even"><td>Variable Type</td>
+<td>String</td>
+</tr>
+<tr class="row-odd"><td>Permitted Values</td>
+<td><code class="docutils literal notranslate"><span class="pre">ALL</span></code>, <code class="docutils literal notranslate"><span class="pre">LOGINS</span></code>, <code class="docutils literal notranslate"><span class="pre">QUERIES</span></code>, <code class="docutils literal notranslate"><span class="pre">NONE</span></code></td>
+</tr>
+<tr class="row-even"><td>Default Value</td>
+<td><code class="docutils literal notranslate"><span class="pre">ALL</span></code></td>
+</tr>
+</tbody>
+</table>
+<p>The possible values are:</p>
+<ul class="simple">
+<li><code class="docutils literal notranslate"><span class="pre">ALL</span></code> - Log all events</li>
+<li><code class="docutils literal notranslate"><span class="pre">LOGINS</span></code> - Log logins only</li>
+<li><code class="docutils literal notranslate"><span class="pre">QUERIES</span></code> - Log queries only</li>
+<li><code class="docutils literal notranslate"><span class="pre">NONE</span></code> - Log no events</li>
+</ul>
+<p class="section-heading rubric" id="audit-log-rotate-on-size"><code class="docutils literal notranslate"><span class="pre">audit_log_rotate_on_size</span></code></p>
+<p id="index-14">This variable is used to specify the maximum audit log file size. Upon reaching this size, the log will be rotated. The rotated log files are in the same same directory as the current log file. A sequence number is appended to the log file name upon rotation. This variable only has effect when <code class="docutils literal notranslate"><span class="pre">audit_log_handler</span></code> is set to <code class="docutils literal notranslate"><span class="pre">FILE</span></code>.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Command-line Format</td>
+<td><code class="docutils literal notranslate"><span class="pre">--audit_log_rotate_on_size</span></code></td>
+</tr>
+<tr class="row-even"><td>Variable Scope</td>
+<td>Global</td>
+</tr>
+<tr class="row-odd"><td>Dynamic Variable</td>
+<td>No</td>
+</tr>
+<tr class="row-even"><td>Variable Type</td>
+<td>Numeric</td>
+</tr>
+<tr class="row-odd"><td>Default Value</td>
+<td><code class="docutils literal notranslate"><span class="pre">0</span></code> (do log rotate the log file)</td>
+</tr>
+</tbody>
+</table>
+<p class="section-heading rubric" id="audit-log-rotations"><code class="docutils literal notranslate"><span class="pre">audit_log_rotations</span></code></p>
+<p id="index-15">This variable is used to specify how many log files is kept when <code class="docutils literal notranslate"><span class="pre">audit_log_rotate_on_size</span></code> variable is set to a non-zero value. This variable only has effect when <code class="docutils literal notranslate"><span class="pre">audit_log_handler</span></code> is set to <code class="docutils literal notranslate"><span class="pre">FILE</span></code>.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Command-line Format</td>
+<td><code class="docutils literal notranslate"><span class="pre">--audit_log_rotations</span></code></td>
+</tr>
+<tr class="row-even"><td>Variable Scope</td>
+<td>Global</td>
+</tr>
+<tr class="row-odd"><td>Dynamic Variable</td>
+<td>No</td>
+</tr>
+<tr class="row-even"><td>Variable Type</td>
+<td>Numeric</td>
+</tr>
+<tr class="row-odd"><td>Default Value</td>
+<td><code class="docutils literal notranslate"><span class="pre">0</span></code></td>
+</tr>
+</tbody>
+</table>
+<p class="section-heading rubric" id="audit-log-handler"><code class="docutils literal notranslate"><span class="pre">audit_log_handler</span></code></p>
+<p id="index-16">This variable is used to configure where the audit log is written. If set to <code class="docutils literal notranslate"><span class="pre">FILE</span></code>, the log is written into a file specified by the <code class="docutils literal notranslate"><span class="pre">audit_log_file</span></code> variable. If set to <code class="docutils literal notranslate"><span class="pre">SYSLOG</span></code>, the audit log is written to syslog.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Command-line Format</td>
+<td><code class="docutils literal notranslate"><span class="pre">--audit_log_handler</span></code></td>
+</tr>
+<tr class="row-even"><td>Variable Scope</td>
+<td>Global</td>
+</tr>
+<tr class="row-odd"><td>Dynamic Variable</td>
+<td>No</td>
+</tr>
+<tr class="row-even"><td>Variable Type</td>
+<td>String</td>
+</tr>
+<tr class="row-odd"><td>Permitted Values</td>
+<td><code class="docutils literal notranslate"><span class="pre">FILE</span></code>, <code class="docutils literal notranslate"><span class="pre">SYSLOG</span></code></td>
+</tr>
+<tr class="row-even"><td>Default Value</td>
+<td><code class="docutils literal notranslate"><span class="pre">FILE</span></code></td>
+</tr>
+</tbody>
+</table>
+<p class="section-heading rubric" id="audit-log-syslog-ident"><code class="docutils literal notranslate"><span class="pre">audit_log_syslog_ident</span></code></p>
+<p>This variable is used to specify the <code class="docutils literal notranslate"><span class="pre">ident</span></code> value for syslog. This variable has the same meaning as the corresponding parameter described in the <a class="reference external" href="https://linux.die.net/man/3/syslog">syslog(3) manual</a>.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Command-line Format</td>
+<td><code class="docutils literal notranslate"><span class="pre">--audit_log_syslog_ident</span></code></td>
+</tr>
+<tr class="row-even"><td>Variable Scope</td>
+<td>Global</td>
+</tr>
+<tr class="row-odd"><td>Dynamic Variable</td>
+<td>No</td>
+</tr>
+<tr class="row-even"><td>Variable Type</td>
+<td>String</td>
+</tr>
+<tr class="row-odd"><td>Default Value</td>
+<td><code class="docutils literal notranslate"><span class="pre">percona-audit</span></code></td>
+</tr>
+</tbody>
+</table>
+<p class="section-heading rubric" id="audit-log-syslog-facility"><code class="docutils literal notranslate"><span class="pre">audit_log_syslog_facility</span></code></p>
+<p>This variable is used to specify the <code class="docutils literal notranslate"><span class="pre">facility</span></code> value for syslog. This variable has the same meaning as the corresponding parameter described in the <a class="reference external" href="https://linux.die.net/man/3/syslog">syslog(3) manual</a>.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Command-line Format</td>
+<td><code class="docutils literal notranslate"><span class="pre">--audit_log_syslog_facility</span></code></td>
+</tr>
+<tr class="row-even"><td>Variable Scope</td>
+<td>Global</td>
+</tr>
+<tr class="row-odd"><td>Dynamic Variable</td>
+<td>No</td>
+</tr>
+<tr class="row-even"><td>Variable Type</td>
+<td>String</td>
+</tr>
+<tr class="row-odd"><td>Default Value</td>
+<td><code class="docutils literal notranslate"><span class="pre">LOG_USER</span></code></td>
+</tr>
+</tbody>
+</table>
+<p class="section-heading rubric" id="audit-log-syslog-priority"><code class="docutils literal notranslate"><span class="pre">audit_log_syslog_priority</span></code></p>
+<p>This variable is used to specify the <code class="docutils literal notranslate"><span class="pre">priority</span></code> value for syslog. This variable has the same meaning as the corresponding parameter described in the <a class="reference external" href="https://linux.die.net/man/3/syslog">syslog(3) manual</a>.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Command-line Format</td>
+<td><code class="docutils literal notranslate"><span class="pre">--audit_log_syslog_priority</span></code></td>
+</tr>
+<tr class="row-even"><td>Variable Scope</td>
+<td>Global</td>
+</tr>
+<tr class="row-odd"><td>Dynamic Variable</td>
+<td>No</td>
+</tr>
+<tr class="row-even"><td>Variable Type</td>
+<td>String</td>
+</tr>
+<tr class="row-odd"><td>Default Value</td>
+<td><code class="docutils literal notranslate"><span class="pre">LOG_INFO</span></code></td>
+</tr>
+</tbody>
+</table>
+<p class="section-heading rubric" id="audit-log-plugin-status-variables">Status Variables</p>
+<p class="section-heading rubric" id="audit-log-buffer-size-overflow"><code class="docutils literal notranslate"><span class="pre">Audit_log_buffer_size_overflow</span></code></p>
+<p id="index-20">The number of times an audit log entry was either dropped or written directly to the file, due to its size being bigger than the <code class="docutils literal notranslate"><span class="pre">audit_log_buffer_size</span></code> variable.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Command-line Format</td>
+<td><code class="docutils literal notranslate"><span class="pre">--Audit_log_buffer_size_overflow</span></code></td>
+</tr>
+<tr class="row-even"><td>Variable Scope</td>
+<td>Global</td>
+</tr>
+<tr class="row-odd"><td>Variable Type</td>
+<td>Numeric</td>
+</tr>
+</tbody>
+</table>
+<div class="bottom-links docutils container">
+<p>Related Documents</p>
+<ul class="simple">
+<li><a class="reference internal" href="log.html"><span class="doc">Database Server Logs</span></a></li>
+<li><a class="reference internal" href="galera-parameters.html"><span class="doc">Galera Parameters</span></a></li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/logo.png" alt="Logo"/>
+            </a></p>
+<h1 class="logo"><a href="../index.html">Galera Cluster</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="index.html">The Codership Documentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../kb/index.html">The Codership Knowledge Base</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../training/index.html">Codership Training</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../whats-new.html">What’s New</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../editors/index.html">Codership Writers &amp; Editors</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+	<div class="navbar">
+	<nav id="site-navigation" class="navigation main-navigation" role="navigation">
+	<div class="nav-bar-container">
+
+	<div id="menu-nav-bar" class="nav-menu">
+		<ul class="nav-link">
+			<li> </li>
+
+		</ul>
+
+	</div>
+	</nav>
+
+	<footer id="colophon" class="site-footer" role="contentinfo">
+	<div class="top">	<div class="powered-by"><p>Powered by Galera:</p>
+	<p><a href="https://mariadb.com/kb/en/galera/"><img class="alignleft size-full wp-image-237" alt="MariaDB" src="https://galeracluster.com/wp-content/uploads/2013/10/logo-mariadb.png" width="166" height="49" /></a></p>
+		</div></div>
+	<div class="footer-menu">
+	<div class="menu-main-menu-container">
+	<ul id="menu-main-menu-1" class="nav-menu">
+	<li class="link-home menu-item menu-item-type-post_type menu-item-object-page menu-item-359"><a href="https://galeracluster.com/">Home</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-35"><a href="https://galeracluster.com/products/">Products</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-34"><a href="https://galeracluster.com/downloads/">Downloads</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-12 current_page_item current-menu-ancestor current-menu-parent current_page_parent current_page_ancestor menu-item-has-children menu-item-33"><a href="https://galeracluster.com/support/">Support</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-32"><a href="https://galeracluster.com/community/">Community</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-31"><a href="https://galeracluster.com/company/">Company</a></li>
+	<li class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-297"><a href="https://galeracluster.com/category/blog/">Blog</a></li>
+	<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-38"><a href="https://galeracluster.com/contact-us/">Contact us</a></li>
+	</ul></div>			</div><!-- .footer-menu -->
+
+
+	<div class="footer-bar">
+	<p class="copyright">2021 Codership Ltd.</p>
+	</div>
+	<div class="footnote">
+	<h2>Your data is invaluable. We're here to secure it. All of it.</h2>
+	</div>
+	</footer><!-- #colophon -->
+
+
+
+
+  </body>
+</html>
