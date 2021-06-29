@@ -23,6 +23,7 @@
 
       .. cssclass:: sub-links
 
+         - :doc:`Training Courses <../training/courses/index>`
          - :doc:`Tutorial Articles <../training/tutorials/index>`
          - :doc:`Training Videos <../training/videos/index>`
 
@@ -108,6 +109,7 @@ This is the Codership Documentation. It documents the latest version of Galera C
 
    ":doc:`load-balancing`", ":doc:`deployment-variants`"
    ":doc:`containers`", ":doc:`arbitrator`"
+   ":doc:`ldap-plugin`", ":doc:`pam-plugin`"
 
 
 .. container:: banner
@@ -120,7 +122,7 @@ This is the Codership Documentation. It documents the latest version of Galera C
 
    ":doc:`monitoring-cluster`", ":doc:`log`"
    ":doc:`galera-manager`", ":doc:`security`"
-   ":doc:`notification-cmd`", ""
+   ":doc:`notification-cmd`", ":doc:`audit-log-plugin`"
 
 
 .. container:: banner

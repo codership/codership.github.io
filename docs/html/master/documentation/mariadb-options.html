@@ -141,6 +141,7 @@
 <li><a class="reference internal" href="../training/index.html"><span class="doc">Training</span></a></li>
 </ul>
 <ul class="sub-links simple">
+<li><a class="reference internal" href="../training/courses/index.html"><span class="doc">Training Courses</span></a></li>
 <li><a class="reference internal" href="../training/tutorials/index.html"><span class="doc">Tutorial Articles</span></a></li>
 <li><a class="reference internal" href="../training/videos/index.html"><span class="doc">Training Videos</span></a></li>
 </ul>
@@ -174,11 +175,11 @@
 <table border="1" class="colwidths-given doc-options tight-header docutils">
 <colgroup>
 <col width="31%" />
-<col width="35%" />
+<col width="20%" />
 <col width="12%" />
 <col width="6%" />
-<col width="8%" />
-<col width="8%" />
+<col width="15%" />
+<col width="15%" />
 </colgroup>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head"><br /> Option</th>
@@ -190,24 +191,274 @@
 </tr>
 </thead>
 <tbody valign="top">
+<tr class="row-even"><td><a class="reference internal" href="#wsrep-gtid-domain-id"><span class="std std-ref">wsrep_gtid_domain_id</span></a></td>
+<td><code class="docutils literal notranslate"><span class="pre">0</span></code></td>
+<td>Yes</td>
+<td>Yes</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#wsrep-gtid-mode"><span class="std std-ref">wsrep_gtid_mode</span></a></td>
+<td><code class="docutils literal notranslate"><span class="pre">OFF</span></code></td>
+<td>Yes</td>
+<td>Yes</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#wsrep-gtid-seq-no"><span class="std std-ref">wsrep_gtid_seq_no</span></a></td>
+<td>&#160;</td>
+<td>No</td>
+<td>Yes</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#wsrep-ignore-apply-errors"><span class="std std-ref">wsrep_ignore_apply_errors</span></a></td>
+<td><code class="docutils literal notranslate"><span class="pre">7</span></code></td>
+<td>Yes</td>
+<td>Yes</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#wsrep-mysql-replication-bundle"><span class="std std-ref">wsrep-mysql-replication-bundle</span></a></td>
+<td><code class="docutils literal notranslate"><span class="pre">0</span></code></td>
+<td>Yes</td>
+<td>No</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#wsrep-patch-version"><span class="std std-ref">wsrep_patch_version</span></a></td>
+<td>&#160;</td>
+<td>Yes</td>
+<td>No</td>
+<td>&#160;</td>
+<td>&#160;</td>
+</tr>
 <tr class="row-even"><td><a class="reference internal" href="#wsrep-mode-replicate-aria"><span class="std std-ref">wsrep_mode=REPLICATE_ARIA</span></a></td>
 <td><code class="docutils literal notranslate"><span class="pre">OFF</span></code></td>
 <td>Yes</td>
 <td>&#160;</td>
-<td>1.0</td>
+<td>&#160;</td>
 <td>&#160;</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="#wsrep-mode-replicate-myisam"><span class="std std-ref">wsrep_mode=REPLICATE_MYISAM</span></a></td>
 <td><code class="docutils literal notranslate"><span class="pre">OFF</span></code></td>
 <td>Yes</td>
 <td>&#160;</td>
-<td>1.0</td>
+<td>&#160;</td>
 <td>&#160;</td>
 </tr>
 </tbody>
 </table>
+<p class="section-heading rubric" id="wsrep-gtid-domain-id"><code class="docutils literal notranslate"><span class="pre">wsrep_gtid_domain_id</span></code></p>
+<p id="index-2">This system variable defines the GTID domain ID that is used for wsrep GTID mode.</p>
+<ul class="simple">
+<li>When <a class="reference internal" href="#wsrep-gtid-mode"><span class="std std-ref">wsrep_gtid_mode</span></a> is set to ON, wsrep_gtid_domain_id is used in place of gtid_domain_id for all Galera Cluster write sets.</li>
+<li>When <a class="reference internal" href="#wsrep-gtid-mode"><span class="std std-ref">wsrep_gtid_mode</span></a> is set to OFF, wsrep_gtid_domain_id is simply ignored to allow for backward compatibility.</li>
+<li>There are some additional requirements that need to be met in order for this mode to generate consistent GTIDs. For more information, see <a class="reference external" href="https://mariadb.com/kb/en/using-mariadb-gtids-with-mariadb-galera-cluster/">Using MariaDB GTIDs with MariaDB Galera Cluster</a>.</li>
+</ul>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Command-line Format</td>
+<td><code class="docutils literal notranslate"><span class="pre">--wsrep-gtid-domain-id=#</span></code></td>
+</tr>
+<tr class="row-even"><td>System Variable</td>
+<td><code class="docutils literal notranslate"><span class="pre">wsrep_gtid_domain_id</span></code></td>
+</tr>
+<tr class="row-odd"><td>Variable Scope</td>
+<td>Global</td>
+</tr>
+<tr class="row-even"><td>Dynamic Variable</td>
+<td>Yes</td>
+</tr>
+<tr class="row-odd"><td>Data Type</td>
+<td>Numeric</td>
+</tr>
+<tr class="row-even"><td>Default Value</td>
+<td><code class="docutils literal notranslate"><span class="pre">0</span></code></td>
+</tr>
+<tr class="row-odd"><td>Range</td>
+<td><code class="docutils literal notranslate"><span class="pre">0</span></code> to <code class="docutils literal notranslate"><span class="pre">4294967295</span></code></td>
+</tr>
+<tr class="row-even"><td>MariaDB Version</td>
+<td>Version 10.1.4</td>
+</tr>
+</tbody>
+</table>
+<p class="section-heading rubric" id="wsrep-gtid-mode"><code class="docutils literal notranslate"><span class="pre">wsrep_gtid_mode</span></code></p>
+<p id="index-3">Wsrep GTID mode attempts to keep GTIDs consistent for Galera Cluster write sets on all cluster nodes. GTID state is initially copied to a joiner node during an SST. If you are planning to use Galera Cluster with MariaDB replication, then wsrep GTID mode can be helpful.</p>
+<ul class="simple">
+<li>When wsrep_gtid_mode is set to ON, <a class="reference internal" href="#wsrep-gtid-domain-id"><span class="std std-ref">wsrep_gtid_domain_id</span></a> is used in place of gtid_domain_id for all Galera Cluster write sets.</li>
+<li>When wsrep_gtid_mode is set to OFF, <a class="reference internal" href="#wsrep-gtid-domain-id"><span class="std std-ref">wsrep_gtid_domain_id</span></a> is simply ignored to allow for backward compatibility.</li>
+<li>There are some additional requirements that need to be met in order for this mode to generate consistent GTIDs. For more information, see <a class="reference external" href="https://mariadb.com/kb/en/using-mariadb-gtids-with-mariadb-galera-cluster/">Using MariaDB GTIDs with MariaDB Galera Cluster</a>.</li>
+</ul>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Command-line Format</td>
+<td><code class="docutils literal notranslate"><span class="pre">--wsrep-gtid-mode[={0|1}]</span></code></td>
+</tr>
+<tr class="row-even"><td>System Variable</td>
+<td><code class="docutils literal notranslate"><span class="pre">wsrep_gtid_mode</span></code></td>
+</tr>
+<tr class="row-odd"><td>Variable Scope</td>
+<td>Global</td>
+</tr>
+<tr class="row-even"><td>Dynamic Variable</td>
+<td>Yes</td>
+</tr>
+<tr class="row-odd"><td>Data Type</td>
+<td>Boolean</td>
+</tr>
+<tr class="row-even"><td>Default Value</td>
+<td><code class="docutils literal notranslate"><span class="pre">OFF</span></code></td>
+</tr>
+<tr class="row-odd"><td>MariaDB Version</td>
+<td>Version 10.1.4</td>
+</tr>
+</tbody>
+</table>
+<p class="section-heading rubric" id="wsrep-gtid-seq-no"><code class="docutils literal notranslate"><span class="pre">wsrep_gtid_seq_no</span></code></p>
+<p id="index-4">Internal server usage, manually set WSREP GTID seqno.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Command-line Format</td>
+<td><a href="#id3"><span class="problematic" id="id4">`</span></a>None</td>
+</tr>
+<tr class="row-even"><td>System Variable</td>
+<td><code class="docutils literal notranslate"><span class="pre">Internal</span> <span class="pre">server</span> <span class="pre">usage,</span> <span class="pre">manually</span> <span class="pre">set</span> <span class="pre">WSREP</span> <span class="pre">GTID</span> <span class="pre">seqno.</span></code></td>
+</tr>
+<tr class="row-odd"><td>Variable Scope</td>
+<td>Session only</td>
+</tr>
+<tr class="row-even"><td>Dynamic Variable</td>
+<td>Yes</td>
+</tr>
+<tr class="row-odd"><td>Data Type</td>
+<td>Numeric</td>
+</tr>
+<tr class="row-even"><td>Range</td>
+<td><code class="docutils literal notranslate"><span class="pre">0</span></code> to <code class="docutils literal notranslate"><span class="pre">18446744073709551615</span></code></td>
+</tr>
+<tr class="row-odd"><td>MariaDB Version</td>
+<td>Version 10.5.1</td>
+</tr>
+</tbody>
+</table>
+<p class="section-heading rubric" id="wsrep-ignore-apply-errors"><code class="docutils literal notranslate"><span class="pre">wsrep_ignore_apply_errors</span></code></p>
+<p id="index-5">A bitmask defining whether errors are ignored, or reported back to the provider</p>
+<ul class="simple">
+<li>0: No errors are skipped.</li>
+<li>1: Ignore some DDL errors (DROP DATABASE, DROP TABLE, DROP INDEX, ALTER TABLE).</li>
+<li>2: Skip DML errors (Only ignores DELETE errors).</li>
+<li>4: Ignore all DDL errors.</li>
+</ul>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Command-line Format</td>
+<td><code class="docutils literal notranslate"><span class="pre">--wsrep-wsrep_ignore_apply_errors</span></code></td>
+</tr>
+<tr class="row-even"><td>System Variable</td>
+<td><code class="docutils literal notranslate"><span class="pre">wsrep_ignore_apply_errors</span></code></td>
+</tr>
+<tr class="row-odd"><td>Variable Scope</td>
+<td>Global</td>
+</tr>
+<tr class="row-even"><td>Dynamic Variable</td>
+<td>Yes</td>
+</tr>
+<tr class="row-odd"><td>Data Type</td>
+<td>Numeric</td>
+</tr>
+<tr class="row-even"><td>Default Value</td>
+<td><code class="docutils literal notranslate"><span class="pre">7</span></code></td>
+</tr>
+<tr class="row-odd"><td>Range</td>
+<td><code class="docutils literal notranslate"><span class="pre">0</span></code> to <code class="docutils literal notranslate"><span class="pre">7</span></code></td>
+</tr>
+<tr class="row-even"><td>MariaDB Version</td>
+<td>Version 10.4.2</td>
+</tr>
+</tbody>
+</table>
+<p class="section-heading rubric" id="wsrep-mysql-replication-bundle"><code class="docutils literal notranslate"><span class="pre">wsrep-mysql-replication-bundle</span></code></p>
+<p id="index-6">Defines the number of replication events that are grouped together. This is an experimental implementation aimed to assist with bottlenecks when a single replica faces a large commit time delay. If set to <code class="docutils literal notranslate"><span class="pre">0</span></code> (the default), there is no grouping.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Command-line Format</td>
+<td><code class="docutils literal notranslate"><span class="pre">--wsrep-mysql-replication-bundle=#</span></code></td>
+</tr>
+<tr class="row-even"><td>System Variable</td>
+<td><code class="docutils literal notranslate"><span class="pre">wsrep-mysql-replication-bundle</span></code></td>
+</tr>
+<tr class="row-odd"><td>Variable Scope</td>
+<td>Global</td>
+</tr>
+<tr class="row-even"><td>Dynamic Variable</td>
+<td>No</td>
+</tr>
+<tr class="row-odd"><td>Data Type</td>
+<td>Numeric</td>
+</tr>
+<tr class="row-even"><td>Default Value</td>
+<td><code class="docutils literal notranslate"><span class="pre">0</span></code></td>
+</tr>
+<tr class="row-odd"><td>Range</td>
+<td><code class="docutils literal notranslate"><span class="pre">0</span></code> to <code class="docutils literal notranslate"><span class="pre">1000</span></code></td>
+</tr>
+</tbody>
+</table>
+<p class="section-heading rubric" id="wsrep-patch-version"><code class="docutils literal notranslate"><span class="pre">wsrep_patch_version</span></code></p>
+<p id="index-7">Wsrep patch version, for example <code class="docutils literal notranslate"><span class="pre">wsrep_25.10</span></code>.</p>
+<table border="1" class="doc-options docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>Command-line Format</td>
+<td>None</td>
+</tr>
+<tr class="row-even"><td>System Variable</td>
+<td><code class="docutils literal notranslate"><span class="pre">wsrep_patch_version</span></code></td>
+</tr>
+<tr class="row-odd"><td>Variable Scope</td>
+<td>Global</td>
+</tr>
+<tr class="row-even"><td>Dynamic Variable</td>
+<td>No</td>
+</tr>
+<tr class="row-odd"><td>Data Type</td>
+<td>String</td>
+</tr>
+<tr class="row-even"><td>Default Value</td>
+<td>None</td>
+</tr>
+<tr class="row-odd"><td>MariaDB Version</td>
+<td>Version 10.1.5</td>
+</tr>
+</tbody>
+</table>
 <p class="section-heading rubric" id="wsrep-mode-replicate-aria"><code class="docutils literal notranslate"><span class="pre">wsrep_mode=REPLICATE_ARIA</span></code></p>
-<div class="admonition note" id="index-2">
+<div class="admonition note" id="index-8">
 <p class="first admonition-title">Note</p>
 <p class="last">This is an experimental feature. This is documentation for currently unreleased software, that is, MariaDB 10.6.</p>
 </div>
@@ -260,7 +511,7 @@
 </pre></div>
 </div>
 <p class="section-heading rubric" id="wsrep-mode-replicate-myisam"><code class="docutils literal notranslate"><span class="pre">wsrep_mode=REPLICATE_MYISAM</span></code></p>
-<div class="admonition note" id="index-3">
+<div class="admonition note" id="index-9">
 <p class="first admonition-title">Note</p>
 <p class="last">This is an experimental feature. This is documentation for currently unreleased software, that is, MariaDB 10.6.</p>
 </div>
@@ -349,7 +600,7 @@
 </tbody>
 </table>
 <p class="section-heading rubric" id="wsrep-osu-mode"><code class="docutils literal notranslate"><span class="pre">wsrep-osu-mode</span></code></p>
-<p id="index-4">This parameter defines the mode for Online Schema Upgrade that the node uses to replicate DDL statements. The following methods are available:</p>
+<p id="index-10">This parameter defines the mode for Online Schema Upgrade that the node uses to replicate DDL statements. The following methods are available:</p>
 <p>DDL statements are non-transactional and as such don’t replicate through write-sets.  There are two methods available that determine how the node handles replicating these statements:</p>
 <ul class="simple">
 <li><code class="docutils literal notranslate"><span class="pre">TOI</span></code>  In the <a class="reference internal" href="glossary.html#term-total-order-isolation"><span class="xref std std-term">Total Order Isolation</span></a> method, the cluster runs the DDL statement on all nodes in the same total order sequence, blocking other transactions from committing while the DDL is in progress.</li>
@@ -405,7 +656,7 @@
 </pre></div>
 </div>
 <p class="section-heading rubric" id="wsrep-strict-ddl"><code class="docutils literal notranslate"><span class="pre">wsrep_strict_ddl</span></code></p>
-<p id="index-5">If set, rejects DDL on affected tables not supporting Galera replication.</p>
+<p id="index-11">If set, rejects DDL on affected tables not supporting Galera replication.</p>
 <table border="1" class="doc-options docutils">
 <colgroup>
 <col width="50%" />
